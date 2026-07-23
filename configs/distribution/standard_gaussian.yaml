@@ -1,0 +1,4 @@
+name: standard_gaussian
+dim: 2
+kind: gaussian
+role: source

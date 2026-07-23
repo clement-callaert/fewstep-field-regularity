@@ -1,0 +1,4 @@
+name: linear
+coupling: independent
+schedule: linear
+notes: Independent coupling with linear mean and residual schedules.

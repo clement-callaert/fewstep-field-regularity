@@ -1,0 +1,4 @@
+name: float32
+dtype: float32
+allow_silent_cast: false
+notes: Optional lower precision. Must be requested explicitly.

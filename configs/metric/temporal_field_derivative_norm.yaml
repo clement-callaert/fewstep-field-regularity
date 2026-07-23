@@ -1,0 +1,3 @@
+name: temporal_field_derivative_norm
+kind: estimator
+baseline: false

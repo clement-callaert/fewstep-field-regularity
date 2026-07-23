@@ -1,0 +1,5 @@
+name: eight_mode_gmm
+dim: 2
+kind: gaussian_mixture
+role: target
+n_modes: 8

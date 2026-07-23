@@ -1,0 +1,4 @@
+name: cuda
+device: cuda
+repo_root: null
+seed_offset: 0

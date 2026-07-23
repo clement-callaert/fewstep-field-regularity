@@ -1,0 +1,41 @@
+{
+  "artifact_manifest": [
+    {
+      "artifact_id": "table1",
+      "code_status": "clean",
+      "config_hash": "cfghash",
+      "creation_timestamp": "2026-07-23T00:00:00+00:00",
+      "git_commit": "abc123",
+      "input_artifact_hashes": {},
+      "kind": "table",
+      "output_checksum": "c3a4ad9c0f3106622e2e2075778e36d6a33b8bd1ef979fcd29aeacb6e6d28518",
+      "path": "/home/calla/AI_projects/fewstep-field-regularity/tests/fixtures/valid_run/table.json",
+      "producing_run_id": "valid_run",
+      "random_seeds": [
+        0,
+        1
+      ],
+      "software_environment_hash": "envhash"
+    }
+  ],
+  "code_status": "clean",
+  "command_line": "pytest",
+  "config_hash": "cfghash",
+  "cuda_version": "null",
+  "end_time": "2026-07-23T00:00:01+00:00",
+  "git_commit": "abc123",
+  "gpu_name": "cpu",
+  "package_lock_hash": "lockhash",
+  "python_version": "3.11.0",
+  "random_seeds": [
+    0,
+    1
+  ],
+  "release_ready": false,
+  "resolved_config_path": "/home/calla/AI_projects/fewstep-field-regularity/tests/fixtures/valid_run/resolved_config.yaml",
+  "run_id": "valid_run",
+  "runtime_s": 1.0,
+  "software_environment_hash": "envhash",
+  "start_time": "2026-07-23T00:00:00+00:00",
+  "unresolved_config_path": "/home/calla/AI_projects/fewstep-field-regularity/tests/fixtures/valid_run/unresolved_config.yaml"
+}

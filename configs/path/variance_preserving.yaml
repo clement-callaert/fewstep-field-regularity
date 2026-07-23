@@ -1,0 +1,4 @@
+name: variance_preserving
+coupling: independent
+schedule: trigonometric_vp
+notes: Variance-preserving trigonometric interpolation. Not OT by default.

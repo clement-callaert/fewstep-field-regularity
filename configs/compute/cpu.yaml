@@ -1,0 +1,4 @@
+name: cpu
+device: cpu
+repo_root: null
+seed_offset: 0

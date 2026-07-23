@@ -1,0 +1,23 @@
+{
+  "artifact_manifest": [],
+  "code_status": "dirty",
+  "command_line": "pytest",
+  "config_hash": "cfghash",
+  "cuda_version": "null",
+  "end_time": "2026-07-23T00:00:01+00:00",
+  "git_commit": "abc123",
+  "gpu_name": "cpu",
+  "package_lock_hash": "lockhash",
+  "python_version": "3.11.0",
+  "random_seeds": [
+    0,
+    1
+  ],
+  "release_ready": true,
+  "resolved_config_path": "/home/calla/AI_projects/fewstep-field-regularity/tests/fixtures/dirty_release_ready/resolved_config.yaml",
+  "run_id": "dirty_release_ready",
+  "runtime_s": 1.0,
+  "software_environment_hash": "envhash",
+  "start_time": "2026-07-23T00:00:00+00:00",
+  "unresolved_config_path": "/home/calla/AI_projects/fewstep-field-regularity/tests/fixtures/dirty_release_ready/unresolved_config.yaml"
+}

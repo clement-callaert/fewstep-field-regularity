@@ -1,0 +1,4 @@
+name: lipschitz_guided
+coupling: independent
+schedule: lipschitz_guided
+notes: Lipschitz-guided schedule from the cited paper after source verification.

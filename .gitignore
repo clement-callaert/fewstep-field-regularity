@@ -1,0 +1,79 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+build/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.tox/
+.venv/
+venv/
+env/
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local experiment outputs (keep directory via .gitkeep)
+outputs/*
+!outputs/.gitkeep
+
+# Generated run artifacts (keep directory via .gitkeep)
+artifacts/*
+!artifacts/.gitkeep
+
+# Hydra
+multirun/
+.hydra/
+
+# Notebooks (inspection only)
+.ipynb_checkpoints/
+*.ipynb
+
+# Secrets / local env
+.env
+.env.*
+!.env.example
+*.pem
+
+# Paper corpus (local only; rebuild with scripts/retrieve_papers.py)
+papers/
+
+# Future numerical / model dumps
+*.pt
+*.pth
+*.ckpt
+*.pkl
+*.pickle
+*.h5
+*.hdf5
+*.npz
+*.npz.idx
+*.npz.data-*
+*.npz.index
+*.onnx
+*.npz
+wandb/
+runs/
+lightning_logs/
+mlruns/
+
+# Logs and temp
+*.log
+tmp/
+temp/
+.cache/

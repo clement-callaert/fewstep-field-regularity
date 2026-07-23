@@ -1,0 +1,17 @@
+defaults:
+  - distribution: standard_gaussian
+  - path: linear
+  - solver: euler
+  - metric: averaged_squared_lipschitz_proxy
+  - evaluator: gaussian_w2
+  - experiment: smoke
+  - precision: float64
+  - compute: cpu
+  - artifact_policy: strict
+  - _self_
+
+hydra:
+  job:
+    chdir: false
+  run:
+    dir: outputs/hydra/${now:%Y-%m-%d}/${now:%H-%M-%S}

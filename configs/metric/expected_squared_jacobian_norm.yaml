@@ -1,0 +1,3 @@
+name: expected_squared_jacobian_norm
+kind: estimator
+baseline: false

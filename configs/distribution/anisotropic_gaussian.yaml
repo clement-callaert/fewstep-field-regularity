@@ -1,0 +1,5 @@
+name: anisotropic_gaussian
+dim: 2
+kind: gaussian
+role: target
+anisotropy: 4.0

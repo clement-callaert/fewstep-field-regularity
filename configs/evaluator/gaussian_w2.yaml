@@ -1,0 +1,3 @@
+name: gaussian_w2
+kind: exact_when_gaussian
+notes: Exact Gaussian W2 when both laws are Gaussian and represented analytically.

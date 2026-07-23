@@ -1,0 +1,4 @@
+name: float64
+dtype: float64
+allow_silent_cast: false
+notes: Default for exact analytical experiments.

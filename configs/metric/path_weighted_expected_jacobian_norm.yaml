@@ -1,0 +1,3 @@
+name: path_weighted_expected_jacobian_norm
+kind: estimator
+baseline: false

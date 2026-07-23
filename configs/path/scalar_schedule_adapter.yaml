@@ -1,0 +1,4 @@
+name: scalar_schedule_adapter
+coupling: unspecified
+schedule: adapter
+notes: Generic scalar schedule adapter. Coupling must be set explicitly by the caller.

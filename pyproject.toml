@@ -1,0 +1,123 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fewstep-regularities"
+version = "0.1.0"
+description = "A reproducible benchmark of field regularity metrics and few-step discretization error in continuous-time generative models."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "fewstep-field-regularity contributors" }]
+keywords = [
+  "flow-matching",
+  "stochastic-interpolants",
+  "regularity",
+  "discretization",
+  "wasserstein",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+  "torch>=2.2",
+  "hydra-core>=1.3",
+  "omegaconf>=2.3",
+  "numpy>=1.26",
+  "scipy>=1.11",
+  "matplotlib>=3.8",
+  "pandas>=2.1",
+  "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "pytest-cov>=4.1",
+  "ruff>=0.4",
+  "mypy>=1.9",
+  "pre-commit>=3.6",
+  "types-PyYAML>=6.0",
+]
+
+[project.scripts]
+fewstep-regularities = "fewstep_regularities.cli.main:main"
+
+[project.urls]
+Homepage = "https://github.com/calla/fewstep-field-regularity"
+Documentation = "https://github.com/calla/fewstep-field-regularity/tree/main/docs"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+fewstep_regularities = ["py.typed"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+src = ["src", "tests", "scripts"]
+
+[tool.ruff.lint]
+select = [
+  "E",
+  "F",
+  "I",
+  "UP",
+  "B",
+  "SIM",
+  "RUF",
+]
+ignore = [
+  "E501",
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+mypy_path = "src"
+files = ["src/fewstep_regularities"]
+
+[[tool.mypy.overrides]]
+module = [
+  "torch.*",
+  "hydra.*",
+  "omegaconf.*",
+  "matplotlib.*",
+  "scipy.*",
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = [
+  "-q",
+  "--strict-markers",
+]
+markers = [
+  "analytical: analytical identity or closed-form checks",
+  "integration: end-to-end smoke checks",
+  "regression: fixed-tolerance regression checks",
+]
+
+[tool.coverage.run]
+source = ["fewstep_regularities"]
+branch = true

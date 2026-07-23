@@ -1,0 +1,23 @@
+{
+  "artifact_manifest": [],
+  "code_status": "clean",
+  "command_line": "pytest",
+  "config_hash": "",
+  "cuda_version": "null",
+  "end_time": "2026-07-23T00:00:01+00:00",
+  "git_commit": "abc123",
+  "gpu_name": "cpu",
+  "package_lock_hash": "",
+  "python_version": "3.11.0",
+  "random_seeds": [
+    0,
+    1
+  ],
+  "release_ready": false,
+  "resolved_config_path": "/home/calla/AI_projects/fewstep-field-regularity/tests/fixtures/missing_hashes/resolved_config.yaml",
+  "run_id": "missing_hashes",
+  "runtime_s": 1.0,
+  "software_environment_hash": "",
+  "start_time": "2026-07-23T00:00:00+00:00",
+  "unresolved_config_path": "/home/calla/AI_projects/fewstep-field-regularity/tests/fixtures/missing_hashes/unresolved_config.yaml"
+}

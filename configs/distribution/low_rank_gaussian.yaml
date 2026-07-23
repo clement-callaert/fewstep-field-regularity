@@ -1,0 +1,6 @@
+name: low_rank_gaussian
+dim: 8
+kind: gaussian
+role: target
+rank: 2
+noise_variance: 0.05

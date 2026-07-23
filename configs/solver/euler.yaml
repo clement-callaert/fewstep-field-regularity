@@ -1,0 +1,4 @@
+name: euler
+family: fixed_step
+order: 1
+nfe_per_step: 1

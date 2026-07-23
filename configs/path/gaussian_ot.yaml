@@ -1,0 +1,4 @@
+name: gaussian_ot
+coupling: gaussian_optimal_transport
+schedule: displacement
+notes: Use only when Gaussian OT displacement interpolation is mathematically valid.

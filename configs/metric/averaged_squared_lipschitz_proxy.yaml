@@ -1,0 +1,4 @@
+name: averaged_squared_lipschitz_proxy
+kind: estimator
+baseline: true
+notes: Baseline averaged squared Lipschitz proxy after source verification.
