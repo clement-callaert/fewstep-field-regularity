@@ -1,4 +1,4 @@
-"""Hydra CLI entry point for dry-run and future experiments."""
+"""Hydra CLI entry point for dry-run and Phase 1 experiments."""
 
 from __future__ import annotations
 
@@ -13,6 +13,7 @@ from omegaconf import DictConfig, OmegaConf
 
 from fewstep_regularities.artifacts.manifest import RunManifest
 from fewstep_regularities.artifacts.writer import FilesystemArtifactWriter
+from fewstep_regularities.experiments.gaussian_exact import run_gaussian_exact
 from fewstep_regularities.utils.environment import (
     cuda_version,
     git_code_status,
@@ -27,7 +28,6 @@ from fewstep_regularities.utils.hashing import sha256_text
 
 def default_repo_root() -> Path:
     """Return repository root from package location."""
-    # Package lives at src/fewstep_regularities.
     return Path(__file__).resolve().parents[3]
 
 
@@ -111,29 +111,27 @@ def write_dry_run(cfg: DictConfig) -> Path:
 
 
 def run_from_overrides(overrides: list[str] | None = None) -> Path:
-    """Compose config from absolute config dir and execute dry-run."""
+    """Compose config from absolute config dir and execute the selected mode."""
     config_dir = str(default_config_dir())
     with initialize_config_dir(version_base=None, config_dir=config_dir):
         cfg = compose(config_name="config", overrides=overrides or [])
     mode = str(cfg.experiment.mode)
-    if mode != "dry_run":
-        msg = (
-            f"Unsupported mode {mode!r}. Phase 0 only supports dry_run. "
-            "Do not launch the gate or full benchmark yet."
-        )
-        raise RuntimeError(msg)
-    return write_dry_run(cfg)
+    if mode == "dry_run":
+        return write_dry_run(cfg)
+    if mode == "gaussian_exact":
+        return run_gaussian_exact(cfg)
+    msg = (
+        f"Unsupported mode {mode!r}. Supported: dry_run, gaussian_exact. "
+        "Do not launch the gate or full benchmark yet."
+    )
+    raise RuntimeError(msg)
 
 
 def main(argv: list[str] | None = None) -> None:
-    """CLI entry point.
-
-    Phase 0 supports ``experiment.mode=dry_run`` only.
-    Remaining argv tokens are Hydra-style overrides.
-    """
+    """CLI entry point."""
     args = list(sys.argv[1:] if argv is None else argv)
     path = run_from_overrides(args)
-    summary: dict[str, Any] = {"manifest_path": str(path), "mode": "dry_run"}
+    summary: dict[str, Any] = {"manifest_path": str(path)}
     print(json.dumps(summary, indent=2, sort_keys=True))
 
 

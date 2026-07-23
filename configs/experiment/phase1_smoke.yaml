@@ -1,0 +1,23 @@
+name: phase1_smoke
+mode: gaussian_exact
+run_id: phase1_smoke
+decision_gate: docs/DECISION_GATE.md
+hypotheses:
+  - H1
+  - H2
+  - H3
+  - H4
+seeds:
+  - 0
+nfe_budgets:
+  - 8
+dimensions:
+  - 2
+n_particles: 1024
+target_names:
+  - anisotropic_gaussian
+path_names:
+  - linear
+solver_names:
+  - euler
+notes: Minimal Phase 1 smoke for CI and artifact validation.

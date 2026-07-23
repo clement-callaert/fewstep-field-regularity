@@ -1,0 +1,41 @@
+name: phase1_gaussian
+mode: gaussian_exact
+run_id: phase1_gaussian
+decision_gate: docs/DECISION_GATE.md
+hypotheses:
+  - H1
+  - H2
+  - H3
+  - H4
+seeds:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+nfe_budgets:
+  - 4
+  - 8
+  - 16
+dimensions:
+  - 2
+  - 8
+n_particles: 4096
+target_names:
+  - anisotropic_gaussian
+  - low_rank_gaussian
+path_names:
+  - linear
+  - variance_preserving
+  - gaussian_ot
+  - lipschitz_guided
+solver_names:
+  - euler
+  - heun
+  - rk4
+notes: Phase 1 exact Gaussian validation. Not the decision gate benchmark.

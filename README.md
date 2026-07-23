@@ -12,9 +12,10 @@ error across probability paths, solvers, dimensions, and target geometries?
 
 ## 2. Scientific status
 
-Phase 0 scaffold only. Interfaces, configuration schema, documentation, and
-paper retrieval infrastructure are in place. No main benchmark has been run.
-No claim in the claims ledger is marked supported.
+Phase 1 exact Gaussian implementations are in progress. Formula notes, exact
+Gaussian distributions, paths, fields, solvers, and Gaussian W2 are under
+analytical validation. No main benchmark or decision gate has been run. No
+claim in the claims ledger is marked supported.
 
 ## 3. Registered hypotheses
 
@@ -54,9 +55,12 @@ Default analytical precision is float64. Do not silently cast precision.
 pytest
 fewstep-regularities experiment=smoke
 python scripts/validate_artifacts.py outputs/phase0_smoke
+fewstep-regularities experiment=phase1_smoke
+python scripts/validate_artifacts.py outputs/phase1_smoke
 ```
 
-The smoke path is a dry-run. It writes provenance files only.
+Phase 0 smoke is a dry-run. Phase 1 smoke runs an exact Gaussian fixed-NFE
+validation on a tiny grid.
 
 ## 7. Reproduction commands
 
@@ -68,8 +72,15 @@ fewstep-regularities experiment=smoke
 python scripts/validate_artifacts.py outputs/phase0_smoke
 ```
 
-Gate and full benchmarks are blocked until Phase 0 review and later phases
-complete. Do not launch them from this README yet.
+Phase 1 validation (not the gate):
+
+```bash
+fewstep-regularities experiment=phase1_gaussian
+python scripts/validate_artifacts.py outputs/phase1_gaussian
+```
+
+Gate and full benchmarks remain blocked until Phases 1-2 pass review. Do not
+launch them from this README yet.
 
 ## 8. Repository structure
 
@@ -97,8 +108,9 @@ pages, official proceedings). Index: [papers/README.md](papers/README.md).
 
 ## 11. Known limitations
 
-- Phase 0 provides interfaces and docs only. No exact fields or solvers yet.
-- Paper PDFs may be missing until retrieval succeeds; missing sources are logged.
+- Phase 1 covers exact Gaussians only. Mixtures are Phase 2.
+- Hairer ODE PDF is missing; solver orders are checked numerically only.
+- Lipschitz-guided schedules use a scalar effective ``M`` for anisotropic targets.
 - No novelty claim is made before literature comparison.
 - No theorem is marked proved without independent manual review.
 

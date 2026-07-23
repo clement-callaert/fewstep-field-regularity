@@ -50,8 +50,10 @@ multirun/
 !.env.example
 *.pem
 
-# Paper corpus (local only; rebuild with scripts/retrieve_papers.py)
-papers/
+# Paper PDFs (local only; rebuild with scripts/retrieve_papers.py).
+# Keep notes, README, and manifest under version control.
+papers/pdfs/
+papers/pdfs/**
 
 # Future numerical / model dumps
 *.pt

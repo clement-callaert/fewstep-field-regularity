@@ -1,0 +1,400 @@
+{
+  "catalog_source": [
+    {
+      "authors": "Michael S. Albergo, Nicholas M. Boffi, Eric Vanden-Eijnden",
+      "formulas_or_results_needed": [
+        "interpolant definition",
+        "conditional and marginal velocity formulas"
+      ],
+      "local_filename": "albergo2023stochastic_interpolants.pdf",
+      "notes_path": "notes/albergo2023stochastic_interpolants.md",
+      "paper_id": "albergo2023stochastic_interpolants",
+      "pdf_url": "https://arxiv.org/pdf/2303.08797.pdf",
+      "relevance": "Probability paths, interpolants, velocity fields.",
+      "source_url": "https://arxiv.org/abs/2303.08797",
+      "title": "Stochastic Interpolants: A Unifying Framework for Flows and Diffusions",
+      "venue_or_status": "arXiv preprint",
+      "year": 2023
+    },
+    {
+      "authors": "Yifan Chen, Eric Vanden-Eijnden, Jiawei Xu",
+      "formulas_or_results_needed": [
+        "Lipschitz-guided schedule definition",
+        "averaged squared Lipschitzness proxy",
+        "transfer formula between schedules"
+      ],
+      "local_filename": "lipschitz_guided_2025.pdf",
+      "notes_path": "notes/lipschitz_guided_2025.md",
+      "paper_id": "lipschitz_guided_2025",
+      "pdf_url": "https://arxiv.org/pdf/2509.01629.pdf",
+      "relevance": "Baseline Lipschitz-guided schedule and regularity proxy.",
+      "source_url": "https://arxiv.org/abs/2509.01629",
+      "title": "Lipschitz-Guided Design of Interpolation Schedules in Generative Models",
+      "venue_or_status": "arXiv preprint",
+      "year": 2025
+    },
+    {
+      "authors": "Yaron Lipman, Ricky T. Q. Chen, Heli Ben-Hamu, Maximilian Nickel, Matt Le",
+      "formulas_or_results_needed": [
+        "OT and VP conditional flows",
+        "conditional velocity"
+      ],
+      "local_filename": "lipman2023flow_matching.pdf",
+      "notes_path": "notes/lipman2023flow_matching.md",
+      "paper_id": "lipman2023flow_matching",
+      "pdf_url": "https://arxiv.org/pdf/2210.02747.pdf",
+      "relevance": "Flow matching paths and conditional vector fields.",
+      "source_url": "https://arxiv.org/abs/2210.02747",
+      "title": "Flow Matching for Generative Modeling",
+      "venue_or_status": "ICLR 2023",
+      "year": 2023
+    },
+    {
+      "authors": "Xingchao Liu, Chengyue Gong, Qiang Liu",
+      "formulas_or_results_needed": [
+        "rectified flow ODE",
+        "marginal preserving properties"
+      ],
+      "local_filename": "liu2022rectified_flow.pdf",
+      "notes_path": "notes/liu2022rectified_flow.md",
+      "paper_id": "liu2022rectified_flow",
+      "pdf_url": "https://arxiv.org/pdf/2209.03003.pdf",
+      "relevance": "Rectified flow and linear interpolation path.",
+      "source_url": "https://arxiv.org/abs/2209.03003",
+      "title": "Flow Straight and Fast: Learning to Generate and Transfer Data with Rectified Flow",
+      "venue_or_status": "arXiv preprint / ICLR version search",
+      "year": 2022
+    },
+    {
+      "authors": "Alexander Tong, Kilian Fatras, Nikolay Malkin, et al.",
+      "formulas_or_results_needed": [
+        "OT-CFM objective",
+        "coupling construction"
+      ],
+      "local_filename": "tong2024conditional_flow_matching.pdf",
+      "notes_path": "notes/tong2024conditional_flow_matching.md",
+      "paper_id": "tong2024conditional_flow_matching",
+      "pdf_url": "https://arxiv.org/pdf/2302.00482.pdf",
+      "relevance": "Conditional flow matching and simulation-free dynamic OT couplings.",
+      "source_url": "https://arxiv.org/abs/2302.00482",
+      "title": "Improving and Generalizing Flow-Based Generative Models with Minibatch Optimal Transport",
+      "venue_or_status": "TMLR / arXiv",
+      "year": 2024
+    },
+    {
+      "authors": "Gabriel Peyre, Marco Cuturi",
+      "formulas_or_results_needed": [
+        "Gaussian W2 closed form",
+        "entropic OT definition"
+      ],
+      "local_filename": "peyre2019computational_ot.pdf",
+      "notes_path": "notes/peyre2019computational_ot.md",
+      "paper_id": "peyre2019computational_ot",
+      "pdf_url": "https://arxiv.org/pdf/1803.00567.pdf",
+      "relevance": "Gaussian W2, entropic OT, displacement interpolation references.",
+      "source_url": "https://arxiv.org/abs/1803.00567",
+      "title": "Computational Optimal Transport",
+      "venue_or_status": "Foundations and Trends in Machine Learning",
+      "year": 2019
+    },
+    {
+      "authors": "Ernst Hairer, Syvert P. Norsett, Gerhard Wanner",
+      "formulas_or_results_needed": [
+        "Euler/Heun/RK4 order conditions",
+        "local truncation error"
+      ],
+      "local_filename": "hairer2008solving_odes_i.pdf",
+      "notes_path": "notes/hairer2008solving_odes_i.md",
+      "paper_id": "hairer2008solving_odes_i",
+      "pdf_url": null,
+      "relevance": "ODE local error, order, and stability analysis.",
+      "source_url": "https://link.springer.com/book/10.1007/978-3-540-78862-1",
+      "title": "Solving Ordinary Differential Equations I: Nonstiff Problems",
+      "venue_or_status": "Springer book",
+      "year": 2008
+    },
+    {
+      "authors": "Nicolas Bonneel, Julien Rabin, Gabriel Peyre, Hanspeter Pfister",
+      "formulas_or_results_needed": [
+        "sliced Wasserstein definition",
+        "projection estimator"
+      ],
+      "local_filename": "bonneel2015sliced_wasserstein.pdf",
+      "notes_path": "notes/bonneel2015sliced_wasserstein.md",
+      "paper_id": "bonneel2015sliced_wasserstein",
+      "pdf_url": "https://arxiv.org/pdf/1308.2074.pdf",
+      "relevance": "Sliced Wasserstein estimation.",
+      "source_url": "https://arxiv.org/abs/1308.2074",
+      "title": "Sliced and Radon Wasserstein Barycenters of Measures",
+      "venue_or_status": "Journal of Mathematical Imaging and Vision",
+      "year": 2015
+    },
+    {
+      "authors": "Ling Yang, Zixiang Zhang, Zhilong Zhang, Xingchao Liu, Minkai Xu, Wentao Zhang, Chenlin Meng, Stefano Ermon, Bin Cui",
+      "formulas_or_results_needed": [
+        "few-step Euler error discussion",
+        "straight flow motivation"
+      ],
+      "local_filename": "yang2024consistency_flow_matching.pdf",
+      "notes_path": "notes/yang2024consistency_flow_matching.md",
+      "paper_id": "yang2024consistency_flow_matching",
+      "pdf_url": "https://arxiv.org/pdf/2407.02398.pdf",
+      "relevance": "Few-step flow discretization error and straight-flow motivation.",
+      "source_url": "https://arxiv.org/abs/2407.02398",
+      "title": "Consistency Flow Matching: Defining Straight Flows with Velocity Consistency",
+      "venue_or_status": "arXiv preprint",
+      "year": 2024
+    },
+    {
+      "authors": "Hansheng Chen, Kai Zhang, Hao Tan, Zexiang Xu, Fujun Luan, Leonidas Guibas, Gordon Wetzstein, Sai Bi",
+      "formulas_or_results_needed": [
+        "mixture velocity parameterization",
+        "discretization error discussion for mixtures"
+      ],
+      "local_filename": "gmflow_2025.pdf",
+      "notes_path": "notes/gmflow_2025.md",
+      "paper_id": "gmflow_2025",
+      "pdf_url": "https://arxiv.org/pdf/2504.05304.pdf",
+      "relevance": "Gaussian mixture flow fields and few-step sampling issues.",
+      "source_url": "https://arxiv.org/abs/2504.05304",
+      "title": "Gaussian Mixture Flow Matching Models",
+      "venue_or_status": "arXiv preprint",
+      "year": 2025
+    }
+  ],
+  "generated_at": "2026-07-23T12:33:37.515472+00:00",
+  "papers": [
+    {
+      "access_date": "2026-07-23",
+      "authors": "Michael S. Albergo, Nicholas M. Boffi, Eric Vanden-Eijnden",
+      "formulas_or_results_needed": [
+        "interpolant definition",
+        "conditional and marginal velocity formulas"
+      ],
+      "local_filename": "albergo2023stochastic_interpolants.pdf",
+      "notation_differences": [],
+      "notes_path": "notes/albergo2023stochastic_interpolants.md",
+      "paper_id": "albergo2023stochastic_interpolants",
+      "pdf_url": "https://arxiv.org/pdf/2303.08797.pdf",
+      "relevance": "Probability paths, interpolants, velocity fields.",
+      "replication_status": "not-started",
+      "retrieval_error": null,
+      "retrieval_status": "present",
+      "sha256": "729e445e5498c97a87a925ff08f084f741eef2cd4e018e83b898fdea7f19bdef",
+      "source_url": "https://arxiv.org/abs/2303.08797",
+      "title": "Stochastic Interpolants: A Unifying Framework for Flows and Diffusions",
+      "venue_or_status": "arXiv preprint",
+      "version_date": null,
+      "year": 2023
+    },
+    {
+      "access_date": "2026-07-23",
+      "authors": "Yifan Chen, Eric Vanden-Eijnden, Jiawei Xu",
+      "formulas_or_results_needed": [
+        "Lipschitz-guided schedule definition",
+        "averaged squared Lipschitzness proxy",
+        "transfer formula between schedules"
+      ],
+      "local_filename": "lipschitz_guided_2025.pdf",
+      "notation_differences": [],
+      "notes_path": "notes/lipschitz_guided_2025.md",
+      "paper_id": "lipschitz_guided_2025",
+      "pdf_url": "https://arxiv.org/pdf/2509.01629.pdf",
+      "relevance": "Baseline Lipschitz-guided schedule and regularity proxy.",
+      "replication_status": "not-started",
+      "retrieval_error": null,
+      "retrieval_status": "present",
+      "sha256": "03d9d84f256c9639edfc6016cdba7b0082ac556ce652b79100f30e1e34fc3dcf",
+      "source_url": "https://arxiv.org/abs/2509.01629",
+      "title": "Lipschitz-Guided Design of Interpolation Schedules in Generative Models",
+      "venue_or_status": "arXiv preprint",
+      "version_date": null,
+      "year": 2025
+    },
+    {
+      "access_date": "2026-07-23",
+      "authors": "Yaron Lipman, Ricky T. Q. Chen, Heli Ben-Hamu, Maximilian Nickel, Matt Le",
+      "formulas_or_results_needed": [
+        "OT and VP conditional flows",
+        "conditional velocity"
+      ],
+      "local_filename": "lipman2023flow_matching.pdf",
+      "notation_differences": [],
+      "notes_path": "notes/lipman2023flow_matching.md",
+      "paper_id": "lipman2023flow_matching",
+      "pdf_url": "https://arxiv.org/pdf/2210.02747.pdf",
+      "relevance": "Flow matching paths and conditional vector fields.",
+      "replication_status": "not-started",
+      "retrieval_error": null,
+      "retrieval_status": "present",
+      "sha256": "5eeb39ba516396924aba4787452f9d0abdee88467a4d0c264d9f66cad0c5ee14",
+      "source_url": "https://arxiv.org/abs/2210.02747",
+      "title": "Flow Matching for Generative Modeling",
+      "venue_or_status": "ICLR 2023",
+      "version_date": null,
+      "year": 2023
+    },
+    {
+      "access_date": "2026-07-23",
+      "authors": "Xingchao Liu, Chengyue Gong, Qiang Liu",
+      "formulas_or_results_needed": [
+        "rectified flow ODE",
+        "marginal preserving properties"
+      ],
+      "local_filename": "liu2022rectified_flow.pdf",
+      "notation_differences": [],
+      "notes_path": "notes/liu2022rectified_flow.md",
+      "paper_id": "liu2022rectified_flow",
+      "pdf_url": "https://arxiv.org/pdf/2209.03003.pdf",
+      "relevance": "Rectified flow and linear interpolation path.",
+      "replication_status": "not-started",
+      "retrieval_error": null,
+      "retrieval_status": "present",
+      "sha256": "d81790cb6988ef480002adcc84000d4f44855b11fb868001fd53aad133bc3a74",
+      "source_url": "https://arxiv.org/abs/2209.03003",
+      "title": "Flow Straight and Fast: Learning to Generate and Transfer Data with Rectified Flow",
+      "venue_or_status": "arXiv preprint / ICLR version search",
+      "version_date": null,
+      "year": 2022
+    },
+    {
+      "access_date": "2026-07-23",
+      "authors": "Alexander Tong, Kilian Fatras, Nikolay Malkin, et al.",
+      "formulas_or_results_needed": [
+        "OT-CFM objective",
+        "coupling construction"
+      ],
+      "local_filename": "tong2024conditional_flow_matching.pdf",
+      "notation_differences": [],
+      "notes_path": "notes/tong2024conditional_flow_matching.md",
+      "paper_id": "tong2024conditional_flow_matching",
+      "pdf_url": "https://arxiv.org/pdf/2302.00482.pdf",
+      "relevance": "Conditional flow matching and simulation-free dynamic OT couplings.",
+      "replication_status": "not-started",
+      "retrieval_error": null,
+      "retrieval_status": "present",
+      "sha256": "c98a4834abffe8a5c4e27c13c36a10d83d38e8780c98c3891150c4e028094d0a",
+      "source_url": "https://arxiv.org/abs/2302.00482",
+      "title": "Improving and Generalizing Flow-Based Generative Models with Minibatch Optimal Transport",
+      "venue_or_status": "TMLR / arXiv",
+      "version_date": null,
+      "year": 2024
+    },
+    {
+      "access_date": "2026-07-23",
+      "authors": "Gabriel Peyre, Marco Cuturi",
+      "formulas_or_results_needed": [
+        "Gaussian W2 closed form",
+        "entropic OT definition"
+      ],
+      "local_filename": "peyre2019computational_ot.pdf",
+      "notation_differences": [],
+      "notes_path": "notes/peyre2019computational_ot.md",
+      "paper_id": "peyre2019computational_ot",
+      "pdf_url": "https://arxiv.org/pdf/1803.00567.pdf",
+      "relevance": "Gaussian W2, entropic OT, displacement interpolation references.",
+      "replication_status": "not-started",
+      "retrieval_error": null,
+      "retrieval_status": "present",
+      "sha256": "5292a1fc53631ac28fdbcccecc060de8e072b3008fb8d36c22d963a8f6a06bac",
+      "source_url": "https://arxiv.org/abs/1803.00567",
+      "title": "Computational Optimal Transport",
+      "venue_or_status": "Foundations and Trends in Machine Learning",
+      "version_date": null,
+      "year": 2019
+    },
+    {
+      "access_date": "2026-07-23",
+      "authors": "Ernst Hairer, Syvert P. Norsett, Gerhard Wanner",
+      "formulas_or_results_needed": [
+        "Euler/Heun/RK4 order conditions",
+        "local truncation error"
+      ],
+      "local_filename": "hairer2008solving_odes_i.pdf",
+      "notation_differences": [],
+      "notes_path": "notes/hairer2008solving_odes_i.md",
+      "paper_id": "hairer2008solving_odes_i",
+      "pdf_url": null,
+      "relevance": "ODE local error, order, and stability analysis.",
+      "replication_status": "not-started",
+      "retrieval_error": "No public PDF URL configured or download skipped. Do not reconstruct proofs from memory.",
+      "retrieval_status": "missing",
+      "sha256": null,
+      "source_url": "https://link.springer.com/book/10.1007/978-3-540-78862-1",
+      "title": "Solving Ordinary Differential Equations I: Nonstiff Problems",
+      "venue_or_status": "Springer book",
+      "version_date": null,
+      "year": 2008
+    },
+    {
+      "access_date": "2026-07-23",
+      "authors": "Nicolas Bonneel, Julien Rabin, Gabriel Peyre, Hanspeter Pfister",
+      "formulas_or_results_needed": [
+        "sliced Wasserstein definition",
+        "projection estimator"
+      ],
+      "local_filename": "bonneel2015sliced_wasserstein.pdf",
+      "notation_differences": [],
+      "notes_path": "notes/bonneel2015sliced_wasserstein.md",
+      "paper_id": "bonneel2015sliced_wasserstein",
+      "pdf_url": "https://arxiv.org/pdf/1308.2074.pdf",
+      "relevance": "Sliced Wasserstein estimation.",
+      "replication_status": "not-started",
+      "retrieval_error": null,
+      "retrieval_status": "present",
+      "sha256": "d221979471bb8ff902ee19639b5af7ad720dd7319bbd72acdc92f1ab246c30e1",
+      "source_url": "https://arxiv.org/abs/1308.2074",
+      "title": "Sliced and Radon Wasserstein Barycenters of Measures",
+      "venue_or_status": "Journal of Mathematical Imaging and Vision",
+      "version_date": null,
+      "year": 2015
+    },
+    {
+      "access_date": "2026-07-23",
+      "authors": "Ling Yang, Zixiang Zhang, Zhilong Zhang, Xingchao Liu, Minkai Xu, Wentao Zhang, Chenlin Meng, Stefano Ermon, Bin Cui",
+      "formulas_or_results_needed": [
+        "few-step Euler error discussion",
+        "straight flow motivation"
+      ],
+      "local_filename": "yang2024consistency_flow_matching.pdf",
+      "notation_differences": [],
+      "notes_path": "notes/yang2024consistency_flow_matching.md",
+      "paper_id": "yang2024consistency_flow_matching",
+      "pdf_url": "https://arxiv.org/pdf/2407.02398.pdf",
+      "relevance": "Few-step flow discretization error and straight-flow motivation.",
+      "replication_status": "not-started",
+      "retrieval_error": null,
+      "retrieval_status": "present",
+      "sha256": "0874651d3aa475471dadd1fca11fba0481d523fdd660552c1c11108117d788d8",
+      "source_url": "https://arxiv.org/abs/2407.02398",
+      "title": "Consistency Flow Matching: Defining Straight Flows with Velocity Consistency",
+      "venue_or_status": "arXiv preprint",
+      "version_date": null,
+      "year": 2024
+    },
+    {
+      "access_date": "2026-07-23",
+      "authors": "Hansheng Chen, Kai Zhang, Hao Tan, Zexiang Xu, Fujun Luan, Leonidas Guibas, Gordon Wetzstein, Sai Bi",
+      "formulas_or_results_needed": [
+        "mixture velocity parameterization",
+        "discretization error discussion for mixtures"
+      ],
+      "local_filename": "gmflow_2025.pdf",
+      "notation_differences": [],
+      "notes_path": "notes/gmflow_2025.md",
+      "paper_id": "gmflow_2025",
+      "pdf_url": "https://arxiv.org/pdf/2504.05304.pdf",
+      "relevance": "Gaussian mixture flow fields and few-step sampling issues.",
+      "replication_status": "not-started",
+      "retrieval_error": null,
+      "retrieval_status": "present",
+      "sha256": "3de3819dfff4eb24136651455fa277c65b4c1c81edec110feb64b3079a43b217",
+      "source_url": "https://arxiv.org/abs/2504.05304",
+      "title": "Gaussian Mixture Flow Matching Models",
+      "venue_or_status": "arXiv preprint",
+      "version_date": null,
+      "year": 2025
+    }
+  ],
+  "policy": "Legal public sources only. No paywall bypass."
+}

@@ -20,3 +20,47 @@ Append one entry per work session. Do not delete prior entries.
 - Issues: none recorded at scaffold time.
 - Decisions: Stop after Phase 0 and request code review before Phase 1.
 - Next action: Code review of Phase 0, then Phase 1 exact Gaussian formulas.
+
+## 2026-07-23 - Phase 1 exact Gaussians
+
+- Date: 2026-07-23
+- Objective: Implement exact Gaussian experiments and validate formulas.
+- Actions:
+  - Extracted source-cited formulas into paper notes (Lipman, Lipschitz-guided,
+    Peyre, Albergo, Liu); recorded Hairer as missing.
+  - Documented notation map and Gaussian affine / OT field derivations in
+    docs/MATHEMATICAL_NOTES.md.
+  - Implemented Gaussian distributions, SI-style paths, exact fields, equal-NFE
+    Euler/Heun/RK4, exact Gaussian W2, and affine regularity metrics.
+  - Added factories, gaussian_exact experiment mode, phase1_smoke and
+    phase1_gaussian configs, and analytical/integration tests.
+- Files changed: src/fewstep_regularities/{distributions,paths,fields,solvers,
+  evaluation,metrics,experiments,cli}, tests/analytical/*, tests/integration/
+  test_phase1_smoke.py, papers/notes/*, docs/MATHEMATICAL_NOTES.md,
+  docs/UNRESOLVED_QUESTIONS.md, README.md, configs/experiment/phase1_*.yaml.
+- Experiments launched: phase1_smoke (validation); phase1_gaussian available.
+- Results observed: formula validation only; no scientific claims supported.
+- Issues: Hairer PDF still missing; Lipschitz-guided uses effective scalar M
+  for anisotropic targets.
+- Decisions: Do not modify DECISION_GATE.md. Defer mixtures and gate to Phase 2+.
+- Next action: Code review of Phase 1, then Phase 2 mixtures and estimator
+  calibration.
+
+## 2026-07-23 - Phase 1 audit and claim-safety fixes
+
+- Date: 2026-07-23
+- Objective: Audit Phase 1 completeness and fix claim-safety issues before push.
+- Actions:
+  - Fixed Lipschitz effective_M (max eigenvalue, not geometric mean).
+  - Stopped silent dtype casts in Gaussian W2 evaluator.
+  - Marked grid/trapezoid regularity metrics as non-exact.
+  - Matched RNG generator device to compute device.
+  - Hard-failed missing pushforward moment APIs.
+  - Narrowed .gitignore so papers/notes and index are tracked; PDFs stay local.
+- Files changed: factories, gaussian_w2, affine_gaussian, gaussian_exact,
+  .gitignore, unit tests for factories and W2 dtype.
+- Experiments launched: none new beyond re-running smoke via pytest.
+- Results observed: 49 tests pass; ruff/mypy clean after fixes.
+- Issues: none remaining critical for Phase 1 commit.
+- Decisions: Do not push until user commits; provide push commands only.
+- Next action: User commit and push, then Phase 2.
