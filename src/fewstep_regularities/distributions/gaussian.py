@@ -9,7 +9,7 @@ from torch import Tensor
 
 from fewstep_regularities.distributions.base import Moments
 from fewstep_regularities.utils.precision import DEFAULT_DTYPE, assert_dtype
-from fewstep_regularities.utils.shapes import assert_finite, assert_shape
+from fewstep_regularities.utils.shapes import assert_device, assert_finite, assert_shape
 
 
 def _symmetrize(matrix: Tensor) -> Tensor:
@@ -38,13 +38,14 @@ class Gaussian:
     _device: torch.device = field(default_factory=_cpu)
 
     def __post_init__(self) -> None:
-        self.mean_vec = self.mean_vec.to(dtype=self._dtype, device=self._device)
-        self.cov = _symmetrize(self.cov.to(dtype=self._dtype, device=self._device))
+        assert_dtype(self.mean_vec, self._dtype, "mean")
+        assert_dtype(self.cov, self._dtype, "covariance")
+        assert_device(self.mean_vec, self._device, "mean")
+        assert_device(self.cov, self._device, "covariance")
+        self.cov = _symmetrize(self.cov)
         assert_shape(self.mean_vec, (None,), "mean")
         d = int(self.mean_vec.shape[0])
         assert_shape(self.cov, (d, d), "covariance")
-        assert_dtype(self.mean_vec, self._dtype, "mean")
-        assert_dtype(self.cov, self._dtype, "covariance")
         # Check positive definite via Cholesky.
         torch.linalg.cholesky(self.cov)
 
@@ -89,6 +90,7 @@ class Gaussian:
             ``log N(x; m, Σ)``.
         """
         assert_dtype(x, self._dtype, "x")
+        assert_device(x, self._device, "x")
         assert_shape(x, (None, self.dim), "x")
         delta = x - self.mean_vec.unsqueeze(0)
         chol = torch.linalg.cholesky(self.cov)
@@ -107,6 +109,7 @@ class Gaussian:
             ``s(x) = -Σ^{-1} (x - m)``.
         """
         assert_dtype(x, self._dtype, "x")
+        assert_device(x, self._device, "x")
         assert_shape(x, (None, self.dim), "x")
         delta = x - self.mean_vec.unsqueeze(0)
         # Solve Σ s^T = -(x-m)^T via Cholesky.

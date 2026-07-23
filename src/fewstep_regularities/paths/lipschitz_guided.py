@@ -44,20 +44,20 @@ class LipschitzGuidedPath:
 
     def alpha(self, t: Tensor) -> Tensor:
         """Noise coefficient ``α_t = sqrt(1 - β_t^2)``."""
-        t = as_time(t.to(dtype=self.dtype))
+        t = as_time(t, self.dtype)
         beta_sq = lipschitz_guided_beta_sq(t, self.m)
         alpha_sq = (1.0 - beta_sq).clamp(min=0.0)
         return torch.sqrt(alpha_sq)
 
     def sigma(self, t: Tensor) -> Tensor:
         """Data coefficient ``β_t``."""
-        t = as_time(t.to(dtype=self.dtype))
+        t = as_time(t, self.dtype)
         beta_sq = lipschitz_guided_beta_sq(t, self.m).clamp(min=0.0)
         return torch.sqrt(beta_sq)
 
     def alpha_derivative(self, t: Tensor) -> Tensor:
         """Time derivative of ``alpha`` via analytic chain rule."""
-        t = as_time(t.to(dtype=self.dtype))
+        t = as_time(t, self.dtype)
         beta_sq = lipschitz_guided_beta_sq(t, self.m).clamp(min=0.0)
         # d/dt β^2 = M^t log(M) / (M - 1)
         log_m = math_log(self.m, t.dtype, t.device)
@@ -69,7 +69,7 @@ class LipschitzGuidedPath:
 
     def sigma_derivative(self, t: Tensor) -> Tensor:
         """Time derivative of ``sigma`` via analytic chain rule."""
-        t = as_time(t.to(dtype=self.dtype))
+        t = as_time(t, self.dtype)
         beta_sq = lipschitz_guided_beta_sq(t, self.m).clamp(min=0.0)
         log_m = math_log(self.m, t.dtype, t.device)
         m_t = torch.pow(torch.tensor(self.m, dtype=t.dtype, device=t.device), t)

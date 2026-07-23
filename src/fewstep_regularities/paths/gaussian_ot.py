@@ -70,22 +70,22 @@ class GaussianOTPath:
 
     def alpha(self, t: Tensor) -> Tensor:
         """McCann weight on identity: ``1 - t``."""
-        t = as_time(t.to(dtype=self.dtype))
+        t = as_time(t, self.dtype)
         return 1.0 - t
 
     def sigma(self, t: Tensor) -> Tensor:
         """McCann weight on OT map: ``t``."""
-        t = as_time(t.to(dtype=self.dtype))
+        t = as_time(t, self.dtype)
         return t
 
     def alpha_derivative(self, t: Tensor) -> Tensor:
         """Derivative of ``alpha``."""
-        t = as_time(t.to(dtype=self.dtype))
+        t = as_time(t, self.dtype)
         return torch.full_like(t, -1.0)
 
     def sigma_derivative(self, t: Tensor) -> Tensor:
         """Derivative of ``sigma``."""
-        t = as_time(t.to(dtype=self.dtype))
+        t = as_time(t, self.dtype)
         return torch.ones_like(t)
 
     def transport(self, x0: Tensor) -> Tensor:

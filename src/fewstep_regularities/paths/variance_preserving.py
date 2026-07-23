@@ -28,22 +28,22 @@ class VariancePreservingTrigPath:
 
     def alpha(self, t: Tensor) -> Tensor:
         """Noise/source coefficient."""
-        t = as_time(t.to(dtype=self.dtype))
+        t = as_time(t, self.dtype)
         return torch.cos(0.5 * math.pi * t)
 
     def sigma(self, t: Tensor) -> Tensor:
         """Target coefficient."""
-        t = as_time(t.to(dtype=self.dtype))
+        t = as_time(t, self.dtype)
         return torch.sin(0.5 * math.pi * t)
 
     def alpha_derivative(self, t: Tensor) -> Tensor:
         """Derivative of ``alpha``."""
-        t = as_time(t.to(dtype=self.dtype))
+        t = as_time(t, self.dtype)
         return -0.5 * math.pi * torch.sin(0.5 * math.pi * t)
 
     def sigma_derivative(self, t: Tensor) -> Tensor:
         """Derivative of ``sigma``."""
-        t = as_time(t.to(dtype=self.dtype))
+        t = as_time(t, self.dtype)
         return 0.5 * math.pi * torch.cos(0.5 * math.pi * t)
 
     def marginal_sample(

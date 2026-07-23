@@ -153,8 +153,11 @@ CATALOG: list[PaperEntry] = [
         authors="Nicolas Bonneel, Julien Rabin, Gabriel Peyre, Hanspeter Pfister",
         year=2015,
         venue_or_status="Journal of Mathematical Imaging and Vision",
-        source_url="https://arxiv.org/abs/1308.2074",
-        pdf_url="https://arxiv.org/pdf/1308.2074.pdf",
+        # Note: arXiv 1308.2074 is a different paper. Use author/HAL public PDF.
+        source_url="https://hal.archives-ouvertes.fr/hal-00881872",
+        pdf_url=(
+            "https://perso.liris.cnrs.fr/nicolas.bonneel/WassersteinSliced-JMIV.pdf"
+        ),
         local_filename="bonneel2015sliced_wasserstein.pdf",
         relevance="Sliced Wasserstein estimation.",
         formulas_or_results_needed=[

@@ -9,8 +9,10 @@ from fewstep_regularities.utils.precision import assert_dtype
 from fewstep_regularities.utils.shapes import assert_finite
 
 
-def as_time(t: Tensor) -> Tensor:
+def as_time(t: Tensor, dtype: torch.dtype | None = None) -> Tensor:
     """Validate and return a time tensor."""
+    if dtype is not None:
+        assert_dtype(t, dtype, "t")
     assert_finite(t, "t")
     return t
 

@@ -10,7 +10,7 @@ from torch import Tensor
 from fewstep_regularities.distributions.gaussian import Gaussian
 from fewstep_regularities.paths.gaussian_ot import gaussian_ot_matrix
 from fewstep_regularities.utils.precision import DEFAULT_DTYPE, assert_dtype
-from fewstep_regularities.utils.shapes import assert_finite, assert_shape
+from fewstep_regularities.utils.shapes import assert_device, assert_finite, assert_shape
 
 
 @dataclass
@@ -38,6 +38,10 @@ class GaussianOTField:
     def __post_init__(self) -> None:
         if self.source.dim != self.target.dim:
             raise ValueError("dims must match")
+        if self.source.dtype != self.dtype or self.target.dtype != self.dtype:
+            raise TypeError("dtype mismatch")
+        if self.source.device != self.target.device:
+            raise ValueError("source and target devices must match")
         self._a = gaussian_ot_matrix(self.source.covariance(), self.target.covariance())
         self._eye = torch.eye(self.source.dim, dtype=self.dtype, device=self.source.device)
 
@@ -71,6 +75,8 @@ class GaussianOTField:
         ``b_t(x) = (m_1 - m_0) + J_t (x - m_t)`` with ``J_t = (A - I) S_t^{-1}``.
         """
         assert_dtype(x, self.dtype, "x")
+        assert_dtype(t, self.dtype, "t")
+        assert_device(t, x.device, "t")
         assert_shape(x, (None, self.dim), "x")
         n = x.shape[0]
         mv = self.target.mean() - self.source.mean()
@@ -81,23 +87,23 @@ class GaussianOTField:
             return mv + j @ (xi - m)
 
         if t.ndim == 0:
-            ts = t.to(dtype=self.dtype)
+            ts = t
             j = self.jacobian_matrix(ts)
             m = self.mean_t(ts)
             out = mv.unsqueeze(0) + (x - m.unsqueeze(0)) @ j.transpose(0, 1)
         elif t.ndim == 1:
             if torch.allclose(t, t[0]):
-                ts = t[0].to(dtype=self.dtype)
+                ts = t[0]
                 j = self.jacobian_matrix(ts)
                 m = self.mean_t(ts)
                 out = mv.unsqueeze(0) + (x - m.unsqueeze(0)) @ j.transpose(0, 1)
             else:
                 out = torch.stack(
-                    [one(t[i].to(dtype=self.dtype), x[i]) for i in range(n)],
+                    [one(t[i], x[i]) for i in range(n)],
                     dim=0,
                 )
         else:
-            ts = t[0, 0].to(dtype=self.dtype)
+            ts = t[0, 0]
             j = self.jacobian_matrix(ts)
             m = self.mean_t(ts)
             out = mv.unsqueeze(0) + (x - m.unsqueeze(0)) @ j.transpose(0, 1)
@@ -106,16 +112,19 @@ class GaussianOTField:
 
     def jacobian(self, t: Tensor, x: Tensor) -> Tensor:
         """Jacobian batch ``(n, d, d)``."""
+        assert_dtype(x, self.dtype, "x")
+        assert_dtype(t, self.dtype, "t")
+        assert_device(t, x.device, "t")
         assert_shape(x, (None, self.dim), "x")
         n = x.shape[0]
         if t.ndim == 0:
-            j = self.jacobian_matrix(t.to(dtype=self.dtype))
+            j = self.jacobian_matrix(t)
             return j.unsqueeze(0).expand(n, -1, -1).contiguous()
         if t.ndim == 1 and torch.allclose(t, t[0]):
-            j = self.jacobian_matrix(t[0].to(dtype=self.dtype))
+            j = self.jacobian_matrix(t[0])
             return j.unsqueeze(0).expand(n, -1, -1).contiguous()
         return torch.stack(
-            [self.jacobian_matrix(t[i].to(dtype=self.dtype)) for i in range(n)],
+            [self.jacobian_matrix(t[i]) for i in range(n)],
             dim=0,
         )
 

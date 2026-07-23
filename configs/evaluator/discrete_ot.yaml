@@ -1,0 +1,4 @@
+name: discrete_ot
+kind: estimator
+max_points: 64
+notes: Exact W2 only between the finite equal-weight empirical measures.

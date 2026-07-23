@@ -1,4 +1,5 @@
 name: sliced_wasserstein
 kind: estimator
 n_projections: 128
-notes: Sliced Wasserstein estimator. Not exact W2.
+seed: 0
+notes: Sliced Wasserstein estimator (Bonneel). Not exact W2.

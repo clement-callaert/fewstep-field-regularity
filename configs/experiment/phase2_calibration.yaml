@@ -1,0 +1,25 @@
+name: phase2_calibration
+mode: estimator_calibration
+run_id: phase2_calibration
+decision_gate: docs/DECISION_GATE.md
+hypotheses:
+  - H1
+  - H2
+  - H3
+  - H4
+seeds:
+  - 0
+  - 1
+  - 2
+dimensions:
+  - 2
+sample_sizes:
+  - 64
+  - 128
+n_projections: 64
+projected_n_projections: 1
+epsilon: 0.05
+entropic_max_iter: 10000
+entropic_tol: 1.0e-5
+discrete_n: 32
+notes: Phase 2 estimator calibration. Not the decision gate.

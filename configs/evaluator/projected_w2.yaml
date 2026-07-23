@@ -1,0 +1,5 @@
+name: projected_w2
+kind: estimator
+n_projections: 1
+seed: 0
+notes: Exact 1D W2 on random projections. Not exact W2 on Rd.

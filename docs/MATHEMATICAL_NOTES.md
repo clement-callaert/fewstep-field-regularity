@@ -159,12 +159,93 @@ Note path: `papers/notes/lipman2023flow_matching.md`
 | gaussian_affine_marginal | scalar SI schedules | Gaussian / Gaussian | source verified + numerically checked | papers/notes/lipschitz_guided_2025.md |
 | gaussian_ot_displacement | gaussian OT | Gaussian / Gaussian | source verified + numerically checked | papers/notes/peyre2019computational_ot.md |
 | lipman_conditional_gaussian | Lipman conditional | noise / point mass Gaussian | source verified | papers/notes/lipman2023flow_matching.md |
+| mixture_affine_marginal | scalar SI schedules | Gaussian / GMM | original derivation + numerically checked | docs/MATHEMATICAL_NOTES.md |
 
 ## Gaussian W2
 
 Peyré (2.41)-(2.42):
 
 `W_2^2 = ∥m_0 - m_1∥^2 + tr(Σ_0 + Σ_1 - 2 (Σ_0^{1/2} Σ_1 Σ_0^{1/2})^{1/2})`
+
+## Gaussian mixture density and score
+
+For weights `π_k > 0` with `∑_k π_k = 1`, means `μ_k`, covariances `Σ_k ≻ 0`:
+
+`p(x) = ∑_k π_k N(x; μ_k, Σ_k)`
+
+`log p(x) = logsumexp_k (log π_k + log N(x; μ_k, Σ_k))`
+
+Responsibilities:
+
+`r_k(x) = softmax_k (log π_k + log N(x; μ_k, Σ_k))`
+
+Score (stable form):
+
+`∇ log p(x) = ∑_k r_k(x) (-Σ_k^{-1} (x - μ_k))`
+
+Status: standard GMM identity; numerically checked via AD.
+
+## Derivation: independent-coupling mixture marginal field
+
+Field ID: `mixture_affine_marginal`
+
+Path class: independent scalar schedule only (linear, trig VP, Lipschitz-guided).
+
+Do not use Gaussian OT for non-Gaussian mixture targets.
+
+Setup:
+
+- `z ~ N(0, I)`, `x_1 ~ ∑_k π_k N(μ_k, Σ_k)`, independent
+- `I_t = alpha(t) z + sigma(t) x_1`
+
+Conditional on component `k` of `x_1`, the law of `I_t` is Gaussian with
+
+- `μ_{k,t} = sigma(t) μ_k`
+- `Σ_{k,t} = alpha(t)^2 I + sigma(t)^2 Σ_k`
+
+so the marginal is the same mixture weights with these component parameters.
+
+Conditional velocity given `(z, x_1)`:
+
+`İ_t = alpha'(t) z + sigma'(t) x_1`
+
+Given component `k` and `I_t = x`, the joint Gaussian conditional mean for the
+component-restricted bridge yields the same affine formula as Phase 1 with
+endpoints `N(0,I)` and `N(μ_k, Σ_k)`:
+
+`b_{k,t}(x) = ṁ_{k,t} + C_{k,t} Σ_{k,t}^{-1} (x - μ_{k,t})`
+
+where
+
+- `ṁ_{k,t} = sigma'(t) μ_k`
+- `C_{k,t} = alpha' alpha I + sigma' sigma Σ_k`
+
+Marginal velocity (original derivation; SI conditional expectation):
+
+`b_t(x) = ∑_k r_{k,t}(x) b_{k,t}(x)`
+
+with responsibilities `r_{k,t}` of the time-`t` GMM.
+
+Jacobian is state-dependent. Regularity metrics for this field use Monte Carlo
+sampling from the time-`t` marginal GMM and are marked non-exact.
+
+Status: original derivation + numerically checked (AD Jacobian, moment ODE).
+
+Nearest sources: Albergo / Lipman conditional velocity identities; Phase 1
+Gaussian affine field as the per-component building block.
+
+## Empirical Wasserstein estimators (Phase 2)
+
+- Exact empirical 1-D W2 for equal-size, equal-weight samples: sort projections
+  and average squared differences of order statistics. For unequal sample
+  sizes, integrate the two empirical quantile step functions over their combined
+  CDF breakpoints.
+- Sliced W2: Bonneel (30)-(31); Monte Carlo average over directions on `S^{d-1}`.
+- Entropic OT: Peyré (4.2); report `ε`, `L_C^ε`, `<P,C>`, marginal residuals,
+  iterations, and convergence. The primary diagnostic is `sqrt(<P,C>)`, not
+  `L_C^ε` and not exact W2.
+- Discrete OT: Kantorovich LP on small equal-weight clouds with cost
+  `∥x_i - y_j∥^2`; exactness is scoped to the finite empirical measures.
 
 ## Proof workflow
 

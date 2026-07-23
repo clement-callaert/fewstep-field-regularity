@@ -122,9 +122,9 @@
       "local_filename": "bonneel2015sliced_wasserstein.pdf",
       "notes_path": "notes/bonneel2015sliced_wasserstein.md",
       "paper_id": "bonneel2015sliced_wasserstein",
-      "pdf_url": "https://arxiv.org/pdf/1308.2074.pdf",
+      "pdf_url": "https://perso.liris.cnrs.fr/nicolas.bonneel/WassersteinSliced-JMIV.pdf",
       "relevance": "Sliced Wasserstein estimation.",
-      "source_url": "https://arxiv.org/abs/1308.2074",
+      "source_url": "https://hal.archives-ouvertes.fr/hal-00881872",
       "title": "Sliced and Radon Wasserstein Barycenters of Measures",
       "venue_or_status": "Journal of Mathematical Imaging and Vision",
       "year": 2015
@@ -162,7 +162,7 @@
       "year": 2025
     }
   ],
-  "generated_at": "2026-07-23T12:33:37.515472+00:00",
+  "generated_at": "2026-07-23T14:38:31.817509+00:00",
   "papers": [
     {
       "access_date": "2026-07-23",
@@ -337,13 +337,13 @@
       "notation_differences": [],
       "notes_path": "notes/bonneel2015sliced_wasserstein.md",
       "paper_id": "bonneel2015sliced_wasserstein",
-      "pdf_url": "https://arxiv.org/pdf/1308.2074.pdf",
+      "pdf_url": "https://perso.liris.cnrs.fr/nicolas.bonneel/WassersteinSliced-JMIV.pdf",
       "relevance": "Sliced Wasserstein estimation.",
       "replication_status": "not-started",
       "retrieval_error": null,
       "retrieval_status": "present",
-      "sha256": "d221979471bb8ff902ee19639b5af7ad720dd7319bbd72acdc92f1ab246c30e1",
-      "source_url": "https://arxiv.org/abs/1308.2074",
+      "sha256": "7741721bdc072583c9827ee0c92f4d21c2362d0443bf94a8ad1bb1dcf33c36df",
+      "source_url": "https://hal.archives-ouvertes.fr/hal-00881872",
       "title": "Sliced and Radon Wasserstein Barycenters of Measures",
       "venue_or_status": "Journal of Mathematical Imaging and Vision",
       "version_date": null,

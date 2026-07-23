@@ -31,19 +31,19 @@ class ScalarScheduleAdapter:
 
     def alpha(self, t: Tensor) -> Tensor:
         """Evaluate ``alpha(t)``."""
-        return self.alpha_fn(as_time(t.to(dtype=self.dtype)))
+        return self.alpha_fn(as_time(t, self.dtype))
 
     def sigma(self, t: Tensor) -> Tensor:
         """Evaluate ``sigma(t)``."""
-        return self.sigma_fn(as_time(t.to(dtype=self.dtype)))
+        return self.sigma_fn(as_time(t, self.dtype))
 
     def alpha_derivative(self, t: Tensor) -> Tensor:
         """Evaluate ``alpha'(t)``."""
-        return self.alpha_deriv_fn(as_time(t.to(dtype=self.dtype)))
+        return self.alpha_deriv_fn(as_time(t, self.dtype))
 
     def sigma_derivative(self, t: Tensor) -> Tensor:
         """Evaluate ``sigma'(t)``."""
-        return self.sigma_deriv_fn(as_time(t.to(dtype=self.dtype)))
+        return self.sigma_deriv_fn(as_time(t, self.dtype))
 
     def marginal_sample(
         self,

@@ -1,4 +1,4 @@
-"""Hydra object factories for Phase 1 components."""
+"""Hydra object factories for Phase 1 and Phase 2 components."""
 
 from __future__ import annotations
 
@@ -13,9 +13,22 @@ from fewstep_regularities.distributions.gaussian import (
     low_rank_gaussian,
     standard_gaussian,
 )
+from fewstep_regularities.distributions.gaussian_mixture import (
+    GaussianMixture,
+    eight_mode_gmm,
+    imbalanced_gmm,
+    two_mode_gmm,
+)
 from fewstep_regularities.evaluation.gaussian_w2 import GaussianW2Evaluator
+from fewstep_regularities.evaluation.projected_sliced import (
+    DiscreteOTEvaluator,
+    EntropicOTEvaluator,
+    ProjectedW2Evaluator,
+    SlicedWassersteinEvaluator,
+)
 from fewstep_regularities.fields.gaussian_affine import GaussianAffineField
 from fewstep_regularities.fields.gaussian_ot_field import GaussianOTField
+from fewstep_regularities.fields.mixture_affine import MixtureAffineField
 from fewstep_regularities.metrics.affine_gaussian import (
     AveragedSquaredLipschitzProxy,
     ExpectedSquaredJacobianNorm,
@@ -34,6 +47,8 @@ from fewstep_regularities.solvers.euler import EulerSolver
 from fewstep_regularities.solvers.heun import HeunSolver
 from fewstep_regularities.solvers.rk4 import RK4Solver
 from fewstep_regularities.utils.precision import resolve_dtype
+
+AnyDistribution = Gaussian | GaussianMixture
 
 
 def cfg_to_dict(cfg: DictConfig | dict[str, Any]) -> dict[str, Any]:
@@ -66,6 +81,20 @@ def build_gaussian(
     generator: torch.Generator | None = None,
 ) -> Gaussian:
     """Build a Gaussian from a distribution config group."""
+    dist = build_distribution(dist_cfg, dim, dtype, device, generator=generator)
+    if not isinstance(dist, Gaussian):
+        raise TypeError("build_gaussian requires a Gaussian config")
+    return dist
+
+
+def build_distribution(
+    dist_cfg: DictConfig | dict[str, Any],
+    dim: int,
+    dtype: torch.dtype,
+    device: torch.device,
+    generator: torch.Generator | None = None,
+) -> AnyDistribution:
+    """Build a Gaussian or Gaussian mixture from config."""
     data = cfg_to_dict(dist_cfg)
     name = str(data.get("name", data.get("kind", "")))
     if name in {"standard_gaussian", "gaussian"} and data.get("role") == "source":
@@ -88,20 +117,53 @@ def build_gaussian(
             device=device,
             generator=generator,
         )
-    # Fallback by kind.
+    if name == "two_mode_gmm":
+        return two_mode_gmm(
+            dim,
+            separation=float(data.get("separation", 2.0)),
+            component_std=float(data.get("component_std", 0.5)),
+            dtype=dtype,
+            device=device,
+        )
+    if name == "eight_mode_gmm":
+        return eight_mode_gmm(
+            dim,
+            radius=float(data.get("radius", 2.0)),
+            component_std=float(data.get("component_std", 0.35)),
+            dtype=dtype,
+            device=device,
+        )
+    if name == "imbalanced_gmm":
+        return imbalanced_gmm(
+            dim,
+            weight_ratio=float(data.get("weight_ratio", 9.0)),
+            separation=float(data.get("separation", 2.0)),
+            component_std=float(data.get("component_std", 0.5)),
+            dtype=dtype,
+            device=device,
+        )
     kind = str(data.get("kind", ""))
     if kind == "gaussian" and data.get("role") == "source":
         return standard_gaussian(dim, dtype=dtype, device=device)
+    if kind == "gaussian_mixture":
+        n_modes = int(data.get("n_modes", 2))
+        if n_modes == 8:
+            return eight_mode_gmm(dim, dtype=dtype, device=device)
+        if "weight_ratio" in data:
+            return imbalanced_gmm(
+                dim,
+                weight_ratio=float(data["weight_ratio"]),
+                dtype=dtype,
+                device=device,
+            )
+        return two_mode_gmm(dim, dtype=dtype, device=device)
     raise ValueError(f"Unsupported distribution config: {name or kind}")
 
 
-def effective_m(target: Gaussian) -> float:
+def effective_m(target: AnyDistribution) -> float:
     """Scalar variance ratio for Lipschitz-guided schedule.
 
-    When the source is ``N(0, I)``, use the largest eigenvalue of the target
-    covariance as the scalar ``M`` (stiffness-relevant). Geometric mean is
-    unsuitable for anisotropic targets whose eigenvalues are reciprocal around
-    1, because that mean is exactly 1 and the schedule is undefined.
+    Uses the largest eigenvalue of the target covariance (mixture or Gaussian).
     """
     ev = torch.linalg.eigvalsh(target.covariance())
     m = float(ev.max().item())
@@ -118,7 +180,7 @@ def effective_m(target: Gaussian) -> float:
 def build_path(
     path_cfg: DictConfig | dict[str, Any],
     source: Gaussian,
-    target: Gaussian,
+    target: AnyDistribution,
     dtype: torch.dtype,
 ) -> Any:
     """Build a probability path."""
@@ -132,6 +194,8 @@ def build_path(
         m = float(data.get("m", effective_m(target)))
         return LipschitzGuidedPath(m=m, dtype=dtype)
     if name == "gaussian_ot":
+        if not isinstance(target, Gaussian):
+            raise ValueError("gaussian_ot is valid only for Gaussian targets (UQ #3)")
         return GaussianOTPath(source=source, target=target, dtype=dtype)
     raise ValueError(f"Unsupported path config: {name}")
 
@@ -139,18 +203,24 @@ def build_path(
 def build_field(
     path_cfg: DictConfig | dict[str, Any],
     source: Gaussian,
-    target: Gaussian,
+    target: AnyDistribution,
     path: Any,
     dtype: torch.dtype,
-) -> GaussianAffineField | GaussianOTField:
+) -> GaussianAffineField | GaussianOTField | MixtureAffineField:
     """Build an exact velocity field for the path."""
     data = cfg_to_dict(path_cfg)
     name = str(data.get("name", data.get("schedule", "")))
+    if isinstance(target, GaussianMixture):
+        if name == "gaussian_ot":
+            raise ValueError("gaussian_ot field is invalid for mixture targets")
+        return MixtureAffineField(
+            source=source, target=target, schedule=path, dtype=dtype
+        )
+    if not isinstance(target, Gaussian):
+        raise TypeError("unsupported target type for field")
     if name == "gaussian_ot":
         return GaussianOTField(source=source, target=target, dtype=dtype)
-    return GaussianAffineField(
-        source=source, target=target, schedule=path, dtype=dtype
-    )
+    return GaussianAffineField(source=source, target=target, schedule=path, dtype=dtype)
 
 
 def build_solver(solver_cfg: DictConfig | dict[str, Any]) -> Any:
@@ -172,7 +242,31 @@ def build_evaluator(eval_cfg: DictConfig | dict[str, Any], dtype: torch.dtype) -
     name = str(data.get("name", ""))
     if name == "gaussian_w2":
         return GaussianW2Evaluator(dtype=dtype)
-    raise ValueError(f"Unsupported evaluator for Phase 1: {name}")
+    if name == "projected_w2":
+        return ProjectedW2Evaluator(
+            n_projections=int(data.get("n_projections", 1)),
+            dtype=dtype,
+            seed=data.get("seed", 0),
+        )
+    if name == "sliced_wasserstein":
+        return SlicedWassersteinEvaluator(
+            n_projections=int(data.get("n_projections", 128)),
+            dtype=dtype,
+            seed=data.get("seed", 0),
+        )
+    if name == "entropic_ot":
+        return EntropicOTEvaluator(
+            epsilon=float(data.get("epsilon", 0.05)),
+            dtype=dtype,
+            max_iter=int(data.get("max_iter", 10000)),
+            tol=float(data.get("tol", 1e-5)),
+        )
+    if name == "discrete_ot":
+        return DiscreteOTEvaluator(
+            max_points=int(data.get("max_points", 64)),
+            dtype=dtype,
+        )
+    raise ValueError(f"Unsupported evaluator: {name}")
 
 
 def build_metric(metric_cfg: DictConfig | dict[str, Any], dtype: torch.dtype) -> Any:

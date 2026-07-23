@@ -1,4 +1,6 @@
 name: entropic_ot
 kind: estimator
 epsilon: 0.05
+max_iter: 10000
+tol: 1.0e-5
 notes: Entropic OT with reported regularization. Do not present as exact W2.

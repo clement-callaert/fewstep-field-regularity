@@ -55,9 +55,15 @@ def n_steps_from_nfe(requested_nfe: int, evals_per_step: int) -> int:
     return steps
 
 
-def build_time_grid(t0: float, t1: float, n_steps: int, dtype: torch.dtype) -> Tensor:
+def build_time_grid(
+    t0: float,
+    t1: float,
+    n_steps: int,
+    dtype: torch.dtype,
+    device: torch.device | None = None,
+) -> Tensor:
     """Uniform grid of shape ``(n_steps + 1,)``."""
-    return torch.linspace(t0, t1, n_steps + 1, dtype=dtype)
+    return torch.linspace(t0, t1, n_steps + 1, dtype=dtype, device=device)
 
 
 @dataclass
@@ -94,7 +100,7 @@ class FixedStepSolver:
         assert_shape(x0, (None, None), "x0")
         n_steps = n_steps_from_nfe(requested_nfe, self.evals_per_step)
         dtype = x0.dtype
-        times = build_time_grid(t0, t1, n_steps, dtype)
+        times = build_time_grid(t0, t1, n_steps, dtype, x0.device)
         wrapped = CountingField(field=field, nfe=0)
         x = x0
         traj = [x0]

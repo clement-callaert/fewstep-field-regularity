@@ -4,3 +4,5 @@ kind: gaussian_mixture
 role: target
 n_modes: 2
 weight_ratio: 9.0
+separation: 2.0
+component_std: 0.5

@@ -1,0 +1,22 @@
+defaults:
+  - override /distribution@_global_.distribution: two_mode_gmm
+  - override /evaluator@_global_.evaluator: sliced_wasserstein
+  - _self_
+
+name: phase2_smoke
+mode: mixture_exact
+run_id: phase2_smoke
+decision_gate: docs/DECISION_GATE.md
+hypotheses:
+  - H1
+  - H2
+  - H3
+  - H4
+seeds:
+  - 0
+nfe_budgets:
+  - 8
+dimensions:
+  - 2
+n_particles: 128
+notes: Minimal Phase 2 mixture smoke for CI and artifact validation.

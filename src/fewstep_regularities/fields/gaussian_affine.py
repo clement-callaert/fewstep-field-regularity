@@ -10,7 +10,7 @@ from torch import Tensor
 
 from fewstep_regularities.distributions.gaussian import Gaussian
 from fewstep_regularities.utils.precision import DEFAULT_DTYPE, assert_dtype
-from fewstep_regularities.utils.shapes import assert_finite, assert_shape
+from fewstep_regularities.utils.shapes import assert_device, assert_finite, assert_shape
 
 
 class ScalarSchedule(Protocol):
@@ -27,7 +27,7 @@ class ScalarSchedule(Protocol):
 
 def _time_col(t: Tensor, n: int, dtype: torch.dtype) -> Tensor:
     """Normalize time to shape ``(n, 1)``."""
-    t = t.to(dtype=dtype)
+    assert_dtype(t, dtype, "t")
     if t.ndim == 0:
         return t.expand(n, 1)
     if t.ndim == 1:
@@ -91,9 +91,11 @@ class GaussianAffineField:
     def cov_t(self, t_scalar: float | Tensor) -> Tensor:
         """Marginal covariance ``Σ_t`` of shape ``(d, d)`` at a scalar time."""
         if isinstance(t_scalar, Tensor):
-            t = t_scalar.to(dtype=self.dtype).reshape(())
+            assert_dtype(t_scalar, self.dtype, "t")
+            assert_device(t_scalar, self.source.device, "t")
+            t = t_scalar.reshape(())
         else:
-            t = torch.tensor(t_scalar, dtype=self.dtype)
+            t = torch.tensor(t_scalar, dtype=self.dtype, device=self.source.device)
         a = self.schedule.alpha(t)
         s = self.schedule.sigma(t)
         return (a**2) * self.source.covariance() + (s**2) * self.target.covariance()
@@ -101,9 +103,11 @@ class GaussianAffineField:
     def cross_cov_t(self, t_scalar: float | Tensor) -> Tensor:
         """``C_t = Cov(İ_t, I_t)`` of shape ``(d, d)``."""
         if isinstance(t_scalar, Tensor):
-            t = t_scalar.to(dtype=self.dtype).reshape(())
+            assert_dtype(t_scalar, self.dtype, "t")
+            assert_device(t_scalar, self.source.device, "t")
+            t = t_scalar.reshape(())
         else:
-            t = torch.tensor(t_scalar, dtype=self.dtype)
+            t = torch.tensor(t_scalar, dtype=self.dtype, device=self.source.device)
         a = self.schedule.alpha(t)
         s = self.schedule.sigma(t)
         ap = self.schedule.alpha_derivative(t)
@@ -122,9 +126,11 @@ class GaussianAffineField:
     def mean_velocity(self, t_scalar: float | Tensor) -> Tensor:
         """``ṁ_t`` of shape ``(d,)``."""
         if isinstance(t_scalar, Tensor):
-            t = t_scalar.to(dtype=self.dtype).reshape(())
+            assert_dtype(t_scalar, self.dtype, "t")
+            assert_device(t_scalar, self.source.device, "t")
+            t = t_scalar.reshape(())
         else:
-            t = torch.tensor(t_scalar, dtype=self.dtype)
+            t = torch.tensor(t_scalar, dtype=self.dtype, device=self.source.device)
         ap = self.schedule.alpha_derivative(t)
         sp = self.schedule.sigma_derivative(t)
         return ap * self.source.mean() + sp * self.target.mean()
@@ -132,9 +138,11 @@ class GaussianAffineField:
     def evaluate(self, t: Tensor, x: Tensor) -> Tensor:
         """Evaluate ``b_t(x)`` of shape ``(n, d)``."""
         assert_dtype(x, self.dtype, "x")
+        assert_device(x, self.source.device, "x")
         assert_shape(x, (None, self.dim), "x")
         n = x.shape[0]
         t_col = _time_col(t, n, self.dtype)
+        assert_device(t_col, x.device, "t")
         # Use per-row times when they differ; otherwise one solve.
         if torch.allclose(t_col, t_col[0:1]):
             ts = t_col[0, 0]
@@ -157,9 +165,11 @@ class GaussianAffineField:
     def jacobian(self, t: Tensor, x: Tensor) -> Tensor:
         """Jacobian batch of shape ``(n, d, d)``."""
         assert_dtype(x, self.dtype, "x")
+        assert_device(x, self.source.device, "x")
         assert_shape(x, (None, self.dim), "x")
         n = x.shape[0]
         t_col = _time_col(t, n, self.dtype)
+        assert_device(t_col, x.device, "t")
         if torch.allclose(t_col, t_col[0:1]):
             j = self.jacobian_matrix(t_col[0, 0])
             return j.unsqueeze(0).expand(n, -1, -1).contiguous()
@@ -168,8 +178,10 @@ class GaussianAffineField:
     def time_derivative(self, t: Tensor, x: Tensor) -> Tensor | None:
         """Finite-difference ``∂_t b`` at fixed ``x`` (documented FD estimator)."""
         assert_dtype(x, self.dtype, "x")
+        assert_device(x, self.source.device, "x")
         n = x.shape[0]
         t_col = _time_col(t, n, self.dtype)
+        assert_device(t_col, x.device, "t")
         eps = torch.tensor(1e-6, dtype=self.dtype, device=x.device)
         t_plus = (t_col + eps).clamp(0.0, 1.0).squeeze(1)
         t_minus = (t_col - eps).clamp(0.0, 1.0).clamp_max(1.0).squeeze(1)

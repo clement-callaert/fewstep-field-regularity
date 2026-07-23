@@ -13,7 +13,11 @@ from omegaconf import DictConfig, OmegaConf
 
 from fewstep_regularities.artifacts.manifest import RunManifest
 from fewstep_regularities.artifacts.writer import FilesystemArtifactWriter
+from fewstep_regularities.experiments.estimator_calibration import (
+    run_estimator_calibration,
+)
 from fewstep_regularities.experiments.gaussian_exact import run_gaussian_exact
+from fewstep_regularities.experiments.mixture_exact import run_mixture_exact
 from fewstep_regularities.utils.environment import (
     cuda_version,
     git_code_status,
@@ -120,8 +124,13 @@ def run_from_overrides(overrides: list[str] | None = None) -> Path:
         return write_dry_run(cfg)
     if mode == "gaussian_exact":
         return run_gaussian_exact(cfg)
+    if mode == "mixture_exact":
+        return run_mixture_exact(cfg)
+    if mode == "estimator_calibration":
+        return run_estimator_calibration(cfg)
     msg = (
-        f"Unsupported mode {mode!r}. Supported: dry_run, gaussian_exact. "
+        f"Unsupported mode {mode!r}. Supported: dry_run, gaussian_exact, "
+        "mixture_exact, estimator_calibration. "
         "Do not launch the gate or full benchmark yet."
     )
     raise RuntimeError(msg)

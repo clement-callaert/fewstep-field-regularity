@@ -21,3 +21,12 @@ def test_smoke_config_resolves() -> None:
     assert list(cfg.experiment.hypotheses) == ["H1", "H2", "H3", "H4"]
     text = OmegaConf.to_yaml(cfg, resolve=True)
     assert "averaged_squared_lipschitz_proxy" in text
+
+
+def test_phase2_smoke_selects_mixture_safe_defaults() -> None:
+    root = Path(__file__).resolve().parents[2]
+    config_dir = str(root / "configs")
+    with initialize_config_dir(version_base=None, config_dir=config_dir):
+        cfg = compose(config_name="config", overrides=["experiment=phase2_smoke"])
+    assert cfg.distribution.name == "two_mode_gmm"
+    assert cfg.evaluator.name == "sliced_wasserstein"

@@ -11,12 +11,16 @@ derivations before corresponding implementations are treated as validated.
 
 2. When a Lipschitz-guided schedule is well-defined for mixture targets,
    including assumptions and endpoint behavior.
-   Status: open (Phase 2).
+   Status (Phase 2): partially resolved. Effective `M` uses the largest
+   eigenvalue of the mixture covariance (same Phase 1 rule). Full paper
+   assumptions for mixture targets remain open.
 
 3. Validity domain of Gaussian OT displacement interpolation versus
    independent coupling for non-Gaussian mixtures.
-   Status: open for mixtures. For Phase 1 Gaussians, Gaussian OT is valid
-   via Peyré (2.40); independent coupling is a different path class.
+   Status (Phase 2): resolved for implementation policy. Gaussian OT is
+   refused for GMM targets in factories. Independent coupling mixture
+   marginal fields are implemented and checked. For Phase 1 Gaussians,
+   Gaussian OT remains valid via Peyré (2.40).
 
 4. Which Jacobian matrix norm and sampling measure match the baseline paper
    averaged squared Lipschitz proxy, after source verification.
@@ -25,8 +29,9 @@ derivations before corresponding implementations are treated as validated.
 
 5. Exact versus estimator status of each regularity metric under finite
    samples.
-   Status (Phase 1): affine Gaussian metrics marked exact when Jacobians are
-   state-independent. Monte Carlo estimators deferred to Phase 2.
+   Status (Phase 2): mixture metrics use Monte Carlo sampling from the
+   time-`t` marginal GMM and are marked non-exact. Affine Gaussian metrics
+   remain as in Phase 1 (state-independent Jacobians; trapezoidal time grid).
 
 6. Endpoint singularity handling for VP and OT schedules at `t in {0, 1}`.
    Status (Phase 1): trig VP and linear are regular on `[0,1]`. Lipman residual
@@ -39,12 +44,16 @@ derivations before corresponding implementations are treated as validated.
 
 8. Conditions under which empirical W2 estimators are stable enough for
    Spearman comparisons at the planned sample sizes.
-   Status: open (Phase 2 calibration).
+   Status (Phase 2): partially verified. The calibration experiment
+   (`experiment=phase2_calibration`) covers projected, sliced, entropic, and
+   exact empirical discrete W2 diagnostics across multiple seeds. Differences
+   from continuous Gaussian W2 are diagnostic comparisons, not universal bias
+   estimates. Criteria remain outside `DECISION_GATE.md`.
 
 9. Continuity-equation consistency tests that are practical for mixture
    fields.
-   Status: open for mixtures. Gaussian affine fields use moment ODE checks
-   in Phase 1.
+   Status (Phase 2): partial. Moment evolution MC check and AD Jacobian
+   checks are implemented. Full PDE residual continuity tests remain open.
 
 10. Whether temporal stiffness metrics require exact `partial_t v` or only
     finite-difference estimators.

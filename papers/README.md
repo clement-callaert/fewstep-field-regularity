@@ -44,7 +44,7 @@ For every paper record:
 | tong2024conditional_flow_matching | Minibatch OT / Conditional Flow Matching | arXiv:2302.00482 | pdfs/tong2024conditional_flow_matching.pdf | see manifest |
 | peyre2019computational_ot | Computational Optimal Transport | arXiv:1803.00567 | pdfs/peyre2019computational_ot.pdf | see manifest |
 | hairer2008solving_odes_i | Solving ODEs I | Springer book page | n/a unless author-legal PDF | likely missing |
-| bonneel2015sliced_wasserstein | Sliced and Radon Wasserstein Barycenters | arXiv:1308.2074 | pdfs/bonneel2015sliced_wasserstein.pdf | see manifest |
+| bonneel2015sliced_wasserstein | Sliced and Radon Wasserstein Barycenters | HAL hal-00881872 / author PDF | pdfs/bonneel2015sliced_wasserstein.pdf | see manifest |
 | yang2024consistency_flow_matching | Consistency Flow Matching | arXiv:2407.02398 | pdfs/yang2024consistency_flow_matching.pdf | see manifest |
 | gmflow_2025 | Gaussian Mixture Flow Matching Models | arXiv:2504.05304 | pdfs/gmflow_2025.pdf | see manifest |
 

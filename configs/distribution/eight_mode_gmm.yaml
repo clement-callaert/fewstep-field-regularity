@@ -3,3 +3,5 @@ dim: 2
 kind: gaussian_mixture
 role: target
 n_modes: 8
+radius: 2.0
+component_std: 0.35
