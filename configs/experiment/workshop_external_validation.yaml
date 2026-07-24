@@ -1,0 +1,51 @@
+name: workshop_external_validation
+mode: workshop_external_validation
+run_id: workshop_external_validation_2026-07-24-v1
+phase: 4
+plan: docs/WORKSHOP_EXTERNAL_VALIDATION_PLAN.md
+hypotheses:
+  - P4-C1
+seeds:
+  - 0
+target_geometry_seed: 314159
+dimensions:
+  - 2
+  - 8
+nfe_budgets:
+  - 8
+  - 16
+  - 32
+family:
+  name: shifted_anisotropic_gaussian
+  anisotropy: 6.0
+  source_mean_scale: 0.75
+  target_mean_base: 1.0
+  target_mean_slope: 0.25
+paths:
+  - linear
+  - variance_preserving
+solvers:
+  - euler
+  - heun
+  - rk4
+metric:
+  name: averaged_squared_lipschitz_proxy
+  n_time: 24
+  estimator_budget: 128
+precision:
+  dtype: float64
+compute:
+  device: cpu
+expected_counts:
+  endpoint_configurations: 36
+  comparison_blocks: 18
+  stochastic_endpoint_replicates: 0
+runtime:
+  expected_minutes: 0.5
+  hard_stop_minutes: 10
+release_ready_required: true
+allow_dirty_code: false
+overwrite: false
+notes: >-
+  Frozen pre-registered external validation. Exactly one non-centered
+  commuting Gaussian family. See docs/WORKSHOP_EXTERNAL_VALIDATION_PLAN.md.

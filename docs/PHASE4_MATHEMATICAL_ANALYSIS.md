@@ -1,7 +1,8 @@
 # Phase 4 mathematical analysis
 
-Status: Partially verified. The derivations are symbolically and numerically
-checked and need expert review.
+Status: Core derivations checked. P4-P1 was independently reviewed and
+verified on 2026-07-24; see
+[the proof audit](P4_P1_PROOF_AUDIT.md).
 
 Scope: Centered anisotropic and low-rank Gaussian targets in dimensions 2 and
 8, linear and variance-preserving paths, and fixed-step Euler, Heun, and RK4.
@@ -236,8 +237,10 @@ and transport weights all enter.
 
 ## Minimal proposition P4-P1
 
-Status: Needs expert review. Explicit construction, symbolically checked and
-numerically checked.
+Status: Proof verified after independent adversarial review. Explicit
+construction, symbolically checked and numerically checked. See
+[the proof audit](P4_P1_PROOF_AUDIT.md) for the quantified statement, edge
+cases, objections, and scope.
 
 Fix \(L>0\) and integer \(N\geq1\). Let \(h=1/N\), \(t_n=n/N\), and consider
 the scalar ODE \(x'=a(t)x\), \(x(0)=1\). Define

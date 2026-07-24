@@ -123,8 +123,9 @@ for the endpoint factor error by algebraic identity.
 P4-P1 has an explicit smooth scalar construction. Two fields have the same
 exact endpoint. The field with strictly larger averaged squared Jacobian has
 zero fixed-grid Euler endpoint error, while the constant field has positive
-error. The statement is numerically and symbolically checked and remains
-`needs expert review`.
+error. The statement is numerically and symbolically checked and passed an
+independent adversarial proof review on 2026-07-24. See
+[the proof audit](P4_P1_PROOF_AUDIT.md).
 
 The construction is tailored to the Euler grid. It demonstrates
 non-implication but should not be presented as the mechanism behind every
@@ -188,9 +189,9 @@ commit, command, environment, package lock hash, and source hashes.
 
 P4-C1 and P4-C2 remain under-test because the policy forbids support from this
 single focused evidence chain. P4-C3 is inconclusive because its apparent
-improvement is post-hoc and in-sample. P4-P1 remains proposed and needs expert
-review. H1 and H3 remain inconclusive, H2 remains contradicted, and H4 remains
-under-test.
+improvement is post-hoc and in-sample. P4-P1 was subsequently verified by the
+independent proof audit. H1 and H3 remain inconclusive, H2 remains
+contradicted, and H4 remains under-test.
 
 Recommendation: pivot. Do not start Phase 5 and do not draft a full paper.
 The mathematical mechanism is real in the tested affine Gaussian settings,

@@ -26,6 +26,9 @@ from fewstep_regularities.experiments.phase4_affine_audit import (
 from fewstep_regularities.experiments.phase4_gaussian_reproduction import (
     run_phase4_gaussian_reproduction,
 )
+from fewstep_regularities.experiments.workshop_external_validation import (
+    run_workshop_external_validation,
+)
 from fewstep_regularities.utils.environment import (
     cuda_version,
     git_code_status,
@@ -144,10 +147,13 @@ def run_from_overrides(overrides: list[str] | None = None) -> Path:
         return run_phase4_gaussian_reproduction(cfg)
     if mode == "phase4_affine_audit":
         return run_phase4_affine_audit(cfg)
+    if mode == "workshop_external_validation":
+        return run_workshop_external_validation(cfg)
     msg = (
         f"Unsupported mode {mode!r}. Supported: dry_run, gaussian_exact, "
         "mixture_exact, estimator_calibration, gate_benchmark, gate_analysis, "
-        "phase4_gaussian_reproduction, phase4_affine_audit."
+        "phase4_gaussian_reproduction, phase4_affine_audit, "
+        "workshop_external_validation."
     )
     raise RuntimeError(msg)
 
