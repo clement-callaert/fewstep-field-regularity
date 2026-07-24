@@ -161,7 +161,9 @@ The affine field, exact transition, discrete maps, material derivative,
 Euler and Heun local coefficients, commuting W2 reduction, and transported
 defect identity are derived in
 [the mathematical analysis](PHASE4_MATHEMATICAL_ANALYSIS.md). P4-P1 is
-explicit and checked but remains needs expert review.
+explicit, checked, and passed the documented adversarial proof audit on
+2026-07-24 ([P4_P1_PROOF_AUDIT.md](P4_P1_PROOF_AUDIT.md), final status
+"proof verified").
 
 ## Phase 4 provenance audit
 

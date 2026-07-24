@@ -1,6 +1,10 @@
 # Exact four-page workshop paper outline
 
-Status: Proposed outline. Paper drafting has not started.
+Status: Historical planning document, frozen as registered. The draft was
+subsequently written (`paper/gddl2026/main.tex`) and deviates from this
+outline where the review simulation and correction pass required it
+(three figures instead of four; the post-hoc proxy statement was removed
+from the paper).
 
 Target: NeurIPS 2026 Geometric Distributional Deep Learning short-paper
 track, four main pages excluding references.
