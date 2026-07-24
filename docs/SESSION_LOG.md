@@ -504,3 +504,54 @@ Artifact IDs used:
 - Decision:
   - Run 3 is justified because the precision audit passed.
   - Stop before Run 3 for artifact review.
+
+## 2026-07-24: Phase 4 Run 3 affine error decomposition
+
+Status: Complete and release-ready.
+
+Scope: Mean, covariance, eigenmode, local defect, and endpoint transport
+decomposition for the 72 Run 1 Gaussian configurations.
+
+Artifact IDs used:
+
+- `phase4_gaussian_reproduction_2026-07-24-v1:results`
+- `phase4_decomposition_2026-07-24-v1:table`
+- `phase4_decomposition_2026-07-24-v1:validation`
+
+- Code commit: `e3ad51a16fba8289e91c86b247e75e5761fdc51b`.
+- Config hash:
+  `a8e6f7355b2fc36d2abdd5105e92d0ab958cb068cf8ff2ff408bb062048362aa`.
+- Runtime:
+  - Manifest runtime: 0.043046 seconds.
+  - Command wall time: 1.72 seconds.
+  - Hard stop: 60 minutes.
+- Registered analysis:
+  - None. The decomposition is a pre-specified Phase 4 workstream but is
+    post-hoc relative to the Phase 3 hypotheses.
+- Post-hoc analysis:
+  - Eigenvalue-wise W2 contributions and transported local defects.
+- Observations:
+  - All 72 W2 reconstructions passed.
+  - Maximum reconstruction difference: `9.7050436884e-10`.
+  - The mean error is zero in every centered configuration.
+  - In the strongest inversion, the dominant target covariance eigenvalue is
+    `10.6756382265`.
+  - Its squared W2 contribution is `0.4939430141` for linear Euler and
+    `0.1837966072` for variance-preserving Euler at dimension 8 and NFE 8.
+- Interpretation:
+  - The strongest inversion is driven mainly by the largest-variance target
+    eigendirection, not by a mean error.
+  - Exact transported local defects provide a mechanism for the endpoint
+    factor difference. Their value as a general predictor is not established.
+- Exact and estimated quantities:
+  - Propagated moments and commuting W2 contributions are analytical for each
+    represented numerical affine map.
+  - Floating-point evaluation causes the reported reconstruction residual.
+- Exclusions:
+  - No mixture, dimension 32, or optional NFE was used.
+- Invalidated outputs:
+  - Earlier dirty smoke decompositions remain excluded.
+- Decision:
+  - Run 4 is justified because the decomposition is stable and identifies a
+    dominant eigenmode.
+  - Stop before Run 4 for artifact review.
