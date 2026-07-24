@@ -1,0 +1,17 @@
+{
+  "figure_artifact_id": "workshop_figures_2026-07-24-v1:fig1_conceptual",
+  "figure_checksum_sha256": "70f0a3113c1051b81196b1134f4f4a6b9e357bc58fa6d73a2b5248f7d9790d0f",
+  "generation_timestamp": "2026-07-24T14:33:27.545212+00:00",
+  "git_commit": "2cf1b8cd1aa2c21ffed17d70763f65b85bacf23c",
+  "note": "Conceptual schematic only; curves and bars are illustrative and represent no measured quantity.",
+  "plotting_config": {
+    "consumes_artifacts": false,
+    "kind": "conceptual_schematic"
+  },
+  "plotting_script": "scripts/make_workshop_figures.py",
+  "source_artifact_ids": [],
+  "source_run_ids": [
+    "none_conceptual"
+  ],
+  "source_table_hashes": {}
+}
