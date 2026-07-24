@@ -1,9 +1,20 @@
 # Code and mathematics audit
 
-Date: 2026-07-23
+Status: Updated through focused Phase 4.
 
-Scope: Full dirty worktree, Phase 1 to Phase 3 mathematical code, statistical
-analysis, artifact provenance, tests, and scientific documentation.
+Date: 2026-07-24
+
+Scope: Phase 1 through focused Phase 4 mathematical code, statistical
+analysis, artifact provenance, CPU tests, and scientific documentation.
+
+Artifact IDs used:
+
+- `phase4_gaussian_reproduction_2026-07-24-v1:validation`
+- `phase4_precision_2026-07-24-v1:validation`
+- `phase4_decomposition_2026-07-24-v1:validation`
+- `phase4_diagnostics_2026-07-24-v1:validation`
+- `phase4_robustness_2026-07-24-v1:validation`
+- `phase4_final_validation_2026-07-24-v1:validation`
 
 ## Verdict
 
@@ -11,8 +22,8 @@ No unresolved blocking code defect remains after the corrections listed below.
 The Phase 3 continue decision is unchanged. It is supported by condition 2
 using exact Gaussian evidence even if mixture dimension 8 is excluded.
 
-The repository still has scientific and provenance limitations. They are
-listed below and prevent calling the work release-ready.
+All six Phase 4 runs are release-ready. The repository still has scientific
+limitations. They prevent a broad paper claim and motivate a pivot.
 
 ## Corrections made during the audit
 
@@ -120,5 +131,58 @@ uncalibrated dimension 8 mixture evidence.
 - The full literature-overlap question is not closed.
 - The Lipschitz-guided anisotropic effective scalar is a heuristic.
 
-These limitations are disclosed in the gate result and claims ledger. They do
-not change the recommendation to continue only to human Phase 4 review.
+These Phase 3 limitations remain disclosed in the gate result and claims
+ledger. The completed Phase 4 audit now recommends a pivot.
+
+## Phase 4 code audit
+
+- The affine analysis uses pure scalar or matrix functions with float64
+  defaults and explicit CPU execution.
+- Release-ready runners reject dirty code and completed-run overwrite.
+- Inputs are listed in resolved Hydra configs and verified by checksum.
+- No runner scans a directory for scientific inputs.
+- Euler, Heun, and RK4 use one, two, and four evaluations per step.
+- The 80-digit reference uses mpmath only for small commuting scalar modes.
+- CPU tests cover exact affine propagation, solver maps, material
+  derivatives, finite differences, automatic differentiation, commuting
+  systems, covariance validity, W2 stability, inversion detection, configs,
+  and provenance.
+- Full pytest, Ruff lint, Ruff format, MyPy, and pre-commit passed before the
+  scientific audit runs.
+
+## Phase 4 mathematical audit
+
+The registered Run 1 reproduction is separated from post-hoc decomposition
+and diagnostic work. Exact propagated Gaussian moments are not called
+empirical. Numerical time quadrature is labeled estimated. No sampled
+Jacobian maximum is called a global Lipschitz constant.
+
+The affine field, exact transition, discrete maps, material derivative,
+Euler and Heun local coefficients, commuting W2 reduction, and transported
+defect identity are derived in
+[the mathematical analysis](PHASE4_MATHEMATICAL_ANALYSIS.md). P4-P1 is
+explicit and checked but remains needs expert review.
+
+## Phase 4 provenance audit
+
+All Phase 4 manifests validate and record clean code status, commit, command,
+resolved and unresolved configs, package lock hash, environment, hardware,
+precision, timestamps, runtime, source hashes, output hashes, and
+release-ready status. No figure was needed, so no scientific figure or
+sidecar was generated.
+
+Dirty Phase 3 inputs are retained only for comparison. Dirty smoke runs and
+all superseded analyses remain excluded and preserved.
+
+## Phase 4 scientific verdict
+
+Observation: The focused validation passes and the inversion margins dominate
+the high-precision difference.
+
+Interpretation: An averaged regularity ordering does not determine fixed-NFE
+error in the tested commuting Gaussian systems. Solver-specific local
+structure explains the mechanism, but the proposed proxy lacks out-of-sample
+validation. Literature already establishes broad solver-specific schedule
+dependence.
+
+Recommendation: pivot. Do not start Phase 5 or a full paper draft.

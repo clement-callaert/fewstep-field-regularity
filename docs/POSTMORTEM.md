@@ -1,8 +1,23 @@
 # Postmortem
 
-Fill this document in Phase 7 regardless of outcome.
-Never delete invalidated findings. Mark them clearly and link to the bug or
-methodological issue.
+Status: Phase 4 update complete. A final project postmortem remains due in
+Phase 7.
+
+Scope: Phase 1 through the focused exact Gaussian Phase 4 audit.
+
+Artifact IDs used:
+
+- `phase3_gate_analysis_final_audit_2026-07-23-v2:decision`
+- `phase4_gaussian_reproduction_2026-07-24-v1:results`
+- `phase4_precision_2026-07-24-v1:validation`
+- `phase4_decomposition_2026-07-24-v1:table`
+- `phase4_diagnostics_2026-07-24-v1:table`
+- `phase4_robustness_2026-07-24-v1:table`
+- `phase4_final_validation_2026-07-24-v1:validation`
+
+Registered and post-hoc analyses are identified in the Phase 4 results. Exact
+Gaussian moment quantities are separated from numerical quadrature estimates.
+Invalidated outputs remain recorded.
 
 ## 1. Initial hypothesis
 
@@ -61,7 +76,9 @@ pivot rule 8 and is not the sole basis for continuing.
 
 ## 10. Time allocation
 
-To be filled in Phase 7.
+Each Phase 4 run finished in under 10 seconds of manifest runtime. Run 4 was
+the longest at 8.109213 seconds. Derivation, implementation, source review,
+tests, and audit documentation took substantially longer than computation.
 
 ## 11. Reproducibility failures
 
@@ -78,5 +95,26 @@ remains under-test.
 
 ## 13. Next project recommendation
 
-Review the Phase 3 artifacts and correction. If approved, continue to Phase 4
-only. Do not start the Phase 5 Cartesian benchmark yet.
+Pivot. Do not start the Phase 5 Cartesian benchmark. The exact Gaussian
+mechanism is understood well enough to reject averaged regularity as a
+determinant of fixed-grid error in the tested setting. Broad solver dependence
+is already represented in prior schedule literature, while the new minimal
+construction is elementary and needs expert review.
+
+## 14. Phase 4 observation and interpretation
+
+Observation: Fourteen clean Gaussian inversions reproduce. Precision,
+decomposition, robustness, and final validation pass. The low-rank solver
+preference persists through NFE 128 and small target perturbations.
+
+Interpretation: Signed and transported solver defects explain why a scalar
+average of Jacobian size loses information. The same-grid leading proxy is
+suggestive but not validated out of sample.
+
+## 15. Phase 4 exclusions and unresolved work
+
+Mixtures, dimension 32, and new target families were excluded. Dimension 8
+mixture evidence remains invalid for decisions. Dirty smoke artifacts and
+superseded Phase 3 analyses remain excluded. Open work is listed in
+[unresolved questions](UNRESOLVED_QUESTIONS.md), and the derivation is in
+[the mathematical analysis](PHASE4_MATHEMATICAL_ANALYSIS.md).

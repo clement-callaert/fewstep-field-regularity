@@ -11,6 +11,9 @@ Artifact IDs used:
 
 - `phase4_gaussian_reproduction_2026-07-24-v1:results`
 - `phase4_gaussian_reproduction_2026-07-24-v1:validation`
+- `phase4_precision_2026-07-24-v1:validation`
+- `phase4_decomposition_2026-07-24-v1:table`
+- `phase4_diagnostics_2026-07-24-v1:table`
 
 Run 1 is registered reproduction evidence. The local error quantities and
 decompositions are post-hoc. Phase 3 dirty outputs are comparison inputs only.
@@ -281,8 +284,8 @@ counterexample search is not a formal proof review.
 
 Automatic differentiation and centered finite differences agree for the
 material derivative formulas. Constant, diagonal, and commuting systems are
-covered by CPU tests. Run 2 will provide an 80 digit scalar reference. Runs 3
-and 4 will check the W2 reconstruction and transported defects.
+covered by CPU tests. Run 2 provided an 80 digit scalar reference. Runs 3 and
+4 checked the W2 reconstruction and transported defects.
 
 Unresolved questions include whether a concise RK4 leading expression adds
 insight beyond the exact stage defect, whether the dominant eigenmodes admit a

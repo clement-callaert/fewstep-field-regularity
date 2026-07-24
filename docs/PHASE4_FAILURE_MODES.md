@@ -8,6 +8,11 @@ Artifact IDs used:
 
 - `phase4_gaussian_reproduction_2026-07-24-v1:results`
 - `phase4_gaussian_reproduction_2026-07-24-v1:validation`
+- `phase4_precision_2026-07-24-v1:validation`
+- `phase4_decomposition_2026-07-24-v1:validation`
+- `phase4_diagnostics_2026-07-24-v1:validation`
+- `phase4_robustness_2026-07-24-v1:validation`
+- `phase4_final_validation_2026-07-24-v1:validation`
 
 Registered reproduction and post-hoc explanation are separated below.
 
@@ -18,9 +23,9 @@ accounting, covariance asymmetry, loss of positive semidefiniteness, and
 failure of continuous endpoint moments for Run 1. These are observations.
 Their interpretation remains limited to the tested exact Gaussian grid.
 
-Runs 2 through 5 must still check floating-point sensitivity, higher-precision
+Runs 2 through 5 checked floating-point sensitivity, higher-precision
 agreement, local reconstruction, optional budgets, and parameter
-perturbations.
+perturbations. All focused checks passed.
 
 ## Remaining risks
 

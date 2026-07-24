@@ -1,6 +1,6 @@
 # Phase 4 plan
 
-Status: Active. Run 1 completed and passed its reproduction checks.
+Status: Complete. Runs 1 through 6 passed focused validation.
 
 Scope: Explain the surviving Phase 3 ranking inversions in the anisotropic
 Gaussian and low-rank Gaussian families. This plan does not authorize Phase 5,
@@ -12,6 +12,12 @@ Artifact IDs used:
 - `phase3_gate_registered_2026-07-23-v1:gate_results`
 - `phase3_gate_analysis_final_audit_2026-07-23-v2:inversions`
 - `phase3_gate_analysis_final_audit_2026-07-23-v2:interactions`
+- `phase4_gaussian_reproduction_2026-07-24-v1:results`
+- `phase4_precision_2026-07-24-v1:validation`
+- `phase4_decomposition_2026-07-24-v1:validation`
+- `phase4_diagnostics_2026-07-24-v1:validation`
+- `phase4_robustness_2026-07-24-v1:validation`
+- `phase4_final_validation_2026-07-24-v1:validation`
 
 The Phase 3 artifacts have dirty-code provenance. They are comparison inputs
 only. They are not release-ready sources.
@@ -206,6 +212,9 @@ Runs 2 through 6 are authorized by the user's request to execute all of Phase
 
 No run may add mixtures, dimension 32, or a Cartesian expansion before the
 Gaussian mechanism is understood.
+
+All six focused runs completed below their hard stops. The final recommendation
+is recorded in [Phase 4 results](PHASE4_RESULTS.md). Phase 5 was not started.
 
 ## Precision audit plan
 

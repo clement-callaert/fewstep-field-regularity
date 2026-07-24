@@ -64,31 +64,54 @@ derivations before corresponding implementations are treated as validated.
 
 11. Whether every decisive exact Gaussian inversion reproduces from a clean
     Phase 4 commit.
-    Status (Phase 4): under-test. A temporary software integration check
-    matches the audited dirty-code rows, but registered Run 1 has not started.
+    Status (Phase 4): resolved for the focused grid. Run 1 reproduced all 72
+    rows and 14 inversion blocks from clean commit `083dbf9`.
 
 12. Which covariance eigendirections dominate the strongest Gaussian
     inversion.
-    Status (Phase 4): open. No affine decomposition run has started.
+    Status (Phase 4): resolved for the strongest inversion. The largest target
+    covariance eigenvalue dominates. Broader uniform mode statements remain
+    open.
 
 13. Why Euler prefers variance-preserving in the low-rank Gaussian family
     while Heun and RK4 prefer linear under equal NFE.
-    Status (Phase 4): open. Solver order is an interpretation, not yet a
-    source-verified derivation.
+    Status (Phase 4): partially resolved. Solver stage sampling and the
+    derivative-dependent local coefficients differ, and exact transported
+    local defects reconstruct endpoint factor error. A concise asymptotic sign
+    proof for the whole low-rank parameter range remains open.
 
 14. Whether a solver-specific leading local error quantity explains both
     Gaussian geometry families.
-    Status (Phase 4): open. Any candidate evaluated on the motivating rows
-    will remain labeled post-hoc.
+    Status (Phase 4): inconclusive. The leading proxy agrees in 29 of 36
+    blocks but is post-hoc, in-sample, and misses three low-rank blocks.
 
 15. Whether the smallest RK4 inversion margins dominate higher-precision
     numerical error.
-    Status (Phase 4): open. The precision audit has not started.
+    Status (Phase 4): resolved for the focused grid. The smallest margin is
+    more than 11,500 times the maximum 80-digit reference difference.
 
 16. Whether a minimal affine non-implication proposition can be stated without
     artificial assumptions.
-    Status (Phase 4): proposed. No proposition is marked proved.
+    Status (Phase 4): partially resolved. An explicit grid-aware construction
+    is complete and checked. It remains needs expert review and may be too
+    artificial for a main claim.
 
 17. Whether the observed mechanism is already established in numerical ODE,
     diffusion schedule, or flow matching literature.
-    Status (Phase 4): open. The Phase 4 primary-source audit has not started.
+    Status (Phase 4): partially resolved. Solver-specific schedule dependence
+    and exact-linear solver design are established in prior work. No exact
+    match to the commuting Gaussian construction was located. Novelty remains
+    under expert literature review.
+
+18. Whether P4-P1 has a natural construction that is not tailored to the
+    solver grid.
+    Status (Phase 4): open.
+
+19. Whether the solver-specific leading proxy generalizes out of sample.
+    Status (Phase 4): open. Testing a new pre-specified family belongs to a
+    later approved phase, not Phase 4.
+
+20. Whether a uniform asymptotic argument explains the sign of the low-rank
+    path preference for all sufficiently large NFE.
+    Status (Phase 4): open. NFE 64 and 128 preserve the tested pattern, but
+    finite checks do not establish an asymptotic theorem.

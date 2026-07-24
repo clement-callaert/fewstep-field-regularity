@@ -660,3 +660,40 @@ Artifact IDs used:
 - Decision:
   - Run 6 is justified because all focused robustness checks passed.
   - Stop before Run 6 for artifact review.
+
+## 2026-07-24: Phase 4 Run 6 final focused validation
+
+Status: Complete and release-ready.
+
+Scope: Validation aggregation for the explicitly listed Run 1 through Run 5
+artifacts. No new scientific grid was run.
+
+Artifact IDs used:
+
+- `phase4_final_validation_2026-07-24-v1:table`
+- `phase4_final_validation_2026-07-24-v1:validation`
+
+- Code commit: `cc0c56ab24cd159efe5005074de9fd0c98120e5a`.
+- Config hash:
+  `a091cee17347767bcd9133de6c3139b7e9ea1f6fd48e1b1c63232f2c300e80eb`.
+- Runtime:
+  - Manifest runtime: 0.011677 seconds.
+  - Command wall time: 1.74 seconds.
+  - Hard stop: 120 minutes.
+- Registered analysis:
+  - None. Run 6 aggregates validations.
+- Post-hoc analysis:
+  - Final focused audit summary only.
+- Observation:
+  - All five input validations and the Run 6 manifest pass.
+- Interpretation:
+  - Passing validation does not itself establish a scientific claim.
+- Exact and estimated quantities:
+  - Run 6 computes no new scientific quantity.
+- Exclusions:
+  - No mixtures, dimension 32, new family, or Cartesian benchmark.
+- Invalidated outputs:
+  - Dirty smoke and superseded Phase 3 artifacts remain recorded and excluded.
+- Decision:
+  - Phase 4 execution is complete.
+  - Recommend pivot. Do not start Phase 5 or draft a full paper.
