@@ -81,9 +81,7 @@ def test_entropic_not_labeled_exact() -> None:
     expected_objective = out.auxiliaries["transport_cost"] - (
         ev.epsilon * out.auxiliaries["entropy"]
     )
-    assert torch.allclose(
-        out.auxiliaries["regularized_objective"], expected_objective
-    )
+    assert torch.allclose(out.auxiliaries["regularized_objective"], expected_objective)
 
 
 @pytest.mark.analytical

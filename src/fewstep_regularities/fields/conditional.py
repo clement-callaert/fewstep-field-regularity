@@ -43,7 +43,9 @@ class LipmanConditionalOTField:
     def evaluate(self, t: Tensor, x: Tensor) -> Tensor:
         """Not available without ``x_1``; raise."""
         del t, x
-        raise RuntimeError("LipmanConditionalOTField.evaluate requires x1; use evaluate_conditional")
+        raise RuntimeError(
+            "LipmanConditionalOTField.evaluate requires x1; use evaluate_conditional"
+        )
 
     def jacobian(self, t: Tensor, x: Tensor) -> Tensor:
         """Spatial Jacobian of the conditional field given fixed ``x_1``.

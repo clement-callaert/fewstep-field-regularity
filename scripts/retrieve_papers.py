@@ -284,6 +284,7 @@ def build_manifest_record(
     status: str,
     checksum: str | None,
     error: str | None,
+    replication_status: str,
 ) -> dict[str, Any]:
     return {
         "paper_id": entry.paper_id,
@@ -300,11 +301,25 @@ def build_manifest_record(
         "relevance": entry.relevance,
         "formulas_or_results_needed": entry.formulas_or_results_needed,
         "notation_differences": [],
-        "replication_status": "not-started",
+        "replication_status": replication_status,
         "notes_path": entry.notes_path,
         "retrieval_status": status,
         "retrieval_error": error,
     }
+
+
+def note_replication_status(note_path: Path) -> str:
+    """Read the first value under the note replication-status heading."""
+    marker = "## Replication status"
+    text = note_path.read_text(encoding="utf-8")
+    if marker not in text:
+        return "not-started"
+    section = text.split(marker, maxsplit=1)[1]
+    for line in section.splitlines():
+        value = line.strip()
+        if value and not value.startswith("#"):
+            return value
+    return "not-started"
 
 
 def main() -> None:
@@ -356,7 +371,14 @@ def main() -> None:
                 error = str(exc)
 
         records.append(
-            build_manifest_record(entry, access_date, status, checksum, error)
+            build_manifest_record(
+                entry,
+                access_date,
+                status,
+                checksum,
+                error,
+                note_replication_status(note_path),
+            )
         )
 
     manifest = {

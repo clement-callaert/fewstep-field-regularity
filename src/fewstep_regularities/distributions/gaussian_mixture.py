@@ -120,11 +120,10 @@ class GaussianMixture:
         assert_dtype(x, self._dtype, "x")
         assert_device(x, self._device, "x")
         assert_shape(x, (None, self.dim), "x")
-        n = int(x.shape[0])
-        logs = torch.empty(n, self.n_components, dtype=self._dtype, device=self._device)
-        for k in range(self.n_components):
-            logs[:, k] = self.component(k).log_prob(x)
-        return logs
+        return torch.stack(
+            [self.component(k).log_prob(x) for k in range(self.n_components)],
+            dim=1,
+        )
 
     def responsibilities(self, x: Tensor) -> Tensor:
         """Posterior component weights of shape ``(n, K)``.

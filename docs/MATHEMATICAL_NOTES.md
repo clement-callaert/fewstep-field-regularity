@@ -63,8 +63,10 @@ Resolved for Phase 1:
 
 - Linear: well-defined on `[0, 1]`
 - Trig VP: well-defined on `[0, 1]`
-- Lipschitz-guided log-covariance schedule: require `M > 0`, `M ≠ 1`;
-  clamp numerical noise near endpoints
+- Lipschitz-guided log-covariance schedule: require `M > 0`, `M ≠ 1`.
+  Its coefficient values reach the intended endpoints, but the square-root
+  coefficients are not differentiable at both endpoints. Clamped derivative
+  evaluations there are numerical regularizations, not exact derivatives.
 - Gaussian OT displacement: well-defined for non-degenerate Gaussian pairs
 - Lipman residual OT with `σ_min > 0`: avoids division by zero at `t=1`
 
@@ -159,7 +161,7 @@ Note path: `papers/notes/lipman2023flow_matching.md`
 | gaussian_affine_marginal | scalar SI schedules | Gaussian / Gaussian | source verified + numerically checked | papers/notes/lipschitz_guided_2025.md |
 | gaussian_ot_displacement | gaussian OT | Gaussian / Gaussian | source verified + numerically checked | papers/notes/peyre2019computational_ot.md |
 | lipman_conditional_gaussian | Lipman conditional | noise / point mass Gaussian | source verified | papers/notes/lipman2023flow_matching.md |
-| mixture_affine_marginal | scalar SI schedules | Gaussian / GMM | original derivation + numerically checked | docs/MATHEMATICAL_NOTES.md |
+| mixture_affine_marginal | scalar SI schedules | Gaussian / GMM | partially verified analytically and numerically | docs/MATHEMATICAL_NOTES.md |
 
 ## Gaussian W2
 
@@ -189,47 +191,141 @@ Status: standard GMM identity; numerically checked via AD.
 
 Field ID: `mixture_affine_marginal`
 
-Path class: independent scalar schedule only (linear, trig VP, Lipschitz-guided).
+Path class: independent scalar schedules where their coefficients are
+differentiable. This includes linear and trig VP on the closed interval, and
+Lipschitz-guided only in the open interval.
 
 Do not use Gaussian OT for non-Gaussian mixture targets.
 
-Setup:
+Assumptions:
 
-- `z ~ N(0, I)`, `x_1 ~ ∑_k π_k N(μ_k, Σ_k)`, independent
-- `I_t = alpha(t) z + sigma(t) x_1`
+- The latent component is `K ~ Categorical(π_1, ..., π_K)`, with
+  `π_k > 0` and `∑_k π_k = 1`.
+- `z ~ N(0, I)` and `x_1 | K=k ~ N(μ_k, Σ_k)`, with `z` independent of
+  `(K, x_1)` and every `Σ_k` symmetric positive definite.
+- `alpha` and `sigma` are continuously differentiable at the time under
+  consideration.
+- `I_t = alpha(t) z + sigma(t) x_1`, and
+  `alpha(t)^2 I + sigma(t)^2 Σ_k` is nonsingular for every component.
+  The implemented endpoint schedules satisfy this condition because they
+  never have `alpha(t) = sigma(t) = 0`.
 
-Conditional on component `k` of `x_1`, the law of `I_t` is Gaussian with
+Write `a = alpha(t)`, `s = sigma(t)`, `a' = alpha'(t)`, and
+`s' = sigma'(t)`.
 
-- `μ_{k,t} = sigma(t) μ_k`
-- `Σ_{k,t} = alpha(t)^2 I + sigma(t)^2 Σ_k`
+### Step 1: time marginal
 
-so the marginal is the same mixture weights with these component parameters.
+Conditionally on `K=k`, independence and closure of Gaussian laws under affine
+maps give
 
-Conditional velocity given `(z, x_1)`:
-
-`İ_t = alpha'(t) z + sigma'(t) x_1`
-
-Given component `k` and `I_t = x`, the joint Gaussian conditional mean for the
-component-restricted bridge yields the same affine formula as Phase 1 with
-endpoints `N(0,I)` and `N(μ_k, Σ_k)`:
-
-`b_{k,t}(x) = ṁ_{k,t} + C_{k,t} Σ_{k,t}^{-1} (x - μ_{k,t})`
+`I_t | K=k ~ N(μ_{k,t}, Σ_{k,t})`,
 
 where
 
-- `ṁ_{k,t} = sigma'(t) μ_k`
-- `C_{k,t} = alpha' alpha I + sigma' sigma Σ_k`
+- `μ_{k,t} = s μ_k`
+- `Σ_{k,t} = a^2 I + s^2 Σ_k`.
 
-Marginal velocity (original derivation; SI conditional expectation):
+The component variable `K` is not changed by the interpolation. The law of
+total probability therefore gives
+
+`p_t(x) = ∑_k π_k p_{k,t}(x)`,
+
+with the original mixture weights and the component parameters above.
+
+### Step 2: component conditional velocity
+
+Differentiating the interpolant gives
+
+`V_t = dI_t/dt = a' z + s' x_1`.
+
+Given `K=k`, `(V_t, I_t)` is jointly Gaussian. Its moments are
+
+- `E[I_t | K=k] = μ_{k,t} = s μ_k`
+- `E[V_t | K=k] = m_dot_{k,t} = s' μ_k`
+- `Cov(V_t, I_t | K=k) = C_{k,t} = a'a I + s's Σ_k`.
+
+The standard conditional-mean identity for a jointly Gaussian pair then gives
+
+`b_{k,t}(x) = ṁ_{k,t} + C_{k,t} Σ_{k,t}^{-1} (x - μ_{k,t})`
+
+and hence
+
+`b_{k,t}(x) = E[V_t | I_t=x, K=k]`.
+
+### Step 3: marginal velocity
+
+Bayes' rule gives the time-dependent responsibilities
+
+`r_{k,t}(x) = P(K=k | I_t=x) = π_k p_{k,t}(x) / p_t(x)`.
+
+The tower property of conditional expectation gives
 
 `b_t(x) = ∑_k r_{k,t}(x) b_{k,t}(x)`
 
-with responsibilities `r_{k,t}` of the time-`t` GMM.
+and therefore `b_t(x) = E[V_t | I_t=x]`. Since every Gaussian component has a
+strictly positive density, `p_t(x) > 0` whenever the component covariances are
+nonsingular, so this formula is defined for every `x`.
+
+### Step 4: score and responsibility gradient
+
+Let `score_{k,t}(x) = ∇ log p_{k,t}(x)` and
+`score_t(x) = ∇ log p_t(x)`. Direct differentiation gives
+
+`score_t(x) = ∑_k r_{k,t}(x) score_{k,t}(x)`.
+
+Differentiating `r_{k,t} = π_k p_{k,t}/p_t` gives
+
+`∇r_{k,t}(x) = r_{k,t}(x) (score_{k,t}(x) - score_t(x))`.
+
+### Step 5: spatial Jacobian
+
+Each component field is affine, with
+
+`J_{k,t} = ∇b_{k,t} = C_{k,t} Σ_{k,t}^{-1}`.
+
+Applying the product rule componentwise to
+`b_t = ∑_k r_{k,t} b_{k,t}` yields
+
+`J_t(x) = ∑_k r_{k,t}(x) J_{k,t}
+          + ∑_k outer(b_{k,t}(x), ∇r_{k,t}(x))`.
+
+The outer-product orientation follows from
+`∂(r_k b_{k,i})/∂x_j = r_k ∂b_{k,i}/∂x_j
++ b_{k,i} ∂r_k/∂x_j`.
+
+### Step 6: continuity equation check
+
+For each component,
+
+`Σ_dot_{k,t} = 2a'a I + 2s's Σ_k = C_{k,t} + C_{k,t}^T`.
+
+The affine Gaussian field above consequently satisfies
+
+`∂_t p_{k,t} + div(p_{k,t} b_{k,t}) = 0`.
+
+Also,
+
+`p_t b_t = ∑_k π_k p_{k,t} b_{k,t}`.
+
+Weights are constant in time, so summing the component continuity equations
+gives
+
+`∂_t p_t + div(p_t b_t) = 0`.
+
+This establishes that the implemented field is the conditional-expectation
+marginal velocity induced by this independent stochastic interpolant. It does
+not assert uniqueness among every velocity field that could satisfy the same
+continuity equation, and it is not an optimal-transport claim.
 
 Jacobian is state-dependent. Regularity metrics for this field use Monte Carlo
 sampling from the time-`t` marginal GMM and are marked non-exact.
 
-Status: original derivation + numerically checked (AD Jacobian, moment ODE).
+Status: partially verified. The analytic steps above were checked directly
+from Gaussian conditioning, Bayes' rule, the product rule, and the component
+continuity equations. Independent implementation checks cover GMM identities,
+AD Jacobians, pointwise continuity residuals, endpoints, and moment evolution.
+This status is deliberately not `proved`, in accordance with the project proof
+workflow.
 
 Nearest sources: Albergo / Lipman conditional velocity identities; Phase 1
 Gaussian affine field as the per-component building block.

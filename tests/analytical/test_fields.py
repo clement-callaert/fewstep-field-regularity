@@ -30,7 +30,9 @@ def test_affine_jacobian_matches_ad() -> None:
         return field.evaluate(t, xx)
 
     # Build Jacobian via autograd for first sample.
-    j_ad = torch.autograd.functional.jacobian(lambda z: f(z.unsqueeze(0)).squeeze(0), x[0].detach())
+    j_ad = torch.autograd.functional.jacobian(
+        lambda z: f(z.unsqueeze(0)).squeeze(0), x[0].detach()
+    )
     j = field.jacobian(t, x.detach())[0]
     assert torch.allclose(j, j_ad, rtol=1e-8, atol=1e-8)
 
@@ -51,9 +53,10 @@ def test_affine_moment_ode_linear() -> None:
     field = GaussianAffineField(source=src, target=tgt, schedule=path)
     t = 0.35
     m_dot = field.mean_velocity(t)
-    expected = path.alpha_derivative(torch.tensor(t, dtype=torch.float64)) * src.mean() + path.sigma_derivative(
-        torch.tensor(t, dtype=torch.float64)
-    ) * tgt.mean()
+    expected = (
+        path.alpha_derivative(torch.tensor(t, dtype=torch.float64)) * src.mean()
+        + path.sigma_derivative(torch.tensor(t, dtype=torch.float64)) * tgt.mean()
+    )
     assert torch.allclose(m_dot, expected)
 
 

@@ -118,9 +118,9 @@ class GaussianAffineField:
         """State-independent Jacobian ``J_t = C_t Σ_t^{-1}`` of shape ``(d, d)``."""
         c = self.cross_cov_t(t_scalar)
         sigma = self.cov_t(t_scalar)
-        out: Tensor = torch.linalg.solve(sigma.transpose(0, 1), c.transpose(0, 1)).transpose(
-            0, 1
-        )
+        out: Tensor = torch.linalg.solve(
+            sigma.transpose(0, 1), c.transpose(0, 1)
+        ).transpose(0, 1)
         return out
 
     def mean_velocity(self, t_scalar: float | Tensor) -> Tensor:

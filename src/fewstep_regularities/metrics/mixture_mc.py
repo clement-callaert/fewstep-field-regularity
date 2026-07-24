@@ -229,17 +229,26 @@ def dispatch_metric_compute(
         seed = int(getattr(metric, "seed", 0))
         dtype = getattr(metric, "dtype", DEFAULT_DTYPE)
         if name == "averaged_squared_lipschitz_proxy":
-            return MCAveragedSquaredLipschitzProxy(n_time=n_time, dtype=dtype).compute(
-                field, times=times, states=states
-            )
+            return MCAveragedSquaredLipschitzProxy(
+                n_time=n_time,
+                n_samples=n_samples,
+                dtype=dtype,
+                seed=seed,
+            ).compute(field, times=times, states=states)
         if name == "path_weighted_expected_jacobian_norm":
             return MCPathWeightedExpectedJacobianNorm(
-                n_time=n_time, dtype=dtype
+                n_time=n_time,
+                n_samples=n_samples,
+                dtype=dtype,
+                seed=seed,
             ).compute(field, times=times, states=states)
         if name == "expected_squared_jacobian_norm":
-            return MCExpectedSquaredJacobianNorm(n_time=n_time, dtype=dtype).compute(
-                field, times=times, states=states
-            )
+            return MCExpectedSquaredJacobianNorm(
+                n_time=n_time,
+                n_samples=n_samples,
+                dtype=dtype,
+                seed=seed,
+            ).compute(field, times=times, states=states)
         if name == "max_sampled_spectral_jacobian_norm":
             mix = field
             use_times = _mixture_times(mix, times, n_time, dtype)

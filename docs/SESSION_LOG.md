@@ -106,3 +106,199 @@ Append one entry per work session. Do not delete prior entries.
 - Scientific status: implementation fixes and numerical checks only. No claim
   status changed, no theorem status changed, and no Phase 3 gate was run.
 - Decision: `DECISION_GATE.md` remains unchanged.
+
+## 2026-07-23 - Phase 2 analytic mixture-field verification
+
+- Date: 2026-07-23
+- Objective: Replace a merely numerical mixture-field status with a direct
+  analytic check while retaining the permitted `partially verified` label.
+- Actions:
+  - Derived the time-marginal GMM from conditional Gaussian laws.
+  - Derived component and marginal velocities using Gaussian conditioning and
+    the tower property.
+  - Derived responsibility gradients and the full spatial Jacobian.
+  - Verified the continuity equation by summing exact component equations.
+  - Added deterministic pointwise continuity residual checks across all Phase
+    2 GMM families, a full-covariance GMM, three schedules, and multiple times.
+  - Added full-covariance AD Jacobian comparisons.
+  - Documented that Lipschitz-guided clamped endpoint derivatives are numerical
+    regularizations; Phase 2 smoke and calibration use the linear path.
+- Scientific status: partially verified analytically and numerically. No
+  theorem is marked proved and no Phase 3 gate was run.
+- Decision: `DECISION_GATE.md` remains unchanged.
+
+## 2026-07-23 - Phase 3 gate registration
+
+- Timestamp: 2026-07-23T16:10:12Z
+- Objective: Freeze the small Phase 3 decision-gate benchmark before outcomes.
+- Prior checks:
+  - Phase 1 and Phase 2 targeted tests passed: 115 tests.
+  - `outputs/phase2_calibration` passed artifact validation.
+  - The calibration marked sliced Wasserstein diagnostic readiness true.
+- Registered grid:
+  - Four families: anisotropic Gaussian, low-rank Gaussian, two-mode GMM,
+    and imbalanced GMM.
+  - Dimensions 2 and 8.
+  - Linear and variance-preserving paths.
+  - Euler, Heun, and RK4 at equal NFE 8, 16, and 32.
+  - Ten seeds for stochastic mixture estimates.
+  - Four metrics and mixture estimator budgets 32 and 128.
+- Analysis:
+  - The full frozen plan is `docs/PHASE3_ANALYSIS_PLAN.md`.
+  - Exact artifact inputs and outputs are in
+    `configs/analysis/phase3_gate.yaml`.
+  - The configuration is the sampling unit. Seeds are nested estimates.
+- Minimality: This grid supports held-out family correlations, path ranking
+  inversions, schedule interactions, solver-order checks, dimension checks,
+  NFE checks, and estimator-budget checks without running Phase 5.
+- Outcome access: No Phase 3 smoke or main outcome was generated or inspected
+  before this entry.
+- Decision: Keep `docs/DECISION_GATE.md` unchanged.
+
+## 2026-07-23 - Phase 3 analysis correction
+
+- Timestamp: 2026-07-23T16:24:00Z
+- Discovery point: After the main gate and first fixed analysis completed.
+- Process errors:
+  - Metric-budget sensitivity used only mixture families at budget 32 but all
+    families at budget 128.
+  - The registered schedule-by-geometry interaction table was not produced.
+- Scope: The immutable main gate artifact, thresholds, primary metric budget,
+  primary projection budget, nesting rule, and bootstrap rule are unchanged.
+- Correction:
+  - Reuse deterministic Gaussian metric rows in both metric-budget sensitivity
+    strata so the target-family set is matched.
+  - Produce the omitted geometry interaction table from the same immutable
+    observations.
+  - Save corrected analysis under new artifact IDs. Do not overwrite the first
+    analysis.
+- Invalidated outputs:
+  - The first sensitivity table is invalid for cross-budget comparison.
+  - The first interaction table is incomplete for geometry interactions.
+- Unaffected outputs:
+  - Primary correlations and paired bootstrap.
+  - Ranking inversion checks.
+  - The immutable gate results.
+- Decision: Do not amend `docs/DECISION_GATE.md` because the error was found
+  after main results were observed. Record it in the postmortem.
+
+## 2026-07-23 - Phase 3 gate completion
+
+- Timestamp: 2026-07-23T16:30:00Z
+- Smoke: `phase3_gate_smoke_2026-07-23-v1` passed artifact validation.
+- Main run: `phase3_gate_registered_2026-07-23-v1` completed with 17,568
+  nested observation rows and exact equal-NFE accounting.
+- Corrected analysis:
+  `phase3_gate_analysis_corrected_2026-07-23-v1` passed artifact validation.
+- Continue conditions:
+  - Condition 1 does not hold.
+  - Condition 2 holds in three target families.
+  - Condition 3 holds under the registered interaction rule.
+  - Condition 4 does not hold.
+- Pivot checks:
+  - Seed variation explains rejected mixture interactions, not the surviving
+    condition 2 blocks.
+  - Estimator sensitivity does not remove the stable two-mode inversions.
+  - Pivot rule 8 applies to the Euler-specific condition 3 evidence.
+  - The first analysis reporting error was corrected and retained.
+- Claim status: No claim is marked supported. See docs/CLAIMS_LEDGER.md.
+- Recommendation: Continue to Phase 4 review only. Stop before Phase 5 and
+  request human review.
+
+## 2026-07-23 - Full code and mathematics audit
+
+- Objective: Audit the dirty worktree, formulas, statistics, provenance, and
+  gate documentation before any commit.
+- Confirmed and fixed:
+  - Smoke resolved configs did not reflect the effective subset.
+  - Superseded decision artifacts treated partial or unassessed pivot checks
+    as false.
+  - A geometry explanation did not match the family types in one block.
+  - Analysis configs were hashed but not copied into analysis run directories.
+  - The Lipschitz-guided anisotropic effective scalar was described too
+    strongly relative to the source assumptions.
+- Audited artifacts:
+  - `phase3_gate_smoke_audited_2026-07-23-v1`
+  - `phase3_gate_analysis_audited_2026-07-23-v1`
+- Historical process issue: Pre-gate mixture calibration directly covered
+  dimension 2, not dimension 8. The continue decision survives using exact
+  Gaussian families and calibration-aligned dimension 2 mixture evidence.
+- Source check: arXiv v3 of the Lipschitz-guided paper confirms Definition 3.2,
+  the variance-log scalar schedule, the GMM field formula, and the restricted
+  assumptions of Proposition 3.9.
+- Decision: The gate recommendation remains Phase 4 review only. See
+  docs/AUDIT_REPORT.md.
+
+## 2026-07-23 - Final estimator-readiness audit
+
+- Objective: Check mixture evaluator readiness at every gate dimension.
+- Diagnostic:
+  - `phase3_estimator_audit_2026-07-23` repeated calibration at dimensions 2
+    and 8 with all ten gate seeds.
+  - Dimension 2 remained the calibration-aligned mixture dimension.
+  - Dimension 8 failed the sliced-versus-discrete diagnostic.
+- Correction:
+  - Excluded dimension 8 mixture blocks from condition 2 and condition 3
+    decision evidence.
+  - Kept the immutable registered gate results unchanged.
+  - Wrote `phase3_gate_analysis_final_audit_2026-07-23-v2` under a new
+    artifact ID.
+- Result: Conditions 2 and 3 still hold. Condition 2 survives with two exact
+  Gaussian families and dimension 2 two-mode mixture evidence.
+- Decision: Continue to human Phase 4 review only. Do not start Phase 5.
+
+## 2026-07-24 - Phase 4 planning and pre-run repair
+
+- Status: Planning gate complete. Registered Run 1 not launched.
+- Scope: Exact anisotropic and low-rank Gaussian families only, dimensions 2
+  and 8, linear and variance-preserving paths, Euler, Heun, and RK4, and NFE
+  8, 16, and 32.
+- Comparison artifacts:
+  - `phase3_gate_registered_2026-07-23-v1:gate_results`
+  - `phase3_gate_analysis_final_audit_2026-07-23-v2:inversions`
+  - `phase3_gate_analysis_final_audit_2026-07-23-v2:interactions`
+- New planned run ID:
+  `phase4_gaussian_reproduction_2026-07-24-v1`.
+- Registered analysis:
+  - The clean reproduction grid and comparison tolerance are fixed in
+    `configs/experiment/phase4_gaussian_reproduction.yaml`.
+  - The Phase 3 decision gate is unchanged.
+- Post-hoc analysis:
+  - No local error diagnostic was run.
+  - No post-hoc quantity was added to the registered hypothesis list.
+- Observation:
+  - A temporary non-release integration test reproduced all 72 audited
+    Gaussian rows within absolute tolerance `1e-12`.
+  - This test is software validation. It is not a scientific artifact.
+- Interpretation:
+  - No mathematical explanation or proposition was accepted at this stage.
+- Exact and estimated quantities:
+  - Gaussian W2 is exact from analytically propagated numerical-map moments.
+  - The averaged regularity baseline uses numerical time quadrature.
+- Repairs:
+  - Updated the valid artifact fixture checksum.
+  - Added NumPy to the isolated pre-commit MyPy environment.
+  - Added a dedicated Phase 4 runner with clean-code, input-hash,
+    equal-NFE, covariance, comparison, and overwrite guards.
+  - Moved affine numerical-map recovery and moment propagation into shared
+    analysis functions used by both Phase 3 and Phase 4 runners.
+- Checks:
+  - Full suite: 132 tests passed in 5.29 seconds.
+  - Ruff lint and format checks passed.
+  - MyPy passed on 54 source files.
+  - Pre-commit passed on all files.
+- Exclusions:
+  - No mixture result was generated or used.
+  - Dimension 8 mixture evidence remains excluded from decisions.
+  - No NFE 64 or 128 check was run.
+  - No dimension 32 configuration was added.
+- Invalidated outputs:
+  - All superseded Phase 3 analyses remain preserved and retain their
+    recorded invalidation status.
+  - Dirty Phase 3 artifacts remain non-release-ready comparison inputs.
+- Sources:
+  - The planning source links remain recorded in
+    `docs/PHASE4_PLAN.md`.
+- Decision:
+  - Commit and clean the reviewed worktree before Run 1.
+  - Stop before Run 1 and do not start Phase 5.

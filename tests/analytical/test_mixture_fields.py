@@ -6,9 +6,16 @@ import pytest
 import torch
 
 from fewstep_regularities.distributions.gaussian import standard_gaussian
-from fewstep_regularities.distributions.gaussian_mixture import two_mode_gmm
+from fewstep_regularities.distributions.gaussian_mixture import (
+    GaussianMixture,
+    eight_mode_gmm,
+    imbalanced_gmm,
+    two_mode_gmm,
+)
 from fewstep_regularities.fields.mixture_affine import MixtureAffineField
 from fewstep_regularities.paths.linear import LinearPath
+from fewstep_regularities.paths.lipschitz_guided import LipschitzGuidedPath
+from fewstep_regularities.paths.variance_preserving import VariancePreservingTrigPath
 
 
 @pytest.mark.analytical
@@ -45,6 +52,89 @@ def test_jacobian_matches_autograd() -> None:
     jac_ad_t = torch.stack(jac_ad, dim=0)
     jac = field.jacobian(t, x.detach())
     assert torch.allclose(jac, jac_ad_t, rtol=1e-6, atol=1e-6)
+
+
+def _full_covariance_gmm() -> GaussianMixture:
+    weights = torch.tensor([0.3, 0.7], dtype=torch.float64)
+    means = torch.tensor([[-1.0, 0.5], [1.5, -0.25]], dtype=torch.float64)
+    covs = torch.tensor(
+        [[[1.2, 0.35], [0.35, 0.8]], [[0.7, -0.2], [-0.2, 1.4]]],
+        dtype=torch.float64,
+    )
+    return GaussianMixture(weights=weights, means=means, covs=covs)
+
+
+@pytest.mark.analytical
+@pytest.mark.parametrize(
+    "schedule",
+    [LinearPath(), VariancePreservingTrigPath(), LipschitzGuidedPath(m=4.0)],
+)
+def test_full_covariance_jacobian_matches_autograd(
+    schedule: LinearPath | VariancePreservingTrigPath | LipschitzGuidedPath,
+) -> None:
+    field = MixtureAffineField(
+        source=standard_gaussian(2),
+        target=_full_covariance_gmm(),
+        schedule=schedule,
+    )
+    t = torch.tensor(0.37, dtype=torch.float64)
+    x = torch.tensor([[-1.1, 0.2], [0.0, -0.7], [1.3, 0.9]], dtype=torch.float64)
+
+    jac_ad = torch.stack(
+        [
+            torch.func.jacrev(lambda point: field.evaluate(t, point[None])[0])(point)
+            for point in x
+        ]
+    )
+    assert torch.allclose(field.jacobian(t, x), jac_ad, rtol=2e-10, atol=2e-10)
+
+
+@pytest.mark.analytical
+@pytest.mark.parametrize(
+    "target",
+    [
+        two_mode_gmm(2),
+        eight_mode_gmm(2),
+        imbalanced_gmm(2),
+        _full_covariance_gmm(),
+    ],
+)
+@pytest.mark.parametrize(
+    "schedule",
+    [LinearPath(), VariancePreservingTrigPath(), LipschitzGuidedPath(m=4.0)],
+)
+@pytest.mark.parametrize("time", [0.19, 0.53, 0.81])
+def test_pointwise_continuity_equation(
+    target: GaussianMixture,
+    schedule: LinearPath | VariancePreservingTrigPath | LipschitzGuidedPath,
+    time: float,
+) -> None:
+    """Check ∂t log p + div(b) + b·∇log p = 0 at fixed points."""
+    field = MixtureAffineField(
+        source=standard_gaussian(2),
+        target=target,
+        schedule=schedule,
+    )
+    points = torch.tensor(
+        [[-2.1, 0.4], [-0.3, -1.2], [0.8, 0.1], [2.4, 1.7]],
+        dtype=torch.float64,
+    )
+
+    for point in points:
+        t = torch.tensor(time, dtype=torch.float64, requires_grad=True)
+        x = point.detach().requires_grad_(True)
+        log_p = field.marginal_mixture(t).log_prob(x[None])[0]
+        dt_log_p = torch.autograd.grad(log_p, t, create_graph=True)[0]
+        velocity = field.evaluate(t, x[None])[0]
+        divergence = sum(
+            torch.autograd.grad(velocity[j], x, retain_graph=True, create_graph=True)[
+                0
+            ][j]
+            for j in range(field.dim)
+        )
+        score = torch.autograd.grad(log_p, x, retain_graph=True)[0]
+        residual = dt_log_p + divergence + torch.dot(velocity, score)
+        assert residual.item() == pytest.approx(0.0, abs=2e-9)
 
 
 @pytest.mark.analytical

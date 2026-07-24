@@ -52,10 +52,43 @@ derivations before corresponding implementations are treated as validated.
 
 9. Continuity-equation consistency tests that are practical for mixture
    fields.
-   Status (Phase 2): partial. Moment evolution MC check and AD Jacobian
-   checks are implemented. Full PDE residual continuity tests remain open.
+   Status (Phase 2): resolved for the implemented independent scalar
+   schedules. The componentwise analytic continuity derivation is documented
+   in MATHEMATICAL_NOTES.md. Deterministic pointwise AD residual checks,
+   AD Jacobian checks, and a moment-evolution MC check are implemented.
 
 10. Whether temporal stiffness metrics require exact `partial_t v` or only
     finite-difference estimators.
     Status (Phase 1): exact `partial_t v` used when the affine formula is
     differentiable; FD fallback documented with tolerance.
+
+11. Whether every decisive exact Gaussian inversion reproduces from a clean
+    Phase 4 commit.
+    Status (Phase 4): under-test. A temporary software integration check
+    matches the audited dirty-code rows, but registered Run 1 has not started.
+
+12. Which covariance eigendirections dominate the strongest Gaussian
+    inversion.
+    Status (Phase 4): open. No affine decomposition run has started.
+
+13. Why Euler prefers variance-preserving in the low-rank Gaussian family
+    while Heun and RK4 prefer linear under equal NFE.
+    Status (Phase 4): open. Solver order is an interpretation, not yet a
+    source-verified derivation.
+
+14. Whether a solver-specific leading local error quantity explains both
+    Gaussian geometry families.
+    Status (Phase 4): open. Any candidate evaluated on the motivating rows
+    will remain labeled post-hoc.
+
+15. Whether the smallest RK4 inversion margins dominate higher-precision
+    numerical error.
+    Status (Phase 4): open. The precision audit has not started.
+
+16. Whether a minimal affine non-implication proposition can be stated without
+    artificial assumptions.
+    Status (Phase 4): proposed. No proposition is marked proved.
+
+17. Whether the observed mechanism is already established in numerical ODE,
+    diffusion schedule, or flow matching literature.
+    Status (Phase 4): open. The Phase 4 primary-source audit has not started.

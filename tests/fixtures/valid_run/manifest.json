@@ -8,7 +8,7 @@
       "git_commit": "abc123",
       "input_artifact_hashes": {},
       "kind": "table",
-      "output_checksum": "c3a4ad9c0f3106622e2e2075778e36d6a33b8bd1ef979fcd29aeacb6e6d28518",
+      "output_checksum": "12b34da73b0c67a0319e6eddbd3582af66e3b558b4d44e4a6860e0cec20d726f",
       "path": "/home/calla/AI_projects/fewstep-field-regularity/tests/fixtures/valid_run/table.json",
       "producing_run_id": "valid_run",
       "random_seeds": [

@@ -161,9 +161,11 @@ def build_distribution(
 
 
 def effective_m(target: AnyDistribution) -> float:
-    """Scalar variance ratio for Lipschitz-guided schedule.
+    """Heuristic scalar variance ratio for a Lipschitz-guided schedule.
 
-    Uses the largest eigenvalue of the target covariance (mixture or Gaussian).
+    Uses the largest target covariance eigenvalue. If it is one, uses the
+    condition ratio. This is not the source-optimal anisotropic rule outside
+    the assumptions of Proposition 3.9.
     """
     ev = torch.linalg.eigvalsh(target.covariance())
     m = float(ev.max().item())

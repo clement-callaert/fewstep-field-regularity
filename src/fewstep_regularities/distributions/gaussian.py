@@ -99,7 +99,9 @@ class Gaussian:
         mahal = torch.sum(y * y, dim=0)
         log_det = 2.0 * torch.sum(torch.log(torch.diag(chol)))
         d = float(self.dim)
-        log_two_pi = torch.log(torch.tensor(2.0 * torch.pi, dtype=self._dtype, device=self._device))
+        log_two_pi = torch.log(
+            torch.tensor(2.0 * torch.pi, dtype=self._dtype, device=self._device)
+        )
         return -0.5 * (mahal + log_det + d * log_two_pi)
 
     def score(self, x: Tensor) -> Tensor:

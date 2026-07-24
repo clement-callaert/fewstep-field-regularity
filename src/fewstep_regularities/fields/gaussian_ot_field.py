@@ -43,7 +43,9 @@ class GaussianOTField:
         if self.source.device != self.target.device:
             raise ValueError("source and target devices must match")
         self._a = gaussian_ot_matrix(self.source.covariance(), self.target.covariance())
-        self._eye = torch.eye(self.source.dim, dtype=self.dtype, device=self.source.device)
+        self._eye = torch.eye(
+            self.source.dim, dtype=self.dtype, device=self.source.device
+        )
 
     @property
     def dim(self) -> int:

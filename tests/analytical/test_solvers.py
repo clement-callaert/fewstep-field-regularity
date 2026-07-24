@@ -70,11 +70,21 @@ def test_rk4_more_accurate_than_euler_equal_nfe() -> None:
     exact = torch.exp(torch.tensor(-1.0, dtype=torch.float64))
     nfe = 64
     e_err = (
-        EulerSolver().solve(field, x0, 0.0, 1.0, requested_nfe=nfe).trajectory[-1] - exact
-    ).abs().item()
+        (
+            EulerSolver().solve(field, x0, 0.0, 1.0, requested_nfe=nfe).trajectory[-1]
+            - exact
+        )
+        .abs()
+        .item()
+    )
     r_err = (
-        RK4Solver().solve(field, x0, 0.0, 1.0, requested_nfe=nfe).trajectory[-1] - exact
-    ).abs().item()
+        (
+            RK4Solver().solve(field, x0, 0.0, 1.0, requested_nfe=nfe).trajectory[-1]
+            - exact
+        )
+        .abs()
+        .item()
+    )
     assert r_err < e_err
 
 

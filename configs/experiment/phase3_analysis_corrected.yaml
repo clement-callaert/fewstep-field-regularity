@@ -1,0 +1,23 @@
+name: phase3_gate_analysis_corrected
+mode: gate_analysis
+run_id: phase3_gate_analysis_corrected_2026-07-23-v1
+gate_version: 2026-07-23-v1
+decision_gate: docs/DECISION_GATE.md
+analysis_config: configs/analysis/phase3_gate_corrected.yaml
+hypotheses:
+  - H1
+  - H2
+  - H3
+  - H4
+seeds:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+notes: Corrected registered analysis from the same immutable Phase 3 gate artifact.

@@ -106,9 +106,7 @@ def run_estimator_calibration(cfg: DictConfig) -> Path:
     entropic_max_iter = int(
         OmegaConf.select(cfg, "experiment.entropic_max_iter", default=10000)
     )
-    entropic_tol = float(
-        OmegaConf.select(cfg, "experiment.entropic_tol", default=1e-5)
-    )
+    entropic_tol = float(OmegaConf.select(cfg, "experiment.entropic_tol", default=1e-5))
     discrete_n = int(OmegaConf.select(cfg, "experiment.discrete_n", default=32))
     if discrete_n < 1:
         raise ValueError("discrete_n must be positive")
@@ -238,19 +236,13 @@ def run_estimator_calibration(cfg: DictConfig) -> Path:
         "criteria_note": ("Calibration criteria live here, not in DECISION_GATE.md"),
     }
     if gauss_rows:
-        sliced_diffs = [
-            abs(r["sliced_minus_exact_reference"]) for r in gauss_rows
-        ]
-        summary["sliced_abs_difference_mean"] = sum(sliced_diffs) / len(
-            sliced_diffs
-        )
+        sliced_diffs = [abs(r["sliced_minus_exact_reference"]) for r in gauss_rows]
+        summary["sliced_abs_difference_mean"] = sum(sliced_diffs) / len(sliced_diffs)
         summary["sliced_abs_difference_max"] = max(sliced_diffs)
         summary["sliced_diagnostic_within_tolerance"] = (
             summary["sliced_abs_difference_mean"] < 0.5
         )
-        entropic_diffs = [
-            abs(r["entropic_minus_exact_reference"]) for r in gauss_rows
-        ]
+        entropic_diffs = [abs(r["entropic_minus_exact_reference"]) for r in gauss_rows]
         summary["entropic_abs_difference_mean"] = sum(entropic_diffs) / len(
             entropic_diffs
         )

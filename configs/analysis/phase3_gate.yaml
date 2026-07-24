@@ -1,0 +1,41 @@
+name: phase3_gate_analysis
+gate_version: 2026-07-23-v1
+sampling_unit:
+  - target_family
+  - path
+  - solver
+  - dim
+  - nfe
+primary_metric: averaged_squared_lipschitz_proxy
+alternative_metrics:
+  - path_weighted_expected_jacobian_norm
+  - expected_squared_jacobian_norm
+  - jacobian_temporal_variation
+primary_metric_estimator_budget: 128
+bootstrap_replicates: 2000
+bootstrap_seed: 314159
+confidence_level: 0.95
+inputs:
+  gate_results:
+    artifact_id: phase3_gate_registered_2026-07-23-v1:gate_results
+    path: outputs/phase3_gate_registered_2026-07-23-v1/gate_results.json
+  calibration:
+    artifact_id: phase2_calibration:calibration_table
+    path: outputs/phase2_calibration/calibration_table.json
+outputs:
+  correlation_table:
+    artifact_id: phase3_gate_analysis_2026-07-23-v1:correlations
+    path: outputs/phase3_gate_analysis_2026-07-23-v1/correlations.json
+  sensitivity_table:
+    artifact_id: phase3_gate_analysis_2026-07-23-v1:sensitivity
+    path: outputs/phase3_gate_analysis_2026-07-23-v1/sensitivity.json
+  inversion_table:
+    artifact_id: phase3_gate_analysis_2026-07-23-v1:inversions
+    path: outputs/phase3_gate_analysis_2026-07-23-v1/inversions.json
+  interaction_table:
+    artifact_id: phase3_gate_analysis_2026-07-23-v1:interactions
+    path: outputs/phase3_gate_analysis_2026-07-23-v1/interactions.json
+  decision_table:
+    artifact_id: phase3_gate_analysis_2026-07-23-v1:decision
+    path: outputs/phase3_gate_analysis_2026-07-23-v1/decision.json
+figures: []

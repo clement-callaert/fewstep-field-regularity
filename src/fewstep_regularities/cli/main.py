@@ -16,8 +16,13 @@ from fewstep_regularities.artifacts.writer import FilesystemArtifactWriter
 from fewstep_regularities.experiments.estimator_calibration import (
     run_estimator_calibration,
 )
+from fewstep_regularities.experiments.gate_analysis import run_gate_analysis
+from fewstep_regularities.experiments.gate_benchmark import run_gate_benchmark
 from fewstep_regularities.experiments.gaussian_exact import run_gaussian_exact
 from fewstep_regularities.experiments.mixture_exact import run_mixture_exact
+from fewstep_regularities.experiments.phase4_gaussian_reproduction import (
+    run_phase4_gaussian_reproduction,
+)
 from fewstep_regularities.utils.environment import (
     cuda_version,
     git_code_status,
@@ -128,10 +133,16 @@ def run_from_overrides(overrides: list[str] | None = None) -> Path:
         return run_mixture_exact(cfg)
     if mode == "estimator_calibration":
         return run_estimator_calibration(cfg)
+    if mode == "gate_benchmark":
+        return run_gate_benchmark(cfg)
+    if mode == "gate_analysis":
+        return run_gate_analysis(cfg)
+    if mode == "phase4_gaussian_reproduction":
+        return run_phase4_gaussian_reproduction(cfg)
     msg = (
         f"Unsupported mode {mode!r}. Supported: dry_run, gaussian_exact, "
-        "mixture_exact, estimator_calibration. "
-        "Do not launch the gate or full benchmark yet."
+        "mixture_exact, estimator_calibration, gate_benchmark, gate_analysis, "
+        "phase4_gaussian_reproduction."
     )
     raise RuntimeError(msg)
 

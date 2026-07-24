@@ -52,7 +52,9 @@ def test_sampling_moments() -> None:
 
 @pytest.mark.analytical
 def test_score_finite_far_away() -> None:
-    g = low_rank_gaussian(6, rank=2, noise_variance=0.1, generator=torch.Generator().manual_seed(1))
+    g = low_rank_gaussian(
+        6, rank=2, noise_variance=0.1, generator=torch.Generator().manual_seed(1)
+    )
     x = g.mean() + 20.0 * torch.ones(1, 6, dtype=torch.float64)
     s = g.score(x)
     assert torch.isfinite(s).all()
@@ -60,6 +62,8 @@ def test_score_finite_far_away() -> None:
 
 @pytest.mark.analytical
 def test_low_rank_positive_definite() -> None:
-    g = low_rank_gaussian(8, rank=2, noise_variance=0.05, generator=torch.Generator().manual_seed(2))
+    g = low_rank_gaussian(
+        8, rank=2, noise_variance=0.05, generator=torch.Generator().manual_seed(2)
+    )
     ev = torch.linalg.eigvalsh(g.covariance())
     assert (ev > 0).all()

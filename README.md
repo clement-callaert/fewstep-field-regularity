@@ -1,6 +1,7 @@
 # fewstep-field-regularity
 
-Research status: Work in progress. No scientific claim has been validated.
+Research status: Phase 3 gate completed. Continue to Phase 4 review only.
+No scientific claim is marked supported.
 
 A reproducible benchmark of field regularity metrics and few-step discretization
 error in continuous-time generative models.
@@ -12,10 +13,9 @@ error across probability paths, solvers, dimensions, and target geometries?
 
 ## 2. Scientific status
 
-Phase 2 Gaussian mixture distributions, exact independent-coupling mixture
-fields, and Wasserstein estimator calibration are under validation. Phase 1
-exact Gaussian stack remains in place. No main benchmark or decision gate has
-been run. No claim in the claims ledger is marked supported.
+The small registered Phase 3 gate is complete. A continue condition holds, so
+the recommendation is Phase 4 review only. Phase 5 remains blocked pending
+human review. No claim in the claims ledger is marked supported.
 
 ## 3. Registered hypotheses
 
@@ -91,8 +91,21 @@ fewstep-regularities experiment=phase2_calibration
 python scripts/validate_artifacts.py outputs/phase2_calibration
 ```
 
-Gate and full benchmarks remain blocked until Phases 1-2 pass review. Do not
-launch them from this README yet.
+Phase 3 gate and audited analysis:
+
+```bash
+fewstep-regularities experiment=phase2_calibration
+python scripts/validate_artifacts.py outputs/phase2_calibration
+fewstep-regularities experiment=phase3_gate
+python scripts/validate_artifacts.py \
+  outputs/phase3_gate_registered_2026-07-23-v1
+fewstep-regularities experiment=phase3_analysis_final_audit
+python scripts/validate_artifacts.py \
+  outputs/phase3_gate_analysis_final_audit_2026-07-23-v2
+```
+
+The registered main run refuses to overwrite an existing completed run.
+Do not launch Phase 4 or Phase 5 without human review.
 
 ## 8. Repository structure
 
@@ -124,9 +137,14 @@ pages, official proceedings). Index: [papers/README.md](papers/README.md).
   refused for mixture targets.
 - Empirical W2 estimators have a multi-seed calibration experiment, but are not
   continuous exact W2 for mixtures.
+- The post-result estimator audit rejected dimension 8 mixture evidence for
+  decision use. Only calibrated dimension 2 mixture evidence is decisive.
 - Hairer ODE PDF is missing; solver orders are checked numerically only.
-- Lipschitz-guided schedules use a scalar effective ``M`` (max eigenvalue of
-  target covariance, including mixtures).
+- Lipschitz-guided schedules use a heuristic scalar effective ``M`` based on
+  target covariance, including mixtures. It is not claimed to be the
+  source-optimal anisotropic rule. Their square-root schedule derivatives are
+  exact only in the open time interval; endpoint clamps are numerical
+  regularizations.
 - No novelty claim is made before literature comparison.
 - No theorem is marked proved without independent manual review.
 

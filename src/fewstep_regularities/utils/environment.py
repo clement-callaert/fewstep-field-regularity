@@ -63,7 +63,7 @@ def gpu_name() -> str:
         return "cpu"
     if not torch.cuda.is_available():
         return "cpu"
-    return torch.cuda.get_device_name(0)
+    return str(torch.cuda.get_device_name(0))
 
 
 def package_lock_hash(repo_root: Path) -> str:

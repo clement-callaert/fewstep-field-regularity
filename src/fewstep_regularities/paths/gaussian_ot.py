@@ -104,9 +104,7 @@ class GaussianOTPath:
         Uses ``T(x0)`` so the coupling is the OT coupling, not ``(x0, x1)``.
         """
         del noise, x1
-        t_col, x0, _ = validate_path_batch(
-            t, x0, torch.zeros_like(x0), self.dtype
-        )
+        t_col, x0, _ = validate_path_batch(t, x0, torch.zeros_like(x0), self.dtype)
         tx = self.transport(x0)
         return self.alpha(t_col) * x0 + self.sigma(t_col) * tx
 

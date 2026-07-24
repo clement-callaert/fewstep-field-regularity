@@ -120,16 +120,24 @@ def run_gaussian_exact(cfg: DictConfig) -> Path:
     stamp = datetime.now(UTC).isoformat()
 
     target_names = list(
-        OmegaConf.select(cfg, "experiment.target_names", default=["anisotropic_gaussian"])
+        OmegaConf.select(
+            cfg, "experiment.target_names", default=["anisotropic_gaussian"]
+        )
     )
-    path_names = list(OmegaConf.select(cfg, "experiment.path_names", default=["linear"]))
-    solver_names = list(OmegaConf.select(cfg, "experiment.solver_names", default=["euler"]))
+    path_names = list(
+        OmegaConf.select(cfg, "experiment.path_names", default=["linear"])
+    )
+    solver_names = list(
+        OmegaConf.select(cfg, "experiment.solver_names", default=["euler"])
+    )
 
     for dim in dims:
         for target_name in target_names:
             for path_name in path_names:
                 for solver_name in solver_names:
-                    for seed in seeds[:1]:  # one seed for particle sampling; fields are exact
+                    for seed in seeds[
+                        :1
+                    ]:  # one seed for particle sampling; fields are exact
                         gen = torch.Generator(device=device).manual_seed(seed)
                         source = standard_gaussian(dim, dtype=dtype, device=device)
                         # Build target from named config overrides.
@@ -146,7 +154,9 @@ def run_gaussian_exact(cfg: DictConfig) -> Path:
                             target_cfg = {
                                 "name": "low_rank_gaussian",
                                 "rank": int(
-                                    OmegaConf.select(cfg, "distribution.rank", default=2)
+                                    OmegaConf.select(
+                                        cfg, "distribution.rank", default=2
+                                    )
                                 ),
                                 "noise_variance": float(
                                     OmegaConf.select(
@@ -173,7 +183,9 @@ def run_gaussian_exact(cfg: DictConfig) -> Path:
                         metric = build_metric(cfg.metric, dtype)
 
                         metric_result = metric.compute(field)
-                        exact_mean, exact_cov = pushforward_gaussian_moments(field, source)
+                        exact_mean, exact_cov = pushforward_gaussian_moments(
+                            field, source
+                        )
 
                         for nfe in nfe_budgets:
                             # Skip NFE incompatible with multistage solvers.
@@ -181,7 +193,9 @@ def run_gaussian_exact(cfg: DictConfig) -> Path:
                             if nfe % evals != 0:
                                 continue
                             x0 = source.sample(n_particles, generator=gen)
-                            result = solver.solve(field, x0, 0.0, 1.0, requested_nfe=nfe)
+                            result = solver.solve(
+                                field, x0, 0.0, 1.0, requested_nfe=nfe
+                            )
                             x1 = result.trajectory[-1]
                             emp_mean = x1.mean(dim=0)
                             centered = x1 - emp_mean.unsqueeze(0)

@@ -40,8 +40,11 @@ class MixtureAffineField:
         ``b_t(x) = ∑_k r_{k,t}(x) b_{k,t}(x)``.
 
     References:
-        docs/MATHEMATICAL_NOTES.md (original derivation).
+        docs/MATHEMATICAL_NOTES.md (partially verified analytic derivation).
         Per-component fields match ``gaussian_affine_marginal``.
+
+    This is the exact conditional-expectation marginal velocity induced by
+    the stated independent coupling. It is not an optimal-transport claim.
     """
 
     source: Gaussian

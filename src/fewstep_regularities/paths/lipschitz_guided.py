@@ -56,7 +56,11 @@ class LipschitzGuidedPath:
         return torch.sqrt(beta_sq)
 
     def alpha_derivative(self, t: Tensor) -> Tensor:
-        """Time derivative of ``alpha`` via analytic chain rule."""
+        """Interior time derivative of ``alpha`` via analytic chain rule.
+
+        The clamp supplies a finite numerical endpoint regularization at
+        ``t=1``. It is not an exact derivative at that endpoint.
+        """
         t = as_time(t, self.dtype)
         beta_sq = lipschitz_guided_beta_sq(t, self.m).clamp(min=0.0)
         # d/dt β^2 = M^t log(M) / (M - 1)
@@ -68,7 +72,11 @@ class LipschitzGuidedPath:
         return -0.5 * d_beta_sq / alpha
 
     def sigma_derivative(self, t: Tensor) -> Tensor:
-        """Time derivative of ``sigma`` via analytic chain rule."""
+        """Interior time derivative of ``sigma`` via analytic chain rule.
+
+        The clamp supplies a finite numerical endpoint regularization at
+        ``t=0``. It is not an exact derivative at that endpoint.
+        """
         t = as_time(t, self.dtype)
         beta_sq = lipschitz_guided_beta_sq(t, self.m).clamp(min=0.0)
         log_m = math_log(self.m, t.dtype, t.device)

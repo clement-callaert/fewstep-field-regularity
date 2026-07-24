@@ -1,0 +1,23 @@
+name: phase3_gate_analysis_audited
+mode: gate_analysis
+run_id: phase3_gate_analysis_audited_2026-07-23-v1
+gate_version: 2026-07-23-v1
+decision_gate: docs/DECISION_GATE.md
+analysis_config: configs/analysis/phase3_gate_audited.yaml
+hypotheses:
+  - H1
+  - H2
+  - H3
+  - H4
+seeds:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+notes: Audited analysis from the unchanged registered Phase 3 gate artifact.

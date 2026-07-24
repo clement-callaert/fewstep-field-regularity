@@ -19,7 +19,7 @@ AffineField = GaussianAffineField | GaussianOTField
 
 
 def _as_affine(field: VelocityField) -> AffineField:
-    if isinstance(field, (GaussianAffineField, GaussianOTField)):
+    if isinstance(field, GaussianAffineField | GaussianOTField):
         return field
     raise TypeError("Phase 1 metrics require GaussianAffineField or GaussianOTField")
 
@@ -78,7 +78,9 @@ class AveragedSquaredLipschitzProxy:
         del states
         affine = _as_affine(field)
         times = times if times is not None else _default_times(self.n_time, self.dtype)
-        vals = torch.stack([_spectral_norm(affine.jacobian_matrix(t)) ** 2 for t in times])
+        vals = torch.stack(
+            [_spectral_norm(affine.jacobian_matrix(t)) ** 2 for t in times]
+        )
         return MetricResult(
             value=integrate_time(vals, times),
             is_exact=False,
@@ -361,12 +363,12 @@ class SpatialTemporalStiffness:
         times: Tensor | None = None,
         states: Tensor | None = None,
     ) -> MetricResult:
-        a2 = AveragedSquaredLipschitzProxy(n_time=self.n_time, dtype=self.dtype).compute(
-            field, times=times, states=states
-        )
-        temp = TemporalFieldDerivativeNorm(n_time=self.n_time, dtype=self.dtype).compute(
-            field, times=times, states=states
-        )
+        a2 = AveragedSquaredLipschitzProxy(
+            n_time=self.n_time, dtype=self.dtype
+        ).compute(field, times=times, states=states)
+        temp = TemporalFieldDerivativeNorm(
+            n_time=self.n_time, dtype=self.dtype
+        ).compute(field, times=times, states=states)
         return MetricResult(
             value=a2.value + self.temporal_weight * temp.value,
             is_exact=False,

@@ -1,0 +1,8 @@
+name: phase4_release_ready
+output_dir: outputs
+release_ready: true
+require_resolved_config: true
+require_seed_records: true
+require_hashes: true
+reject_dirty_release_ready: true
+require_figure_provenance: true

@@ -1,0 +1,62 @@
+name: phase3_gate
+mode: gate_benchmark
+run_id: phase3_gate_registered_2026-07-23-v1
+gate_version: 2026-07-23-v1
+decision_gate: docs/DECISION_GATE.md
+analysis_plan: docs/PHASE3_ANALYSIS_PLAN.md
+hypotheses:
+  - H1
+  - H2
+  - H3
+  - H4
+seeds:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+dimensions:
+  - 2
+  - 8
+nfe_budgets:
+  - 8
+  - 16
+  - 32
+target_names:
+  - anisotropic_gaussian
+  - low_rank_gaussian
+  - two_mode_gmm
+  - imbalanced_gmm
+path_names:
+  - linear
+  - variance_preserving
+solver_names:
+  - euler
+  - heun
+  - rk4
+metric_names:
+  - averaged_squared_lipschitz_proxy
+  - path_weighted_expected_jacobian_norm
+  - expected_squared_jacobian_norm
+  - jacobian_temporal_variation
+metric_n_time: 24
+metric_estimator_budgets:
+  - 32
+  - 128
+primary_metric_estimator_budget: 128
+n_particles: 256
+n_projections: 64
+wasserstein_projection_budgets:
+  - 32
+  - 64
+  - 128
+bootstrap_replicates: 2000
+bootstrap_seed: 314159
+target_geometry_seed: 271828
+smoke: false
+notes: Small registered Phase 3 gate. This is not the full Cartesian benchmark.
