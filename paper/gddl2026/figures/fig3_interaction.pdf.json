@@ -1,8 +1,8 @@
 {
   "figure_artifact_id": "workshop_figures_2026-07-24-v1:fig3_interaction",
-  "figure_checksum_sha256": "6d7f6a9ce88a236f01a292d493c56dffb850091d181ada1b8484e6572628351b",
-  "generation_timestamp": "2026-07-24T18:49:10.326682+00:00",
-  "git_commit": "a1ae644508a93045cb9e3c0e3283cd520cab733a",
+  "figure_checksum_sha256": "0ab7d3e4ecadc64033a6cbc09d402e8f66af35dc59089cc6b12ce63b30bbb00f",
+  "generation_timestamp": "2026-07-24T21:55:41.340367+00:00",
+  "git_commit": "88af300cbdbe5a0dd6887c4fe2d76e521bad3671",
   "git_status": "dirty (regenerate after committing)",
   "note": "Signed margins; zero line marks path-preference boundary.",
   "plotting_config": {
