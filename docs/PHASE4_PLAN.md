@@ -1,6 +1,6 @@
 # Phase 4 plan
 
-Status: Proposed and not yet executed.
+Status: Active. Run 1 completed and passed its reproduction checks.
 
 Scope: Explain the surviving Phase 3 ranking inversions in the anisotropic
 Gaussian and low-rank Gaussian families. This plan does not authorize Phase 5,
@@ -76,8 +76,9 @@ No scientific run may start until all of these conditions hold:
 10. Confirm that the Phase 4 runner rejects dirty release-ready runs.
 11. Resolve the Phase 4 Hydra config and verify every listed input.
 
-The current worktree is dirty. Therefore the clean-code gate does not yet
-pass.
+The clean-code gate passed at commit `083dbf9a14e73f3211daf9851909160467b8c3ee`.
+Run 1 was executed from that clean commit. Later analysis code must pass the
+same gate from a new clean commit before Run 2.
 
 ## Run 1: clean Gaussian reproduction
 
@@ -192,8 +193,8 @@ review. No statement will be called proved without manual approval.
 
 ## Later focused runs
 
-Runs 2 through 6 are not authorized automatically. Each requires review of
-the preceding validated artifacts.
+Runs 2 through 6 are authorized by the user's request to execute all of Phase
+4. Each still requires review of the preceding validated artifacts.
 
 | run | purpose | expected limit | hard stop |
 | --- | --- | ---: | ---: |

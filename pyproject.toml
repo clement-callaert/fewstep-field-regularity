@@ -32,6 +32,7 @@ dependencies = [
   "numpy>=1.26,<2.5",
   "scipy>=1.11",
   "matplotlib>=3.8",
+  "mpmath>=1.3",
   "pandas>=2.1",
   "tqdm>=4.66",
 ]
@@ -102,6 +103,7 @@ module = [
   "hydra.*",
   "omegaconf.*",
   "matplotlib.*",
+  "mpmath.*",
   "scipy.*",
 ]
 ignore_missing_imports = true

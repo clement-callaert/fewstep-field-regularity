@@ -75,3 +75,30 @@ def test_phase4_gaussian_reproduction_config_is_focused() -> None:
     assert list(cfg.experiment.dimensions) == [2, 8]
     assert list(cfg.experiment.nfe_budgets) == [8, 16, 32]
     assert cfg.experiment.expected_counts.endpoint_configurations == 72
+
+
+def test_phase4_affine_audit_configs_resolve() -> None:
+    root = Path(__file__).resolve().parents[2]
+    config_dir = str(root / "configs")
+    experiments = {
+        "phase4_precision": "precision",
+        "phase4_decomposition": "decomposition",
+        "phase4_diagnostics": "diagnostics",
+        "phase4_robustness": "robustness",
+        "phase4_final_validation": "final_validation",
+    }
+    for experiment, audit_kind in experiments.items():
+        with initialize_config_dir(version_base=None, config_dir=config_dir):
+            cfg = compose(
+                config_name="config",
+                overrides=[
+                    f"experiment={experiment}",
+                    "artifact_policy=phase4_release_ready",
+                ],
+            )
+        assert cfg.experiment.mode == "phase4_affine_audit"
+        assert cfg.experiment.audit_kind == audit_kind
+        assert cfg.precision.dtype == "float64"
+        assert cfg.compute.device == "cpu"
+        assert cfg.artifact_policy.release_ready is True
+        assert cfg.experiment.runtime.hard_stop_minutes <= 120

@@ -20,6 +20,9 @@ from fewstep_regularities.experiments.gate_analysis import run_gate_analysis
 from fewstep_regularities.experiments.gate_benchmark import run_gate_benchmark
 from fewstep_regularities.experiments.gaussian_exact import run_gaussian_exact
 from fewstep_regularities.experiments.mixture_exact import run_mixture_exact
+from fewstep_regularities.experiments.phase4_affine_audit import (
+    run_phase4_affine_audit,
+)
 from fewstep_regularities.experiments.phase4_gaussian_reproduction import (
     run_phase4_gaussian_reproduction,
 )
@@ -139,10 +142,12 @@ def run_from_overrides(overrides: list[str] | None = None) -> Path:
         return run_gate_analysis(cfg)
     if mode == "phase4_gaussian_reproduction":
         return run_phase4_gaussian_reproduction(cfg)
+    if mode == "phase4_affine_audit":
+        return run_phase4_affine_audit(cfg)
     msg = (
         f"Unsupported mode {mode!r}. Supported: dry_run, gaussian_exact, "
         "mixture_exact, estimator_calibration, gate_benchmark, gate_analysis, "
-        "phase4_gaussian_reproduction."
+        "phase4_gaussian_reproduction, phase4_affine_audit."
     )
     raise RuntimeError(msg)
 

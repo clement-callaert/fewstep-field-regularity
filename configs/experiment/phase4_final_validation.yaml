@@ -1,0 +1,41 @@
+name: phase4_final_validation
+mode: phase4_affine_audit
+audit_kind: final_validation
+run_id: phase4_final_validation_2026-07-24-v1
+phase: 4
+seeds:
+  - 0
+inputs:
+  run1_validation:
+    artifact_id: phase4_gaussian_reproduction_2026-07-24-v1:validation
+    path: outputs/phase4_gaussian_reproduction_2026-07-24-v1/validation.json
+    sha256: 43f951f956accdc6fca2a26d485539779136c4c603017db36bde25b456623483
+  run2_validation:
+    artifact_id: phase4_precision_2026-07-24-v1:validation
+    path: outputs/phase4_precision_2026-07-24-v1/validation.json
+  run3_validation:
+    artifact_id: phase4_decomposition_2026-07-24-v1:validation
+    path: outputs/phase4_decomposition_2026-07-24-v1/validation.json
+  run4_validation:
+    artifact_id: phase4_diagnostics_2026-07-24-v1:validation
+    path: outputs/phase4_diagnostics_2026-07-24-v1/validation.json
+  run5_validation:
+    artifact_id: phase4_robustness_2026-07-24-v1:validation
+    path: outputs/phase4_robustness_2026-07-24-v1/validation.json
+outputs:
+  table:
+    artifact_id: phase4_final_validation_2026-07-24-v1:table
+  validation:
+    artifact_id: phase4_final_validation_2026-07-24-v1:validation
+row_selection:
+  source_runs:
+    - phase4_gaussian_reproduction_2026-07-24-v1
+    - phase4_precision_2026-07-24-v1
+    - phase4_decomposition_2026-07-24-v1
+    - phase4_diagnostics_2026-07-24-v1
+    - phase4_robustness_2026-07-24-v1
+runtime:
+  expected_minutes: 90
+  hard_stop_minutes: 120
+allow_dirty_code: false
+notes: Run 6 final focused validation from exact listed inputs.
