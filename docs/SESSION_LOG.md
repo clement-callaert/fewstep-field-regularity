@@ -369,3 +369,95 @@ Append one entry per work session. Do not delete prior entries.
 - Interpretation: These were checkout-portability defects in tests.
 - Sources: The GitHub Actions failure log supplied by the repository owner.
 - Unresolved question: Both CI matrix jobs must pass before Run 1.
+
+## 2026-07-24 - Phase 4 Run 1 clean Gaussian reproduction
+
+- Status: Completed and validated. Stopped before Run 2.
+- Scope:
+  - anisotropic Gaussian and low-rank Gaussian
+  - dimensions 2 and 8
+  - linear and variance-preserving paths
+  - Euler, Heun, and RK4
+  - NFE 8, 16, and 32
+  - float64 on CPU
+- Run ID: `phase4_gaussian_reproduction_2026-07-24-v1`.
+- Code commit: `083dbf96b5bf189650d7d3d519b99887f18aa15e`.
+- Config hash:
+  `82ec484f42fb8cd45000e4c3c8b399d46a64763226bf84ed2235080a1dae7e2b`.
+- Artifact IDs:
+  - `phase4_gaussian_reproduction_2026-07-24-v1:results`
+  - `phase4_gaussian_reproduction_2026-07-24-v1:phase3_comparison`
+  - `phase4_gaussian_reproduction_2026-07-24-v1:validation`
+- Input artifact IDs:
+  - `phase3_gate_registered_2026-07-23-v1:gate_results`
+  - `phase3_gate_analysis_final_audit_2026-07-23-v2:inversions`
+  - `phase3_gate_analysis_final_audit_2026-07-23-v2:interactions`
+- Clean-code gate:
+  - The worktree was clean and synchronized with `origin/main`.
+  - Full suite: 132 tests passed.
+  - Ruff lint and format checks passed.
+  - MyPy passed on 54 source files.
+  - Pre-commit passed on all files.
+- Runtime:
+  - Manifest runtime: 0.350331 seconds.
+  - Full command wall time: 2.03 seconds.
+  - Hard stop: 45 minutes.
+- Registered analysis:
+  - Run 1 used the frozen 72-configuration grid.
+  - The absolute Phase 3 comparison tolerance was `1e-12`.
+- Post-hoc analysis:
+  - No solver-specific diagnostic or new regularity metric was evaluated.
+  - A summary of inversion margins was computed only to validate and report
+    the reproduced rows.
+- Observations:
+  - All 72 Phase 4 error values equal their Phase 3 comparison values.
+  - All 72 baseline metric values equal their Phase 3 comparison values.
+  - Fourteen baseline inversion blocks reproduce.
+  - The strongest reproduced inversion by absolute Gaussian W2 margin is
+    low-rank Gaussian, dimension 8, Euler, NFE 8.
+  - Its linear and variance-preserving errors are 0.8108540111 and
+    0.4564779075, giving margin 0.3543761036.
+  - In the low-rank Gaussian family, variance-preserving is preferred for
+    Euler and linear is preferred for Heun and RK4 at both dimensions and all
+    three NFE budgets.
+- Numerical validation:
+  - Equal NFE passed for every row.
+  - Covariance symmetry and positive semidefiniteness passed for every row.
+  - Minimum numerical covariance eigenvalue: 0.0273188110.
+  - Maximum numerical covariance eigenvalue: 10.8536434383.
+  - Maximum numerical affine-map condition number: 16.6018078049.
+  - Maximum continuous endpoint Gaussian W2 check: 6.3220272766e-08.
+- Exact and estimated quantities:
+  - Endpoint Gaussian W2 uses analytical moments propagated through the
+    numerical affine map and is exact for those represented Gaussian laws.
+  - The baseline metric uses numerical time quadrature and is not symbolic
+    exact.
+- Interpretation:
+  - Run 1 establishes clean reproduction only.
+  - It does not establish numerical precision separation, a solver-specific
+    mechanism, a proposition, or novelty.
+- Exclusions:
+  - No mixture result was generated or used.
+  - Dimension 8 mixture evidence remains excluded from decisions.
+  - NFE 64 and 128 were not run.
+  - Dimension 32 was not added.
+- Invalidated outputs:
+  - Superseded Phase 3 analyses remain preserved and invalidated as recorded.
+  - Dirty Phase 3 artifacts remain comparison inputs only.
+- Sources:
+  - Mathematical and literature sources remain listed in
+    `docs/PHASE4_PLAN.md`.
+  - No new literature conclusion was made.
+- Claims:
+  - P4-C1 remains under-test.
+  - P4-C2 remains under-test.
+  - P4-C3 remains proposed.
+  - P4-P1 remains proposed.
+- Unresolved questions:
+  - Whether inversion margins dominate higher-precision numerical error.
+  - Which affine eigendirections generate the strongest inversion.
+  - Why solver order changes the low-rank path preference.
+  - Whether the mechanism is already established in prior literature.
+- Decision:
+  - Run 2 is justified because the clean Gaussian inversions reproduce.
+  - Stop before Run 2 for artifact and scientific review.
