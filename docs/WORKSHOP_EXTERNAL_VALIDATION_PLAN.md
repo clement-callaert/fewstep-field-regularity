@@ -145,6 +145,24 @@ Outputs are written under
 manifest. The run refuses a dirty worktree, refuses to overwrite a
 completed manifest, and must be release-ready.
 
+## 4a. Amendment A1 (recorded 2026-07-24, before any result interpretation)
+
+The first execution attempt aborted on the auxiliary exact-endpoint sanity
+check, not on any scientific quantity. The frozen check required the
+continuous flow at \(t=1\) to reach the target with W2 at most \(10^{-9}\).
+For two Gaussians identical up to float64 rounding, the Bures W2 is the
+square root of accumulated rounding error (\(\approx1.5\times10^{-8}\) at
+dimension 8), so the threshold was numerically unattainable as written.
+
+Amendment: the endpoint sanity check now compares the analytic endpoint
+moments directly and requires the maximum absolute mean difference and the
+covariance Frobenius difference to be at most \(10^{-12}\). This is the
+quantity the W2 is computed from and is a strictly tighter consistency
+requirement. The family, grid, metric, inversion definition, precision
+audit, success criteria, and artifact IDs are unchanged. The aborted
+attempt wrote only resolved-config files, which were discarded. This
+deviation is recorded here and in `docs/SESSION_LOG.md`.
+
 ## 5. Execution protocol
 
 1. Commit this plan and the implementation before execution.

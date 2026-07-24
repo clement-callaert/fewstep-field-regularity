@@ -55,7 +55,8 @@ FROZEN_SOURCE_MEAN_SCALE = 0.75
 FROZEN_TARGET_MEAN_BASE = 1.0
 FROZEN_TARGET_MEAN_SLOPE = 0.25
 MARGIN_TOLERANCE = 1.0e-9
-ENDPOINT_TOLERANCE = 1.0e-9
+# Amendment A1: moment-gap tolerance (mean max-abs and covariance Frobenius).
+ENDPOINT_TOLERANCE = 1.0e-12
 PRECISION_TOLERANCE = 2.0e-9
 MARGIN_TO_PRECISION_RATIO = 100.0
 PRECISION_DIGITS = 80
@@ -248,7 +249,18 @@ def run_workshop_external_validation(cfg: DictConfig) -> Path:
                 },
                 {"mean": target.mean(), "covariance": target.covariance()},
             )
-            endpoint_consistency.append(float(exact_endpoint.primary.item()))
+            # Amendment A1: check endpoint moments directly. W2 of two
+            # Gaussians equal up to float64 rounding is sqrt(rounding) and
+            # cannot meet a 1e-9 threshold; the moment gap can.
+            endpoint_mean_gap = float(
+                (field.mean_t(endpoint_time) - target.mean()).abs().max().item()
+            )
+            endpoint_cov_gap = float(
+                torch.linalg.matrix_norm(
+                    field.cov_t(endpoint_time) - target.covariance(), ord="fro"
+                ).item()
+            )
+            endpoint_consistency.append(max(endpoint_mean_gap, endpoint_cov_gap))
             # Record the drift offset magnitude c(t) on a grid: the frozen
             # family must be genuinely non-centered.
             offsets = []
@@ -416,6 +428,7 @@ def run_workshop_external_validation(cfg: DictConfig) -> Path:
         "covariance_validated": covariance_valid,
         "continuous_endpoint_validated": endpoint_valid,
         "continuous_endpoint_tolerance": ENDPOINT_TOLERANCE,
+        "continuous_endpoint_check": "moment_gap_amendment_A1",
         "drift_offset_nonzero_validated": offset_nonzero,
         "max_drift_offset_by_dim_path": {
             f"dim{dim}:{path_name}": value
