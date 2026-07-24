@@ -611,3 +611,52 @@ Artifact IDs used:
   - P4-C3 cannot be marked supported from this same-grid post-hoc comparison.
   - Run 5 is justified to test optional budgets and perturbations.
   - Stop before Run 5 for artifact review.
+
+## 2026-07-24: Phase 4 Run 5 robustness
+
+Status: Complete and release-ready.
+
+Scope: The two Gaussian families, two dimensions, two paths, three solvers,
+three primary NFE budgets, ±10 percent target perturbations, and unperturbed
+NFE 64 and 128 checks.
+
+Artifact IDs used:
+
+- `phase4_gaussian_reproduction_2026-07-24-v1:results`
+- `phase4_robustness_2026-07-24-v1:table`
+- `phase4_robustness_2026-07-24-v1:validation`
+
+- Code commit: `08c14852676196d0a697b2f65be6bd5ba44d06f5`.
+- Config hash:
+  `1b10d16804d30623a70fd068dde496766506d0edd92d405a7a695904887610b9`.
+- Runtime:
+  - Manifest runtime: 0.055365 seconds.
+  - Command wall time: 1.78 seconds.
+  - Hard stop: 90 minutes.
+- Registered analysis:
+  - None. The robustness checks were pre-declared for Phase 4 but are outside
+    the Phase 3 gate.
+- Post-hoc analysis:
+  - Small target-parameter perturbations and optional NFE budgets.
+- Observations:
+  - All 264 endpoint errors are finite.
+  - All 132 two-path preference blocks were evaluated.
+  - The low-rank pattern has zero failures: variance-preserving is preferred
+    for Euler, while linear is preferred for Heun and RK4.
+  - The pattern persists at both dimensions for perturbations -10 percent,
+    zero, and +10 percent at NFE 8, 16, and 32.
+  - The unperturbed pattern also persists at NFE 64 and 128.
+- Interpretation:
+  - The low-rank solver-dependent preference is stable in the tested local
+    parameter neighborhood and optional budgets.
+  - This remains focused robustness evidence, not a universal statement.
+- Exact and estimated quantities:
+  - Endpoint errors use scalar affine propagation and commuting Gaussian W2.
+  - No sampling estimator is used.
+- Exclusions:
+  - No mixture, dimension 32, new family, or full Cartesian grid was used.
+- Invalidated outputs:
+  - Earlier dirty smoke robustness output remains excluded.
+- Decision:
+  - Run 6 is justified because all focused robustness checks passed.
+  - Stop before Run 6 for artifact review.
