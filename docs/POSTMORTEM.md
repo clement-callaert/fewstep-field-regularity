@@ -99,7 +99,11 @@ Pivot. Do not start the Phase 5 Cartesian benchmark. The exact Gaussian
 mechanism is understood well enough to reject averaged regularity as a
 determinant of fixed-grid error in the tested setting. Broad solver dependence
 is already represented in prior schedule literature, while the new minimal
-construction is elementary and needs expert review.
+construction is elementary; it subsequently passed the documented
+adversarial proof audit (2026-07-24), and one pre-registered non-centered
+replication family reproduced the ranking inversions in 11 of 18
+comparison blocks (`workshop_external_validation_2026-07-24-v1`). These
+completions narrow, but do not broaden, the recommendation above.
 
 ## 14. Phase 4 observation and interpretation
 

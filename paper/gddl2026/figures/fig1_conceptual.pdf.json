@@ -1,8 +1,9 @@
 {
   "figure_artifact_id": "workshop_figures_2026-07-24-v1:fig1_conceptual",
-  "figure_checksum_sha256": "70f0a3113c1051b81196b1134f4f4a6b9e357bc58fa6d73a2b5248f7d9790d0f",
-  "generation_timestamp": "2026-07-24T14:33:27.545212+00:00",
-  "git_commit": "2cf1b8cd1aa2c21ffed17d70763f65b85bacf23c",
+  "figure_checksum_sha256": "e6add1d9ab5e96315140e23ef39c0ca4952c18686a48bff0334732587072fb8a",
+  "generation_timestamp": "2026-07-24T18:49:09.814847+00:00",
+  "git_commit": "a1ae644508a93045cb9e3c0e3283cd520cab733a",
+  "git_status": "dirty (regenerate after committing)",
   "note": "Conceptual schematic only; curves and bars are illustrative and represent no measured quantity.",
   "plotting_config": {
     "consumes_artifacts": false,

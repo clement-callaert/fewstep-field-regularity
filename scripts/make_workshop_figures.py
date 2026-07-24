@@ -49,12 +49,12 @@ GRAY = "#5f6368"
 
 plt.rcParams.update(
     {
-        "font.size": 8,
-        "axes.titlesize": 8,
-        "axes.labelsize": 8,
-        "xtick.labelsize": 7,
-        "ytick.labelsize": 7,
-        "legend.fontsize": 7,
+        "font.size": 9,
+        "axes.titlesize": 9,
+        "axes.labelsize": 9,
+        "xtick.labelsize": 8,
+        "ytick.labelsize": 8,
+        "legend.fontsize": 8,
         "axes.spines.top": False,
         "axes.spines.right": False,
         "axes.linewidth": 0.6,
@@ -73,6 +73,17 @@ def git_commit() -> str:
         text=True,
         check=True,
     ).stdout.strip()
+
+
+def git_status_flag() -> str:
+    out = subprocess.run(
+        ["git", "status", "--porcelain"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout.strip()
+    return "clean" if not out else "dirty (regenerate after committing)"
 
 
 def load_pinned(artifact_id: str) -> Any:
@@ -100,6 +111,7 @@ def write_sidecar(
         "plotting_script": "scripts/make_workshop_figures.py",
         "plotting_config": plotting_config,
         "git_commit": git_commit(),
+        "git_status": git_status_flag(),
         "generation_timestamp": datetime.now(UTC).isoformat(),
         "figure_checksum_sha256": sha256_file(figure_path),
         "note": note,
@@ -138,50 +150,74 @@ def phase4_blocks(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 def figure1_conceptual() -> Path:
-    """Conceptual schematic: averaged regularity versus endpoint ranking."""
-    fig, (ax1, ax2) = plt.subplots(
-        1, 2, figsize=(5.5, 1.9), gridspec_kw={"width_ratios": [1.4, 1.0]}
-    )
+    """Conceptual signed-defect schematic (not data).
+
+    Communicates: two time-dependent fields; an averaged scalar loses
+    temporal structure; solvers sample stage locations; signed local
+    defects cancel or amplify; transported endpoint error can reverse
+    the scalar ranking. It does not depict any measured mechanism.
+    """
     import numpy as np
 
-    t = np.linspace(0.0, 1.0, 400)
-    # Schematic Jacobian magnitude profiles (not data). Path B carries a
-    # narrow spike centered between two solver nodes, so its larger time
-    # average is invisible to the fixed grid.
-    path_a = 1.0 + 0.25 * np.sin(2.4 * np.pi * t)
-    path_b = 0.55 + 1.6 * np.exp(-((t - 0.875) ** 2) / 0.008)
-    ax1.plot(t, path_a, color=COLOR_LINEAR, lw=1.4, label="path A")
-    ax1.plot(t, path_b, color=COLOR_VP, lw=1.4, label="path B")
-    for node in np.linspace(0, 1, 5):
-        ax1.axvline(node, color=GRAY, lw=0.5, alpha=0.35, zorder=0)
-    ax1.annotate(
-        "solver nodes",
-        xy=(0.5, 2.14),
-        xytext=(0.24, 2.14),
-        color=GRAY,
-        fontsize=6.5,
-        va="center",
-        ha="right",
-        arrowprops={"arrowstyle": "-", "color": GRAY, "lw": 0.5},
+    fig, (ax1, ax2, ax3) = plt.subplots(
+        1,
+        3,
+        figsize=(5.5, 1.4),
+        gridspec_kw={"width_ratios": [1.3, 1.05, 0.7], "wspace": 0.55},
     )
+
+    t = np.linspace(0.0, 1.0, 400)
+    field_a = 1.05 + 0.25 * np.sin(2.2 * np.pi * t)
+    field_b = 1.25 + 0.55 * np.sin(4.4 * np.pi * t + 0.6)
+    ax1.plot(t, field_a, color=COLOR_LINEAR, lw=1.6)
+    ax1.plot(t, field_b, color=COLOR_VP, lw=1.6, ls="--")
+    ax1.text(0.36, 0.72, "path A", color=COLOR_LINEAR, fontsize=8.5)
+    ax1.text(0.03, 1.9, "path B", color=COLOR_VP, fontsize=8.5)
+    stages = np.linspace(0, 1, 5)[:-1]
+    ax1.plot(stages, np.interp(stages, t, field_a), "o", ms=4, color=COLOR_LINEAR)
+    ax1.plot(stages, np.interp(stages, t, field_b), "s", ms=4, color=COLOR_VP)
+    ax1.axhline(float(np.mean(field_a)), color=COLOR_LINEAR, lw=0.9, alpha=0.5)
+    ax1.axhline(float(np.mean(field_b)), color=COLOR_VP, lw=0.9, alpha=0.5)
     ax1.set_xlabel("time $t$")
     ax1.set_ylabel(r"$\Vert \partial_x b_t \Vert$ (schematic)")
-    ax1.set_ylim(0, 2.3)
-    ax1.legend(frameon=False, loc="upper left", bbox_to_anchor=(0.0, 0.86))
-    ax1.set_title("averaged regularity: B > A", loc="left", fontsize=7.5)
+    ax1.set_xlim(0, 1.0)
+    ax1.set_ylim(0.45, 2.05)
+    ax1.set_title("(a) fields and averages", loc="left")
 
-    bars = ax2.bar(
+    steps = np.arange(1, 5)
+    defects_a = np.array([0.30, 0.34, 0.38, 0.42])
+    defects_b = np.array([0.55, -0.45, 0.50, -0.40])
+    width = 0.38
+    ax2.bar(steps - width / 2, defects_a, width, color=COLOR_LINEAR, label="path A")
+    ax2.bar(
+        steps + width / 2,
+        defects_b,
+        width,
+        color=COLOR_VP,
+        hatch="//",
+        edgecolor="white",
+        label="path B",
+    )
+    ax2.axhline(0.0, color=GRAY, lw=0.9)
+    ax2.set_xticks(steps, [str(n) for n in steps])
+    ax2.set_xlabel("solver step")
+    ax2.set_ylabel("local defect")
+    ax2.set_title("(b) signed defects", loc="left")
+
+    totals = [float(np.abs(defects_a.sum())), float(np.abs(defects_b.sum()))]
+    bars = ax3.bar(
         [0, 1],
-        [0.71, 0.42],
+        totals,
         width=0.55,
         color=[COLOR_LINEAR, COLOR_VP],
-        edgecolor="none",
+        hatch=["", "//"],
+        edgecolor=["none", "white"],
     )
-    ax2.bar_label(bars, ["A", "B"], padding=2, fontsize=7)
-    ax2.set_xticks([0, 1], ["path A", "path B"])
-    ax2.set_ylabel("endpoint error (schematic)")
-    ax2.set_ylim(0, 0.95)
-    ax2.set_title("fixed-NFE error: B < A", loc="left", fontsize=7.5)
+    ax3.bar_label(bars, ["A", "B"], padding=2, fontsize=8)
+    ax3.set_xticks([0, 1], ["path A", "path B"])
+    ax3.set_ylim(0, 1.75)
+    ax3.set_ylabel("endpoint\nerror")
+    ax3.set_title("(c) ranking reversed", loc="left")
     fig.tight_layout()
     out = FIGURE_DIR / ("fig1_conceptual" + FIGURE_SUFFIX)
     fig.savefig(out, bbox_inches="tight")
@@ -199,58 +235,86 @@ def figure2_inversions() -> tuple[Path, list[str]]:
         raise ValueError(f"Expected 14 Phase 4 inversion blocks, got {len(inversions)}")
 
     strongest = max(inversions, key=lambda b: abs(b["w2_delta"]))
-    fig = plt.figure(figsize=(6.9, 2.4))
-    gs = fig.add_gridspec(1, 3, width_ratios=[0.55, 0.55, 1.9], wspace=0.95)
+    fig = plt.figure(figsize=(5.5, 1.78))
+    gs = fig.add_gridspec(1, 3, width_ratios=[0.5, 0.5, 1.7], wspace=1.25)
     ax_m = fig.add_subplot(gs[0])
     ax_w = fig.add_subplot(gs[1])
     ax_all = fig.add_subplot(gs[2])
 
     lin, vp = strongest["linear"], strongest["vp"]
     for ax, key, title in (
-        (ax_m, "baseline_metric", "avg. regularity"),
+        (ax_m, "baseline_metric", "avg. regularity $\\mathcal{R}$"),
         (ax_w, "gaussian_w2", "Gaussian $W_2$"),
     ):
         vals = [lin[key], vp[key]]
         bars = ax.bar(
             [0, 1],
             vals,
-            width=0.6,
+            width=0.62,
             color=[COLOR_LINEAR, COLOR_VP],
-            edgecolor="none",
+            hatch=["", "//"],
+            edgecolor=["none", "white"],
         )
-        ax.bar_label(bars, [f"{v:.2f}" for v in vals], padding=1.5, fontsize=6.5)
-        ax.set_xticks([0, 1], ["lin", "vp"])
-        ax.set_title(title, loc="left", fontsize=7.5)
-        ax.set_ylim(0, max(vals) * 1.3)
-    ax_m.set_ylabel("Avg-Lip$^2$")
+        ax.bar_label(bars, [f"{v:.2f}" for v in vals], padding=1.5, fontsize=8)
+        ax.set_xticks([0, 1], ["lin", "VP"])
+        ax.set_title(title, loc="left", fontsize=8.5)
+        ax.set_ylim(0, max(vals) * 1.32)
+    ax_m.set_ylabel("$\\mathcal{R}[b]$")
     ax_w.set_ylabel("$W_2$")
 
     # All fourteen blocks: |W2 margin| of the inversion, log scale.
     inversions_sorted = sorted(inversions, key=lambda b: abs(b["w2_delta"]))
+    solver_abbrev = {"euler": "Eu", "heun": "He", "rk4": "RK"}
     labels = [
-        f"{'aniso' if b['family'] == 'anisotropic_gaussian' else 'lowrank'}"
-        f" d{b['dim']} {b['solver']} n{b['nfe']}"
+        f"{'AN' if b['family'] == 'anisotropic_gaussian' else 'LR'}"
+        f" d{b['dim']} {solver_abbrev[b['solver']]} n{b['nfe']}"
         for b in inversions_sorted
     ]
-    margins = [abs(b["w2_delta"]) for b in inversions_sorted]
-    colors = [
-        COLOR_VP if b["w2_delta"] > 0 else COLOR_LINEAR for b in inversions_sorted
-    ]
-    y = range(len(margins))
-    ax_all.hlines(y, 1e-6, margins, color="#d0d0d0", lw=0.7, zorder=1)
-    ax_all.scatter(margins, y, s=14, c=colors, zorder=2)
+    y = list(range(len(inversions_sorted)))
+    ax_all.hlines(
+        y,
+        1e-6,
+        [abs(b["w2_delta"]) for b in inversions_sorted],
+        color="#c9c9c9",
+        lw=0.8,
+        zorder=1,
+    )
+    for yi, block in zip(y, inversions_sorted, strict=True):
+        prefers_vp = block["w2_delta"] > 0
+        ax_all.plot(
+            abs(block["w2_delta"]),
+            yi,
+            marker="s" if prefers_vp else "o",
+            ms=5,
+            color=COLOR_VP if prefers_vp else COLOR_LINEAR,
+            zorder=2,
+        )
     ax_all.set_xscale("log")
     ax_all.set_xlim(5e-6, 1.0)
-    ax_all.set_yticks(list(y), labels, fontsize=6)
-    ax_all.set_xlabel(r"$|W_2|$ margin of inversion (log scale)")
-    ax_all.set_title("all 14 inversion blocks", loc="left", fontsize=7.5)
+    ax_all.set_yticks(y, labels, fontsize=7)
+    ax_all.set_xlabel(r"$W_2$ margin of inversion (log scale)")
+    ax_all.set_title("all 14 inversion blocks", loc="left", fontsize=8.5)
     handles = [
         plt.Line2D(
-            [], [], marker="o", ls="", color=COLOR_LINEAR, label="$W_2$ prefers linear"
+            [],
+            [],
+            marker="o",
+            ls="",
+            ms=5,
+            color=COLOR_LINEAR,
+            label="$W_2$ prefers linear",
         ),
-        plt.Line2D([], [], marker="o", ls="", color=COLOR_VP, label="$W_2$ prefers vp"),
+        plt.Line2D(
+            [],
+            [],
+            marker="s",
+            ls="",
+            ms=5,
+            color=COLOR_VP,
+            label="$W_2$ prefers VP",
+        ),
     ]
-    ax_all.legend(handles=handles, frameon=False, loc="lower right", fontsize=6)
+    ax_all.legend(handles=handles, frameon=False, loc="lower right", fontsize=7.5)
     fig.tight_layout()
     out = FIGURE_DIR / ("fig2_inversions" + FIGURE_SUFFIX)
     fig.savefig(out, bbox_inches="tight")
@@ -265,7 +329,8 @@ def figure3_interaction() -> tuple[Path, list[str]]:
     blocks = [
         b for b in phase4_blocks(payload["rows"]) if b["family"] == "low_rank_gaussian"
     ]
-    fig, axes = plt.subplots(1, 2, figsize=(5.5, 1.9), sharey=True)
+    solver_names = {"euler": "Euler", "heun": "Heun", "rk4": "RK4"}
+    fig, axes = plt.subplots(1, 2, figsize=(5.5, 1.42), sharey=True)
     for ax, dim in zip(axes, (2, 8), strict=True):
         for solver in ("euler", "heun", "rk4"):
             pts = sorted(
@@ -276,35 +341,30 @@ def figure3_interaction() -> tuple[Path, list[str]]:
                 [b["nfe"] for b in pts],
                 [b["w2_delta"] for b in pts],
                 marker=SOLVER_MARKERS[solver],
-                ms=3.5,
-                lw=1.2,
+                ms=5,
+                lw=1.8,
                 color=SOLVER_COLORS[solver],
-                label=solver if dim == 2 else None,
             )
-        ax.axhline(0.0, color=GRAY, lw=0.6, alpha=0.6)
+            # Direct label at the right end of each line; no legend.
+            ax.annotate(
+                solver_names[solver],
+                xy=(pts[-1]["nfe"], pts[-1]["w2_delta"]),
+                xytext=(6, 0),
+                textcoords="offset points",
+                color=SOLVER_COLORS[solver],
+                fontsize=9,
+                va="center",
+            )
+        ax.axhline(0.0, color="#333333", lw=1.0)
         ax.set_xscale("log", base=2)
         ax.set_yscale("symlog", linthresh=1e-4)
+        ax.set_xlim(7, 46)
+        ax.set_yticks([1e-1, 1e-3, 0.0, -1e-3, -1e-1])
         ax.set_xticks([8, 16, 32], ["8", "16", "32"])
-        ax.set_xlabel("NFE")
-        ax.set_title(f"low-rank, $d={dim}$", loc="left", fontsize=7.5)
-    axes[0].set_ylabel(r"$W_2$(lin) $-$ $W_2$(vp)")
-    fig.text(
-        0.99,
-        0.99,
-        "above 0: vp preferred · below 0: linear preferred",
-        ha="right",
-        va="top",
-        color=GRAY,
-        fontsize=6.5,
-    )
-    fig.legend(
-        frameon=False,
-        loc="lower center",
-        ncol=3,
-        fontsize=6.5,
-        bbox_to_anchor=(0.5, -0.06),
-    )
-    fig.tight_layout(rect=(0.0, 0.06, 1.0, 0.97))
+        ax.set_xlabel("NFE (equal across solvers)")
+        ax.set_title(f"low-rank target, $d={dim}$", loc="left")
+    axes[0].set_ylabel(r"$W_2(\mathrm{linear})-W_2(\mathrm{VP})$")
+    fig.tight_layout()
     out = FIGURE_DIR / ("fig3_interaction" + FIGURE_SUFFIX)
     fig.savefig(out, bbox_inches="tight")
     plt.close(fig)

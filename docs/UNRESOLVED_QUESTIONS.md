@@ -92,9 +92,10 @@ derivations before corresponding implementations are treated as validated.
 
 16. Whether a minimal affine non-implication proposition can be stated without
     artificial assumptions.
-    Status (Phase 4): partially resolved. An explicit grid-aware construction
-    is complete and checked. It remains needs expert review and may be too
-    artificial for a main claim.
+    Status (workshop preparation, 2026-07-24): resolved for the grid-aware
+    statement. P4-P1 passed the documented adversarial proof audit
+    (docs/P4_P1_PROOF_AUDIT.md ends "proof verified"). The construction
+    remains grid-aware by design; a grid-independent variant is question 18.
 
 17. Whether the observed mechanism is already established in numerical ODE,
     diffusion schedule, or flow matching literature.
@@ -108,10 +109,20 @@ derivations before corresponding implementations are treated as validated.
     Status (Phase 4): open.
 
 19. Whether the solver-specific leading proxy generalizes out of sample.
-    Status (Phase 4): open. Testing a new pre-specified family belongs to a
-    later approved phase, not Phase 4.
+    Status (workshop preparation, 2026-07-24): open. The pre-registered
+    non-centered replication tested the primary ranking claim, not the
+    proxy; the proxy remains post-hoc and in-sample.
 
 20. Whether a uniform asymptotic argument explains the sign of the low-rank
     path preference for all sufficiently large NFE.
     Status (Phase 4): open. NFE 64 and 128 preserve the tested pattern, but
     finite checks do not establish an asymptotic theorem.
+
+21. Whether the ranking non-implication persists outside the Phase 3/4
+    design space.
+    Status (workshop preparation, 2026-07-24): resolved for exactly one
+    pre-registered non-centered commuting Gaussian family
+    (`workshop_external_validation_2026-07-24-v1`): 11 of 18 comparison
+    blocks invert and pass the 80-digit audit. Learned-model validation,
+    non-commuting Gaussian validation, and any broader population claim
+    remain open.
