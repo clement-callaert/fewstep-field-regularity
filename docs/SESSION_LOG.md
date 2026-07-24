@@ -555,3 +555,59 @@ Artifact IDs used:
   - Run 4 is justified because the decomposition is stable and identifies a
     dominant eigenmode.
   - Stop before Run 4 for artifact review.
+
+## 2026-07-24: Phase 4 Run 4 solver diagnostics
+
+Status: Complete and release-ready.
+
+Scope: Pre-declared post-hoc diagnostics for the 72 Run 1 Gaussian
+configurations.
+
+Artifact IDs used:
+
+- `phase4_gaussian_reproduction_2026-07-24-v1:results`
+- `phase4_diagnostics_2026-07-24-v1:table`
+- `phase4_diagnostics_2026-07-24-v1:validation`
+
+- Code commit: `f3ad0f96024175228fd622e83c28c4d681fd70a7`.
+- Config hash:
+  `c135d79214f25c444175657f7769677c41cd66fe9ba8718f6b19f294bca56716`.
+- Runtime:
+  - Manifest runtime: 8.109213 seconds.
+  - Command wall time: 9.72 seconds.
+  - Hard stop: 60 minutes.
+- Registered analysis:
+  - None.
+- Post-hoc analysis:
+  - Integrated material derivative norms, temporal Jacobian variation,
+    solver-specific leading local coefficients, and exact local log defects.
+- Observations:
+  - All 72 eigenmode endpoint reconstructions passed.
+  - Maximum reconstruction difference: `9.7050436884e-10`.
+  - Across 36 two-path blocks, the baseline, integrated material derivative,
+    and expected material derivative each agree with the observed preferred
+    path in 22 blocks.
+  - The solver-specific leading local proxy agrees in 29 blocks.
+  - The unsigned exact local log defect agrees in 22 blocks.
+  - In low-rank Gaussian, the leading proxy agrees in all six Euler blocks,
+    five of six Heun blocks, and four of six RK4 blocks.
+- Interpretation:
+  - Solver stages and derivatives explain more of the observed ordering on
+    this same diagnostic grid than the averaged baseline.
+  - This is not out-of-sample evidence and does not establish predictive
+    superiority.
+  - Unsigned local defects can fail because sign cancellation and endpoint
+    transport matter. The exact transported decomposition remains the
+    stronger mathematical explanation.
+- Exact and estimated quantities:
+  - The endpoint reconstruction uses exact scalar affine step formulas up to
+    float64 evaluation.
+  - Time integrals use 257-point numerical quadrature and are estimated.
+- Exclusions:
+  - No mixture, dimension 32, optional NFE, or new family was used.
+- Invalidated outputs:
+  - Earlier dirty smoke diagnostics remain excluded.
+- Decision:
+  - P4-C3 cannot be marked supported from this same-grid post-hoc comparison.
+  - Run 5 is justified to test optional budgets and perturbations.
+  - Stop before Run 5 for artifact review.
