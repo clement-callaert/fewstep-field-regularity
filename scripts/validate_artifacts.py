@@ -89,6 +89,8 @@ def validate_manifest(manifest: dict[str, Any], run_dir: Path) -> list[str]:
         checksum = artifact.get("output_checksum")
         if path_value and checksum:
             path = Path(str(path_value))
+            if not path.is_absolute():
+                path = run_dir / path
             if not path.is_file():
                 errors.append(f"missing source artifact: {path}")
             else:

@@ -9,7 +9,7 @@
       "input_artifact_hashes": {},
       "kind": "table",
       "output_checksum": "12b34da73b0c67a0319e6eddbd3582af66e3b558b4d44e4a6860e0cec20d726f",
-      "path": "/home/calla/AI_projects/fewstep-field-regularity/tests/fixtures/valid_run/table.json",
+      "path": "table.json",
       "producing_run_id": "valid_run",
       "random_seeds": [
         0,

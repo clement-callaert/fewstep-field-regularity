@@ -333,3 +333,39 @@ Append one entry per work session. Do not delete prior entries.
   run `30085501467`.
 - Unresolved question: The new GitHub Actions run must pass on Python 3.11 and
   Python 3.12 before Run 1.
+
+## 2026-07-24 - CI test portability repair
+
+- Status: Fixed locally. Awaiting a new GitHub Actions run.
+- Scope: Test portability and explicit input configuration only. No
+  scientific grid, numerical formula, artifact claim, or decision rule
+  changed.
+- Failed workflow: `Fix NumPy typing compatibility in CI #5`, commit
+  `10209b0`.
+- Root causes:
+  - The Phase 3 smoke test relied on an ignored local Phase 2 calibration
+    artifact.
+  - The Phase 4 integration test relied on ignored local Phase 3 artifacts.
+  - The valid artifact fixture stored an absolute workstation path.
+- Repairs:
+  - Added an optional explicit Phase 2 calibration input to the Phase 3
+    runner without changing the registered Phase 3 config.
+  - The Phase 3 integration tests list that input in their resolved Hydra
+    configs.
+  - Made both integration tests create their required inputs under the pytest
+    temporary directory.
+  - Made the fixture artifact path relative to its run directory.
+  - Made artifact validation resolve relative artifact paths from the run
+    directory.
+- Validation:
+  - The three failing CI tests pass locally.
+  - Full suite: 132 tests passed in 5.37 seconds.
+  - MyPy and every pre-commit hook passed.
+- Artifact IDs used: None. Test artifacts are temporary and non-release.
+- Registered and post-hoc analysis: Neither was run.
+- Exact and estimated quantities: Not applicable.
+- Exclusions: No registered Phase 4 run, optional NFE, mixtures, or new target.
+- Invalidated outputs: None.
+- Interpretation: These were checkout-portability defects in tests.
+- Sources: The GitHub Actions failure log supplied by the repository owner.
+- Unresolved question: Both CI matrix jobs must pass before Run 1.

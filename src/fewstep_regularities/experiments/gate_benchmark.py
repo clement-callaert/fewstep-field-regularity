@@ -499,9 +499,15 @@ def run_gate_benchmark(cfg: DictConfig) -> Path:
     env_hash = software_environment_hash()
     stamp = datetime.now(UTC).isoformat()
     table_path = run_dir / "gate_results.json"
-    calibration_path = (
-        root / "outputs" / "phase2_calibration" / "calibration_table.json"
-    )
+    calibration_cfg = OmegaConf.select(cfg, "experiment.inputs.calibration")
+    if calibration_cfg is None:
+        calibration_artifact_id = "phase2_calibration:calibration_table"
+        calibration_path = Path("outputs/phase2_calibration/calibration_table.json")
+    else:
+        calibration_artifact_id = str(calibration_cfg.artifact_id)
+        calibration_path = Path(str(calibration_cfg.path))
+    if not calibration_path.is_absolute():
+        calibration_path = (root / calibration_path).resolve()
     if not calibration_path.is_file():
         raise FileNotFoundError("Phase 2 calibration artifact is missing")
     table_record = _record(
@@ -514,7 +520,9 @@ def run_gate_benchmark(cfg: DictConfig) -> Path:
         seeds=seeds,
         path=table_path,
         timestamp=stamp,
-        inputs={"phase2_calibration:calibration_table": sha256_file(calibration_path)},
+        inputs={
+            calibration_artifact_id: sha256_file(calibration_path),
+        },
     )
     saved_table = writer.save_table(
         {

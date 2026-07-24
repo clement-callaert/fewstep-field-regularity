@@ -15,6 +15,8 @@ from fewstep_regularities.cli.main import run_from_overrides
 def test_phase3_gate_smoke_writes_valid_manifest(tmp_path: Path) -> None:
     run_id = "phase3_gate_smoke_test"
     output_dir = tmp_path / "outputs"
+    calibration_path = tmp_path / "calibration_table.json"
+    calibration_path.write_text('{"rows": []}', encoding="utf-8")
     manifest_path = run_from_overrides(
         [
             "experiment=phase3_gate",
@@ -24,6 +26,9 @@ def test_phase3_gate_smoke_writes_valid_manifest(tmp_path: Path) -> None:
             "experiment.n_projections=8",
             "experiment.metric_n_time=4",
             "experiment.primary_metric_estimator_budget=8",
+            "+experiment.inputs.calibration.artifact_id="
+            "phase2_calibration:calibration_table",
+            f"+experiment.inputs.calibration.path={calibration_path}",
             f"artifact_policy.output_dir={output_dir}",
             "artifact_policy.release_ready=false",
         ]
