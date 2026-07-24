@@ -115,6 +115,27 @@ Forbidden statement: the proxy predicts better, generalizes better, or is a
 new selection criterion. It is not a primary contribution and should not
 receive a main-paper correlation figure.
 
+## Supporting external-validation claim (added 2026-07-24 under the gate)
+
+This section is added under the change gate below after the pre-registered
+external validation completed. It adds a clearly labeled supporting result
+and does not modify the primary claim or its population.
+
+> In a pre-registered non-centered anisotropic Gaussian family with affine
+> drift \(b(t,x)=A(t)x+c(t)\), \(c\neq0\), frozen before execution, 11 of
+> 18 equal-NFE comparison blocks reproduce the averaged-regularity ranking
+> inversion, and all 11 pass an 80-digit precision audit.
+
+Allowed evidence:
+
+- `workshop_external_validation_2026-07-24-v1:results`
+- `workshop_external_validation_2026-07-24-v1:inversions`
+- `workshop_external_validation_2026-07-24-v1:precision`
+- `docs/WORKSHOP_EXTERNAL_VALIDATION_PLAN.md` (including Amendment A1)
+
+Mandatory qualifiers: pre-registered, single family, supporting only. The
+scope of the primary claim remains the tested systems.
+
 ## Exclusions
 
 - No mixture result supports the workshop paper conclusions.
