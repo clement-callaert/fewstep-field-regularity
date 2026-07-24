@@ -697,3 +697,31 @@ Artifact IDs used:
 - Decision:
   - Phase 4 execution is complete.
   - Recommend pivot. Do not start Phase 5 or draft a full paper.
+
+## 2026-07-24: Repository-state resolution before workshop construction
+
+Status: Complete.
+
+Scope: Git-state audit only. No scientific file was changed in this step.
+
+- Branch: `main`, tracking `origin/main`.
+- HEAD hash: `3c47b6799d6bbd5ba9b53617a69835b80491f596`
+  ("Complete focused Phase 4 audit").
+- Local `origin/main` hash before fetch:
+  `3c47b6799d6bbd5ba9b53617a69835b80491f596`.
+- Divergence before fetch: `git log --left-right --count origin/main...HEAD`
+  reported `0 0`.
+- `git fetch origin` succeeded; network access is available.
+- `origin/main` hash after fetch:
+  `3c47b6799d6bbd5ba9b53617a69835b80491f596`.
+- Divergence after fetch: `0 0`. Local and remote are identical.
+- Working tree at audit time: uncommitted modifications to `README.md`,
+  `docs/CLAIMS_LEDGER.md`, `docs/PHASE4_MATHEMATICAL_ANALYSIS.md`, and
+  `docs/PHASE4_RESULTS.md`; untracked `docs/P4_P1_PROOF_AUDIT.md`,
+  `docs/WORKSHOP_PAPER_CLAIMS.md`, `docs/WORKSHOP_PAPER_OUTLINE.md`, and
+  `docs/WORKSHOP_TARGETS.md`. These are the workshop-preparation documents
+  from the previous session and will be committed with the workshop work.
+- No force-push and no history rewrite was performed or is needed.
+
+Decision: Proceed to the workshop submission construction phase against
+HEAD `3c47b67`.
