@@ -1,0 +1,21 @@
+{
+  "figure_artifact_id": "workshop_figures_2026-07-24-v1:fig3_interaction",
+  "figure_checksum_sha256": "5c7653abcd9e0e4b03f960ad0bf5e99f1c2ad9cfb1c86cadaf356b5c9474af01",
+  "generation_timestamp": "2026-07-24T14:33:28.211731+00:00",
+  "git_commit": "2cf1b8cd1aa2c21ffed17d70763f65b85bacf23c",
+  "note": "Signed margins; zero line marks path-preference boundary.",
+  "plotting_config": {
+    "kind": "lowrank_solver_path_interaction",
+    "y_scale": "symlog linthresh 1e-4"
+  },
+  "plotting_script": "scripts/make_workshop_figures.py",
+  "source_artifact_ids": [
+    "phase4_gaussian_reproduction_2026-07-24-v1:results"
+  ],
+  "source_run_ids": [
+    "phase4_gaussian_reproduction_2026-07-24-v1"
+  ],
+  "source_table_hashes": {
+    "phase4_gaussian_reproduction_2026-07-24-v1:results": "b8930142cba5655ee553aae5ff400cd884c1137e77547d9a5fa94bd4e354973f"
+  }
+}
