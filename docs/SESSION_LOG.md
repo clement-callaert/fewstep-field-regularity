@@ -461,3 +461,46 @@ Append one entry per work session. Do not delete prior entries.
 - Decision:
   - Run 2 is justified because the clean Gaussian inversions reproduce.
   - Stop before Run 2 for artifact and scientific review.
+
+## 2026-07-24: Phase 4 Run 2 precision audit
+
+Status: Complete and release-ready.
+
+Scope: The 72 exact Gaussian Run 1 configurations at 80 decimal digits.
+
+Artifact IDs used:
+
+- `phase4_gaussian_reproduction_2026-07-24-v1:results`
+- `phase4_precision_2026-07-24-v1:table`
+- `phase4_precision_2026-07-24-v1:validation`
+
+- Code commit: `2a28fd41193fb2c2500d13af4b2c364601c1d12b`.
+- Config hash:
+  `d58d1bb54cd0a24c741cacc87aff1a03c95fc8cc672e7d1006f8ed9a27dc192b`.
+- Runtime:
+  - Manifest runtime: 0.177238 seconds.
+  - Command wall time: 1.95 seconds.
+  - Hard stop: 45 minutes.
+- Registered analysis:
+  - This run is the pre-specified high-accuracy check of Run 1.
+- Post-hoc analysis:
+  - None.
+- Observation:
+  - All 72 comparisons passed.
+  - The maximum absolute float64 versus 80-digit W2 difference is
+    `9.7050430488e-10`.
+  - The acceptance tolerance is `2e-9`.
+- Interpretation:
+  - Float64 reference error is much smaller than the strongest inversion
+    margin. The complete minimum-margin comparison is deferred to the final
+    precision table.
+- Exact and estimated quantities:
+  - The reference uses scalar commuting eigenmode propagation in mpmath.
+  - It is a high-precision numerical reference, not a symbolic exact value.
+- Exclusions:
+  - No mixture, dimension 32, or optional NFE was used.
+- Invalidated outputs:
+  - Earlier dirty smoke runs remain excluded.
+- Decision:
+  - Run 3 is justified because the precision audit passed.
+  - Stop before Run 3 for artifact review.
