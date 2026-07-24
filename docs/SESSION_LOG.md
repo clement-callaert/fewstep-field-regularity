@@ -725,3 +725,54 @@ Scope: Git-state audit only. No scientific file was changed in this step.
 
 Decision: Proceed to the workshop submission construction phase against
 HEAD `3c47b67`.
+
+## 2026-07-24: Workshop external validation (pre-registered, executed once)
+
+Status: Complete and release-ready.
+
+Scope: The frozen plan in `docs/WORKSHOP_EXTERNAL_VALIDATION_PLAN.md`.
+One shifted anisotropic Gaussian family with nonzero source and target
+means, dimensions 2 and 8, linear and variance-preserving paths, Euler,
+Heun, RK4, NFE 8, 16, 32, float64, CPU.
+
+Artifact IDs and SHA-256:
+
+- `workshop_external_validation_2026-07-24-v1:results`
+  `4234bc2baefa8390414db9e037c7d028408cb04591e2b6302524ed8ad3bd205d`
+- `workshop_external_validation_2026-07-24-v1:inversions`
+  `cceebdfcba6f7cec4a7ff9e137d4a53f8c7e389acc0222a20805f16204a1b875`
+- `workshop_external_validation_2026-07-24-v1:precision`
+  `6e242b87f5cf56f773d1b3c1cd40bae5d4feda55b7fef9179674e8796e0ee39b`
+- `workshop_external_validation_2026-07-24-v1:validation`
+  `2b10bee4971c62ae6ba9aa7a332edcdd7652967abd57a4ce451143f1915a6683`
+
+- Code commit: `508101e759a2a035b194f9a4c56fab28fcac6f39`, clean worktree.
+- Pre-execution gates: full pytest, Ruff check and format, MyPy strict,
+  and pre-commit all passed.
+- Runtime: manifest 0.452936 s; command wall time 2.96 s; hard stop
+  10 minutes.
+- Deviation: Amendment A1 (recorded in the plan before any result
+  interpretation). The first attempt aborted because the auxiliary
+  exact-endpoint W2 threshold `1e-9` is numerically unattainable for
+  float64-identical Gaussians; the check now compares endpoint moments
+  directly at `1e-12`. The aborted attempt wrote only config files, which
+  were discarded. No scientific definition changed.
+- Observations (positive result):
+  - All 36 endpoint rows valid; equal NFE, PSD covariance, endpoint
+    moment consistency, and nonzero drift offset c(t) all validated.
+  - The baseline averaged-regularity metric prefers variance-preserving
+    in both dimensions (linear-minus-VP metric margin `0.7513149036`).
+  - 11 of 18 comparison blocks are ranking inversions (W2 prefers
+    linear): dim 8 Euler at NFE 8, 16, 32; Heun at both dims and all
+    NFE; RK4 at NFE 32 at both dims.
+  - All 11 flagged inversions pass the 80-digit precision audit: maximum
+    float64-versus-80-digit W2 difference `2.0688e-11`; smallest
+    inverted W2 margin `1.4234e-6`, more than 68,000 times that
+    difference; all 80-digit margins have the same sign as float64.
+- Interpretation:
+  - The pre-registered non-centered family with affine drift
+    b(t,x) = A(t)x + c(t), c(t) nonzero, reproduces the ranking
+    non-implication out of the Phase 3/4 design space.
+  - Per the frozen plan, this supports only the limited supporting
+    claim; the primary claim population remains the tested systems.
+- Exclusions: no mixtures, no second family, no proxy promotion.
