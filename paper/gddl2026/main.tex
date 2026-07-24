@@ -1,0 +1,322 @@
+\documentclass{article}
+
+% NeurIPS submission mode: anonymized with line numbers.
+% NOTE: replace with the official neurips_2026 style once the NeurIPS 2026
+% style files are published; the 2026 zip was not yet available at drafting
+% time and this draft uses the official 2025 style as a stand-in.
+\usepackage{neurips_2025}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{enumitem}
+
+\newtheorem{proposition}{Proposition}
+
+\newcommand{\wtwo}{W_2}
+\newcommand{\artifact}[1]{\texttt{\footnotesize #1}}
+
+\title{When Averaged Field Regularity Fails to Rank\\ Few-Step Generative Paths}
+
+\author{%
+  Anonymous authors\\
+  Paper under double-blind review\\
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Choosing a probability path for few-step generative sampling is often guided
+by averaged regularity of the velocity field: a path with smaller averaged
+squared Jacobian norm is expected to discretize better at a fixed number of
+function evaluations (NFE). We test this assumption where every quantity is
+exact: commuting Gaussian probability flows, whose numerical endpoint laws
+and Gaussian 2-Wasserstein ($\wtwo$) errors are closed-form. The
+averaged-regularity ordering of linear versus variance-preserving paths
+fails to determine the fixed-NFE $\wtwo$ ordering: fourteen ranking
+inversions reproduce across Euler, Heun, and RK4, survive an 80-digit
+precision audit, and recur in a pre-registered non-centered family. An exact modal decomposition explains the
+mismatch through solver-stage sampling and signed one-step defects
+transported to the endpoint, and an explicit scalar construction proves the
+non-implication for fixed-grid Euler. This is a controlled limitation
+study: it does not refute regularity-guided schedule design, and no learned
+model is evaluated.
+\end{abstract}
+
+\section{Introduction}
+
+Few-step sampling of continuous-time generative models commits to a
+probability path, a solver, and a small NFE budget before any error is
+observed. A natural criterion, made explicit by Lipschitz-guided schedule
+design~\citep{lipschitzguided2025}, ranks candidate paths by the averaged
+squared Jacobian (Lipschitz) norm of the velocity field. Averaged
+regularity controls worst-case error
+\emph{bounds}~\citep{hairer1993solving}, but bounding an error is weaker
+than determining which of two paths errs less at an equal small budget. We
+isolate that question where the marginal flow is affine, the fixed-step
+endpoint law is exactly computable, and the error is the closed-form
+Gaussian $\wtwo$~\citep{gelbrich1990formula}: no sampling, training, or
+estimation noise intervenes, and every reported digit is auditable.
+
+\textbf{Contributions.}
+\begin{itemize}[leftmargin=1.4em,itemsep=1pt,topsep=2pt]
+  \item A controlled exact-$\wtwo$ benchmark on commuting Gaussian flows in
+  which the averaged-regularity ordering fails to determine the fixed-NFE
+  $\wtwo$ ordering in 14 of 36 pre-specified comparisons, verified against
+  an 80-digit reference and reproduced (11 of 18 comparisons) in a
+  pre-registered non-centered family frozen before execution.
+  \item An exact eigenmode analysis showing the endpoint factor error is a
+  transported sum of signed, solver-stage-dependent local defects---%
+  information an unsigned time average of Jacobian norms cannot retain.
+  \item An explicit smooth scalar construction proving that, for every
+  $L>0$ and grid size $N$, strictly larger averaged squared Jacobian is
+  compatible with zero fixed-grid Euler endpoint error.
+\end{itemize}
+
+Solver dependence of good schedules is not itself
+novel~\citep{sabour2024align,karras2022edm}; the contribution is the exact,
+controlled non-implication and its modal explanation. Averaged regularity
+may well remain useful for schedule \emph{design}; our result bounds what
+it can certify about fixed-budget \emph{rankings} in the tested systems.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.66\linewidth]{figures/fig1_conceptual.pdf}
+  \caption{\textbf{Conceptual schematic (not data).} Path B has the larger
+  time-averaged Jacobian magnitude, but its irregularity concentrates
+  between the nodes a fixed-NFE solver samples; the endpoint-error ordering
+  can oppose the averaged-regularity ordering.}
+  \label{fig:concept}
+\end{figure}
+
+\section{Gaussian probability flows and averaged regularity}
+\label{sec:setup}
+
+Let $X_0\sim N(\mu_0,\Sigma_0)$ and $X_1\sim N(\mu_1,\Sigma_1)$ be
+independent and let a scalar schedule $(\alpha(t),\sigma(t))$, with
+$\alpha(0)=\sigma(1)=1$ and $\alpha(1)=\sigma(0)=0$, define the interpolant
+$X_t=\alpha X_0+\sigma X_1$~\citep{albergo2025stochastic,lipman2023flow}.
+The marginal law is Gaussian with mean $m_t=\alpha\mu_0+\sigma\mu_1$ and
+covariance $Q(t)=\alpha^2\Sigma_0+\sigma^2\Sigma_1$, and the marginal
+velocity field is affine,
+\begin{equation}
+  b(t,x)=A(t)\,x+c(t),\qquad
+  A(t)=C_t\,Q(t)^{-1},\qquad
+  c(t)=\dot m_t-A(t)\,m_t,
+  \label{eq:affine}
+\end{equation}
+with $C_t=\dot\alpha\alpha\,\Sigma_0+\dot\sigma\sigma\,\Sigma_1$; centered
+with $\Sigma_0=I$ this is $A(t)=\tfrac12 Q'Q^{-1}$, $c\equiv0$. We compare
+the \emph{linear} path $(1-t,\,t)$ and the \emph{variance-preserving} (VP)
+path $(\cos\tfrac{\pi t}{2},\,\sin\tfrac{\pi t}{2})$~\citep{song2021score}.
+Following \citet{lipschitzguided2025}, the averaged-regularity baseline is
+$\mathcal{R}[b]=\int_0^1\|A(t)\|_2^2\,dt$ (exact spectral norms, fixed
+trapezoidal grid); note $\mathcal{R}$ ignores $c(t)$.
+
+A fixed-step solver applied to \eqref{eq:affine} induces an affine endpoint
+map, recovered exactly from $d{+}1$ probe trajectories; pushing the source
+moments through it and applying the Gaussian $\wtwo$
+formula~\citep{gelbrich1990formula} gives the exact endpoint error. With
+$\Sigma_0=I$ and $\Sigma_1=U\mathrm{diag}(\lambda_i)U^{\top}$ all matrices
+commute: each mode obeys $x_i'=a_i(t)x_i+c_i(t)$ with $a_i=q_i'/(2q_i)$,
+$q_i=\alpha^2+\sigma^2\lambda_i$, and in the centered case
+$\wtwo^2=\sum_i(|r_i|-\sqrt{\lambda_i})^2$, where $r_i$ is the product of
+the numerical one-step factors of mode $i$.
+
+\section{Why the ranking need not agree: transported signed defects}
+\label{sec:mechanism}
+
+The exact one-step transition of mode $i$ over $[t_n,t_{n+1}]$ is
+$e_{i,n}=\sqrt{q_i(t_{n+1})/q_i(t_n)}$, while a Runge--Kutta step
+multiplies by a factor $r_{i,n}$ built from stage samples of $a_i$ (one for
+Euler, two for Heun, four for RK4). For smooth $a$, the leading local
+defect (exact minus method) is $\tfrac12(a'+a^2)h^2$ for Euler and
+$(-\tfrac1{12}a''+\tfrac16a^3)h^3$ for Heun---different derivatives, signs,
+and stage locations. The endpoint factor error obeys the exact telescoping
+identity
+\begin{equation}
+  \prod_{n<S}r_{i,n}-\prod_{n<S}e_{i,n}
+  =\sum_{n<S}(r_{i,n}-e_{i,n})
+  \Bigl(\prod_{j<n}r_{i,j}\Bigr)\Bigl(\prod_{j>n}e_{i,j}\Bigr),
+  \label{eq:telescope}
+\end{equation}
+with no smallness or positivity assumption. This identifies what the
+scalar $\mathcal{R}$ discards: which times the stages sample, the
+derivatives of $A$, the \emph{signs} of local defects, their cancellation,
+and their transport to the endpoint. An unsigned average of $\|A\|^2$
+retains none of these, so it need not determine the fixed-NFE ordering.
+
+\section{Controlled benchmark and results}
+\label{sec:results}
+
+\textbf{Design.} Source $N(0,I)$; anisotropic (condition number 4) and
+seeded low-rank ($FF^{\top}{+}0.05I$, rank 2) targets; $d\in\{2,8\}$;
+linear and VP paths; Euler, Heun, RK4; NFE $\in\{8,16,32\}$ with
+equal-NFE accounting (steps $=$ NFE$/$stages): 72 float64 CPU
+configurations in 36 two-path blocks. A \emph{ranking inversion} is a
+block where the $\mathcal{R}$ and $\wtwo$ orderings strictly disagree.
+Grid, definitions, and tolerances were fixed before execution; post-hoc
+diagnostics are labeled as such.
+
+\textbf{Fourteen audited inversions.} All 72 configurations reproduce a
+registered earlier run within $10^{-12}$, and 14 of 36 blocks are
+inversions (Figure~\ref{fig:inversions};
+\artifact{phase4\_gaussian\_reproduction\_2026-07-24-v1:results}). The
+strongest is the low-rank target, $d=8$, Euler, NFE 8
+(Table~\ref{tab:strongest}): the baseline prefers linear while its $\wtwo$
+is $78\%$ larger (margin $0.3543761036$). All 72 float64 $\wtwo$ values
+agree with an 80-digit \texttt{mpmath} modal reference to at most
+$9.71\times10^{-10}$; the smallest surviving inversion margin,
+$1.1189\times10^{-5}$, exceeds this by a factor above 11{,}500
+(\artifact{phase4\_precision\_2026-07-24-v1:table}).
+
+\begin{table}[t]
+  \centering
+  \caption{Strongest inversion: low-rank Gaussian, $d=8$, Euler, NFE 8.
+  (\artifact{phase4\_gaussian\_reproduction\_2026-07-24-v1:results})}
+  \label{tab:strongest}
+  \begin{tabular}{lcc}
+    \toprule
+    path & $\mathcal{R}[b]$ (lower = preferred) & Gaussian $\wtwo$\\
+    \midrule
+    linear & $\mathbf{2.9476523251}$ & $0.8108540111$\\
+    variance-preserving & $4.7295206355$ & $\mathbf{0.4564779075}$\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.78\linewidth]{figures/fig2_inversions.pdf}
+  \caption{\textbf{Left:} the strongest inversion in both quantities.
+  \textbf{Right:} $\wtwo$ margins of all fourteen inversion blocks (log
+  axis; compresses, never exaggerates); color marks the path exact error
+  prefers, always opposite to the baseline.
+  (\artifact{phase4\_gaussian\_reproduction\_2026-07-24-v1:results})}
+  \label{fig:inversions}
+\end{figure}
+
+\textbf{Solver--path interaction.} In the low-rank grid, VP is preferred
+under Euler and linear under Heun and RK4, at both dimensions and every
+primary budget (Figure~\ref{fig:interaction}); the pattern persists at NFE
+64 and 128 and under $\pm10\%$ target perturbations
+(\artifact{phase4\_robustness\_2026-07-24-v1:table}). Solver-dependent
+schedule preference is established~\citep{sabour2024align}; the point is
+that a solver-independent scalar cannot represent it. A solver-specific
+leading proxy from Section~\ref{sec:mechanism} agrees with 29 of 36
+observed preferences versus 22 of 36 for the baseline, but this is post-hoc
+and in-sample and carries no predictive claim
+(\artifact{phase4\_diagnostics\_2026-07-24-v1:table}).
+
+\textbf{Pre-registered external validation.} To leave the original
+design space we froze, before execution, one non-centered family: source
+$N(\mu_0,I)$, $\mu_{0,i}=0.75(-1)^i$; target $N(\mu_1,D)$,
+$\mu_{1,i}=1+0.25i$, $D$ geometric with condition number 6---so
+$c(t)\neq0$ in \eqref{eq:affine}---with the same paths, solvers, and
+budgets. Eleven of eighteen blocks are inversions ($\mathcal{R}$ prefers
+VP, margin $0.7513$; exact $\wtwo$ prefers linear), and all eleven pass
+the 80-digit audit (max float64 deviation $2.07\times10^{-11}$; smallest
+inverted margin $1.42\times10^{-6}$)
+(\artifact{workshop\_external\_validation\_2026-07-24-v1:results}). This
+supports the finding only for the tested systems. No mixture target
+supports any conclusion here; mixture evidence was excluded after an
+estimator-calibration failure.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.68\linewidth]{figures/fig3_interaction.pdf}
+  \caption{Signed low-rank margins
+  $\wtwo(\mathrm{lin})-\wtwo(\mathrm{vp})$ across solvers and NFE
+  (symmetric log axis): the preferred path flips with the solver at equal
+  NFE. (\artifact{phase4\_gaussian\_reproduction\_2026-07-24-v1:results})}
+  \label{fig:interaction}
+\end{figure}
+
+\section{A minimal non-implication for fixed-grid Euler}
+\label{sec:prop}
+
+The benchmark shows the failure empirically; the following shows the
+implication already fails logically, in one smooth scalar dimension.
+
+\begin{proposition}
+\label{prop:euler}
+Fix $L>0$ and an integer $N\ge1$; let $h=1/N$ and let forward Euler use the
+left-endpoint grid $t_n=nh$ on $[0,1]$. Set
+$\epsilon_N=N\{e^{L/N}-1\}-L>0$ and define $f_k(t,x)=a_k(t)x$ with
+$a_0(t)=L$ and $a_{1,N}(t)=L+\epsilon_N\cos(2\pi Nt)$. For $x(0)=1$:
+(i) both exact endpoints equal $e^{L}$;
+(ii) $\int_0^1 a_{1,N}^2=L^2+\epsilon_N^2/2>\int_0^1 a_0^2$;
+(iii) Euler is \emph{exact} for $a_{1,N}$;
+(iv) Euler has strictly positive endpoint error for $a_0$.
+Hence larger averaged squared Jacobian does not imply larger fixed-grid
+Euler endpoint error.
+\end{proposition}
+
+\begin{proof}
+(i) $\int_0^1\cos(2\pi Nt)\,dt=0$ for integer $N$, so both coefficients
+integrate to $L$ and $x(1)=e^{L}$.
+(ii) By orthogonality
+$\int_0^1a_{1,N}^2=L^2+\epsilon_N^2/2$, and $\epsilon_N>0$ since
+$e^{z}>1+z$ for $z=L/N>0$.
+(iii) At every node $\cos(2\pi Nt_n)=1$, so each Euler factor is
+$1+h(L+\epsilon_N)=e^{L/N}$ and the product is $e^{L}$.
+(iv) $(1+L/N)^N<e^{L}$ since $\log(1+z)<z$ for $z>0$.
+\end{proof}
+
+The quantifiers matter: $a_{1,N}$ is chosen after the grid, its
+amplitude vanishes as $N\to\infty$, and shifted grids or multi-stage
+solvers sample different phases. This elementary grid-aliasing
+construction, which passed an independent adversarial review, establishes
+a logical non-implication for fixed-grid left-endpoint Euler only; we
+claim neither the mechanism behind every Gaussian inversion nor a new
+numerical-analysis phenomenon.
+
+\section{Related work}
+\label{sec:related}
+
+Flow matching and stochastic interpolants define the Gaussian path family
+and its marginal fields~\citep{lipman2023flow,albergo2025stochastic,
+liu2023rectified}; Lipschitz-guided schedule design proposes the criterion
+we test~\citep{lipschitzguided2025}. Fast diffusion solvers exploit exactly
+integrated linear parts and solver-specific
+expansions~\citep{lu2022dpmsolver,lu2022dpmsolverpp,zhang2023deis}, EDM
+separates schedule from discretization~\citep{karras2022edm}, and Align
+Your Steps optimizes schedules per solver, model, and
+dataset~\citep{sabour2024align}: schedule quality is known to be
+solver-dependent. Runge--Kutta and backward error analysis supply the
+local-error machinery~\citep{butcher1963coefficients,hairer1993solving,
+hairer2006geometric}; Gaussian $\wtwo$ is due to
+\citet{gelbrich1990formula}. None of these states the exact commuting
+inversion benchmark or the grid-aware non-implication, though search
+absence does not establish novelty.
+
+\section{Limitations and conclusion}
+\label{sec:limits}
+
+Our systems are exact, commuting, affine Gaussian flows with two paths,
+three solvers, dimensions 2 and 8, and small budgets, plus one
+pre-registered non-centered family. No learned neural field is evaluated;
+no image, video, or world-model improvement is demonstrated or implied; the
+solver-specific proxy is post-hoc and in-sample; the proposition is
+grid-aware by construction. Averaged regularity may remain valuable for
+schedule design, and our result does not refute Lipschitz-guided schedules:
+in the tested systems the averaged-regularity \emph{ordering} does not
+determine the fixed-NFE $\wtwo$ ordering, because fixed-budget error lives
+in solver-stage samples and transported signed defects invisible to an
+unsigned time average. The benchmark is a small, auditable test bed for
+schedule-selection criteria: every numerical statement carries a
+checksummed artifact identifier whose manifest records commit, config and
+environment hashes, and seeds; the anonymized audit bundle accompanies
+submission.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
