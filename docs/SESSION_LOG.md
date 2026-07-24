@@ -302,3 +302,34 @@ Append one entry per work session. Do not delete prior entries.
 - Decision:
   - Commit and clean the reviewed worktree before Run 1.
   - Stop before Run 1 and do not start Phase 5.
+
+## 2026-07-24 - CI dependency repair
+
+- Status: Fixed locally. Awaiting a new GitHub Actions run.
+- Scope: CI and development dependency resolution only. No scientific code,
+  configuration grid, artifact, claim status, or decision rule changed.
+- Failed workflow run: GitHub Actions run `30085501467`.
+- Root cause:
+  - Python 3.12 CI resolved NumPy 2.5.1 and MyPy 2.3.0.
+  - MyPy targets Python 3.11 because the package supports Python 3.11.
+  - The NumPy 2.5.1 stub used Python 3.12 type syntax, so MyPy stopped while
+    parsing the dependency before checking project source.
+- Repair:
+  - Constrained project NumPy to `>=1.26,<2.5`.
+  - Applied the same constraint to the isolated pre-commit MyPy environment.
+- Validation:
+  - NumPy 2.4.6 and MyPy 2.3.0 pass strict local checks.
+  - Full suite: 132 tests passed.
+  - Ruff lint and format checks passed.
+  - Pre-commit passed on all files.
+- Artifact IDs used: None. No experiment artifact was read or written.
+- Registered and post-hoc analysis: Neither was run.
+- Exact and estimated quantities: Not applicable.
+- Exclusions: No Phase 4 run, mixture evidence, optional NFE, or new target.
+- Invalidated outputs: None. The failed CI job is retained by GitHub.
+- Interpretation: This was a dependency-resolution defect, not a scientific
+  result.
+- Sources: The exact installed versions and failure line are in GitHub Actions
+  run `30085501467`.
+- Unresolved question: The new GitHub Actions run must pass on Python 3.11 and
+  Python 3.12 before Run 1.
