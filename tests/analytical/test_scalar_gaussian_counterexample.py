@@ -108,6 +108,15 @@ def test_exact_regularity_identities() -> None:
 
 
 @pytest.mark.analytical
+def test_rlin_exceeds_rvp_by_quadratic_factorization() -> None:
+    """Exact comparison: 5π/8-1 > π²/16 iff (π-2)(π-8)<0 iff 2<π<8."""
+    # Multiply the claimed inequality by 16: 10π-16 > π², i.e. π²-10π+16<0.
+    # The quadratic π²-10π+16=(π-2)(π-8) is negative precisely on (2,8).
+    assert 2.0 < math.pi < 8.0
+    assert (math.pi - 2.0) * (math.pi - 8.0) < 0.0
+
+
+@pytest.mark.analytical
 def test_exact_linear_heun_factor() -> None:
     factors = linear_heun_step_factors()
     assert all(factor > 0 for factor in factors)

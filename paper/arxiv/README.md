@@ -1,8 +1,8 @@
 # Public preprint sources
 
 This directory is the public manuscript tree for the expanded article
-*Few-Step Flow-Matching Error Can Be Misranked by Averaged Jacobian
-Regularity: A Certified Gaussian Counterexample*.
+*Averaged Jacobian Regularity Can Misrank Few-Step Flow-Matching
+Schedules: A Certified Gaussian Counterexample*.
 
 It is not a renamed short draft. The historical short draft lives under
 `paper/archive/` and is not the public preprint.
@@ -22,10 +22,10 @@ python scripts/make_arxiv_figures.py
 python scripts/pack_arxiv_source.py
 ```
 
-Compact JSON used by the PDF lives in `artifacts/` and is committed.
-`make_arxiv_compact_artifacts.py` rebuilds those files from frozen
-Phase~4 JSON when `outputs/` is present; it is not required to read
-Proposition 2 or the four-path grid from the committed artifacts.
+Compact JSON used by the PDF lives in `artifacts/`.
+`make_arxiv_compact_artifacts.py` rebuilds those files from
+`paper/arxiv/frozen_runs/` and from compact JSON already in `artifacts/`.
+The gitignored `outputs/` tree is not required to rebuild the preprint.
 
 Then from this directory:
 

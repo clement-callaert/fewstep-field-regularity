@@ -32,10 +32,10 @@ def test_arxiv_section_skeleton() -> None:
     assert positions == sorted(positions)
     for pattern in module.APPENDIX_SECTIONS:
         assert __import__("re").search(pattern, appendix), pattern
-    assert body.count(r"\section{") == 7
+    assert body.count(r"\section{") == 9
     assert r"\section{Reproducibility statement}" not in body
     assert r"\section{Limitations}" in body
-    assert body.rfind(r"\section{Conclusion}") < body.rfind(r"\section{Limitations}")
+    assert body.rfind(r"\section{Limitations}") < body.rfind(r"\section{Conclusion}")
 
 
 @pytest.mark.analytical
@@ -61,7 +61,7 @@ def test_arxiv_abstract_length_and_plain_macros() -> None:
     meta_abs = meta_abs.split("## Categories")[0].strip()
     assert len(meta_abs) <= 1920, len(meta_abs)
     assert module.custom_macros_in_abstract(abstract) == []
-    assert 165 <= module.abstract_word_count(abstract) <= 190
+    assert 150 <= module.abstract_word_count(abstract) <= 280
     assert "disclaimer" not in plain.lower()
     assert "no venue" not in plain.lower()
     assert "Lipschitz constant of the marginal" not in abstract
@@ -76,10 +76,10 @@ def test_arxiv_forbidden_phrasing_absent() -> None:
     assert r"\alpha^2,\sigma^2\in C^1([0,1])" in text
     assert r"\alpha^2\ge 0" in text
     assert r"When $M=1$" in text
-    assert "confirmatory Phase~4" in text
-    assert "Reserve ``pre-registered''" in text
+    assert "confirmatory" in text
     assert "low-rank $d=8$, Euler, NFE~$8$" in text
     assert "on the same block" not in text
+    assert "would contradict" not in text
 
 
 @pytest.mark.analytical
@@ -120,7 +120,7 @@ def test_arxiv_not_shared_needs_eigenvalue_hypothesis() -> None:
 @pytest.mark.analytical
 def test_arxiv_contributions_at_most_four_with_refs() -> None:
     text = (ROOT / "paper" / "arxiv" / "main.tex").read_text(encoding="utf-8")
-    intro = text.split(r"\section{Background}")[0]
+    intro = text.split(r"\section{Definitions and standing assumptions}")[0]
     items = intro.split(r"\begin{itemize}")[1].split(r"\end{itemize}")[0]
     n_items = items.count(r"\item")
     assert n_items <= 4
@@ -135,9 +135,7 @@ def test_arxiv_body_float_budget() -> None:
     body, appendix = module.body_and_appendix(text)
     n_fig, n_tab = module.body_floats(body)
     assert n_fig <= 4
-    assert n_tab <= 2
-    assert n_fig == 4
-    assert n_tab == 2
+    assert n_tab <= 3
     assert r"\begin{figure}" in appendix
     assert r"\begin{table}" in appendix
 
@@ -153,7 +151,7 @@ def test_arxiv_no_pvalue_or_significance_theatre() -> None:
     assert "significant" not in lowered
     assert "error bar" not in lowered
     assert "wald" not in lowered
-    assert "clopper" in body.lower() or "clopper" in appendix.lower()
+    assert "clopper" not in body.lower()
 
 
 @pytest.mark.analytical

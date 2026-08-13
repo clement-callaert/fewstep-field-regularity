@@ -6,17 +6,19 @@ differently. It is not a submission note.
 
 ## Structure (2026-08-13 restructure)
 
-- Title: *Few-Step Flow-Matching Error Can Be Misranked by Averaged Jacobian
-  Regularity: A Certified Gaussian Counterexample*.
-- Body: Abstract, §§1--7 (Introduction, Background, Method, Experiments
-  4.1--4.8, Related work, Conclusion, Limitations). Reproducibility is
-  Appendix H only.
+- Title: *Averaged Jacobian Regularity Can Misrank Few-Step Flow-Matching
+  Schedules: A Certified Gaussian Counterexample* (canonical; the retired
+  wording began “Few-Step Flow-Matching Error Can Be Misranked...”).
+- Body: Abstract, Introduction, Definitions, certified inversion, local
+  error, grid-aware theorem, finite enumeration, Related work,
+  Limitations, Conclusion. Reproducibility is an appendix.
 - Experiments are split by question. VP versus Chen Example 3.3 scalar
-  ($M=\lambda_{\max}$) is a post-hoc shared-schedule pairwise census: 9 of 36
-  blocks, 4 of 12 cells. The 36 of 36 per-mode count is a four-candidate
-  census, not a global $W_2$ optimality theorem.
-- Statistical treatment is a census plus one Clopper--Pearson interval on
-  $N=50$ i.i.d.\ draws of the low-rank factor. No $p$-value on
+  ($M=\lambda_{\max}$) is a post-hoc shared-schedule pairwise count: 9 of 36
+  tested blocks, 4 of 12 cells. The 36 of 36 per-mode count is a
+  four-candidate finite enumeration, not a global $W_2$ optimality theorem.
+- The manuscript reports hierarchical descriptive counts. The $N=50$
+  redraw of the low-rank factor is a descriptive 50/50 fraction on the
+  sampled geometries, not a population interval and not a $p$-value on
   deterministic $R$ or $W_2$.
 
 ## Form

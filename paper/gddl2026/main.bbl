@@ -1,4 +1,4 @@
-\begin{thebibliography}{19}
+\begin{thebibliography}{16}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -26,22 +26,11 @@ Yifan Chen, Eric Vanden-Eijnden, and Jiawei Xu.
 \newblock \emph{arXiv preprint arXiv:2509.01629}, 2025.
 \newblock version 3, 16 May 2026.
 
-\bibitem[Du et~al.(2026)Du, Zhang, and Li]{du2026lagrangian}
-Shukai Du, Junzhe Zhang, and Yiming Li.
-\newblock Lagrangian flow matching: A least-action framework for principled
-  path design.
-\newblock \emph{arXiv preprint arXiv:2605.15419}, 2026.
-
 \bibitem[Gelbrich(1990)]{gelbrich1990formula}
 Matthias Gelbrich.
 \newblock On a formula for the {$L^2$} {W}asserstein metric between measures on
   {E}uclidean and {H}ilbert spaces.
 \newblock \emph{Mathematische Nachrichten}, 147:\penalty0 185--203, 1990.
-
-\bibitem[Gupta et~al.(2026)Gupta, Lim, Yu, and Erichson]{gupta2026sharpen}
-Aditi Gupta, Soon~Hoe Lim, Annan Yu, and N.~Benjamin Erichson.
-\newblock Sharpen your flow: Sharpness-aware sampling for flow matching.
-\newblock \emph{arXiv preprint arXiv:2605.11547}, 2026.
 
 \bibitem[Hairer et~al.(1993)Hairer, N{\o}rsett, and Wanner]{hairer1993solving}
 Ernst Hairer, Syvert~P. N{\o}rsett, and Gerhard Wanner.
@@ -125,15 +114,6 @@ Alexander Tong, Kilian Fatras, Nikolay Malkin, Guillaume Huguet, Yanlei Zhang,
   minibatch optimal transport.
 \newblock \emph{Transactions on Machine Learning Research}, 2024.
 \newblock arXiv:2302.00482.
-
-\bibitem[Yuan et~al.(2026)Yuan, Wang, Zhao, Fu, Lei, Zhu, and
-  Zhang]{yuan2026instance}
-Liangyu Yuan, Ruoyu Wang, Tong Zhao, Dingwen Fu, Mingkun Lei, Beier Zhu, and
-  Chi Zhang.
-\newblock Few-step diffusion sampling through instance-aware discretizations.
-\newblock In \emph{Proceedings of the {IEEE/CVF} Conference on Computer Vision
-  and Pattern Recognition ({CVPR})}, pages 35882--35892, 2026.
-\newblock arXiv:2603.17671.
 
 \bibitem[Zhang and Chen(2023)]{zhang2023deis}
 Qinsheng Zhang and Yongxin Chen.

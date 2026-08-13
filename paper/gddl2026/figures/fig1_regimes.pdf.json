@@ -1,0 +1,23 @@
+{
+  "base_commit": "aaef59caa6e3d4bca79b4538bb3f3d6d1706a8e4",
+  "environment_lock_hash": "25195ab63834cda2c141fa7745e4949756797aca5f2cc75ab671e057d2a124b6",
+  "figure_artifact_id": "workshop_figures_2026-08-13-v1:fig1_regimes",
+  "figure_checksum_sha256": "f573c6b20d0e4c854555ae1a0a5db24b9a6a2e4f48e8b709514f814508799304",
+  "generation_command": "python scripts/make_workshop_figures.py",
+  "generation_timestamp": "2026-08-13T21:46:19.492524+00:00",
+  "git_commit": "aaef59caa6e3d4bca79b4538bb3f3d6d1706a8e4",
+  "note": "Copied from paper/arxiv/figures/fig1_regimes.pdf for the anonymous PDF.",
+  "plotting_config": {
+    "kind": "copied_from_arxiv",
+    "source": "fig1_regimes.pdf"
+  },
+  "plotting_script": "scripts/make_workshop_figures.py",
+  "source_artifact_ids": [],
+  "source_run_ids": [
+    "none_conceptual"
+  ],
+  "source_table_hashes": {},
+  "working_tree_diff_sha256": "bc4ae0b39fb5f9f24e490eb8b6dac88eda843ef47687435e47ac72150fd041ba",
+  "working_tree_dirty": true,
+  "working_tree_status_sha256": "3c36aa6278779dd82115cf7ee3af5dea8a70d89f614c16cab731d4275fae5718"
+}

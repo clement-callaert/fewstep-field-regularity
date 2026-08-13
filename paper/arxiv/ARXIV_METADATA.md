@@ -21,7 +21,7 @@ contains "flow matching" (as "Flow-Matching"). Character count: 110. Word count:
 
 ## Abstract (plain text, for the abstract field)
 
-Few-step sampling in flow matching and stochastic interpolants requires an interpolation schedule to be chosen before any endpoint error is observed. A natural question for schedule design is whether a scalar regularity functional ranks two schedules in the same order as equal-NFE discretization error. Chen, Vanden-Eijnden, and Xu propose minimizing A_2, the time-integrated squared spatial Jacobian norm of a flow-matching marginal ODE. They prove no bound relating A_2 to discretization error, Wasserstein-2 distance, or sampling error. Classical one-step bounds use a Lipschitz constant of the field; A_2 is not that constant. Already for independent N(0,1) and N(0,4), exact regularity integrals prefer the trigonometric variance-preserving interpolant while the Heun method at NFE 8 prefers the linear path in Gaussian Wasserstein-2 distance. The inversion is certified by an exact rational Heun product and a nonnegative polynomial in pi and sqrt(2), not by floating-point comparison. Fixed-stage Runge-Kutta methods use signed stage evaluations that the unsigned time average discards. All comparisons use exact Gaussian marginal fields. Multimode results are finite deterministic censuses, not a global optimality proof, and no learned vector field is used.
+Few-step sampling in flow matching and stochastic interpolants requires an interpolation schedule, equivalently a sampling schedule, to be chosen before any endpoint error is observed. Averaged squared Jacobian regularity is a plausible criterion for schedule design. Chen, Vanden-Eijnden, and Xu propose minimizing A_2, the time-integrated squared spatial Jacobian norm of a flow-matching marginal ODE. Classical one-step bounds use a Lipschitz constant of the field; A_2 is not that constant, and they prove no universal ranking of equal-NFE solver error. This paper studies that narrower question. For independent N(0,1) and N(0,4), the exact integrals are 5 pi/8 - 1 and pi^2/16, so regularity prefers trigonometric VP, while explicit Heun at NFE 8 prefers the linear path in Gaussian Wasserstein-2 distance. The inversion is certified by an exact rational Heun product and a nonnegative element of Q[pi, sqrt(2)]. A complementary construction shows that, for every step count N and every admissible endpoint log-scale, the unique integrated-regularity minimizer can have strictly larger N-step Euler endpoint error than a higher-regularity competitor aligned to that solver grid. A specified finite Gaussian enumeration of four candidate paths on 36 tested blocks contains both agreement and pairwise disagreement. The results establish a limitation of a universal surrogate interpretation. They do not refute Chen et al., do not evaluate learned velocity fields, and do not estimate a population frequency of failure.
 
 ## Categories (proposed, not submitted)
 
@@ -49,7 +49,7 @@ flow matching, stochastic interpolants, few-step sampling, Runge-Kutta, Gaussian
 
 ## Comments field (suggested)
 
-23 pages, 4 figures, 2 tables in the main text. Code and compact artifacts: https://github.com/clement-callaert/fewstep-field-regularity
+21 pages, 4 figures in the main text, 1 table in the main text. Code and compact artifacts: https://github.com/clement-callaert/fewstep-field-regularity
 
 Update the page/figure/table counts from the compiled PDF immediately before upload. Do not put venue, review, or acceptance language in the comments field.
 

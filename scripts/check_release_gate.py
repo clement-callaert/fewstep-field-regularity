@@ -1,8 +1,7 @@
 """Fail if publication tokens are still unresolved.
 
-Default pytest skips this gate. Set FEWSTEP_RELEASE_GATE=1 after the GDDL
-notification, once the arXiv identifier, ORCID, and release date exist.
-Until then the tokens must remain, so the gated test is expected to fail.
+Optional fields that cannot be filled honestly (arXiv id, release date)
+must be omitted rather than left as TODO. ORCID is recorded when known.
 """
 
 from __future__ import annotations
@@ -30,15 +29,11 @@ def unresolved_tokens() -> list[str]:
         errors.append(f"{TODO_ARXIV} is still present in README.md or CITATION.cff")
     if TODO_ORCID in citation:
         errors.append(f"{TODO_ORCID} is still present in CITATION.cff")
-    released = None
+    if "arxiv.org/abs/TODO" in readme:
+        errors.append("README.md contains a broken placeholder arXiv URL")
     for line in citation.splitlines():
-        if line.strip().startswith("date-released"):
-            released = line
-            break
-    if released is None:
-        errors.append("CITATION.cff is missing date-released")
-    elif "TODO" in released:
-        errors.append("CITATION.cff date-released is still TODO")
+        if line.strip().startswith("date-released") and "TODO" in line:
+            errors.append("CITATION.cff date-released is still TODO")
     return errors
 
 

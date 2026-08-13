@@ -10,7 +10,6 @@ from __future__ import annotations
 
 import json
 import subprocess
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -20,27 +19,30 @@ matplotlib.use("pdf")
 import matplotlib.pyplot as plt
 
 from fewstep_regularities.utils.hashing import sha256_file
+from fewstep_regularities.utils.provenance import figure_sidecar_payload, write_json
 
 ROOT = Path(__file__).resolve().parents[1]
 FIGURE_DIR = ROOT / "paper" / "arxiv" / "figures"
 FIGURE_SUFFIX = ".pdf"
 
-# Pinned artifact inputs. No other file may be read.
+# Pinned frozen Hydra tables. These live in paper/arxiv/frozen_runs/ so
+# figures regenerate without the gitignored outputs/ tree. Checksums must
+# match the compact-artifact manifest.
 PINNED_INPUTS = {
     "phase4_gaussian_reproduction_2026-07-24-v1:results": {
-        "path": "outputs/phase4_gaussian_reproduction_2026-07-24-v1/results.json",
+        "path": "paper/arxiv/frozen_runs/phase4_gaussian_reproduction_2026-07-24-v1/results.json",
         "sha256": "b8930142cba5655ee553aae5ff400cd884c1137e77547d9a5fa94bd4e354973f",
     },
     "phase4_decomposition_2026-07-24-v1:table": {
-        "path": "outputs/phase4_decomposition_2026-07-24-v1/table.json",
+        "path": "paper/arxiv/frozen_runs/phase4_decomposition_2026-07-24-v1/table.json",
         "sha256": "690d068c3693f99f38ddb17b479ab0e63b5ad859835f2092c5420175d954f252",
     },
     "workshop_external_validation_2026-07-24-v1:results": {
-        "path": "outputs/workshop_external_validation_2026-07-24-v1/results.json",
+        "path": "paper/arxiv/frozen_runs/workshop_external_validation_2026-07-24-v1/results.json",
         "sha256": "4234bc2baefa8390414db9e037c7d028408cb04591e2b6302524ed8ad3bd205d",
     },
     "workshop_external_validation_2026-07-24-v1:inversions": {
-        "path": "outputs/workshop_external_validation_2026-07-24-v1/inversions.json",
+        "path": "paper/arxiv/frozen_runs/workshop_external_validation_2026-07-24-v1/inversions.json",
         "sha256": "cceebdfcba6f7cec4a7ff9e137d4a53f8c7e389acc0222a20805f16204a1b875",
     },
 }
@@ -181,24 +183,17 @@ def write_sidecar(
     plotting_config: dict[str, Any],
     note: str,
 ) -> None:
-    sidecar = {
-        "figure_artifact_id": f"arxiv_figures_2026-08-13-v1:{figure_path.stem}",
-        "source_run_ids": sorted({a.split(":")[0] for a in artifact_ids})
-        or ["none_conceptual"],
-        "source_artifact_ids": artifact_ids,
-        "source_table_hashes": {a: PINNED_INPUTS[a]["sha256"] for a in artifact_ids},
-        "plotting_script": "scripts/make_arxiv_figures.py",
-        "plotting_config": plotting_config,
-        "git_commit": git_commit(),
-        "git_status": git_status_flag(),
-        "generation_timestamp": datetime.now(timezone.utc).isoformat(),
-        "figure_checksum_sha256": sha256_file(figure_path),
-        "note": note,
-    }
-    sidecar_path = figure_path.with_suffix(figure_path.suffix + ".json")
-    sidecar_path.write_text(
-        json.dumps(sidecar, indent=2, sort_keys=True), encoding="utf-8"
+    sidecar = figure_sidecar_payload(
+        figure_path,
+        artifact_ids=artifact_ids,
+        source_table_hashes={a: PINNED_INPUTS[a]["sha256"] for a in artifact_ids},
+        plotting_script="scripts/make_arxiv_figures.py",
+        plotting_config=plotting_config,
+        note=note,
+        generation_command="python scripts/make_arxiv_figures.py",
+        figure_artifact_id=f"arxiv_figures_2026-08-13-v1:{figure_path.stem}",
     )
+    write_json(figure_path.with_suffix(figure_path.suffix + ".json"), sidecar)
 
 
 def phase4_blocks(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -977,8 +972,9 @@ def main() -> None:
             "counts": {"pairwise_cells": "5/12", "in_family_blocks": "9/36", "minimizer": "36/36"},
         },
         note=(
-            "Headline R and W2 bars for the three regimes. Counts are complete "
-            "enumerations, not estimators. Source geometries.json."
+            "Headline R and W2 bars for the three regimes. Counts are a finite "
+            "enumeration of the four specified candidate paths, not estimators. "
+            "Source geometries.json."
         ),
     )
     written.append(fig1)
@@ -1001,23 +997,10 @@ def main() -> None:
         ),
     )
     written.append(fig4)
-    outputs_root = ROOT / "outputs" / "phase4_gaussian_reproduction_2026-07-24-v1"
-    if outputs_root.is_dir():
-        fig2, ids2 = figure2_inversions()
-        write_sidecar(
-            fig2,
-            artifact_ids=ids2,
-            plotting_config={
-                "kind": "strongest_inversion_and_all_blocks",
-                "block_definition": "two-path comparison per (family, dim, solver, nfe)",
-                "x_scale": "log",
-            },
-            note=(
-                "Source: phase4_gaussian_reproduction_2026-07-24-v1:results. "
-                "Log margin axis for 14 of 36 inversion blocks in the tested grid."
-            ),
-        )
-        written.append(fig2)
+    frozen_root = (
+        ROOT / "paper" / "arxiv" / "frozen_runs" / "phase4_gaussian_reproduction_2026-07-24-v1"
+    )
+    if frozen_root.is_dir():
         fig_e, ids_e = figure_eigenmode()
         write_sidecar(
             fig_e,
@@ -1058,8 +1041,8 @@ def main() -> None:
     else:
         print(
             "skipping Hydra-backed figures (fig2_inversions, fig_eigenmode, "
-            "fig3_interaction, fig_noncentered): outputs/ is not in the public "
-            "snapshot; use the shipped PDFs under paper/arxiv/figures/"
+            "fig3_interaction, fig_noncentered): missing "
+            "paper/arxiv/frozen_runs/phase4_gaussian_reproduction_2026-07-24-v1"
         )
     for path in written:
         print(path.relative_to(ROOT), sha256_file(path)[:16])

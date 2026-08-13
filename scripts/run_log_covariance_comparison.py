@@ -91,11 +91,12 @@ def main() -> None:
     OUT_TEX.write_text("\n".join(lines), encoding="utf-8")
     OUT_SUMMARY.write_text(
         (
-            f"Among the four candidate paths on the stated {n_total}-block census, "
+            f"Among the four specified candidate paths on the stated "
+            f"{n_total} tested blocks, "
             f"the per-mode log-covariance path has the smallest continuous "
             f"$\\cR$ and the smallest Gaussian $\\wtwo$ in "
-            f"{n_log_smallest_w2} of {n_total} blocks. This finite-census "
-            f"observation does not imply that a global $\\cR$-minimizer "
+            f"{n_log_smallest_w2} of {n_total} tested blocks. This finite "
+            f"enumeration does not imply that a global $\\cR$-minimizer "
             f"minimizes fixed-NFE error.\n"
         ),
         encoding="utf-8",

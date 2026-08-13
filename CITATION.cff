@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-title: "Few-Step Flow-Matching Error Can Be Misranked by Averaged Jacobian Regularity: A Certified Gaussian Counterexample"
+title: "Averaged Jacobian Regularity Can Misrank Few-Step Flow-Matching Schedules: A Certified Gaussian Counterexample"
 message: "If you use this software or the accompanying manuscript, please cite it as below. The software is MIT-licensed. The manuscript, figures, and compact artifacts are CC BY 4.0."
 type: preprint
 authors:
@@ -10,31 +10,28 @@ authors:
     affiliation: "CentraleSupélec and Université Paris-Saclay"
 license: MIT
 repository-code: "https://github.com/clement-callaert/fewstep-field-regularity"
-date-released: TODO
-identifiers:
-  - type: other
-    value: TODO-ARXIV-ID
-    description: arXiv eprint, filled after announcement
 abstract: >
-  Does averaged squared Jacobian regularity rank two interpolants in the same
-  order as equal-NFE endpoint error? Chen, Vanden-Eijnden, and Xu propose
+  Few-step sampling in flow matching and stochastic interpolants requires an
+  interpolation schedule, equivalently a sampling schedule, to be chosen before
+  any endpoint error is observed. Averaged squared Jacobian regularity is a
+  plausible criterion for schedule design. Chen, Vanden-Eijnden, and Xu propose
   minimizing A_2, the time-integrated squared spatial Jacobian norm of a
-  flow-matching marginal ODE, as a criterion for schedule design, without a
-  proved discretization-error bound. Classical one-step bounds use a Lipschitz
-  constant of the field; A_2 is not that constant. Already for independent
-  N(0,1) and N(0,4), the exact regularity integrals of the linear and
-  trigonometric variance-preserving Gaussian interpolants are 5 pi/8 - 1 and
-  pi^2/16, while Heun at NFE 8 reverses Gaussian Wasserstein-2 distance. The
-  linear Heun product is the rational 6797469/3559400; a nonnegative element of
-  Q[pi, sqrt(2)] yields r_VP < 187/100. The object is a flow matching marginal
-  interpolant ODE, not a score-based probability-flow ODE. The Gaussian drift
-  and W_2 formula are closed form; the regularity integrand is exact, while
-  multimode R is evaluated deterministically by adaptive quadrature. Pairwise
-  and four-path census comparisons on commuting Gaussian interpolants are
-  reported below; a finite census does not imply that a global A_2-minimizer
-  minimizes fixed-NFE error. The analysis uses stochastic interpolants,
-  few-step sampling, Runge-Kutta, and interpolation schedules; no learned field
-  is used.
+  flow-matching marginal ODE. Classical one-step bounds use a Lipschitz
+  constant of the field; A_2 is not that constant, and they prove no universal
+  ranking of equal-NFE solver error. This paper studies that narrower question.
+  For independent N(0,1) and N(0,4), the exact integrals are 5 pi/8 - 1 and
+  pi^2/16, so regularity prefers trigonometric VP, while explicit Heun at NFE 8
+  prefers the linear path in Gaussian Wasserstein-2 distance. The inversion is
+  certified by an exact rational Heun product and a nonnegative element of
+  Q[pi, sqrt(2)]. A complementary construction shows that, for every step count
+  N and every admissible endpoint log-scale, the unique integrated-regularity
+  minimizer can have strictly larger N-step Euler endpoint error than a
+  higher-regularity competitor aligned to that solver grid. A specified finite
+  Gaussian enumeration of four candidate paths on 36 tested blocks contains
+  both agreement and pairwise disagreement. The results establish a limitation
+  of a universal surrogate interpretation. They do not refute Chen et al., do
+  not evaluate learned velocity fields, and do not estimate a population
+  frequency of failure.
 keywords:
   - flow matching
   - stochastic interpolants

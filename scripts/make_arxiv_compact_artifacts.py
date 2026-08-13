@@ -33,34 +33,36 @@ from fewstep_regularities.experiments.workshop_external_validation import (
     frozen_target_eigenvalues,
     frozen_target_mean,
 )
-from fewstep_regularities.utils.hashing import sha256_file
+from fewstep_regularities.utils.hashing import sha256_file, write_compact_manifest
+from fewstep_regularities.utils.provenance import source_state
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "paper" / "arxiv" / "artifacts"
 GEN = ROOT / "paper" / "arxiv" / "generated"
+FROZEN = ROOT / "paper" / "arxiv" / "frozen_runs"
 
 PINNED = {
     "phase4_gaussian_reproduction_2026-07-24-v1:results": (
-        ROOT / "outputs/phase4_gaussian_reproduction_2026-07-24-v1/results.json",
+        FROZEN / "phase4_gaussian_reproduction_2026-07-24-v1/results.json",
         "b8930142cba5655ee553aae5ff400cd884c1137e77547d9a5fa94bd4e354973f",
     ),
     "phase4_precision_2026-07-24-v1:table": (
-        ROOT / "outputs/phase4_precision_2026-07-24-v1/table.json",
+        FROZEN / "phase4_precision_2026-07-24-v1/table.json",
         "5f8800a697c61c2eab2306281fe4fb1b01dee67bc3c678dd7ba4a626d9dc8e1b",
     ),
-    "phase4_robustness_2026-07-24-v1:table": (
-        ROOT / "outputs/phase4_robustness_2026-07-24-v1/table.json",
-        "3cace6e3d016f0c3e893a656fb76acfad11ce4569debc6ea418fe5aeec7d6306",
-    ),
     "workshop_external_validation_2026-07-24-v1:results": (
-        ROOT / "outputs/workshop_external_validation_2026-07-24-v1/results.json",
+        FROZEN / "workshop_external_validation_2026-07-24-v1/results.json",
         "4234bc2baefa8390414db9e037c7d028408cb04591e2b6302524ed8ad3bd205d",
     ),
     "workshop_external_validation_2026-07-24-v1:inversions": (
-        ROOT / "outputs/workshop_external_validation_2026-07-24-v1/inversions.json",
+        FROZEN / "workshop_external_validation_2026-07-24-v1/inversions.json",
         "cceebdfcba6f7cec4a7ff9e137d4a53f8c7e389acc0222a20805f16204a1b875",
     ),
 }
+ROBUSTNESS_PIN = (
+    "phase4_robustness_2026-07-24-v1:table",
+    "3cace6e3d016f0c3e893a656fb76acfad11ce4569debc6ea418fe5aeec7d6306",
+)
 
 RELEASE_TAG = "arxiv-v1"
 RELEASE_URL = (
@@ -420,12 +422,28 @@ def main() -> None:
         },
     )
 
-    robust = load_pinned("phase4_robustness_2026-07-24-v1:table")
-    lr_prefs = [
-        row
-        for row in robust["preferences"]
-        if row["target_family"] == "low_rank_gaussian"
-    ]
+    robust_hydra = (
+        ROOT / "outputs/phase4_robustness_2026-07-24-v1/table.json"
+    )
+    if robust_hydra.is_file():
+        actual = sha256_file(robust_hydra)
+        if actual != ROBUSTNESS_PIN[1]:
+            raise ValueError(
+                f"Checksum mismatch for {ROBUSTNESS_PIN[0]}: {actual}"
+            )
+        robust = json.loads(robust_hydra.read_text(encoding="utf-8"))
+        lr_prefs = [
+            row
+            for row in robust["preferences"]
+            if row["target_family"] == "low_rank_gaussian"
+        ]
+    else:
+        existing = json.loads((OUT / "robustness_lowrank.json").read_text(encoding="utf-8"))
+        lr_prefs = existing["blocks"]
+        print(
+            "using committed robustness_lowrank.json; raw Hydra table "
+            "phase4_robustness_2026-07-24-v1 is not in the public snapshot"
+        )
     formula = 2 * 3 * (3 * 3 + 2)
     if len(lr_prefs) != 66 or len(lr_prefs) != formula:
         raise RuntimeError(f"low-rank robustness count {len(lr_prefs)} != 66")
@@ -456,9 +474,16 @@ def main() -> None:
     smallest = min(inversions, key=lambda b: b["W2_margin"])
     ratio = smallest["W2_margin"] / max_delta
 
+    pinned_inputs = {key: value[1] for key, value in PINNED.items()}
+    pinned_inputs[ROBUSTNESS_PIN[0]] = ROBUSTNESS_PIN[1]
     manifest = {
         "artifact_release_id": "arxiv-compact-2026-08-13-local",
         "experiment_code_commit": "e48c9390e62b38f206342e6aeb7f160122ccc79c",
+        "compact_manifest_source_state": source_state(),
+        "canonical_self_hash_rule": (
+            "SHA-256 of compact JSON with files.manifest.json blanked; "
+            "sorted keys, separators (',', ':')"
+        ),
         "planned_release_tag": RELEASE_TAG,
         "planned_release_url": RELEASE_URL,
         "public_download": False,
@@ -469,19 +494,19 @@ def main() -> None:
             "noncentered_blocks.json": non_sha,
             "robustness_lowrank.json": robust_sha,
         },
-        "pinned_inputs": {key: value[1] for key, value in PINNED.items()},
+        "pinned_inputs": pinned_inputs,
     }
     for extra_name in (
         "log_covariance_blocks.json",
         "inversion_region.json",
         "lowrank_seed_fraction.json",
+        "grid_aware_robustness.json",
+        "in_family_blocks.json",
     ):
         extra_path = OUT / extra_name
         if extra_path.is_file():
             manifest["files"][extra_name] = sha256_file(extra_path)
-    manifest_sha = write_json(OUT / "manifest.json", manifest)
-    manifest["files"]["manifest.json"] = manifest_sha
-    write_json(OUT / "manifest.json", manifest)
+    write_compact_manifest(OUT / "manifest.json", manifest)
 
     with mp.workdps(40):
         vp_lo = mp.mpf(certified.vp_factor_interval[0])

@@ -1,0 +1,18 @@
+\begin{tabular}{rllllrrcc}
+\toprule
+$N$ & solver & $\phi$ & $f$ & $\theta$ & err $a_0$ & err $a_{1,N}$ & ends & invert \\
+\midrule
+4 & euler & 0 & 4 & 0 & 0.105 & $<10^{-12}$ & yes & yes \\
+8 & euler & 0 & 8 & 0 & 0.056 & $<10^{-12}$ & yes & yes \\
+16 & euler & 0 & 16 & 0 & 0.029 & $<10^{-12}$ & yes & yes \\
+4 & euler & $\pi/2$ & 4 & 0 & 0.105 & 0.105 & yes & no \\
+4 & euler & $\pi$ & 4 & 0 & 0.105 & 0.206 & yes & no \\
+8 & euler & $\pi/4$ & 8 & 0 & 0.056 & 0.017 & yes & yes \\
+4 & euler & 0 & 4.5 & 0 & 0.105 & 0.079 & yes & yes \\
+8 & euler & 0 & 7 & 0 & 0.056 & 0.056 & yes & no \\
+8 & euler & 0 & 9 & 0 & 0.056 & 0.056 & yes & no \\
+8 & euler & 0 & 8 & 0.5 & 0.056 & 0.111 & yes & no \\
+4 & heun & 0 & 4 & 0 & 6.09e-03 & 0.123 & yes & no \\
+8 & heun & 0 & 8 & 0 & 1.63e-03 & 0.061 & yes & no \\
+\bottomrule
+\end{tabular}
