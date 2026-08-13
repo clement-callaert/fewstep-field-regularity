@@ -1,0 +1,2 @@
+wrote /tmp/fewstep-pass5-20260813/paper/arxiv/arxiv-source.zip files 25
+clean compile passed: 23 pages, embedded fonts, no Type 3

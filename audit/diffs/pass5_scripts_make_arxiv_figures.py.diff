@@ -1,0 +1,66 @@
+--- /tmp/fewstep-corrected-20260813/scripts/make_arxiv_figures.py	2026-08-13 21:23:21.216194101 +0200
++++ /tmp/fewstep-pass5-20260813/scripts/make_arxiv_figures.py	2026-08-13 22:19:12.963995455 +0200
+@@ -824,13 +824,17 @@
+         arrowprops={"arrowstyle": "->", "color": COLOR_LINEAR, "lw": 0.7},
+     )
+ 
+-    def _bars(axis, values, ylabel, panel, prefer_index, prefer_text, prefer_color):
++    def _bars(axis, values, ylabel, panel, prefer_index, prefer_text):
+         colors = [COLOR_LINEAR, COLOR_VP]
+         bars = axis.bar([0, 1], values, color=colors, width=0.55)
+         axis.set_xticks([0, 1], ["lin", "VP"])
+         axis.set_ylabel(ylabel)
+         axis.set_title(panel, loc="left", fontsize=8)
+-        axis.set_ylim(0.0, max(values) * 1.42)
++        ymax = max(values)
++        shorter = values[prefer_index]
++        y_ann = ymax * 1.18
++        axis.set_xlim(-0.85, 1.85)
++        axis.set_ylim(0.0, ymax * 1.48)
+         for bar, val in zip(bars, values, strict=True):
+             axis.text(
+                 bar.get_x() + bar.get_width() / 2,
+@@ -840,14 +844,23 @@
+                 va="bottom",
+                 fontsize=7,
+             )
++        # Outer face of the shorter bar, so the leader misses the value label.
++        x_face = prefer_index - 0.32 if prefer_index == 0 else prefer_index + 0.32
+         axis.annotate(
+             prefer_text,
+-            xy=(prefer_index, values[prefer_index]),
+-            xytext=(1 - prefer_index, max(values) * 0.78),
++            xy=(x_face, shorter * 0.55),
++            xytext=(prefer_index, y_ann),
+             fontsize=7,
+-            color=prefer_color,
++            color="black",
+             ha="center",
+-            arrowprops={"arrowstyle": "->", "color": prefer_color, "lw": 0.7},
++            va="bottom",
++            bbox={
++                "facecolor": "white",
++                "alpha": 0.85,
++                "edgecolor": "none",
++                "pad": 1.5,
++            },
++            arrowprops={"arrowstyle": "->", "color": "black", "lw": 0.7},
+         )
+ 
+     _bars(
+@@ -857,7 +870,6 @@
+         r"(b) exact $\mathcal{R}$",
+         1,
+         r"$\mathcal{R}$ prefers VP",
+-        COLOR_VP,
+     )
+     _bars(
+         ax_w,
+@@ -866,7 +878,6 @@
+         r"(c) Heun $W_2$",
+         0,
+         r"$W_2$ prefers lin",
+-        COLOR_LINEAR,
+     )
+     out = FIGURE_DIR / ("fig_scalar" + FIGURE_SUFFIX)
+     fig.savefig(out, bbox_inches="tight")

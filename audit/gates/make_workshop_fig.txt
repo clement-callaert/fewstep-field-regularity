@@ -1,0 +1,1 @@
+skipping Hydra-backed figures (fig2_inversions, fig3_interaction): outputs/ is not in the public snapshot; use the shipped PDFs under paper/gddl2026/figures/

@@ -1,0 +1,1 @@
+scientific release checks passed; tag arxiv-v1 is the remaining manual publication gate
