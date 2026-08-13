@@ -15,12 +15,23 @@ and is not edited in place.
   body pages.
 - No author name, email, GitHub username, or identifying artefact URL.
 - No "under review at NeurIPS" wording.
-- Integer VP Heun certificate lives in `supplement.tex`.
+- One anonymous PDF: the rational VP Heun certificate is Appendix A after
+  the bibliography, not a separate supplement.
 - PDF metadata: title and keywords only; `pdfauthor` remains empty.
+
+## Hyperref / pdfTeX 1.40.22
+
+This TeX Live's pdfTeX 1.40.22 segfaults on `\pdfendlink` when a
+citation hyperlink straddles a page break. `main.tex` therefore sets
+`draft=true` **only** when `\pdftexrevision` is `22`. Newer engines keep
+`hidelinks` with live destinations. Metadata is still written with
+`\hypersetup` and `\pdfinfo`. This workaround is **not** used in
+`paper/arxiv/main.tex`, which loads `\usepackage[hidelinks]{hyperref}`
+and must keep working links.
 
 ## Build
 
 ```bash
-latexmk -pdf -interaction=nonstopmode main.tex
-latexmk -pdf -interaction=nonstopmode supplement.tex
+latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+python ../../scripts/check_pdf_fonts.py main.pdf
 ```

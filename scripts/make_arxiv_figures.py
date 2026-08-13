@@ -68,12 +68,12 @@ FIGWIDTH = 5.45
 def apply_paper_style() -> None:
     plt.rcParams.update(
         {
-            "text.usetex": True,
-            "text.latex.preamble": r"\usepackage{lmodern}",
-            "font.family": "serif",
-            "font.serif": ["Latin Modern Roman"],
+            "text.usetex": False,
             "mathtext.fontset": "cm",
+            "font.family": "serif",
+            "font.serif": ["DejaVu Serif"],
             "pdf.fonttype": 42,
+            "ps.fonttype": 42,
             "font.size": 9,
             "axes.titlesize": 9,
             "axes.labelsize": 9,
@@ -110,13 +110,34 @@ def _git(*args: str) -> subprocess.CompletedProcess[str]:
     )
 
 
+def _revision_commit() -> str | None:
+    path = ROOT / "REVISION"
+    if not path.is_file():
+        return None
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if line.lower().startswith("commit:"):
+            return line.split(":", 1)[1].strip()
+    return None
+
+
 def git_commit() -> str:
-    return _git("rev-parse", "HEAD").stdout.strip()
+    pinned = _revision_commit()
+    if pinned:
+        return pinned
+    try:
+        return _git("rev-parse", "HEAD").stdout.strip()
+    except (subprocess.CalledProcessError, FileNotFoundError, OSError):
+        return "snapshot-without-git"
 
 
 def git_status_flag() -> str:
-    out = _git("status", "--porcelain").stdout.strip()
-    return "clean" if not out else "dirty (regenerate after committing)"
+    if (ROOT / "REVISION").is_file() and not (ROOT / ".git").exists():
+        return "git-archive-snapshot"
+    try:
+        out = _git("status", "--porcelain").stdout.strip()
+        return "clean" if not out else "dirty (regenerate after committing)"
+    except (subprocess.CalledProcessError, FileNotFoundError, OSError):
+        return "git-unavailable"
 
 
 def load_pinned(artifact_id: str) -> Any:
@@ -228,29 +249,15 @@ def figure1_regimes() -> Path:
     def _bars(ax: Any, names: list[str], colors: list[str], values: list[float]) -> None:
         x = np.arange(len(names))
         bars = ax.bar(x, values, color=colors, width=0.62)
-        ax.set_xticks(x, names, fontsize=7)
-        ax.bar_label(bars, [f"{v:.2f}" for v in values], padding=1.2, fontsize=7)
+        tick_size = 6.5 if len(names) > 2 else 7
+        ax.set_xticks(x, names, fontsize=tick_size)
+        ax.bar_label(bars, [f"{v:.3g}" for v in values], padding=1.2, fontsize=7)
         ax.set_ylim(0.0, max(values) * 1.32)
 
     fig, axes = plt.subplots(3, 2, figsize=(FIGWIDTH, 4.2), layout="constrained")
     fig.set_constrained_layout_pads(w_pad=0.02, h_pad=0.04, hspace=0.08, wspace=0.06)
     def _panel_label(ax: Any, text: str) -> None:
-        ax.text(
-            0.03,
-            0.97,
-            text,
-            transform=ax.transAxes,
-            fontsize=7,
-            ha="left",
-            va="top",
-            clip_on=True,
-            bbox={
-                "boxstyle": "round,pad=0.15",
-                "fc": "white",
-                "ec": "none",
-                "alpha": 0.9,
-            },
-        )
+        ax.set_title(text, loc="left", fontsize=7)
 
     _bars(
         axes[0, 0],
@@ -270,7 +277,7 @@ def figure1_regimes() -> Path:
 
     _bars(
         axes[1, 0],
-        ["VP", r"Ex.\ 3.3"],
+        ["VP", "Ex. 3.3"],
         [COLOR_VP, COLOR_SCALAR],
         [
             aniso8["variance_preserving"].regularity,
@@ -279,7 +286,7 @@ def figure1_regimes() -> Path:
     )
     _bars(
         axes[1, 1],
-        ["VP", r"Ex.\ 3.3"],
+        ["VP", "Ex. 3.3"],
         [COLOR_VP, COLOR_SCALAR],
         [aniso8["variance_preserving"].w2, aniso8["log_covariance_scalar"].w2],
     )
@@ -289,7 +296,7 @@ def figure1_regimes() -> Path:
 
     _bars(
         axes[2, 0],
-        ["lin", "VP", "3.3", "pm"],
+        ["lin", "VP", "Ex. 3.3", "pm"],
         [COLOR_LINEAR, COLOR_VP, COLOR_SCALAR, COLOR_MINIMIZER],
         [
             low8["linear"].regularity,
@@ -300,7 +307,7 @@ def figure1_regimes() -> Path:
     )
     _bars(
         axes[2, 1],
-        ["lin", "VP", "3.3", "pm"],
+        ["lin", "VP", "Ex. 3.3", "pm"],
         [COLOR_LINEAR, COLOR_VP, COLOR_SCALAR, COLOR_MINIMIZER],
         [
             low8["linear"].w2,
@@ -360,7 +367,7 @@ def figure_four_paths() -> Path:
     labels = {
         "linear": "linear",
         "variance_preserving": "VP",
-        "log_covariance_scalar": r"Ex.\ 3.3",
+        "log_covariance_scalar": "Ex. 3.3",
         "log_covariance": r"per-mode",
     }
     colors = {
@@ -741,10 +748,15 @@ def figure3_interaction() -> tuple[Path, list[str]]:
 
 
 def figure_scalar_counterexample() -> Path:
-    """Exact scalar drifts a_lin(t) and a_VP(t) on [0,1], with Heun nodes."""
+    """Certified 1-D counterexample: drifts plus exact R and Heun-8 W2 bars."""
     import numpy as np
 
     from fewstep_regularities.analysis.affine_flow import scalar_drift
+    from fewstep_regularities.analysis.scalar_gaussian_counterexample import (
+        certify,
+        linear_regularity,
+        vp_regularity,
+    )
 
     eigenvalue = 4.0
     t = np.linspace(0.0, 1.0, 401)
@@ -755,8 +767,18 @@ def figure_scalar_counterexample() -> Path:
     a_vp_nodes = np.array(
         [scalar_drift("variance_preserving", eigenvalue, ti) for ti in nodes]
     )
+    certified = certify()
+    r_lin = float(linear_regularity())
+    r_vp = float(vp_regularity())
+    w_lin = float(certified.linear_w2)
+    w_vp = float(certified.vp_w2_interval[0])
 
-    fig, ax = plt.subplots(figsize=(FIGWIDTH, 2.35), layout="constrained")
+    fig = plt.figure(figsize=(FIGWIDTH, 4.45), layout="constrained")
+    grid = fig.add_gridspec(2, 2, height_ratios=(1.45, 1.0))
+    ax = fig.add_subplot(grid[0, :])
+    ax_r = fig.add_subplot(grid[1, 0])
+    ax_w = fig.add_subplot(grid[1, 1])
+
     ax.axhline(0.0, color="0.45", lw=0.8)
     ax.fill_between(
         t,
@@ -782,26 +804,91 @@ def figure_scalar_counterexample() -> Path:
     ax.annotate(
         r"$a_{\mathrm{lin}}(1)=+1$",
         xy=(1.0, 1.0),
-        xytext=(0.88, 0.55),
-        textcoords="data",
-        ha="center",
-        va="center",
+        xytext=(0.72, 1.28),
         fontsize=8,
         color=COLOR_LINEAR,
-        bbox={"boxstyle": "round,pad=0.15", "fc": "white", "ec": "none", "alpha": 0.9},
-        arrowprops={
-            "arrowstyle": "->",
-            "color": COLOR_LINEAR,
-            "lw": 0.7,
-            "shrinkA": 4,
-            "shrinkB": 3,
-        },
+        arrowprops={"arrowstyle": "-", "color": COLOR_LINEAR, "lw": 0.6},
     )
     ax.set_xlim(0.0, 1.0)
     ax.set_ylim(-1.55, 1.55)
     ax.set_xlabel(r"$t$")
     ax.set_ylabel(r"$a(t)$")
-    ax.legend(frameon=False, loc="upper left")
+    ax.legend(frameon=False, loc="lower right")
+    ax.set_title(r"(a) signed drifts", loc="left", fontsize=8)
+    ax.annotate(
+        "unsigned average discards sign",
+        xy=(0.18, -0.45),
+        xytext=(0.42, -1.38),
+        fontsize=7,
+        color=COLOR_LINEAR,
+        arrowprops={"arrowstyle": "->", "color": COLOR_LINEAR, "lw": 0.7},
+    )
+
+    def _bars(axis, values, ylabel, panel, prefer_index, prefer_text):
+        colors = [COLOR_LINEAR, COLOR_VP]
+        bars = axis.bar([0, 1], values, color=colors, width=0.55)
+        axis.set_xticks([0, 1], ["lin", "VP"])
+        axis.set_ylabel(ylabel)
+        axis.set_title(panel, loc="left", fontsize=8)
+        ymax = max(values)
+        shorter = values[prefer_index]
+        y_ann = ymax * 1.18
+        axis.set_xlim(-0.85, 1.85)
+        axis.set_ylim(0.0, ymax * 1.48)
+        for bar, val in zip(bars, values, strict=True):
+            axis.text(
+                bar.get_x() + bar.get_width() / 2,
+                bar.get_height(),
+                f"{val:.3f}",
+                ha="center",
+                va="bottom",
+                fontsize=7,
+                zorder=6,
+                clip_on=False,
+            )
+        # Side annotation: leader lands on the named bar and misses the value label.
+        side = -1.0 if prefer_index == 0 else 1.0
+        axis.annotate(
+            prefer_text,
+            xy=(prefer_index + side * 0.18, shorter * 0.48),
+            xytext=(prefer_index + side * 0.70, y_ann),
+            fontsize=7,
+            color="black",
+            ha="center",
+            va="bottom",
+            zorder=4,
+            bbox={
+                "facecolor": "white",
+                "alpha": 0.85,
+                "edgecolor": "none",
+                "pad": 1.5,
+            },
+            arrowprops={
+                "arrowstyle": "->",
+                "color": "black",
+                "lw": 0.7,
+                "connectionstyle": (
+                    "arc3,rad=0.25" if prefer_index == 0 else "arc3,rad=-0.25"
+                ),
+            },
+        )
+
+    _bars(
+        ax_r,
+        [r_lin, r_vp],
+        r"$\mathcal{R}$",
+        r"(b) exact $\mathcal{R}$",
+        1,
+        r"$\mathcal{R}$ prefers VP",
+    )
+    _bars(
+        ax_w,
+        [w_lin, w_vp],
+        r"$W_2$",
+        r"(c) Heun $W_2$",
+        0,
+        r"$W_2$ prefers lin",
+    )
     out = FIGURE_DIR / ("fig_scalar" + FIGURE_SUFFIX)
     fig.savefig(out, bbox_inches="tight")
     workshop = ROOT / "paper" / "gddl2026" / "figures" / ("fig_scalar" + FIGURE_SUFFIX)
@@ -968,6 +1055,12 @@ def main() -> None:
             note="Signed Delta_mean and Delta_cov on all 18 blocks; * marks inversions.",
         )
         written.append(fig_n)
+    else:
+        print(
+            "skipping Hydra-backed figures (fig2_inversions, fig_eigenmode, "
+            "fig3_interaction, fig_noncentered): outputs/ is not in the public "
+            "snapshot; use the shipped PDFs under paper/arxiv/figures/"
+        )
     for path in written:
         print(path.relative_to(ROOT), sha256_file(path)[:16])
 

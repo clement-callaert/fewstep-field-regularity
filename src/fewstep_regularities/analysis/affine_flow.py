@@ -4,9 +4,10 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
+from typing import TYPE_CHECKING
 
-import torch
-from torch import Tensor
+if TYPE_CHECKING:
+    from torch import Tensor
 
 
 LOG_COVARIANCE_SCALAR = "log_covariance_scalar"
@@ -130,6 +131,8 @@ def scalar_affine_quantities(
     time: float,
 ) -> ScalarAffineQuantities:
     """Evaluate the drift and three time derivatives with autograd."""
+    import torch
+
     if eigenvalue <= 0.0:
         raise ValueError("eigenvalue must be positive")
     t = torch.tensor(time, dtype=torch.float64, requires_grad=True)
@@ -172,6 +175,8 @@ def scalar_affine_quantities(
 
 def sorted_covariance_eigenvalues(covariance: Tensor) -> list[float]:
     """Return sorted covariance eigenvalues as Python floats."""
+    import torch
+
     if covariance.ndim != 2 or covariance.shape[0] != covariance.shape[1]:
         raise ValueError("covariance must be square")
     values = torch.linalg.eigvalsh(covariance)

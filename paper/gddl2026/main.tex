@@ -5,23 +5,39 @@
 % linked from https://neurips.cc/Conferences/2026/CallForPapers ("Paper template").
 % neurips_2026.sty SHA-256:
 % c3fc2894e83d2517ca18b66741d6c595986d97957dc08ec08bb2125a7ec4555a
-% Retrieved 2026-07-24T18:17:44Z. Main-track checklist.tex is intentionally
-% not loaded (GDDL CFP does not require it).
+% Retrieved 2026-07-24T18:17:44Z.
+% [OWNER DECISION] Main-track checklist.tex is not loaded. GDDL OpenReview
+% invitation NeurIPS.cc/2026/Workshop/GDDL/-/Submission (retrieved 2026-08-13)
+% has no checklist field and no supplement-PDF field. Include the NeurIPS
+% paper checklist only after written organizer confirmation.
 % Long-paper track: 5--9 pages excluding references
-% (https://gddl-neurips-2026.github.io/). This version targets 5--6 body pages.
+% (https://gddl-neurips-2026.github.io/). Single anonymous PDF: the rational
+% VP Heun certificate is an appendix after the bibliography, not a separate
+% supplement file.
 \usepackage[dblblindworkshop]{neurips_2026}
 \workshoptitle{Geometric Distributional Deep Learning: Bridging Optimal Transport, Learning and Structured Data}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+% Clickable links are disabled only on pdfTeX 1.40.22, which segfaults
+% on \pdfendlink when a citation hyperlink straddles a page break
+% (TeX Live 2022). Newer engines keep hidelinks with live destinations.
+% Metadata is always written with \hypersetup and \pdfinfo.
 \usepackage{hyperref}
 \hypersetup{
   hidelinks,
-  pdftitle={Few-Step Flow-Matching Error Can Be Misranked by Averaged Jacobian Regularity: A Certified Gaussian Counterexample},
+  pdftitle={Averaged Jacobian Regularity Can Misrank Few-Step Flow-Matching Schedules: A Certified Gaussian Counterexample},
   pdfauthor={},
   pdfsubject={Anonymous workshop submission},
   pdfkeywords={flow matching, stochastic interpolants, few-step sampling, Runge-Kutta, Gaussian interpolants, Wasserstein-2, interpolation schedules},
 }
+\makeatletter
+\@ifundefined{pdftexrevision}{}{%
+  \ifnum\pdftexrevision=22
+    \hypersetup{draft=true}%
+  \fi
+}
+\makeatother
 \usepackage{url}
 \usepackage{booktabs}
 \usepackage{amsmath,amssymb,amsthm}
@@ -43,8 +59,8 @@
 \newcommand{\cR}{\mathcal{R}}
 \newcommand{\Rhat}{\widehat{\mathcal{R}}_{24}}
 
-\title{Few-Step Flow-Matching Error Can Be Misranked by\\
-Averaged Jacobian Regularity:\\
+\title{Averaged Jacobian Regularity Can Misrank Few-Step\\
+Flow-Matching Schedules:\\
 A Certified Gaussian Counterexample}
 
 \author{%
@@ -53,24 +69,31 @@ A Certified Gaussian Counterexample}
 
 \begin{document}
 
+\pdfinfo{%
+  /Title (Averaged Jacobian Regularity Can Misrank Few-Step Flow-Matching Schedules: A Certified Gaussian Counterexample)
+  /Author ()
+  /Subject (Anonymous workshop submission)
+  /Keywords (flow matching, stochastic interpolants, few-step sampling, Runge-Kutta, Gaussian interpolants, Wasserstein-2, interpolation schedules)
+}
+
 \maketitle
 
 \begin{abstract}
-Does averaged squared Jacobian regularity rank two interpolants in the
-same order as equal-NFE endpoint error? Chen et al.\ propose minimizing
-$A_2$, the time-integrated squared spatial Jacobian norm of a
-flow-matching marginal ODE, as a path-selection criterion, without a
-proved discretization-error bound. Already for independent $N(0,1)$ and
-$N(0,4)$, the exact integrals are $5\pi/8-1$ (linear) and $\pi^2/16$
-(trigonometric VP), while Heun at NFE~$8$ reverses Gaussian $\wtwo$.
-The linear factor is the rational $6797469/3559400$; a rational enclosure
-in $\mathbb{Q}[\pi,\sqrt{2}]$ gives $r_{\mathrm{VP}}<187/100$. The object
-is a flow-matching marginal ODE, not a score-based probability-flow ODE.
-The Gaussian drift and $\wtwo$ formula are closed form; the regularity
-integrand is exact, while multimode $\cR$ is evaluated deterministically
-by adaptive quadrature. Pairwise and four-path census comparisons are
-reported below; a finite census does not imply that a global
-$A_2$-minimizer minimizes fixed-NFE error.
+Few-step sampling in flow matching and stochastic interpolants requires
+an interpolation schedule before any endpoint error is observed. A
+natural question for schedule design is whether a scalar regularity
+functional ranks two schedules in the same order as equal-NFE
+discretization error. Chen et al.\ propose minimizing $A_2$, the
+time-integrated squared spatial Jacobian norm of a flow-matching
+marginal ODE, without a proved discretization-error bound. For
+independent $N(0,1)$ and $N(0,4)$, exact regularity integrals prefer
+trigonometric VP while the Heun method at NFE~$8$ prefers the linear
+path in Gaussian $W_2$. The inversion is certified by an exact rational
+Heun product and a nonnegative polynomial in $\pi$ and $\sqrt{2}$, not
+by floating-point comparison. The unsigned time average discards signed
+stage information that a fixed-stage Runge--Kutta method uses. All
+comparisons use exact Gaussian marginal fields; multimode results are
+finite deterministic censuses. No learned vector field is used.
 \end{abstract}
 
 \section{Introduction}
@@ -86,12 +109,16 @@ induces between two interpolant paths is reliable at equal NFE on a
 flow-matching marginal ODE.
 
 We isolate that ranking question on commuting Gaussian interpolants,
-where the field is affine. The Gaussian drift and $\wtwo$ formula are
-closed form; the regularity integrand is exact, while multimode $\cR$ is
-evaluated deterministically by adaptive quadrature. The leading result
-is a deterministic scalar Heun example
-(Section~\ref{sec:scalar}). A modal identity then records the signed
-information that $\cR$ discards (Section~\ref{sec:mechanism}).
+where the field is affine. For the certified scalar pair, the Gaussian
+drift and $\wtwo$ formula are closed form and the regularity integrals
+are exact, so inversion is a property of the criterion rather than an
+estimation artefact. Multimode censuses below are deterministic numerical
+calculations: $\cR$ by adaptive quadrature, and $\wtwo$ by exact Gaussian
+moments propagated through modal Runge--Kutta updates. They are not a
+symbolic certificate. The leading result is a deterministic scalar Heun
+example (Section~\ref{sec:scalar}). A modal identity then records the
+signed information that $\cR$ discards for the implemented Euler and Heun
+factors (Section~\ref{sec:mechanism}).
 Section~\ref{sec:third} splits the ranking question into three
 comparisons: pairwise linear versus VP, pairwise VP versus the Chen
 Ex.~3.3 scalar schedule, and a four-path census including the per-mode
@@ -203,18 +230,18 @@ $a(3/4)=(-9+15\sqrt{2})\pi/82$. Positivity of $a(3/4)$ is
 $15^2\cdot 2-9^2=369>0$. The four-step product lies in
 $\mathbb{Q}[\pi,\sqrt{2}]$ with nonnegative coefficients, so
 substituting $\sqrt{2}<99/70$ and $\pi<355/113$ is valid and yields
-$r_{\mathrm{VP}}<187/100$ by an integer comparison in the anonymous
-supplement. Interval arithmetic is a cross-check only.
+$r_{\mathrm{VP}}<187/100$ by an integer comparison in
+Appendix~\ref{app:vpheun}. Interval arithmetic is a cross-check only.
 \end{proof}
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.92\linewidth,alt={Scalar drifts of the linear and trigonometric VP interpolants between N(0,1) and N(0,4), with Heun nodes at NFE 8.}]{figures/fig_scalar.pdf}
-  \caption{Scalar drifts $a_{\mathrm{lin}}(t)$ and $a_{\mathrm{VP}}(t)$
-  for independent $N(0,1)$ and $N(0,4)$. The shaded region is
-  $a_{\mathrm{lin}}<0$. Markers are the four Heun nodes at NFE~$8$.
-  $a_{\mathrm{lin}}(0)=-1<0<a_{\mathrm{lin}}(1)=+1$. Exact evaluation
-  of the closed-form drifts.}
+  \includegraphics[width=0.92\linewidth,alt={Certified scalar counterexample: linear versus VP drifts between N(0,1) and N(0,4), exact regularity integrals, and Heun NFE 8 Wasserstein-2 bars.}]{figures/fig_scalar.pdf}
+  \caption{Certified scalar counterexample for independent $N(0,1)$ and
+  $N(0,4)$. (a)~Closed-form drifts; the shaded region is
+  $a_{\mathrm{lin}}<0$; markers are Heun nodes at NFE~$8$.
+  (b)~Exact regularity integrals $5\pi/8-1$ and $\pi^2/16$.
+  (c)~Gaussian $\wtwo$ at Heun NFE~$8$. Symbolic certificate, not a census.}
   \label{fig:scalar}
   \vspace{-8pt}
 \end{figure}
@@ -299,9 +326,10 @@ are a hierarchical listing of those cells, not a population rate.
   finite-census observation does not imply that a global $\cR$-minimizer
   minimizes fixed-NFE error. When $\Sigma_1$ has at least two distinct
   eigenvalues, the per-mode path is not a $C^1$ shared interpolant.
-  The Gaussian drift and $\wtwo$ formula are closed form; the regularity
-  integrand is exact, while multimode $\cR$ is evaluated deterministically
-  by adaptive quadrature.}
+  The Gaussian drift and $\wtwo$ formula are closed form. Deterministic
+  calculation: $\cR$ is evaluated by adaptive quadrature, while $\wtwo$
+  uses exact Gaussian moments propagated through the modal Runge--Kutta
+  updates.}
   \label{tab:threepath}
   \small
   \input{generated/log_covariance_workshop}
@@ -311,7 +339,9 @@ are a hierarchical listing of those cells, not a population rate.
   \centering
   \caption{Strongest centered inversion: low-rank, $d=8$, Euler, NFE~$8$.
   Eigenvalues: $0.05$ (six times), $4.64827725629505$,
-  $10.675638226546441$.}
+  $10.675638226546441$. Deterministic calculation: $\cR$ is evaluated by
+  adaptive quadrature, while $\wtwo$ uses exact Gaussian moments
+  propagated through the modal Runge--Kutta updates.}
   \label{tab:strongest}
   \begin{tabular}{lccc}
     \toprule
@@ -424,5 +454,58 @@ global few-step optimality theorem.
 \FloatBarrier
 \bibliographystyle{plainnat}
 \bibliography{references}
+
+\appendix
+\begingroup
+\setlength{\abovedisplayskip}{4pt plus 1pt minus 2pt}
+\setlength{\belowdisplayskip}{4pt plus 1pt minus 2pt}
+\setlength{\abovedisplayshortskip}{2pt plus 1pt}
+\setlength{\belowdisplayshortskip}{2pt plus 1pt}
+\section{Rational VP Heun certificate}
+\label{app:vpheun}
+
+This appendix records the integer comparison used in
+Proposition~\ref{prop:scalar}. It is part of this PDF, not a separate
+supplement file.
+
+\looseness=-1
+The four-step VP Heun product is the following element $P(\pi,\sqrt{2})$
+of $\mathbb{Q}[\pi,\sqrt{2}]$, obtained by expanding the four Heun
+factors with $h=1/4$ and reducing $\sqrt{2}^2=2$:
+{\small
+\begin{equation}
+\begin{aligned}
+P(\pi,\sqrt{2})
+&= 1+\tfrac{3}{40}\pi+\tfrac{15}{164}\pi\sqrt{2}
++\tfrac{78579}{10758400}\pi^2+\tfrac{45}{5248}\pi^2\sqrt{2}
++\tfrac{11421}{17213440}\pi^3
++\tfrac{4671}{17213440}\pi^3\sqrt{2}\\
+&\quad+\tfrac{5103}{275415040}\pi^4
++\tfrac{567}{55083008}\pi^4\sqrt{2}
++\tfrac{243}{2203320320}\pi^5
++\tfrac{729}{2203320320}\pi^5\sqrt{2}
++\tfrac{729}{176265625600}\pi^6.
+\end{aligned}
+\end{equation}
+}
+Each of the twelve coefficients is a ratio of nonnegative integers,
+hence nonnegative, and the constant term is $1$. Substituting
+$\pi<355/113$ and $\sqrt{2}<99/70$ is therefore valid and yields
+\[
+P\Bigl(\frac{355}{113},\frac{99}{70}\Bigr)
+=\frac{192113353671412470139303}{102753427879939708813312}
+<\frac{187}{100},
+\]
+equivalently
+\[
+19211335367141247013930300<19214891013548725548089344.
+\]
+Hence $r_{\mathrm{VP}}<187/100$ and $W_2^{\mathrm{VP}}>13/100$.
+The bound $\sqrt{2}<99/70$ is $99^2-2\cdot 70^2=1$;
+$\pi<355/113$ follows from Machin's formula with Leibniz remainders
+(seven Taylor terms for $\arctan(1/5)$, four for $\arctan(1/239)$).
+An independent \texttt{mpmath}~$1.3.0$ interval enclosure is a
+\mbox{cross-check}, not the proof.
+\endgroup
 
 \end{document}
