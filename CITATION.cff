@@ -5,7 +5,7 @@ type: preprint
 authors:
   - family-names: Callaert
     given-names: Clément
-    orcid: TODO-ORCID
+    orcid: "https://orcid.org/0009-0001-6863-8778"
     email: callaert.clement@gmail.com
     affiliation: "CentraleSupélec and Université Paris-Saclay"
 license: MIT

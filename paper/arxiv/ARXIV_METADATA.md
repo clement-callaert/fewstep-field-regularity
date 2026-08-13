@@ -15,7 +15,7 @@ contains "flow matching" (as "Flow-Matching"). Character count: 110. Word count:
 - Name: Clément Callaert
 - Affiliation: CentraleSupélec and Université Paris-Saclay
 - Email: callaert.clement@gmail.com
-- ORCID: owner action required before upload (Semantic Scholar / OpenAlex / Google Scholar merge on ORCID)
+- ORCID: https://orcid.org/0009-0001-6863-8778
 - Graphy: always "Clément Callaert" in the PDF, arXiv, GitHub, LinkedIn, and BibTeX
 - Postal address, laboratory, supervisor, funding: none (by instruction)
 
