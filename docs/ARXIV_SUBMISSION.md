@@ -103,10 +103,10 @@ The script enforces, in code:
 Do not run this sequence now. Trigger it only after the workshop
 decision.
 
-1. Create the ORCID. Replace `TODO-ORCID` in `CITATION.cff`. Keep **one**
-   spelling of the name everywhere: PDF, arXiv, GitHub, BibTeX. Graphy:
-   `Clément Callaert`. Without ORCID, `Clément Callaert` and
-   `Clement Callaert` become two authors in Google Scholar and OpenAlex.
+1. ORCID is set in `CITATION.cff`:
+   `https://orcid.org/0009-0001-6863-8778`. Keep **one** spelling of the
+   name everywhere: PDF, arXiv, GitHub, BibTeX. Graphy: `Clément Callaert`.
+   At arXiv upload, paste the same ORCID into the author form.
 2. `git checkout main && git merge --ff-only arxiv-audit-and-release && git push origin main`
 3. Deposit on arXiv with the fields above. **v1 is the only discovery
    event**: it enters the daily listing and email alerts; v2 does not.
