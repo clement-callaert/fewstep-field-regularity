@@ -91,10 +91,12 @@ def main() -> None:
     OUT_TEX.write_text("\n".join(lines), encoding="utf-8")
     OUT_SUMMARY.write_text(
         (
-            f"On the {n_total} centered solver-budget conditions, the per-mode "
-            f"log-covariance schedule (Chen et al.\\ Ex.~3.3) has the smallest "
-            f"continuous $\\cR$ in every block and the smallest Gaussian $\\wtwo$ "
-            f"in {n_log_smallest_w2} of {n_total} blocks.\n"
+            f"Among the four candidate paths on the stated {n_total}-block census, "
+            f"the per-mode log-covariance path has the smallest continuous "
+            f"$\\cR$ and the smallest Gaussian $\\wtwo$ in "
+            f"{n_log_smallest_w2} of {n_total} blocks. This finite-census "
+            f"observation does not imply that a global $\\cR$-minimizer "
+            f"minimizes fixed-NFE error.\n"
         ),
         encoding="utf-8",
     )

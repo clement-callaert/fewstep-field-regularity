@@ -5,7 +5,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{hyperref}
-\hypersetup{hidelinks,pdftitle={},pdfauthor={}}
+\hypersetup{hidelinks,pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={}}
 \usepackage{url}
 
 \title{Anonymous supplement: rational VP Heun certificate}
@@ -17,10 +17,26 @@
 This supplement records the integer comparison used in the workshop
 paper. It contains no author names, emails, or public repository URLs.
 
-The four-step VP Heun product is an element $P(\pi,\sqrt{2})$ of
-$\mathbb{Q}[\pi,\sqrt{2}]$ with twelve monomials, all coefficients
-nonnegative. Substituting $\pi<355/113$ and $\sqrt{2}<99/70$ is
-therefore valid and yields
+The four-step VP Heun product is the following element $P(\pi,\sqrt{2})$
+of $\mathbb{Q}[\pi,\sqrt{2}]$, obtained by expanding the four Heun
+factors with $h=1/4$ and reducing $\sqrt{2}^2=2$:
+\begin{equation}
+\begin{aligned}
+P(\pi,\sqrt{2})
+&= 1+\frac{3}{40}\pi+\frac{15}{164}\pi\sqrt{2}
++\frac{78579}{10758400}\pi^2+\frac{45}{5248}\pi^2\sqrt{2}\\
+&\quad+\frac{11421}{17213440}\pi^3
++\frac{4671}{17213440}\pi^3\sqrt{2}\\
+&\quad+\frac{5103}{275415040}\pi^4
++\frac{567}{55083008}\pi^4\sqrt{2}\\
+&\quad+\frac{243}{2203320320}\pi^5
++\frac{729}{2203320320}\pi^5\sqrt{2}
++\frac{729}{176265625600}\pi^6.
+\end{aligned}
+\end{equation}
+Each of the twelve coefficients is a ratio of nonnegative integers,
+hence nonnegative, and the constant term is $1$. Substituting
+$\pi<355/113$ and $\sqrt{2}<99/70$ is therefore valid and yields
 \[
 P\Bigl(\frac{355}{113},\frac{99}{70}\Bigr)
 =\frac{192113353671412470139303}{102753427879939708813312}

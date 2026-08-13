@@ -1,4 +1,4 @@
-\begin{thebibliography}{20}
+\begin{thebibliography}{22}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -13,6 +13,12 @@ Michael~S. Albergo, Nicholas~M. Boffi, and Eric Vanden-Eijnden.
 \newblock \emph{Journal of Machine Learning Research}, 26\penalty0
   (209):\penalty0 1--80, 2025.
 \newblock arXiv:2303.08797.
+
+\bibitem[Benton et~al.(2024)Benton, Deligiannidis, and Doucet]{benton2024error}
+Joe Benton, George Deligiannidis, and Arnaud Doucet.
+\newblock Error bounds for flow matching methods.
+\newblock \emph{Transactions on Machine Learning Research}, 2024.
+\newblock arXiv:2305.16860.
 
 \bibitem[Chen et~al.(2025)Chen, Vanden-Eijnden, and Xu]{lipschitzguided2025}
 Yifan Chen, Eric Vanden-Eijnden, and Jiawei Xu.
@@ -111,6 +117,14 @@ Yang Song, Jascha Sohl-Dickstein, Diederik~P. Kingma, Abhishek Kumar, Stefano
 \newblock In \emph{International Conference on Learning Representations
   (ICLR)}, 2021.
 \newblock arXiv:2011.13456.
+
+\bibitem[Song et~al.(2023)Song, Dhariwal, Chen, and
+  Sutskever]{song2023consistency}
+Yang Song, Prafulla Dhariwal, Mark Chen, and Ilya Sutskever.
+\newblock Consistency models.
+\newblock In \emph{International Conference on Machine Learning ({ICML})},
+  2023.
+\newblock arXiv:2303.01469.
 
 \bibitem[St{\'e}phanovitch(2026)]{stephanovitch2026lipschitz}
 Arthur St{\'e}phanovitch.

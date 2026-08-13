@@ -138,11 +138,11 @@ def four_path_scores(
     return scores
 
 
-def kendall_tau_two_path(n_agree: int, n_invert: int) -> float:
-    """Return census Kendall tau for paired two-path rankings.
+def paired_concordance_score_from_counts(n_agree: int, n_invert: int) -> float:
+    """Return (n_agree - n_invert) / n for a complete two-path census.
 
     Each block contributes +1 if R and W2 agree and -1 if they invert.
-    This is a descriptive statistic on a complete enumeration, not a test.
+    This is a paired concordance score, not Kendall's tau and not a test.
     """
     total = n_agree + n_invert
     if total <= 0:

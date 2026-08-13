@@ -1,8 +1,8 @@
 {
   "figure_artifact_id": "arxiv_figures_2026-08-13-v1:fig_noncentered",
-  "figure_checksum_sha256": "1d6384ee5f30699db9a361c05427baacb9b366c438e75929a64f759c5f276026",
-  "generation_timestamp": "2026-08-13T15:25:49.092672+00:00",
-  "git_commit": "f04caceeb8e386a903db9919ecb7f9449fb1962d",
+  "figure_checksum_sha256": "ac8ecc78bee8ab5bf400593ed0e2a8f1226434acf1b56f4f4fe2a79ac79c50f0",
+  "generation_timestamp": "2026-08-13T17:38:52.793245+00:00",
+  "git_commit": "d71349012762318f2248ec2d4d69942884a4c872",
   "git_status": "dirty (regenerate after committing)",
   "note": "Signed Delta_mean and Delta_cov on all 18 blocks; * marks inversions.",
   "plotting_config": {

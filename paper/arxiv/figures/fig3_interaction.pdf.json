@@ -1,8 +1,8 @@
 {
   "figure_artifact_id": "arxiv_figures_2026-08-13-v1:fig3_interaction",
-  "figure_checksum_sha256": "96500fe1cdebd5433416896790e413660475907500279f90ed8d55ab5d3772f0",
-  "generation_timestamp": "2026-08-13T15:25:47.707613+00:00",
-  "git_commit": "f04caceeb8e386a903db9919ecb7f9449fb1962d",
+  "figure_checksum_sha256": "6fe88a25f671f439f55d590dd11de79872a38ed11fc3134dfeb827deeb0df1bb",
+  "generation_timestamp": "2026-08-13T17:38:52.443026+00:00",
+  "git_commit": "d71349012762318f2248ec2d4d69942884a4c872",
   "git_status": "dirty (regenerate after committing)",
   "note": "Source: phase4_gaussian_reproduction_2026-07-24-v1:results. Signed low-rank W2 margins versus equal-NFE Euler, Heun, and RK4.",
   "plotting_config": {

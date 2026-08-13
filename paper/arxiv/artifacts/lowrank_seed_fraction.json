@@ -1,5 +1,8 @@
 {
   "n_seeds": 50,
+  "interval": "Clopper-Pearson 95 percent exact",
+  "generator": "torch.Generator manual_seed 10000..10049",
+  "redraws_F": true,
   "summary": [
     {
       "dim": 2,
@@ -519,8 +522,5 @@
       "seed": 10049,
       "inversion_any_block": true
     }
-  ],
-  "interval": "Clopper-Pearson 95 percent exact",
-  "generator": "torch.Generator manual_seed 10000..10049",
-  "redraws_F": true
+  ]
 }

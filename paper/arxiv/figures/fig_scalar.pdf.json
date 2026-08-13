@@ -1,8 +1,8 @@
 {
   "figure_artifact_id": "arxiv_figures_2026-08-13-v1:fig_scalar",
-  "figure_checksum_sha256": "d6ad8a4246e7853c8907bd8fde2875c5405b34f26d3921b18fa4870f5cbe2a5f",
-  "generation_timestamp": "2026-08-13T15:39:20.814221+00:00",
-  "git_commit": "f04caceeb8e386a903db9919ecb7f9449fb1962d",
+  "figure_checksum_sha256": "544ddb18099df61fa963c5936386f171d60affa271f890bd3f2a54472c9819f4",
+  "generation_timestamp": "2026-08-13T17:38:50.994857+00:00",
+  "git_commit": "d71349012762318f2248ec2d4d69942884a4c872",
   "git_status": "dirty (regenerate after committing)",
   "note": "Exact closed-form drifts a_lin and a_VP on [0,1]; Heun nodes at NFE 8.",
   "plotting_config": {

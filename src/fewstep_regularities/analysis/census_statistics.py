@@ -29,8 +29,12 @@ def clopper_pearson(
     return float(interval.low), float(interval.high)
 
 
-def kendall_tau_from_flags(inverted: Sequence[bool]) -> float:
-    """Return (n_agree - n_invert) / n on a complete two-path census."""
+def paired_concordance_score(inverted: Sequence[bool]) -> float:
+    """Return (n_agree - n_invert) / n on a complete two-path census.
+
+    This is a paired concordance score on a finite enumeration, not Kendall's
+    tau and not an inferential test.
+    """
     n = len(inverted)
     if n <= 0:
         raise ValueError("need at least one block")

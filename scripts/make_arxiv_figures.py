@@ -208,7 +208,7 @@ def phase4_blocks(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 def figure1_regimes() -> Path:
-    """Three-regime bar overview: pairwise, in-family, unconstrained.
+    """Three-comparison bar overview: pairwise, shared-schedule, four-path census.
 
     Inputs: paper/arxiv/artifacts/geometries.json via exact-moment modal RK.
     Outputs: path to the written figure PDF.
@@ -232,7 +232,26 @@ def figure1_regimes() -> Path:
         ax.bar_label(bars, [f"{v:.2f}" for v in values], padding=1.2, fontsize=7)
         ax.set_ylim(0.0, max(values) * 1.32)
 
-    fig, axes = plt.subplots(2, 3, figsize=(FIGWIDTH, 2.72), layout="constrained")
+    fig, axes = plt.subplots(3, 2, figsize=(FIGWIDTH, 4.2), layout="constrained")
+    fig.set_constrained_layout_pads(w_pad=0.02, h_pad=0.04, hspace=0.08, wspace=0.06)
+    def _panel_label(ax: Any, text: str) -> None:
+        ax.text(
+            0.03,
+            0.97,
+            text,
+            transform=ax.transAxes,
+            fontsize=7,
+            ha="left",
+            va="top",
+            clip_on=True,
+            bbox={
+                "boxstyle": "round,pad=0.15",
+                "fc": "white",
+                "ec": "none",
+                "alpha": 0.9,
+            },
+        )
+
     _bars(
         axes[0, 0],
         ["lin", "VP"],
@@ -240,17 +259,17 @@ def figure1_regimes() -> Path:
         [low8["linear"].regularity, low8["variance_preserving"].regularity],
     )
     _bars(
-        axes[1, 0],
+        axes[0, 1],
         ["lin", "VP"],
         [COLOR_LINEAR, COLOR_VP],
         [low8["linear"].w2, low8["variance_preserving"].w2],
     )
-    axes[0, 0].set_title(r"(a) pairwise: 5 of 12 invert", loc="left", fontsize=8)
     axes[0, 0].set_ylabel(r"$\mathcal{R}$")
-    axes[1, 0].set_ylabel(r"$W_2$")
+    axes[0, 1].set_ylabel(r"$W_2$")
+    _panel_label(axes[0, 0], r"(a) lin vs VP")
 
     _bars(
-        axes[0, 1],
+        axes[1, 0],
         ["VP", r"Ex.\ 3.3"],
         [COLOR_VP, COLOR_SCALAR],
         [
@@ -264,32 +283,56 @@ def figure1_regimes() -> Path:
         [COLOR_VP, COLOR_SCALAR],
         [aniso8["variance_preserving"].w2, aniso8["log_covariance_scalar"].w2],
     )
-    axes[0, 1].set_title(r"(b) in-family: 9 of 36 invert", loc="left", fontsize=8)
+    axes[1, 0].set_ylabel(r"$\mathcal{R}$")
+    axes[1, 1].set_ylabel(r"$W_2$")
+    _panel_label(axes[1, 0], r"(b) VP vs Chen")
 
     _bars(
-        axes[0, 2],
-        ["lin", "VP", "per-mode"],
-        [COLOR_LINEAR, COLOR_VP, COLOR_MINIMIZER],
+        axes[2, 0],
+        ["lin", "VP", "3.3", "pm"],
+        [COLOR_LINEAR, COLOR_VP, COLOR_SCALAR, COLOR_MINIMIZER],
         [
             low8["linear"].regularity,
             low8["variance_preserving"].regularity,
+            low8["log_covariance_scalar"].regularity,
             low8["log_covariance"].regularity,
         ],
     )
     _bars(
-        axes[1, 2],
-        ["lin", "VP", "per-mode"],
-        [COLOR_LINEAR, COLOR_VP, COLOR_MINIMIZER],
+        axes[2, 1],
+        ["lin", "VP", "3.3", "pm"],
+        [COLOR_LINEAR, COLOR_VP, COLOR_SCALAR, COLOR_MINIMIZER],
         [
             low8["linear"].w2,
             low8["variance_preserving"].w2,
+            low8["log_covariance_scalar"].w2,
             low8["log_covariance"].w2,
         ],
     )
-    axes[0, 2].set_title(r"(c) unconstrained: 36 of 36", loc="left", fontsize=8)
+    axes[2, 0].set_ylabel(r"$\mathcal{R}$")
+    axes[2, 1].set_ylabel(r"$W_2$")
+    _panel_label(axes[2, 0], r"(c) four paths")
+
+    r_lin = low8["linear"].regularity
+    r_vp = low8["variance_preserving"].regularity
+    r_sc = low8["log_covariance_scalar"].regularity
+    r_pm = low8["log_covariance"].regularity
+    if abs(r_lin - 2.9441044082631174) > 1e-9:
+        raise ValueError(f"fig1(c) linear R is {r_lin}, expected low-rank d=8")
+    if abs(r_vp - 4.730543813636288) > 1e-9:
+        raise ValueError(f"fig1(c) VP R is {r_vp}, expected low-rank d=8")
+    if abs(r_sc - 11.418837310605857) > 1e-9:
+        raise ValueError(f"fig1(c) Chen R is {r_sc}, expected low-rank d=8")
+    if abs(r_pm - 2.243602963703273) > 1e-9:
+        raise ValueError(f"fig1(c) per-mode R is {r_pm}, expected low-rank d=8")
+    if aniso8["linear"].regularity > 1.5 or abs(aniso8["linear"].regularity - r_lin) < 0.5:
+        raise ValueError("panel (b) must use anisotropic d=8, not low-rank")
 
     out = FIGURE_DIR / ("fig1_regimes" + FIGURE_SUFFIX)
     fig.savefig(out, bbox_inches="tight")
+    workshop = ROOT / "paper" / "gddl2026" / "figures" / ("fig1_regimes" + FIGURE_SUFFIX)
+    workshop.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(workshop, bbox_inches="tight")
     plt.close(fig)
     return out
 

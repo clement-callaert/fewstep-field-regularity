@@ -9,17 +9,17 @@ The compiled PDF is `paper/arxiv/main.pdf`. Source is packed by
 
 ## Title
 
-Averaged Jacobian Regularity Does Not Order Few-Step Error in Flow Matching: A Certified Gaussian Counterexample
+Few-Step Flow-Matching Error Can Be Misranked by Averaged Jacobian Regularity: A Certified Gaussian Counterexample
 
-No LaTeX macros. No mathematical symbols. Character count: 108. Word count: 15.
+No LaTeX macros. No mathematical symbols. Character count: 114. Word count: 14.
 
 ## Abstract (plain text, arXiv form field)
 
-Character count: 1372. Limit: 1920. One paragraph. Macros expanded; `$...$`
-reduced to ASCII (`A_2`, `pi`, `lambda_max`, `alpha`, `sigma`).
+Character count: 1341. Limit: 1920. One paragraph. Macros expanded; `$...$`
+reduced to ASCII (`A_2`, `pi`, `W_2`). Word count: 190.
 
 <!-- BEGIN ARXIV ABSTRACT -->
-Flow matching and stochastic interpolants specify a probability flow ODE whose few-step sampling error depends on the sampling schedule. Schedule design therefore needs an a priori criterion. Chen, Vanden-Eijnden, and Xu propose minimizing the averaged squared Jacobian norm A_2, a Lipschitz constant of the marginal field, as a selection criterion, without a proved bound on discretization error. This paper asks whether the order induced by A_2 between two paths is reliable at a fixed number of function evaluations (NFE). Already for centered Gaussian interpolants the implication fails: for independent N(0,1) and N(0,4), the exact regularity integrals of the linear and trigonometric variance-preserving paths are 5 pi/8 - 1 and pi^2/16, while Heun at NFE 8 reverses Gaussian Wasserstein-2 distance. Three regimes then separate. As a pairwise comparator of linear versus VP, the ranking inverts in 5 of 12 geometry-by-solver cells. As an in-family objective, trigonometric VP versus the scalar log-covariance schedule (Chen Example 3.3 with M = lambda_max) invert in 9 of 36 blocks (4 of 12 cells). The unconstrained per-mode minimizer attains both the smallest regularity and the smallest Wasserstein-2 distance in 36 of 36 blocks, but is not a shared (alpha, sigma) interpolant for d >= 2. The analysis is confined to commuting Gaussians; no learned field is used.
+Does averaged squared Jacobian regularity rank two interpolants in the same order as equal-NFE endpoint error? Chen, Vanden-Eijnden, and Xu propose minimizing A_2, the time-integrated squared spatial Jacobian norm of a flow-matching marginal ODE, as a criterion for schedule design, without a proved discretization-error bound. Classical one-step bounds use a Lipschitz constant of the field; A_2 is not that constant. Already for independent N(0,1) and N(0,4), the exact regularity integrals of the linear and trigonometric variance-preserving Gaussian interpolants are 5 pi/8 - 1 and pi^2/16, while Heun at NFE 8 reverses Gaussian Wasserstein-2 distance. The linear Heun product is the rational 6797469/3559400; a nonnegative element of Q[pi, sqrt(2)] yields r_VP < 187/100. The object is a flow matching marginal interpolant ODE, not a score-based probability-flow ODE. The Gaussian drift and W_2 formula are closed form; the regularity integrand is exact, while multimode R is evaluated deterministically by adaptive quadrature. Pairwise and four-path census comparisons on commuting Gaussian interpolants are reported below; a finite census does not imply that a global A_2-minimizer minimizes fixed-NFE error. The analysis uses stochastic interpolants, few-step sampling, Runge-Kutta, and interpolation schedules; no learned field is used.
 <!-- END ARXIV ABSTRACT -->
 
 `tests/analytical/test_release_gate.py` checks that this block is at most
@@ -55,7 +55,7 @@ This field appears in the daily listing and is indexed. It is the only
 place the code URL is visible without opening the PDF.
 
 ```
-23 pages, 4 figures, 2 tables in the main text. Code and compact artifacts: https://github.com/clement-callaert/fewstep-field-regularity
+25 pages, 4 figures, 2 tables in the main text. Code and compact artifacts: https://github.com/clement-callaert/fewstep-field-regularity
 ```
 
 No venue, review, or acceptance language.
@@ -126,3 +126,7 @@ mismatch is useful while the signed preprint is unannounced.
 Unpin the repository from the GitHub profile for the review window. Do
 not switch the repository to private: it is already public and indexed,
 and going private does not restore anonymity.
+
+## Dual submission `[OPEN]`
+
+The official GDDL 2026 CFP (https://gddl-neurips-2026.github.io/, retrieved 2026-08-13) states that the workshop is non-archival and that "Workshop submissions can be subsequently or concurrently submitted to other venues." That is not a signed permission to post a de-anonymized arXiv preprint during double-blind review. Do not deposit the preprint or submit the workshop as part of packing this kit. Keep dual-submission status open until an explicit preprint rule is confirmed.

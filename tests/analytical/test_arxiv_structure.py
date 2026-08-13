@@ -61,8 +61,25 @@ def test_arxiv_abstract_length_and_plain_macros() -> None:
     meta_abs = meta_abs.split("## Categories")[0].strip()
     assert len(meta_abs) <= 1920, len(meta_abs)
     assert module.custom_macros_in_abstract(abstract) == []
+    assert 165 <= module.abstract_word_count(abstract) <= 190
     assert "disclaimer" not in plain.lower()
     assert "no venue" not in plain.lower()
+    assert "Lipschitz constant of the marginal" not in abstract
+    assert "probability flow ODE" not in abstract.lower() or "score-based" in abstract.lower()
+
+
+@pytest.mark.analytical
+def test_arxiv_forbidden_phrasing_absent() -> None:
+    module = _load_structure()
+    text = (ROOT / "paper" / "arxiv" / "main.tex").read_text(encoding="utf-8")
+    assert module.forbidden_phrase_hits(text) == []
+    assert r"\alpha^2,\sigma^2\in C^1([0,1])" in text
+    assert r"\alpha^2\ge 0" in text
+    assert r"When $M=1$" in text
+    assert "confirmatory Phase~4" in text
+    assert "Reserve ``pre-registered''" in text
+    assert "low-rank $d=8$, Euler, NFE~$8$" in text
+    assert "on the same block" not in text
 
 
 @pytest.mark.analytical
@@ -89,6 +106,14 @@ def test_arxiv_thirtysix_restriction() -> None:
     module = _load_structure()
     text = (ROOT / "paper" / "arxiv" / "main.tex").read_text(encoding="utf-8")
     bad = module.thirty_six_without_restriction(text)
+    assert bad == []
+
+
+@pytest.mark.analytical
+def test_arxiv_not_shared_needs_eigenvalue_hypothesis() -> None:
+    module = _load_structure()
+    text = (ROOT / "paper" / "arxiv" / "main.tex").read_text(encoding="utf-8")
+    bad = module.not_shared_without_eigenvalue_hypothesis(text)
     assert bad == []
 
 

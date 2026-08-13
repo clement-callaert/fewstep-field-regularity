@@ -1,4 +1,4 @@
-"""Write census macros: Kendall tau, Clopper--Pearson, log-Lebesgue measure."""
+"""Write census macros: paired concordance, Clopper--Pearson, log-Lebesgue."""
 
 from __future__ import annotations
 
@@ -8,7 +8,7 @@ from pathlib import Path
 
 from fewstep_regularities.analysis.census_statistics import (
     clopper_pearson,
-    kendall_tau_from_flags,
+    paired_concordance_score,
 )
 from fewstep_regularities.analysis.ranking_grids import (
     PRIMARY_NFE,
@@ -28,7 +28,7 @@ REGION = ART / "inversion_region.json"
 MANIFEST = ART / "manifest.json"
 MACROS = GEN / "stats_macros.tex"
 LEBESGUE_TEX = GEN / "lebesgue_inversion.tex"
-KENDALL_TEX = GEN / "kendall_census.tex"
+CONCORDANCE_TEX = GEN / "concordance_census.tex"
 N_FINE = 1281
 N_DOUBLE = 2561
 LAM_MIN = 0.05
@@ -75,15 +75,15 @@ def main() -> None:
     GEN.mkdir(parents=True, exist_ok=True)
     centered = json.loads(CENTERED.read_text(encoding="utf-8"))
     flags = [bool(block["inversion_R"]) for block in centered["blocks"]]
-    tau = kendall_tau_from_flags(flags)
+    tau = paired_concordance_score(flags)
     by_family: dict[str, list[bool]] = defaultdict(list)
     by_solver: dict[str, list[bool]] = defaultdict(list)
     for block in centered["blocks"]:
         key = f"{block['family']}_d{block['dim']}"
         by_family[key].append(bool(block["inversion_R"]))
         by_solver[str(block["solver"])].append(bool(block["inversion_R"]))
-    tau_family = {key: kendall_tau_from_flags(vals) for key, vals in by_family.items()}
-    tau_solver = {key: kendall_tau_from_flags(vals) for key, vals in by_solver.items()}
+    tau_family = {key: paired_concordance_score(vals) for key, vals in by_family.items()}
+    tau_solver = {key: paired_concordance_score(vals) for key, vals in by_solver.items()}
 
     seeds = json.loads(SEEDS.read_text(encoding="utf-8"))
     draws = [
@@ -147,14 +147,14 @@ def main() -> None:
     macros = [
         r"\newcommand{\nInFamilyInversions}{9}",
         r"\newcommand{\nInFamilyCells}{4}",
-        rf"\newcommand{{\kendallTauCensus}}{{{tau:.3f}}}",
-        rf"\newcommand{{\kendallTauAnisoTwo}}{{{tau_family['anisotropic_gaussian_d2']:.3f}}}",
-        rf"\newcommand{{\kendallTauAnisoEight}}{{{tau_family['anisotropic_gaussian_d8']:.3f}}}",
-        rf"\newcommand{{\kendallTauLowRankTwo}}{{{tau_family['low_rank_gaussian_d2']:.3f}}}",
-        rf"\newcommand{{\kendallTauLowRankEight}}{{{tau_family['low_rank_gaussian_d8']:.3f}}}",
-        rf"\newcommand{{\kendallTauEuler}}{{{tau_solver['euler']:.3f}}}",
-        rf"\newcommand{{\kendallTauHeun}}{{{tau_solver['heun']:.3f}}}",
-        rf"\newcommand{{\kendallTauRK}}{{{tau_solver['rk4']:.3f}}}",
+        rf"\newcommand{{\pairedConcordanceCensus}}{{{tau:.3f}}}",
+        rf"\newcommand{{\pairedConcordanceAnisoTwo}}{{{tau_family['anisotropic_gaussian_d2']:.3f}}}",
+        rf"\newcommand{{\pairedConcordanceAnisoEight}}{{{tau_family['anisotropic_gaussian_d8']:.3f}}}",
+        rf"\newcommand{{\pairedConcordanceLowRankTwo}}{{{tau_family['low_rank_gaussian_d2']:.3f}}}",
+        rf"\newcommand{{\pairedConcordanceLowRankEight}}{{{tau_family['low_rank_gaussian_d8']:.3f}}}",
+        rf"\newcommand{{\pairedConcordanceEuler}}{{{tau_solver['euler']:.3f}}}",
+        rf"\newcommand{{\pairedConcordanceHeun}}{{{tau_solver['heun']:.3f}}}",
+        rf"\newcommand{{\pairedConcordanceRK}}{{{tau_solver['rk4']:.3f}}}",
         r"\newcommand{\nSeedDraws}{50}",
         rf"\newcommand{{\clopperLow}}{{{cp_low:.3f}}}",
         rf"\newcommand{{\clopperHigh}}{{{cp_high:.3f}}}",
@@ -168,10 +168,10 @@ def main() -> None:
     ]
     MACROS.write_text("\n".join(macros), encoding="utf-8")
 
-    kendall_lines = [
+    concordance_lines = [
         r"\begin{tabular}{lc}",
         r"\toprule",
-        r"stratum & Kendall $\tau$ \\",
+        r"stratum & paired concordance \\",
         r"\midrule",
         rf"census (36 blocks) & {_tau_as_tex(tau)} \\",
         rf"anisotropic $d=2$ & {_tau_as_tex(tau_family['anisotropic_gaussian_d2'])} \\",
@@ -185,7 +185,10 @@ def main() -> None:
         r"\end{tabular}",
         "",
     ]
-    KENDALL_TEX.write_text("\n".join(kendall_lines), encoding="utf-8")
+    CONCORDANCE_TEX.write_text("\n".join(concordance_lines), encoding="utf-8")
+    stale = GEN / "kendall_census.tex"
+    if stale.is_file():
+        stale.unlink()
 
     leb_lines = [
         r"\begin{tabular}{lccc}",

@@ -6,14 +6,15 @@ differently. It is not a submission note.
 
 ## Structure (2026-08-13 restructure)
 
-- Title A: *Averaged Jacobian Regularity Does Not Order Few-Step Error in
-  Flow Matching: A Certified Gaussian Counterexample*.
+- Title: *Few-Step Flow-Matching Error Can Be Misranked by Averaged Jacobian
+  Regularity: A Certified Gaussian Counterexample*.
 - Body: Abstract, §§1--7 (Introduction, Background, Method, Experiments
   4.1--4.8, Related work, Conclusion, Limitations). Reproducibility is
   Appendix H only.
 - Experiments are split by question. VP versus Chen Example 3.3 scalar
-  ($M=\lambda_{\max}$) is a post-hoc in-family census: 9 of 36 blocks,
-  4 of 12 cells.
+  ($M=\lambda_{\max}$) is a post-hoc shared-schedule pairwise census: 9 of 36
+  blocks, 4 of 12 cells. The 36 of 36 per-mode count is a four-candidate
+  census, not a global $W_2$ optimality theorem.
 - Statistical treatment is a census plus one Clopper--Pearson interval on
   $N=50$ i.i.d.\ draws of the low-rank factor. No $p$-value on
   deterministic $R$ or $W_2$.

@@ -50,6 +50,23 @@ PI_UPPER = Fraction(355, 113)
 
 Poly = dict[tuple[int, int], Fraction]
 
+# Displayed four-step VP Heun product in Q[pi, sqrt(2)], reduced with
+# sqrt(2)^2 = 2. Keys are (power of pi, power of sqrt(2) in {0, 1}).
+DISPLAYED_VP_HEUN_PRODUCT: Poly = {
+    (0, 0): Fraction(1),
+    (1, 0): Fraction(3, 40),
+    (1, 1): Fraction(15, 164),
+    (2, 0): Fraction(78579, 10758400),
+    (2, 1): Fraction(45, 5248),
+    (3, 0): Fraction(11421, 17213440),
+    (3, 1): Fraction(4671, 17213440),
+    (4, 0): Fraction(5103, 275415040),
+    (4, 1): Fraction(567, 55083008),
+    (5, 0): Fraction(243, 2203320320),
+    (5, 1): Fraction(729, 2203320320),
+    (6, 0): Fraction(729, 176265625600),
+}
+
 
 def linear_variance(time: Fraction) -> Fraction:
     """Return q_lin(t) = (1-t)^2 + 4 t^2."""
