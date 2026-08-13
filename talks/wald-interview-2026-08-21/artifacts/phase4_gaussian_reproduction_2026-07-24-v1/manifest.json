@@ -1,0 +1,96 @@
+{
+  "artifact_manifest": [
+    {
+      "artifact_id": "phase4_gaussian_reproduction_2026-07-24-v1:results",
+      "code_status": "clean",
+      "config_hash": "82ec484f42fb8cd45000e4c3c8b399d46a64763226bf84ed2235080a1dae7e2b",
+      "creation_timestamp": "2026-07-24T11:07:28.923157+00:00",
+      "git_commit": "083dbf96b5bf189650d7d3d519b99887f18aa15e",
+      "input_artifact_hashes": {
+        "phase3_gate_analysis_final_audit_2026-07-23-v2:interactions": "e3c2c678df7d476972ca58ca1b638069bf88780d86cd7c6fe942ee7b098e380a",
+        "phase3_gate_analysis_final_audit_2026-07-23-v2:inversions": "0d42c6a51011d4d1ac45202e5f46f14d291b11ffb43e1290cab9bd25deb12799",
+        "phase3_gate_registered_2026-07-23-v1:gate_results": "6c68fe54cc20dde970ef1ab2828d082820cf21395e1ac096b90c9825f54085c5"
+      },
+      "kind": "table",
+      "output_checksum": "b8930142cba5655ee553aae5ff400cd884c1137e77547d9a5fa94bd4e354973f",
+      "path": "/home/calla/AI_projects/fewstep-field-regularity/outputs/phase4_gaussian_reproduction_2026-07-24-v1/results.json",
+      "producing_run_id": "phase4_gaussian_reproduction_2026-07-24-v1",
+      "random_seeds": [
+        0
+      ],
+      "software_environment_hash": "5e1050c1800d4f47d2e7c3bd03ca03af6481587cd7c95fc022d2a928b264f36e"
+    },
+    {
+      "artifact_id": "phase4_gaussian_reproduction_2026-07-24-v1:phase3_comparison",
+      "code_status": "clean",
+      "config_hash": "82ec484f42fb8cd45000e4c3c8b399d46a64763226bf84ed2235080a1dae7e2b",
+      "creation_timestamp": "2026-07-24T11:07:28.923157+00:00",
+      "git_commit": "083dbf96b5bf189650d7d3d519b99887f18aa15e",
+      "input_artifact_hashes": {
+        "phase3_gate_analysis_final_audit_2026-07-23-v2:interactions": "e3c2c678df7d476972ca58ca1b638069bf88780d86cd7c6fe942ee7b098e380a",
+        "phase3_gate_analysis_final_audit_2026-07-23-v2:inversions": "0d42c6a51011d4d1ac45202e5f46f14d291b11ffb43e1290cab9bd25deb12799",
+        "phase3_gate_registered_2026-07-23-v1:gate_results": "6c68fe54cc20dde970ef1ab2828d082820cf21395e1ac096b90c9825f54085c5"
+      },
+      "kind": "table",
+      "output_checksum": "7ea44ac9b6a84e19e9097b03eb7a5250389b2568d295fbbedcbcad00243c63df",
+      "path": "/home/calla/AI_projects/fewstep-field-regularity/outputs/phase4_gaussian_reproduction_2026-07-24-v1/phase3_comparison.json",
+      "producing_run_id": "phase4_gaussian_reproduction_2026-07-24-v1",
+      "random_seeds": [
+        0
+      ],
+      "software_environment_hash": "5e1050c1800d4f47d2e7c3bd03ca03af6481587cd7c95fc022d2a928b264f36e"
+    },
+    {
+      "artifact_id": "phase4_gaussian_reproduction_2026-07-24-v1:validation",
+      "code_status": "clean",
+      "config_hash": "82ec484f42fb8cd45000e4c3c8b399d46a64763226bf84ed2235080a1dae7e2b",
+      "creation_timestamp": "2026-07-24T11:07:28.923157+00:00",
+      "git_commit": "083dbf96b5bf189650d7d3d519b99887f18aa15e",
+      "input_artifact_hashes": {
+        "phase3_gate_analysis_final_audit_2026-07-23-v2:interactions": "e3c2c678df7d476972ca58ca1b638069bf88780d86cd7c6fe942ee7b098e380a",
+        "phase3_gate_analysis_final_audit_2026-07-23-v2:inversions": "0d42c6a51011d4d1ac45202e5f46f14d291b11ffb43e1290cab9bd25deb12799",
+        "phase3_gate_registered_2026-07-23-v1:gate_results": "6c68fe54cc20dde970ef1ab2828d082820cf21395e1ac096b90c9825f54085c5"
+      },
+      "kind": "table",
+      "output_checksum": "43f951f956accdc6fca2a26d485539779136c4c603017db36bde25b456623483",
+      "path": "/home/calla/AI_projects/fewstep-field-regularity/outputs/phase4_gaussian_reproduction_2026-07-24-v1/validation.json",
+      "producing_run_id": "phase4_gaussian_reproduction_2026-07-24-v1",
+      "random_seeds": [
+        0
+      ],
+      "software_environment_hash": "5e1050c1800d4f47d2e7c3bd03ca03af6481587cd7c95fc022d2a928b264f36e"
+    }
+  ],
+  "code_status": "clean",
+  "command_line": ".venv/bin/fewstep-regularities experiment=phase4_gaussian_reproduction artifact_policy=phase4_release_ready",
+  "config_hash": "82ec484f42fb8cd45000e4c3c8b399d46a64763226bf84ed2235080a1dae7e2b",
+  "cuda_version": "null",
+  "end_time": "2026-07-24T11:07:28.927843+00:00",
+  "extras": {
+    "device": "cpu",
+    "expected_runtime_minutes": 10.0,
+    "hard_stop_minutes": 45.0,
+    "input_artifacts": {
+      "phase3_gate_analysis_final_audit_2026-07-23-v2:interactions": "e3c2c678df7d476972ca58ca1b638069bf88780d86cd7c6fe942ee7b098e380a",
+      "phase3_gate_analysis_final_audit_2026-07-23-v2:inversions": "0d42c6a51011d4d1ac45202e5f46f14d291b11ffb43e1290cab9bd25deb12799",
+      "phase3_gate_registered_2026-07-23-v1:gate_results": "6c68fe54cc20dde970ef1ab2828d082820cf21395e1ac096b90c9825f54085c5"
+    },
+    "mode": "phase4_gaussian_reproduction",
+    "phase": 4,
+    "precision": "float64"
+  },
+  "git_commit": "083dbf96b5bf189650d7d3d519b99887f18aa15e",
+  "gpu_name": "cpu",
+  "package_lock_hash": "ed17302605231a5e54a90b5e753edf6bbad9cb14bd0165622fbb9dc629038bcb",
+  "python_version": "3.11.15",
+  "random_seeds": [
+    0
+  ],
+  "release_ready": true,
+  "resolved_config_path": "/home/calla/AI_projects/fewstep-field-regularity/outputs/phase4_gaussian_reproduction_2026-07-24-v1/resolved_config.yaml",
+  "run_id": "phase4_gaussian_reproduction_2026-07-24-v1",
+  "runtime_s": 0.350331,
+  "software_environment_hash": "5e1050c1800d4f47d2e7c3bd03ca03af6481587cd7c95fc022d2a928b264f36e",
+  "start_time": "2026-07-24T11:07:28.577512+00:00",
+  "unresolved_config_path": "/home/calla/AI_projects/fewstep-field-regularity/outputs/phase4_gaussian_reproduction_2026-07-24-v1/unresolved_config.yaml"
+}

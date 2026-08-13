@@ -1,0 +1,16 @@
+{
+  "figure_artifact_id": "wald_talk_2026-08-13:fig_strongest_inversion",
+  "figure_checksum_sha256": "7e71b03a54897ae66554978fce36c3165d2ad3a6ff1ba720553c0e5adc7c0a3e",
+  "generation_timestamp": "2026-08-13T08:38:15.160793+00:00",
+  "note": "Data figure from frozen Phase 4 results. Lower is preferred on both axes.",
+  "plotting_config": {
+    "kind": "strongest_inversion_bars"
+  },
+  "plotting_script": "talks/wald-interview-2026-08-21/make_talk_figures.py",
+  "source_artifact_ids": [
+    "phase4_gaussian_reproduction_2026-07-24-v1:results"
+  ],
+  "source_table_hashes": {
+    "phase4_gaussian_reproduction_2026-07-24-v1:results": "b8930142cba5655ee553aae5ff400cd884c1137e77547d9a5fa94bd4e354973f"
+  }
+}
