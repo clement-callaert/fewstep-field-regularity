@@ -1,0 +1,2246 @@
+{
+  "grid": [
+    {
+      "lambda": 0.05,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 0.060463844021798704,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 0.0731175286778481,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 0.08841933698473604,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 0.10692345999911879,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 0.12930006815315506,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 0.15635958305640624,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 0.18908202882472058,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 0.22865252596366312,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 0.2765042133011442,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 0.33437015248821095,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 0.40434609491184476,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 0.4889663842714641,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 0.5912957438098541,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 0.7150402724894495,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 0.8646816701021308,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 1.045639552591273,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 1.2644677362180423,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 1.5290915994656933,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 1.8490951193027279,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 2.2360679774997894,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 2.7040253082737236,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 3.2699152894091723,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 3.9542329604666215,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 4.781762498950183,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 5.782474837716209,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 6.9926131329529735,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 8.456005395512996,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 10.225651825635723,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 12.365644340129192,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 14.953487812212204,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 18.082907093189338,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 21.86724147886555,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 26.443549559302674,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 31.97757311872762,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 38.66973986492824,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 46.762422391131054,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 56.54871627077632,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 68.3830552045834,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 82.69404767247963,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 100.0,
+      "solver": "euler",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 0.05,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 0.060463844021798704,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 0.0731175286778481,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 0.08841933698473604,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 0.10692345999911879,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 0.12930006815315506,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 0.15635958305640624,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 0.18908202882472058,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 0.22865252596366312,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 0.2765042133011442,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 0.33437015248821095,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 0.40434609491184476,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 0.4889663842714641,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 0.5912957438098541,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 0.7150402724894495,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 0.8646816701021308,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 1.045639552591273,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 1.2644677362180423,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 1.5290915994656933,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 1.8490951193027279,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 2.2360679774997894,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 2.7040253082737236,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 3.2699152894091723,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 3.9542329604666215,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 4.781762498950183,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 5.782474837716209,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 6.9926131329529735,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 8.456005395512996,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 10.225651825635723,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 12.365644340129192,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 14.953487812212204,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 18.082907093189338,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 21.86724147886555,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 26.443549559302674,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 31.97757311872762,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 38.66973986492824,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 46.762422391131054,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 56.54871627077632,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 68.3830552045834,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 82.69404767247963,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 100.0,
+      "solver": "euler",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 0.05,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 0.060463844021798704,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 0.0731175286778481,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 0.08841933698473604,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 0.10692345999911879,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 0.12930006815315506,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 0.15635958305640624,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 0.18908202882472058,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 0.22865252596366312,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 0.2765042133011442,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 0.33437015248821095,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 0.40434609491184476,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 0.4889663842714641,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 0.5912957438098541,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 0.7150402724894495,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 0.8646816701021308,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 1.045639552591273,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 1.2644677362180423,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 1.5290915994656933,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 1.8490951193027279,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 2.2360679774997894,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 2.7040253082737236,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 3.2699152894091723,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 3.9542329604666215,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 4.781762498950183,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 5.782474837716209,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 6.9926131329529735,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 8.456005395512996,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 10.225651825635723,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 12.365644340129192,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 14.953487812212204,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 18.082907093189338,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 21.86724147886555,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 26.443549559302674,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 31.97757311872762,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 38.66973986492824,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 46.762422391131054,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 56.54871627077632,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 68.3830552045834,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 82.69404767247963,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 100.0,
+      "solver": "euler",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 0.05,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 0.060463844021798704,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 0.0731175286778481,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 0.08841933698473604,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 0.10692345999911879,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 0.12930006815315506,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 0.15635958305640624,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 0.18908202882472058,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 0.22865252596366312,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 0.2765042133011442,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 0.33437015248821095,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 0.40434609491184476,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 0.4889663842714641,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 0.5912957438098541,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 0.7150402724894495,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 0.8646816701021308,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 1.045639552591273,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 1.2644677362180423,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 1.5290915994656933,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 1.8490951193027279,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 2.2360679774997894,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 2.7040253082737236,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 3.2699152894091723,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 3.9542329604666215,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 4.781762498950183,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 5.782474837716209,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 6.9926131329529735,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 8.456005395512996,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 10.225651825635723,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 12.365644340129192,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 14.953487812212204,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 18.082907093189338,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 21.86724147886555,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 26.443549559302674,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 31.97757311872762,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 38.66973986492824,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 46.762422391131054,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 56.54871627077632,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 68.3830552045834,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 82.69404767247963,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 100.0,
+      "solver": "heun",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 0.05,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 0.060463844021798704,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 0.0731175286778481,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 0.08841933698473604,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 0.10692345999911879,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 0.12930006815315506,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 0.15635958305640624,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 0.18908202882472058,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 0.22865252596366312,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 0.2765042133011442,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 0.33437015248821095,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 0.40434609491184476,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 0.4889663842714641,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 0.5912957438098541,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 0.7150402724894495,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 0.8646816701021308,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 1.045639552591273,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 1.2644677362180423,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 1.5290915994656933,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 1.8490951193027279,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 2.2360679774997894,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 2.7040253082737236,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 3.2699152894091723,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 3.9542329604666215,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 4.781762498950183,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 5.782474837716209,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 6.9926131329529735,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 8.456005395512996,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 10.225651825635723,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 12.365644340129192,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 14.953487812212204,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 18.082907093189338,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 21.86724147886555,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 26.443549559302674,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 31.97757311872762,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 38.66973986492824,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 46.762422391131054,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 56.54871627077632,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 68.3830552045834,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 82.69404767247963,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 100.0,
+      "solver": "heun",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 0.05,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 0.060463844021798704,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 0.0731175286778481,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 0.08841933698473604,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 0.10692345999911879,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 0.12930006815315506,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 0.15635958305640624,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 0.18908202882472058,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 0.22865252596366312,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 0.2765042133011442,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 0.33437015248821095,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 0.40434609491184476,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 0.4889663842714641,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 0.5912957438098541,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 0.7150402724894495,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 0.8646816701021308,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 1.045639552591273,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 1.2644677362180423,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 1.5290915994656933,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 1.8490951193027279,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 2.2360679774997894,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 2.7040253082737236,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 3.2699152894091723,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 3.9542329604666215,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 4.781762498950183,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 5.782474837716209,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 6.9926131329529735,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 8.456005395512996,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 10.225651825635723,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 12.365644340129192,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 14.953487812212204,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 18.082907093189338,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 21.86724147886555,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 26.443549559302674,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 31.97757311872762,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 38.66973986492824,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 46.762422391131054,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 56.54871627077632,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 68.3830552045834,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 82.69404767247963,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 100.0,
+      "solver": "heun",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 0.05,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 0.060463844021798704,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 0.0731175286778481,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 0.08841933698473604,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 0.10692345999911879,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 0.12930006815315506,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 0.15635958305640624,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 0.18908202882472058,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 0.22865252596366312,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 0.2765042133011442,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 0.33437015248821095,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 0.40434609491184476,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 0.4889663842714641,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 0.5912957438098541,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 0.7150402724894495,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 0.8646816701021308,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 1.045639552591273,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 1.2644677362180423,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 1.5290915994656933,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 1.8490951193027279,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 2.2360679774997894,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 2.7040253082737236,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 3.2699152894091723,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 3.9542329604666215,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 4.781762498950183,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 5.782474837716209,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 6.9926131329529735,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 8.456005395512996,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": true
+    },
+    {
+      "lambda": 10.225651825635723,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 12.365644340129192,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 14.953487812212204,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 18.082907093189338,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 21.86724147886555,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 26.443549559302674,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 31.97757311872762,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 38.66973986492824,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 46.762422391131054,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 56.54871627077632,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 68.3830552045834,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 82.69404767247963,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 100.0,
+      "solver": "rk4",
+      "nfe": 8,
+      "inversion": false
+    },
+    {
+      "lambda": 0.05,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 0.060463844021798704,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 0.0731175286778481,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 0.08841933698473604,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 0.10692345999911879,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 0.12930006815315506,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 0.15635958305640624,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 0.18908202882472058,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 0.22865252596366312,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 0.2765042133011442,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 0.33437015248821095,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 0.40434609491184476,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 0.4889663842714641,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 0.5912957438098541,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 0.7150402724894495,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 0.8646816701021308,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 1.045639552591273,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 1.2644677362180423,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 1.5290915994656933,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 1.8490951193027279,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 2.2360679774997894,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 2.7040253082737236,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 3.2699152894091723,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 3.9542329604666215,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 4.781762498950183,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 5.782474837716209,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 6.9926131329529735,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 8.456005395512996,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 10.225651825635723,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 12.365644340129192,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": true
+    },
+    {
+      "lambda": 14.953487812212204,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 18.082907093189338,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 21.86724147886555,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 26.443549559302674,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 31.97757311872762,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 38.66973986492824,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 46.762422391131054,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 56.54871627077632,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 68.3830552045834,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 82.69404767247963,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 100.0,
+      "solver": "rk4",
+      "nfe": 16,
+      "inversion": false
+    },
+    {
+      "lambda": 0.05,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 0.060463844021798704,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 0.0731175286778481,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 0.08841933698473604,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 0.10692345999911879,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 0.12930006815315506,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 0.15635958305640624,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 0.18908202882472058,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 0.22865252596366312,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 0.2765042133011442,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 0.33437015248821095,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 0.40434609491184476,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 0.4889663842714641,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 0.5912957438098541,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 0.7150402724894495,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 0.8646816701021308,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 1.045639552591273,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 1.2644677362180423,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 1.5290915994656933,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 1.8490951193027279,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 2.2360679774997894,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 2.7040253082737236,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 3.2699152894091723,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 3.9542329604666215,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 4.781762498950183,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 5.782474837716209,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 6.9926131329529735,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 8.456005395512996,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 10.225651825635723,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 12.365644340129192,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 14.953487812212204,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 18.082907093189338,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 21.86724147886555,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 26.443549559302674,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 31.97757311872762,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 38.66973986492824,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 46.762422391131054,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": true
+    },
+    {
+      "lambda": 56.54871627077632,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 68.3830552045834,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 82.69404767247963,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": false
+    },
+    {
+      "lambda": 100.0,
+      "solver": "rk4",
+      "nfe": 32,
+      "inversion": false
+    }
+  ],
+  "heun_lambda4_budgets": {
+    "4": true,
+    "8": true,
+    "12": true,
+    "16": true,
+    "24": true,
+    "32": true,
+    "64": true,
+    "128": true,
+    "256": true
+  },
+  "euler_lambda4_budgets": {
+    "4": false,
+    "8": false,
+    "12": false,
+    "16": false,
+    "24": false,
+    "32": false,
+    "64": false,
+    "128": false,
+    "256": false
+  },
+  "rk4_lambda4_nfe8": false,
+  "rk4_lambda4_nfe12": false,
+  "R_linear_lambda4": 0.9634954084936208,
+  "R_vp_lambda4": 0.616850275067939,
+  "W2_heun8_linear": 0.09027673203348852,
+  "W2_heun8_vp": 0.1303736583386823
+}

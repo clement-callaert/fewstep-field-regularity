@@ -1,0 +1,17 @@
+{
+  "figure_artifact_id": "arxiv_figures_2026-08-13-v1:fig_scalar",
+  "figure_checksum_sha256": "ab44b36be19fd753c5f73d71a8eec071553135e14693f645589bac5c29723f8f",
+  "generation_timestamp": "2026-08-13T12:42:21.653418+00:00",
+  "git_commit": "ad18ff99b5298d89ed1c3fbcf332b8c3f192c536",
+  "git_status": "dirty (regenerate after committing)",
+  "note": "Source: paper/arxiv/artifacts/scalar_counterexample.json.",
+  "plotting_config": {
+    "kind": "scalar_gaussian_heun_counterexample"
+  },
+  "plotting_script": "scripts/make_arxiv_figures.py",
+  "source_artifact_ids": [],
+  "source_run_ids": [
+    "none_conceptual"
+  ],
+  "source_table_hashes": {}
+}

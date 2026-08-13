@@ -1,0 +1,670 @@
+{
+  "blocks": [
+    {
+      "dim": 2,
+      "inversion": false,
+      "inversion_margin": 0.23975952118162822,
+      "nfe": 8,
+      "perturbation": -0.1,
+      "preferred_path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": false,
+      "inversion_margin": 0.12803435915850808,
+      "nfe": 16,
+      "perturbation": -0.1,
+      "preferred_path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": false,
+      "inversion_margin": 0.06617999568054818,
+      "nfe": 32,
+      "perturbation": -0.1,
+      "preferred_path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": true,
+      "inversion_margin": 0.018309264696756096,
+      "nfe": 8,
+      "perturbation": -0.1,
+      "preferred_path": "linear",
+      "solver": "heun",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": true,
+      "inversion_margin": 0.006029596844048671,
+      "nfe": 16,
+      "perturbation": -0.1,
+      "preferred_path": "linear",
+      "solver": "heun",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": true,
+      "inversion_margin": 0.0016960677510341562,
+      "nfe": 32,
+      "perturbation": -0.1,
+      "preferred_path": "linear",
+      "solver": "heun",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": true,
+      "inversion_margin": 0.0015332525636137535,
+      "nfe": 8,
+      "perturbation": -0.1,
+      "preferred_path": "linear",
+      "solver": "rk4",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": true,
+      "inversion_margin": 0.0001395398061993989,
+      "nfe": 16,
+      "perturbation": -0.1,
+      "preferred_path": "linear",
+      "solver": "rk4",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": true,
+      "inversion_margin": 1.1461392881431175e-05,
+      "nfe": 32,
+      "perturbation": -0.1,
+      "preferred_path": "linear",
+      "solver": "rk4",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": false,
+      "inversion_margin": 0.2400940365534186,
+      "nfe": 8,
+      "perturbation": 0.0,
+      "preferred_path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": false,
+      "inversion_margin": 0.12823015938157797,
+      "nfe": 16,
+      "perturbation": 0.0,
+      "preferred_path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": false,
+      "inversion_margin": 0.06628603759400548,
+      "nfe": 32,
+      "perturbation": 0.0,
+      "preferred_path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": false,
+      "inversion_margin": 0.033702756134365006,
+      "nfe": 64,
+      "perturbation": 0.0,
+      "preferred_path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": false,
+      "inversion_margin": 0.01699352503351194,
+      "nfe": 128,
+      "perturbation": 0.0,
+      "preferred_path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": true,
+      "inversion_margin": 0.01836251250588415,
+      "nfe": 8,
+      "perturbation": 0.0,
+      "preferred_path": "linear",
+      "solver": "heun",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": true,
+      "inversion_margin": 0.006039925134236226,
+      "nfe": 16,
+      "perturbation": 0.0,
+      "preferred_path": "linear",
+      "solver": "heun",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": true,
+      "inversion_margin": 0.0016980345745468304,
+      "nfe": 32,
+      "perturbation": 0.0,
+      "preferred_path": "linear",
+      "solver": "heun",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": true,
+      "inversion_margin": 0.0004467040372573976,
+      "nfe": 64,
+      "perturbation": 0.0,
+      "preferred_path": "linear",
+      "solver": "heun",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": true,
+      "inversion_margin": 0.00011432369979676526,
+      "nfe": 128,
+      "perturbation": 0.0,
+      "preferred_path": "linear",
+      "solver": "heun",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": true,
+      "inversion_margin": 0.0015167218272955259,
+      "nfe": 8,
+      "perturbation": 0.0,
+      "preferred_path": "linear",
+      "solver": "rk4",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": true,
+      "inversion_margin": 0.0001289980998781083,
+      "nfe": 16,
+      "perturbation": 0.0,
+      "preferred_path": "linear",
+      "solver": "rk4",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": true,
+      "inversion_margin": 1.1188975517171855e-05,
+      "nfe": 32,
+      "perturbation": 0.0,
+      "preferred_path": "linear",
+      "solver": "rk4",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": true,
+      "inversion_margin": 9.508703949567526e-07,
+      "nfe": 64,
+      "perturbation": 0.0,
+      "preferred_path": "linear",
+      "solver": "rk4",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": true,
+      "inversion_margin": 6.876834620141282e-08,
+      "nfe": 128,
+      "perturbation": 0.0,
+      "preferred_path": "linear",
+      "solver": "rk4",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": false,
+      "inversion_margin": 0.24042450752263073,
+      "nfe": 8,
+      "perturbation": 0.1,
+      "preferred_path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": false,
+      "inversion_margin": 0.1284235337937925,
+      "nfe": 16,
+      "perturbation": 0.1,
+      "preferred_path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": false,
+      "inversion_margin": 0.06639074783877383,
+      "nfe": 32,
+      "perturbation": 0.1,
+      "preferred_path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": true,
+      "inversion_margin": 0.01841751969907534,
+      "nfe": 8,
+      "perturbation": 0.1,
+      "preferred_path": "linear",
+      "solver": "heun",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": true,
+      "inversion_margin": 0.006050793720933343,
+      "nfe": 16,
+      "perturbation": 0.1,
+      "preferred_path": "linear",
+      "solver": "heun",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": true,
+      "inversion_margin": 0.001700169870621368,
+      "nfe": 32,
+      "perturbation": 0.1,
+      "preferred_path": "linear",
+      "solver": "heun",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": true,
+      "inversion_margin": 0.0014877697681832435,
+      "nfe": 8,
+      "perturbation": 0.1,
+      "preferred_path": "linear",
+      "solver": "rk4",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": true,
+      "inversion_margin": 0.00011932325698741167,
+      "nfe": 16,
+      "perturbation": 0.1,
+      "preferred_path": "linear",
+      "solver": "rk4",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 2,
+      "inversion": true,
+      "inversion_margin": 1.0943712607345318e-05,
+      "nfe": 32,
+      "perturbation": 0.1,
+      "preferred_path": "linear",
+      "solver": "rk4",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": true,
+      "inversion_margin": 0.353279374778922,
+      "nfe": 8,
+      "perturbation": -0.1,
+      "preferred_path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": true,
+      "inversion_margin": 0.20406628005626104,
+      "nfe": 16,
+      "perturbation": -0.1,
+      "preferred_path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": true,
+      "inversion_margin": 0.1093248185762188,
+      "nfe": 32,
+      "perturbation": -0.1,
+      "preferred_path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": false,
+      "inversion_margin": 0.2534130105228759,
+      "nfe": 8,
+      "perturbation": -0.1,
+      "preferred_path": "linear",
+      "solver": "heun",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": false,
+      "inversion_margin": 0.08360970415592757,
+      "nfe": 16,
+      "perturbation": -0.1,
+      "preferred_path": "linear",
+      "solver": "heun",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": false,
+      "inversion_margin": 0.020893205012310206,
+      "nfe": 32,
+      "perturbation": -0.1,
+      "preferred_path": "linear",
+      "solver": "heun",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": false,
+      "inversion_margin": 0.16956104163477342,
+      "nfe": 8,
+      "perturbation": -0.1,
+      "preferred_path": "linear",
+      "solver": "rk4",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": false,
+      "inversion_margin": 0.004429339113680876,
+      "nfe": 16,
+      "perturbation": -0.1,
+      "preferred_path": "linear",
+      "solver": "rk4",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": false,
+      "inversion_margin": 0.0017162355408771959,
+      "nfe": 32,
+      "perturbation": -0.1,
+      "preferred_path": "linear",
+      "solver": "rk4",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": true,
+      "inversion_margin": 0.35437610358150334,
+      "nfe": 8,
+      "perturbation": 0.0,
+      "preferred_path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": true,
+      "inversion_margin": 0.2046946096752169,
+      "nfe": 16,
+      "perturbation": 0.0,
+      "preferred_path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": true,
+      "inversion_margin": 0.10965760680064207,
+      "nfe": 32,
+      "perturbation": 0.0,
+      "preferred_path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": true,
+      "inversion_margin": 0.056716325517539766,
+      "nfe": 64,
+      "perturbation": 0.0,
+      "preferred_path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": true,
+      "inversion_margin": 0.02883840467358871,
+      "nfe": 128,
+      "perturbation": 0.0,
+      "preferred_path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": false,
+      "inversion_margin": 0.252292541674586,
+      "nfe": 8,
+      "perturbation": 0.0,
+      "preferred_path": "linear",
+      "solver": "heun",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": false,
+      "inversion_margin": 0.08336365663837626,
+      "nfe": 16,
+      "perturbation": 0.0,
+      "preferred_path": "linear",
+      "solver": "heun",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": false,
+      "inversion_margin": 0.020823056273008164,
+      "nfe": 32,
+      "perturbation": 0.0,
+      "preferred_path": "linear",
+      "solver": "heun",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": false,
+      "inversion_margin": 0.005138673018567899,
+      "nfe": 64,
+      "perturbation": 0.0,
+      "preferred_path": "linear",
+      "solver": "heun",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": false,
+      "inversion_margin": 0.0012716679119415873,
+      "nfe": 128,
+      "perturbation": 0.0,
+      "preferred_path": "linear",
+      "solver": "heun",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": false,
+      "inversion_margin": 0.16727467113220965,
+      "nfe": 8,
+      "perturbation": 0.0,
+      "preferred_path": "linear",
+      "solver": "rk4",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": false,
+      "inversion_margin": 0.00523307831739661,
+      "nfe": 16,
+      "perturbation": 0.0,
+      "preferred_path": "linear",
+      "solver": "rk4",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": false,
+      "inversion_margin": 0.001508868488900162,
+      "nfe": 32,
+      "perturbation": 0.0,
+      "preferred_path": "linear",
+      "solver": "rk4",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": false,
+      "inversion_margin": 6.627339020266629e-05,
+      "nfe": 64,
+      "perturbation": 0.0,
+      "preferred_path": "linear",
+      "solver": "rk4",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": false,
+      "inversion_margin": 3.872019685606068e-06,
+      "nfe": 128,
+      "perturbation": 0.0,
+      "preferred_path": "linear",
+      "solver": "rk4",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": true,
+      "inversion_margin": 0.35542504517492085,
+      "nfe": 8,
+      "perturbation": 0.1,
+      "preferred_path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": true,
+      "inversion_margin": 0.20528645612910545,
+      "nfe": 16,
+      "perturbation": 0.1,
+      "preferred_path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": true,
+      "inversion_margin": 0.10997072022878804,
+      "nfe": 32,
+      "perturbation": 0.1,
+      "preferred_path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": false,
+      "inversion_margin": 0.2513604330875287,
+      "nfe": 8,
+      "perturbation": 0.1,
+      "preferred_path": "linear",
+      "solver": "heun",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": false,
+      "inversion_margin": 0.08318180379472452,
+      "nfe": 16,
+      "perturbation": 0.1,
+      "preferred_path": "linear",
+      "solver": "heun",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": false,
+      "inversion_margin": 0.02076768912766595,
+      "nfe": 32,
+      "perturbation": 0.1,
+      "preferred_path": "linear",
+      "solver": "heun",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": false,
+      "inversion_margin": 0.1661241755886402,
+      "nfe": 8,
+      "perturbation": 0.1,
+      "preferred_path": "linear",
+      "solver": "rk4",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": false,
+      "inversion_margin": 0.005694753310644101,
+      "nfe": 16,
+      "perturbation": 0.1,
+      "preferred_path": "linear",
+      "solver": "rk4",
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "dim": 8,
+      "inversion": false,
+      "inversion_margin": 0.001351101856665085,
+      "nfe": 32,
+      "perturbation": 0.1,
+      "preferred_path": "linear",
+      "solver": "rk4",
+      "target_family": "low_rank_gaussian"
+    }
+  ],
+  "extra_nfe_64_128": "unperturbed target only",
+  "formula": "2 dims x 3 solvers x (3 primary NFE x 3 perturbations + 2 extra NFE at 0 perturbation)",
+  "n_blocks": 66,
+  "perturbation": "multiplies low-rank noise_variance 0.05 by (1+delta); F is regenerated from the same seed",
+  "solver_path_pattern_holds": true,
+  "status": "post-hoc"
+}

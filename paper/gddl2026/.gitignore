@@ -1,0 +1,9 @@
+# LaTeX intermediates. Keep source, figures, and compiled PDFs.
+*.aux
+*.log
+*.out
+*.fls
+*.fdb_latexmk
+*.blg
+*.synctex.gz
+*.toc

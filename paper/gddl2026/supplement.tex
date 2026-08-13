@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage[dblblindworkshop]{neurips_2026}
+\workshoptitle{Geometric Distributional Deep Learning: Bridging Optimal Transport, Learning and Structured Data}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{hyperref}
+\hypersetup{hidelinks,pdftitle={},pdfauthor={}}
+\usepackage{url}
+
+\title{Anonymous supplement: rational VP Heun certificate}
+\author{Anonymous Author(s)}
+
+\begin{document}
+\maketitle
+
+This supplement records the integer comparison used in the workshop
+paper. It contains no author names, emails, or public repository URLs.
+
+The four-step VP Heun product is an element $P(\pi,\sqrt{2})$ of
+$\mathbb{Q}[\pi,\sqrt{2}]$ with twelve monomials, all coefficients
+nonnegative. Substituting $\pi<355/113$ and $\sqrt{2}<99/70$ is
+therefore valid and yields
+\[
+P\Bigl(\frac{355}{113},\frac{99}{70}\Bigr)
+=\frac{192113353671412470139303}{102753427879939708813312}
+<\frac{187}{100},
+\]
+equivalently
+\[
+19211335367141247013930300<19214891013548725548089344.
+\]
+Hence $r_{\mathrm{VP}}<187/100$ and $W_2^{\mathrm{VP}}>13/100$.
+The bound $\sqrt{2}<99/70$ is $99^2-2\cdot 70^2=1$. The bound
+$\pi<355/113$ follows from Machin's formula with Leibniz remainders
+(seven Taylor terms for $\arctan(1/5)$, four for $\arctan(1/239)$).
+An independent \texttt{mpmath}~$1.3.0$ interval enclosure is a
+cross-check, not the proof.
+
+\end{document}

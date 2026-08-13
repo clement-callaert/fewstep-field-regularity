@@ -16,46 +16,57 @@ differently. It is not a submission note.
 
 ## Claims and wording
 
-- 14 of 36 and 11 of 18 are stated as descriptive counts on specified
-  grids, not as population rates.
+- The leading logical result is a one-dimensional Gaussian Heun
+  counterexample (exact `R` integrals, exact rational linear factor,
+  rational VP certificate in `Q[pi, sqrt(2)]`).
+- Headline linear-versus-VP inversions are 5 of 12 geometry×solver cells
+  (4 of 12 at every NFE in {8,16,32}), from three distinct R comparisons.
+  The 14 inverted solver-budget rows remain an appendix listing, not a
+  headline. 11 of 18 non-centered blocks remain a hierarchical descriptive
+  count, not a population rate.
+- Headline regularity is the continuous integral `R`. The 24-node
+  trapezoidal estimator is written `Rhat_24` and is an implementation check
+  only. On the registered grid the path-ordering sign agrees; inversion
+  counts are unchanged. The strongest-row pair is
+  `R = 2.9441044083` vs `4.7305438136` (not the workshop `Rhat_24` pair
+  `2.9476523251` vs `4.7295206355`).
 - The short-draft gloss that the strongest linear `W2` was "78% larger"
-  is omitted. The article reports the pair
-  `0.8108540111` versus `0.4564779075` and the margin `0.3543761036`.
+  is omitted. The article reports `W2` `0.8108540111` versus `0.4564779075`
+  and the margin `0.3543761036`.
 - The 80-digit gap `9.7050430488e-10` is distinguished from the
   reconstruction residual `9.7050436884e-10`.
 - The ratio of the smallest inversion margin to the 80-digit gap is the
-  integer `11528` (floor of the exact quotient), not a rounded "more than
-  11,500" slogan used as if it were a different number.
-- `R` is identified as a 24-node trapezoidal quadrature of an exact
-  integrand, recorded as non-exact in code.
-- Ledger statuses are not upgraded: P4-C1 and P4-C2 remain `under-test`
-  in `docs/CLAIMS_LEDGER.md`. The article uses reconstructed grid counts.
+  integer `11528`.
+- Ledger: P4-P2 is `supported` (existence). P4-C1, P4-C2, and P4-C4 remain
+  `under-test`. Robustness is labeled post-hoc. The non-centered family is
+  a pre-specified stress test, not an independent replication.
 
 ## Mathematics
 
-- Affine field, commuting reduction, Gelbrich `W2`, telescoping identity,
-  Euler and Heun leading coefficients, and the grid-aware Euler
-  construction are written out with domains and quantifiers.
+- Interpolant boundary conditions, isotropic-source commutation, and the
+  telescoping identity without a non-vanishing hypothesis are written out.
 - The Euler construction is labeled grid-aware and is not offered as the
-  mechanism of the Gaussian inversions.
-- An 80-digit check that the oscillatory Euler product equals `e^L` is
-  recorded in the appendix and in
-  `tests/analytical/test_affine_flow_analysis.py`.
+  mechanism of the Gaussian inversions. Appendix D restores the analytical
+  proof (endpoint matching, `cos^2` integral, grid evaluation, Euler
+  factors `1+L/N`, and `(1+L/N)^N < exp(L)`). The 80-digit check remains a
+  test, not the proof.
 
 ## Empirics
 
-- Full inversion tables are generated from pinned JSON.
+- Full inversion tables are generated from pinned JSON plus continuous `R`.
+- Non-centered `W2^2` is split into mean and Bures terms.
 - Mixture exclusion is explained (dimension-8 mixture endpoint estimators
   failed post-result calibration; Phase 4 accepts Gaussian targets only).
-- Non-centered family chronology includes Amendment A1 (endpoint sanity
-  check only).
-- Low-rank solver-path split is restricted to that family.
+- Low-rank solver-path split is restricted to that family. The 66-block
+  robustness count is `2 x 3 x (3 x 3 + 2)`.
 
 ## Literature
 
 - Search date 2026-08-13.
-- Contemporaneous strain/vorticity and isokinetic-flow notes are cited
-  with scope limits. No "to our knowledge" novelty slogan.
+- Lipschitz-guided design, Stéphanovitch, Gupta et al., Du et al., Yuan et
+  al., Tao-Choi, Khan, Align Your Steps, EDM, DPM-Solver, DEIS are
+  positioned by the object they control. Search absence is not a proof that
+  no related example exists.
 
 ## What was not changed in substance
 
