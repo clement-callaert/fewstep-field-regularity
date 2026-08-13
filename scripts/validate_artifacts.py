@@ -13,7 +13,7 @@ from fewstep_regularities.artifacts.manifest import (
     REQUIRED_FIGURE_SIDECAR_FIELDS,
     REQUIRED_MANIFEST_FIELDS,
 )
-from fewstep_regularities.utils.hashing import sha256_file
+from fewstep_regularities.utils.hashing import sha256_file, sha256_manifest
 
 
 class ValidationError(Exception):
@@ -60,9 +60,14 @@ def validate_compact_manifest(manifest: dict[str, Any], run_dir: Path) -> list[s
     if not isinstance(files, dict) or not files:
         return ["compact manifest missing files"]
     for name, expected in files.items():
-        if name == "manifest.json":
-            continue
         path = run_dir / str(name)
+        if name == "manifest.json":
+            actual = sha256_manifest(manifest)
+            if actual != expected:
+                errors.append(
+                    f"canonical self-hash mismatch for manifest.json: {actual}"
+                )
+            continue
         if not path.is_file():
             errors.append(f"missing compact artefact {name}")
             continue

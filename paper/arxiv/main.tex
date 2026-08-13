@@ -32,9 +32,6 @@
 \input{generated/numbers}
 \input{generated/stats_macros}
 
-% Body display: three decimals (or two for eigenvalues of order 10).
-% Closed forms and rationals are left exact. Full float64 digits occupy
-% generated/numbers.tex and Appendix D.
 \newcommand{\numRlinAniso}{0.972}
 \newcommand{\numRvpAniso}{0.192}
 \newcommand{\numRlinLowTwo}{1.246}
@@ -49,6 +46,7 @@
 \newcommand{\numLrEightA}{4.65}
 \newcommand{\numLrEightB}{10.7}
 
+\newtheorem{theorem}{Theorem}
 \newtheorem{proposition}{Proposition}
 \newtheorem{definition}{Definition}
 \newtheorem{assumption}{Assumption}
@@ -75,145 +73,117 @@ A Certified Gaussian Counterexample}
 
 \begin{abstract}
 Few-step sampling in flow matching and stochastic interpolants requires
-an interpolation schedule to be chosen before any endpoint error is
-observed. A natural question for schedule design is whether a scalar
-regularity functional ranks two schedules in the same order as equal-NFE
-discretization error.
-Chen, Vanden-Eijnden, and Xu propose minimizing $A_2$, the
-time-integrated squared spatial Jacobian norm of a flow-matching
-marginal ODE. They prove no bound relating $A_2$ to discretization
-error, Wasserstein-2 distance, or sampling error. Classical one-step
-bounds use a Lipschitz constant of the field; $A_2$ is not that
-constant. Already for independent $N(0,1)$ and $N(0,4)$, exact
-regularity integrals prefer the trigonometric variance-preserving
-interpolant while the Heun method at NFE~$8$ prefers the linear path in
-Gaussian Wasserstein-2 distance. The inversion is certified by an exact
-rational Heun product and a nonnegative polynomial in $\pi$ and
-$\sqrt{2}$, not by floating-point comparison. Fixed-stage Runge--Kutta
-methods use signed stage evaluations that the unsigned time average
-discards. All comparisons use exact Gaussian marginal fields.
-Multimode results are finite deterministic censuses, not a global
-optimality proof, and no learned vector field is used.
+an interpolation schedule, equivalently a sampling schedule, to be chosen
+before any endpoint error is observed. Averaged squared Jacobian
+regularity is a plausible criterion for schedule design. Chen,
+Vanden-Eijnden, and Xu propose minimizing $A_2$, the time-integrated
+squared spatial Jacobian norm of a flow-matching marginal ODE. Classical
+one-step bounds use a Lipschitz constant of the field; $A_2$ is not that
+constant, and they prove no universal ranking of equal-NFE solver error.
+This paper studies that narrower question. For independent $N(0,1)$ and
+$N(0,4)$, the exact integrals are $5\pi/8-1$ and $\pi^2/16$, so
+regularity prefers trigonometric VP, while explicit Heun at NFE~$8$
+prefers the linear path in Gaussian Wasserstein-2 distance. The inversion
+is certified by an exact rational Heun product and a nonnegative element
+of $\mathbb{Q}[\pi,\sqrt{2}]$. A complementary construction shows that,
+for every step count $N$ and every admissible endpoint log-scale, the
+unique integrated-regularity minimizer can have strictly larger $N$-step
+Euler endpoint error than a higher-regularity competitor aligned to that
+solver grid. A specified finite Gaussian enumeration of four candidate
+paths on $36$ tested blocks contains both agreement and pairwise
+disagreement. The results establish a limitation of a universal surrogate
+interpretation. They do not refute Chen et al., do not evaluate learned
+velocity fields, and do not estimate a population frequency of failure.
 \end{abstract}
 
 \section{Introduction}
 \label{sec:intro}
 
-A few-step sampler engages a probability path, a numerical solver, and
-a budget of number of function evaluations (NFE) before any endpoint error
+A few-step sampler engages a probability path, a numerical solver, and a
+budget of number of function evaluations (NFE) before any endpoint error
 is observed. Few-step sampling therefore makes the sampling schedule a
-design choice that must be made a priori. Classical one-step bounds involve a Lipschitz constant of
-the field~\citep{hairer1993solving}. What the practitioner needs is a
-scalar criterion for schedule design that can be evaluated from the path
-alone.
+design choice that must be made a priori. Classical one-step bounds
+involve a Lipschitz constant of the field~\citep{hairer1993solving}. A
+scalar functional of the path that can be evaluated before discretization
+is an attractive surrogate.
 
 In the stochastic interpolants and flow matching setting,
 \citet{lipschitzguided2025} propose minimizing averaged squared Jacobian
-regularity (their Definition~3.2, denoted $A_2$, the time-integrated
-squared spatial Jacobian norm) as a selection criterion.
-The integrand is a Jacobian norm. They prove KL equivalence of schedules
-and a logarithmic scaling law. They prove no bound relating $A_2$ to
-discretization error, Wasserstein-2 distance, or sampling error. This paper
-asks whether the pairwise order that $A_2$ induces between two interpolant
-paths is reliable at equal NFE on a flow-matching marginal ODE. The object
-is that interpolant ODE, not a score-based probability-flow ODE
-(Section~\ref{subsec:interpolants}).
+regularity (their Definition~3.2, denoted $A_2$) as a schedule-design
+objective. They prove KL equivalence of scalar schedules after a
+posteriori diffusion tuning, a transfer formula, and a logarithmic
+scaling law for the one-dimensional log-covariance minimizer. They
+minimize $A_2$ in specified admissible families. They do not claim, and
+do not prove, a universal pairwise implication of the form
+\begin{equation}
+  R(q_1)<R(q_2)
+  \;\Longrightarrow\;
+  \operatorname{Err}_{\mathrm{solver},N}(q_1)
+  <
+  \operatorname{Err}_{\mathrm{solver},N}(q_2).
+\end{equation}
+The present paper studies that narrower ranking question on
+flow-matching marginal interpolant ODEs, not score-based probability-flow
+ODEs.
 
-Commuting Gaussian interpolants are the right probe. For the certified
-scalar pair, the Gaussian drift and $\wtwo$ formula are closed form and the
-regularity integrals are exact, so that inversion is a property of the
-criterion rather than an estimation artefact. Multimode censuses below are
-deterministic numerical calculations: $\cR$ by adaptive quadrature, and
-$\wtwo$ by exact Gaussian moments propagated through modal Runge--Kutta
-updates. They are not Monte Carlo estimates, and they are not a symbolic
-certificate. The family includes the linear interpolant and the
-trigonometric variance-preserving (VP) path, both $C^1$ shared schedules;
-the Chen scalar log-covariance schedule, a shared schedule whose
-square-root coefficients are not $C^1$ at the endpoints; and the per-mode
-log-covariance path.
+The object is an integrated unsigned Jacobian-energy functional. For a
+fixed finite-step solver, endpoint error depends on stagewise field
+values, temporal derivatives, quadrature structure, and signed
+cancellations that are not determined by that energy alone.
 
-The leading logical result is a deterministic scalar example, proved by an
-exact integral, an exact rational product of the Heun method, and a
-rational enclosure of a two-stage Runge--Kutta product
-(Section~\ref{subsec:counterexample}). Figure~\ref{fig:scalar} is that
-certified pair.
+Already for independent $N(0,1)$ and $N(0,4)$, exact regularity integrals
+prefer trigonometric VP while explicit Heun at NFE~$8$ prefers the linear
+path in Gaussian $\wtwo$ (Proposition~\ref{prop:scalar}). The comparison
+uses exact $W_2$ between Gaussians and a fully certified scalar
+calculation.
 
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=\linewidth,alt={Certified scalar counterexample: linear versus VP drifts between N(0,1) and N(0,4), exact regularity integrals, and Heun NFE 8 Wasserstein-2 bars.}]{figures/fig_scalar.pdf}
-  \caption{Certified scalar counterexample for independent $N(0,1)$ and
-  $N(0,4)$. (a)~Closed-form drifts; the shaded region is
-  $a_{\mathrm{lin}}<0$; markers are Heun nodes at NFE~$8$.
-  (b)~Exact regularity integrals $5\pi/8-1$ and $\pi^2/16$.
-  (c)~Gaussian $\wtwo$ at Heun NFE~$8$: the linear value is the rational
-  $321331/3559400$; VP is shown by its certified lower enclosure.
-  Symbolic certificate, not a census.}
-  \label{fig:scalar}
-\end{figure}
+For every step count $N$ and every admissible endpoint log-scale $L>0$,
+a solver-grid-aware Gaussian construction exhibits two smooth scalar
+paths with identical endpoints such that the unique minimizer of
+integrated squared field energy has strictly larger $N$-step Euler
+endpoint error than a higher-regularity competitor
+(Theorem~\ref{thm:gridaware}). The competitor is constructed as a
+function of the solver resolution and exploits exact grid alignment. It
+is not offered as a model of naturally occurring or learned schedules.
 
-The same calculation then splits into three comparisons, summarized in
-Figure~\ref{fig:regimes}: $\cR$ as a pairwise comparator of two fixed
-Class~S paths, $\cR$ as a pairwise comparison of two shared-schedule
-Class~Q paths, and a four-path census that includes the per-mode Class~Q
-path.
+A specified finite Gaussian enumeration then delimits where pairwise
+disagreement appears and where it does not
+(Section~\ref{sec:experiments}). Among four specified candidate paths,
+the per-mode log-covariance path has both the smallest $\cR$ and the
+smallest $\wtwo$ in $36$ of $36$ tested blocks. Pairwise linear-versus-VP
+and VP-versus-scalar-log-covariance comparisons on those tested blocks
+contain inversions. These counts are a finite enumeration, not a
+population frequency and not a global optimality statement.
 
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=\linewidth,alt={Three paired bar charts. Row (a) linear versus VP on low-rank d=8, Euler, NFE 8: regularity prefers linear while W2 prefers VP. Row (b) VP versus Chen Example 3.3 on anisotropic d=8, Euler, NFE 8. Row (c) four paths on low-rank d=8, Euler, NFE 8, with regularity values near 2.94, 4.73, 11.42, and 2.24.}]{figures/fig1_regimes.pdf}
-  \caption{Three comparisons for $\cR$ on commuting Gaussian interpolants.
-  Each row shows continuous $\cR$ (left) and equal-NFE Gaussian $\wtwo$
-  (right; lower is preferred). (a)~Pairwise linear versus VP on
-  low-rank $d=8$, Euler, NFE~$8$: $\cR$ and $\wtwo$ invert; this occurs
-  in $5$ of $12$ geometry$\times$solver cells. (b)~Shared-schedule pairwise
-  comparison, VP versus Chen Ex.~3.3 scalar ($M=\lambda_{\max}$) on
-  anisotropic $d=8$, Euler, NFE~$8$: inversion, as in $9$ of $36$ blocks.
-  (c)~Four candidate paths on low-rank $d=8$, Euler, NFE~$8$, including
-  per-mode $q_i(t)=\lambda_i^{t}$: smallest $\cR$ and smallest $\wtwo$ in
-  $36$ of $36$ blocks on this finite census. This does not imply that a
-  global $\cR$-minimizer minimizes fixed-NFE error. When $\Sigma_1$ has at
-  least two distinct eigenvalues, the per-mode path is not a Class~S shared
-  interpolant. Exact-moment modal Runge--Kutta; census counts, not
-  estimators.}
-  \label{fig:regimes}
-\end{figure}
+\paragraph{Scope.}
+The analysis uses commuting affine Gaussian interpolants, three
+fixed-step Runge--Kutta methods, and small equal-NFE budgets. No learned
+neural velocity field is evaluated. The paper does not claim that
+average Jacobian regularity is generally useless, that it is empirically
+inferior in typical flow-matching training, that Chen et al.'s
+optimization results are invalid, or that ranking inversions are
+frequent in practice. Signed information is consistent with the
+certified inversion; it is not isolated as a unique causal source.
 
 The contributions are as follows.
 \begin{itemize}
-\item A certified one-dimensional counterexample: exact $\cR$ prefers
-  trigonometric VP while Heun at NFE~$8$ prefers the linear path in
-  Gaussian $\wtwo$ (Section~\ref{subsec:counterexample},
-  Appendix~\ref{app:scalar}). An exact integral or an exact Heun product
-  that restored the $\cR$ ranking would contradict the claim.
+\item A certified one-dimensional Gaussian ranking inversion: exact
+  $\cR$ prefers trigonometric VP while Heun at NFE~$8$ prefers the linear
+  path in Gaussian $\wtwo$ (Proposition~\ref{prop:scalar},
+  Appendix~\ref{app:scalar}).
 \item Exact one-dimensional identities and solver-specific local
-  truncation expansions for the implemented Euler and Heun factors:
-  leading exact-minus-method coefficients, stage locations, and the sign
-  change of the independent linear drift
-  (Section~\ref{subsec:discarded}, Appendix~\ref{app:solvers}). These
-  identities do not claim a complete account of every Runge--Kutta method.
-  A truncation expansion in which those coefficients reduced to
-  $\|A\|_2^2$ would contradict the expansions.
-\item A three-comparison characterisation on a complete $4\times 3\times 3$
-  census: pairwise linear-versus-VP inversions in $5$ of $12$ cells;
-  shared-schedule pairwise VP-versus-scalar-log-covariance inversions in
-  $9$ of $36$ blocks; among four candidate paths, the per-mode path has
-  the smallest $\cR$ and the smallest $\wtwo$ in $36$ of $36$ blocks.
-  This finite-census observation does not imply that a global
-  $\cR$-minimizer minimizes fixed-NFE error. When $\Sigma_1$ has at least
-  two distinct eigenvalues, that path is not a Class~S shared interpolant.
-  Rank agreement between $\cR$ and $\wtwo$ changes sign with the solver
-  (Sections~\ref{subsec:pairwise}--\ref{subsec:minimizer}). A census in
-  which all three comparisons agreed would contradict the split.
-\item An inversion map over target variance
-  $\lambda\in[0.05,100]$, reported as log-Lebesgue measure rather than a
-  grid-point count (Section~\ref{subsec:region}). Emptiness of the
-  inversion set on that interval would contradict the map.
+  truncation expansions for the implemented Euler and Heun factors
+  (Section~\ref{sec:local}, Appendix~\ref{app:solvers}).
+\item A solver-grid-aware impossibility theorem: the unique integrated
+  squared-energy minimizer need not minimize fixed-grid Euler endpoint
+  error (Theorem~\ref{thm:gridaware}).
+\item A finite Gaussian enumeration of four specified candidate paths on
+  $36$ tested blocks, containing both agreement and pairwise disagreement
+  (Section~\ref{sec:experiments}).
 \end{itemize}
 
-\section{Background}
-\label{sec:background}
-
-\subsection{Gaussian interpolants and the marginal velocity field}
-\label{subsec:interpolants}
+\section{Definitions and standing assumptions}
+\label{sec:definitions}
 
 Let $X_0\sim N(\mu_0,\Sigma_0)$ and $X_1\sim N(\mu_1,\Sigma_1)$ be independent
 in $\RR^d$, with $\Sigma_0,\Sigma_1$ symmetric positive definite. A
@@ -224,24 +194,27 @@ We distinguish three regularity classes.
 \item \emph{Class~S} (shared $C^1$ interpolants): $\alpha,\sigma\in C^1([0,1])$
   with
 \begin{equation}
-  \alpha(0)=1,\quad \sigma(0)=0,\quad \alpha(1)=0,\quad \sigma(1)=1.
+  \alpha(0)=1,\quad \sigma(0)=0,\quad \alpha(1)=0,\quad \sigma(1)=1,
 \end{equation}
-  The linear path $(1-t,\,t)$ and trigonometric VP
+  and $(\alpha(t),\sigma(t))\neq(0,0)$ for every $t\in[0,1]$. The linear
+  path $(1-t,\,t)$ and trigonometric VP
   $(\cos(\pi t/2),\,\sin(\pi t/2))$ belong to Class~S, as does the
   grid-aware embedding of Appendix~\ref{app:p4p1}.
 \item \emph{Class~Q} (regular covariance paths): a $C^1$ path of positive
   definite covariances $Q(t)$ with $Q(0)=\Sigma_0$, $Q(1)=\Sigma_1$, for
   which $A(t)=\tfrac12 Q'(t)Q(t)^{-1}$ extends continuously to $[0,1]$.
-  Every Class~S interpolant induces a Class~Q path. The per-mode schedule
-  $q_i(t)=\lambda_i^t$ is Class~Q.
+  Every Class~S interpolant induces a Class~Q path, because the
+  simultaneous-zero prohibition and $\Sigma_0,\Sigma_1\succ 0$ give
+  $Q(t)\succ 0$ on $[0,1]$. The per-mode schedule $q_i(t)=\lambda_i^t$ is
+  Class~Q.
 \item \emph{Class~R} (regular squares): $\alpha^2,\sigma^2\in C^1([0,1])$,
   $\alpha^2\ge 0$, $\sigma^2\ge 0$, and
   \begin{equation}
-    \alpha(0)^2=1,\quad \sigma(0)^2=0,\quad \alpha(1)^2=0,\quad \sigma(1)^2=1.
+    \alpha(0)^2=1,\quad \sigma(0)^2=0,\quad \alpha(1)^2=0,\quad \sigma(1)^2=1,
   \end{equation}
-  The square roots $\alpha=\sqrt{\alpha^2}$ and $\sigma=\sqrt{\sigma^2}$
-  need not be differentiable at the endpoints. Chen et al.'s scalar
-  log-covariance schedule $\sigma(t)^2=(M^t-1)/(M-1)$,
+  with $\alpha(t)^2+\sigma(t)^2>0$ on $[0,1]$. Square roots need not be
+  differentiable at the endpoints. Chen et al.'s scalar log-covariance
+  schedule $\sigma(t)^2=(M^t-1)/(M-1)$,
   $\alpha(t)^2=(M-M^t)/(M-1)$ for $M>0$, $M\neq 1$ is Class~R:
   $\sigma(t)\asymp\sqrt{t}$ as $t\to 0$ and $\alpha(t)\asymp\sqrt{1-t}$ as
   $t\to 1$, so it is not Class~S. When $M=1$ the formulas are read in the
@@ -273,49 +246,39 @@ field
   c(t)=\dot m_t-A(t)m_t,
   \label{eq:affine}
 \end{equation}
-with $C_t=\dot\alpha\alpha\,\Sigma_0+\dot\sigma\sigma\,\Sigma_1$ on $(0,1)$
-for Class~S and Class~R. Equivalently,
+with
 $C_t=\tfrac12(\alpha^2)'\,\Sigma_0+\tfrac12(\sigma^2)'\,\Sigma_1$, which
 extends continuously to $[0,1]$ whenever $\alpha^2,\sigma^2\in C^1([0,1])$.
-This is a
+On $(0,1)$ this coincides with
+$C_t=\dot\alpha\alpha\,\Sigma_0+\dot\sigma\sigma\,\Sigma_1$ wherever
+$\alpha$ and $\sigma$ are differentiable and nonzero. This is a
 marginal interpolant ODE, not a score-based probability-flow ODE in the sense
-of~\citet{song2021score}, although the latter is an instance of a generative
-ODE. If $\mu_0=\mu_1=0$ and $\Sigma_0=I$, then $c\equiv 0$ and
-$A=\tfrac12 Q'Q^{-1}$.
+of~\citet{song2021score}. If $\mu_0=\mu_1=0$ and $\Sigma_0=I$, then $c\equiv 0$
+and $A=\tfrac12 Q'Q^{-1}$.
 
 If $\Sigma_0=I$, then $Q(t)$, $Q'(t)$, $A(t)$, and $\Sigma_1$ share the
-eigenbasis of $\Sigma_1$. Simultaneous diagonalization with the identity is
-not an extra hypothesis. In that basis, mode $i$ with eigenvalue
+eigenbasis of $\Sigma_1$. In that basis, mode $i$ with eigenvalue
 $\lambda_i>0$ obeys $x_i'=a_i(t)x_i+c_i(t)$ with
 $q_i(t)=\alpha(t)^2+\lambda_i\sigma(t)^2$ and
 $a_i(t)=q_i'(t)/(2q_i(t))$. For a Class~Q path that is not shared, the
 same identity holds modewise with no single pair $(\alpha,\sigma)$. The
-covariance drift depends only on the
-variance schedule. The exact one-step factor on $[t_n,t_{n+1}]$ is
+exact one-step factor on $[t_n,t_{n+1}]$ is
 $\sqrt{q_i(t_{n+1})/q_i(t_n)}$. For centered modes the exact endpoint factor
 is $\sqrt{\lambda_i}$.
-
-\subsection{Solvers, evaluation budget, and endpoint error}
-\label{subsec:solvers}
 
 Euler uses $s=1$ field evaluation per step, Heun $s=2$, and classical RK4
 $s=4$. A budget $B$ is admitted only if $B\equiv 0\pmod s$. The step count
 is $S=B/s$ and the grid is the uniform partition of $[0,1]$ with $S$ steps.
 Equal NFE is not equal step count: at $B=8$, Euler takes $8$ steps, Heun $4$,
-and RK4 $2$.
-
-A solver applied to~\eqref{eq:affine} produces an affine endpoint map
-$x\mapsto Rx+d$. Source moments are pushed through this map. Error is the
-Gaussian $\wtwo$ of the endpoint \emph{laws}~\citep{gelbrich1990formula,peyre2019computational},
+and RK4 $2$. A solver applied to~\eqref{eq:affine} produces an affine
+endpoint map $x\mapsto Rx+d$. Error is the Gaussian $\wtwo$ of the endpoint
+laws~\citep{gelbrich1990formula,peyre2019computational},
 \begin{equation}
   \wtwo^2=\|\hat m-\mu_1\|_2^2
   +\mathrm{tr}\bigl(\hat C+\Sigma_1-2(\Sigma_1^{1/2}\hat C\Sigma_1^{1/2})^{1/2}\bigr).
 \end{equation}
-This is neither pathwise trajectory error nor local truncation error. In the
-centered commuting case, $\wtwo^2=\sum_i\bigl(|r_i|-\sqrt{\lambda_i}\bigr)^2$.
-
-\subsection{The averaged squared Jacobian criterion}
-\label{subsec:criterion}
+In the centered commuting case,
+$\wtwo^2=\sum_i\bigl(|r_i|-\sqrt{\lambda_i}\bigr)^2$.
 
 \citet[Definition~3.2]{lipschitzguided2025} introduce
 \begin{equation}
@@ -326,27 +289,10 @@ For the affine field~\eqref{eq:affine} the integrand is deterministic and
   \cR[b]=\int_0^1 \bigl\|A(t)\bigr\|_2^2\,dt
   \label{eq:R}
 \end{equation}
-coincides with $A_2$. Thus $A_2$ is the time-integrated squared spatial
-Jacobian norm, not a classical Lipschitz constant of the field. By definition
-$\cR$ ignores $c(t)$. For commuting
+coincides with $A_2$. By definition $\cR$ ignores $c(t)$. For commuting
 $A(t)$, $\|A(t)\|_2=\max_i |a_i(t)|$. Headline comparisons use the continuous
 integral~\eqref{eq:R}. The historical $24$-node trapezoidal estimator is
-written $\Rhat$ and is used only as an implementation check. No trapezoidal
-value is described as an exact integral.
-
-\paragraph{What the criterion does and does not establish.}
-\citet{lipschitzguided2025} propose $A_2$ as a design objective. They prove
-that schedules related by a time-change have equivalent KL cost, and that
-the optimized one-dimensional log-covariance schedule attains a logarithmic
-scaling of $A_2$. They prove no bound relating $A_2$ to a discretization
-error, a Wasserstein error, or a sampling error. They never compare the
-linear interpolant to trigonometric VP.
-
-\section{Method}
-\label{sec:method}
-
-\subsection{The variance-path invariant and the Cauchy--Schwarz bound}
-\label{subsec:invariant}
+written $\Rhat$ and is used only as an implementation check.
 
 \begin{proposition}
 \label{prop:cs}
@@ -366,38 +312,30 @@ $\int a^2$ as $(\int a)^2+\mathrm{Var}_t(a)$ gives the bound.
 \end{proof}
 
 Thus $\cR$ measures only the temporal variance of the log-covariance rate.
-Its unconstrained Class~Q minimizer is the constant drift
-$a\equiv\tfrac12\ln\lambda$, i.e.\ $q(t)=\lambda^t$, which is
-\citet[Example~3.3]{lipschitzguided2025} in one dimension. In several
-dimensions the per-mode schedule $q_i(t)=\lambda_i^t$ attains
-$\cR=\bigl(\tfrac12\max_i|\ln\lambda_i|\bigr)^2$. If $\Sigma_1$ has at
-least two distinct eigenvalues, that path is not a Class~S shared
+Its unconstrained Class~Q minimizer is $a\equiv\tfrac12\ln\lambda$, i.e.\
+$q(t)=\lambda^t$, which is \citet[Example~3.3]{lipschitzguided2025} in one
+dimension. In several dimensions the per-mode schedule $q_i(t)=\lambda_i^t$
+attains $\cR=\bigl(\tfrac12\max_i|\ln\lambda_i|\bigr)^2$. If $\Sigma_1$ has
+at least two distinct eigenvalues, that path is not a Class~S shared
 interpolant: matching $\alpha^2+\lambda_i\sigma^2=\lambda_i^t$ on two
 distinct eigenvalues forces $\sigma(t)\asymp\sqrt{t}$ as $t\to 0$. If
 three or more distinct eigenvalues are present, no shared
 $(\alpha,\sigma)$ exists even in Class~R, because
 $\alpha^2+\lambda\sigma^2$ is affine in $\lambda$ while $\lambda^t$ is
-not. \citet[Proposition~3.9]{lipschitzguided2025} optimize $A_2$ over
-shared scalar schedules under the spectral hypothesis
-$1\ge\lambda^{(1)}\ge\cdots\ge\lambda^{(d)}>0$, taking $M$ equal to the
-smallest eigenvalue. The geometries below have mixed spectra with some
-$\lambda_i>1$; the scalar candidate used in the census is Chen
-Example~3.3 with $M=\lambda_{\max}$. That is a pairwise comparison of two
-shared-schedule Class~Q paths, not a test of Proposition~3.9.
+not. Isotropic spectra remain compatible with a shared schedule. We do
+not claim that $d\ge 2$ forbids a shared schedule.
 
-\subsection{A certified one-dimensional counterexample}
-\label{subsec:counterexample}
+\section{Certified scalar Gaussian ranking inversion}
+\label{sec:scalar}
 
 \begin{assumption}
 \label{ass:scalar}
 The endpoints $X_0\sim N(0,1)$ and $X_1\sim N(0,4)$ are independent.
-The compared schedules are linear and trigonometric VP. The solver is
-explicit Heun with NFE $B=8$, hence $S=4$ steps of size $h=1/4$.
+The compared schedules are linear and trigonometric VP, both in Class~S.
+The solver is explicit Heun with NFE $B=8$, hence $S=4$ steps of size
+$h=1/4$. Error is Gaussian $\wtwo$ of the endpoint laws, which equals
+$|r-2|$ because every Heun factor below is positive.
 \end{assumption}
-
-Under Assumption~\ref{ass:scalar}, $q(t)=\alpha(t)^2+4\sigma(t)^2$ and
-$a(t)=q'(t)/(2q(t))$. The exact endpoint factor is $2$. All Heun factors
-below are positive, so $\wtwo=\bigl||r|-2\bigr|=|r-2|$.
 
 \begin{proposition}
 \label{prop:scalar}
@@ -406,7 +344,9 @@ Under Assumption~\ref{ass:scalar},
   \cR_{\mathrm{lin}}=\frac{5\pi}{8}-1,\qquad
   \cR_{\mathrm{VP}}=\frac{\pi^2}{16},
 \end{equation}
-so averaged regularity prefers VP. The Heun endpoint factors satisfy
+and the comparison $\cR_{\mathrm{lin}}>\cR_{\mathrm{VP}}$ is equivalent to
+$2<\pi<8$. Averaged regularity therefore prefers VP. The Heun endpoint
+factors satisfy
 \begin{equation}
   r_{\mathrm{lin}}=\frac{6797469}{3559400},\qquad
   0<r_{\mathrm{VP}}<\frac{187}{100},
@@ -417,42 +357,54 @@ $\mathbb{Q}[\pi,\sqrt{2}]$. Consequently
 \begin{equation}
   \wtwo^{\mathrm{lin}}=\frac{321331}{3559400}<0.091<0.130<\wtwo^{\mathrm{VP}},
 \end{equation}
-so equal-NFE Gaussian $\wtwo$ prefers the linear path. The regularity
-ordering does not determine the fixed-NFE $\wtwo$ ordering.
+so equal-NFE Gaussian $\wtwo$ prefers the linear path. Pairwise ordering
+by integrated Jacobian regularity therefore need not agree with fixed-NFE
+Heun $\wtwo$ error.
 \end{proposition}
 
 \begin{proof}[Proof sketch]
-The linear drift is $a(t)=(5t-1)/(1-2t+5t^2)$. Completing the square to
-$5(t-1/5)^2+4/5$ and using $\arctan 2+\arctan(1/2)=\pi/2$ yields
-$\cR_{\mathrm{lin}}=5\pi/8-1$.
-The VP integral evaluates to $\pi^2/16$. The four linear Heun factors are
-the rationals $47/52$, $6/5$, $497/370$, and $97/74$, whose product is
-$6797469/3559400$. Then
-$321331/3559400<91/1000$ is an elementary comparison of integers.
-The VP grid drifts are exact elements of $\mathbb{Q}[\pi,\sqrt{2}]$; the
-four-step Heun product has only nonnegative coefficients, so substituting
-the rational upper bounds $\sqrt{2}<99/70$ and $\pi<355/113$ is valid and
-gives $r_{\mathrm{VP}}<187/100$, hence $\wtwo^{\mathrm{VP}}>13/100$.
-Details occupy Appendix~\ref{app:scalar}.
+The linear drift is $a(t)=(5t-1)/(1-2t+5t^2)$. Completing the square and
+using $\arctan 2+\arctan(1/2)=\pi/2$ yields $\cR_{\mathrm{lin}}=5\pi/8-1$.
+The VP integral evaluates to $\pi^2/16$. Multiplying
+$5\pi/8-1>\pi^2/16$ by $16$ rearranges to $\pi^2-10\pi+16<0$, i.e.\
+$(\pi-2)(\pi-8)<0$, which holds because $2<\pi<8$. The four linear Heun
+factors are the rationals $47/52$, $6/5$, $497/370$, and $97/74$, whose
+product is $6797469/3559400$. Then $321331/3559400<91/1000$ is an
+elementary comparison of integers. The VP grid drifts are exact elements
+of $\mathbb{Q}[\pi,\sqrt{2}]$; the four-step Heun product has only
+nonnegative coefficients, so substituting the rational upper bounds is
+valid and gives $r_{\mathrm{VP}}<187/100$. Details occupy
+Appendix~\ref{app:scalar}.
 \end{proof}
 
-The certified drifts, exact $\cR$ integrals, and Heun $\wtwo$ bars are
-Figure~\ref{fig:scalar}.
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth,alt={Certified scalar counterexample: linear versus VP drifts between N(0,1) and N(0,4), exact regularity integrals, and Heun NFE 8 Wasserstein-2 bars.}]{figures/fig_scalar.pdf}
+  \caption{Certified scalar counterexample for independent $N(0,1)$ and
+  $N(0,4)$. (a)~Closed-form drifts; the shaded region is
+  $a_{\mathrm{lin}}<0$; markers are Heun nodes at NFE~$8$.
+  (b)~Exact regularity integrals $5\pi/8-1$ and $\pi^2/16$.
+  (c)~Gaussian $\wtwo$ at Heun NFE~$8$: the linear value is the rational
+  $321331/3559400$; VP is shown by its certified lower enclosure.}
+  \label{fig:scalar}
+\end{figure}
 
-One certified inversion proves the logical non-implication. The remainder of
-the paper identifies what $\cR$ cannot retain, then measures how the failure
-depends on the regime in which $\cR$ is used.
+One certified inversion proves the logical non-implication. It does not
+by itself identify a unique causal mechanism, and it does not refute a
+universal pairwise theorem that Chen et al.\ did not state.
 
-\subsection{What the unsigned average discards}
-\label{subsec:discarded}
+\section{Solver-specific local error}
+\label{sec:local}
 
-The content of a ranking inversion is the leading exact-minus-method
-coefficient of the one-step factor (Appendix~\ref{app:solvers}):
-$\tfrac12(a'+a^2)h^2$ for Euler and
+The leading exact-minus-method coefficients of the one-step factor on
+$x'=a(t)x$ are $\tfrac12(a'+a^2)h^2$ for explicit Euler and
 $\bigl(-a''/12+a^3/6\bigr)h^3$ for the implemented Heun factor
-$1+(h/2)\bigl(a(t)+a(t+h)(1+ha(t))\bigr)$. These involve different
-derivatives, signs, and stage locations. Averaging $\|A\|_2^2$ retains none
-of them.
+$1+(h/2)\bigl(a(t)+a(t+h)(1+ha(t))\bigr)$ (Appendix~\ref{app:solvers}).
+These involve different derivatives, signs, and stage locations.
+Averaging $\|A\|_2^2$ retains none of them. The expansions establish that
+local solver error depends on temporal and stagewise information not
+determined by integrated Jacobian energy. They do not isolate sign loss
+as the unique source of the certified inversion.
 
 The telescoping identity
 \begin{equation}
@@ -462,75 +414,82 @@ The telescoping identity
   \Bigl(\prod_{j>n}e_{i,j}\Bigr)
   \label{eq:telescope}
 \end{equation}
-is the accounting tool that converts those local coefficients into endpoint
-factor error. Here $e_{i,n}=\sqrt{q_i(t_{n+1})/q_i(t_n)}$ is exact and
-$r_{i,n}$ is numerical. Prefixes are numerical; suffixes are exact. The
-identity holds without a non-vanishing hypothesis. Appendix~\ref{app:tables}
-illustrates the signed transported terms on the strongest centered block.
+converts those local coefficients into endpoint factor error.
+The exact modal factor is
+$e_{i,n}=\sqrt{q_i(t_{n+1})/q_i(t_n)}$; $r_{i,n}$ is numerical.
+For any independent linear coupling,
+$a_{\mathrm{lin}}(0)=-1<0<a_{\mathrm{lin}}(1)=+1$. The VP drift vanishes
+at the endpoints and does not change sign on $(0,1)$. This distinction
+is consistent with the Heun inversion; it is not a causal isolation.
 
-Fixed-stage Runge--Kutta methods use signed stage evaluations that $\cR$
-discards; in the tested schemes, this distinction contributes to the observed
-inversion. For any independent linear
-coupling, $a_{\mathrm{lin}}(0)=-1<0<a_{\mathrm{lin}}(1)=+1$. The VP drift
-vanishes at the endpoints and does not change sign on $(0,1)$.
+\section{Grid-aware impossibility}
+\label{sec:gridaware}
 
-\subsection{Three regimes: comparator, shared-schedule pairwise comparison, four-path census}
-\label{subsec:regimes}
+Proposition~\ref{prop:scalar} compares two fixed Class~S paths. The
+following theorem addresses a different question: even the global
+minimizer of integrated squared field energy need not minimize
+fixed-grid Euler error. The competitor is chosen after the grid.
 
-Proposition~\ref{prop:scalar} is a pairwise comparison of two fixed Class~S
-paths. Comparing two shared-schedule Class~Q paths is a different
-question, and enumerating four candidate paths including the per-mode
-Class~Q path is a third. The rest of the paper answers these three
-questions on one factorial grid.
+\begin{theorem}
+\label{thm:gridaware}
+Fix $L>0$ and an integer $N\ge 1$. Let $h=1/N$ and let forward Euler use
+the left-endpoint grid $t_n=nh$ on $[0,1]$. Set
+$\varepsilon_N=N(e^{L/N}-1)-L>0$ and define $a_0(t)\equiv L$ and
+$a_{1,N}(t)=L+\varepsilon_N\cos(2\pi Nt)$. Consider the scalar ODE
+$x'=a(t)x$ with $x(0)=1$, and the Class~S Gaussian interpolants of
+Appendix~\ref{app:p4p1} with endpoints $N(0,1)$ and $N(0,e^{2L})$. Then:
+both exact endpoints equal $e^{L}$; $a_0$ uniquely minimizes
+$\int_0^1 a^2$ among scalar fields with integral $L$;
+$\int_0^1 a_{1,N}^2=L^2+\varepsilon_N^2/2>\int_0^1 a_0^2$; left-endpoint
+Euler is exact for $a_{1,N}$; and Euler has strictly positive endpoint
+error for $a_0$. Endpoint error may equivalently be read as
+$|r-e^{L}|$ or as Gaussian $\wtwo$ between $N(0,r^2)$ and $N(0,e^{2L})$.
+\end{theorem}
 
-\begin{enumerate}[leftmargin=1.4em]
-\item $\cR$ as a \emph{pairwise comparator} between two Class~S paths
-  (linear versus trigonometric VP).
-\item $\cR$ as a \emph{pairwise comparison within the shared-schedule
-  class}: trigonometric VP (Class~S, hence Class~Q) versus the scalar
-  Chen Example~3.3 schedule with $M=\lambda_{\max}$ (Class~R and Class~Q,
-  not Class~S).
-\item A \emph{four-path census} that additionally includes the per-mode
-  schedule $q_i(t)=\lambda_i^t$ (Class~Q; not Class~S when $\Sigma_1$ has
-  at least two distinct eigenvalues).
-\end{enumerate}
+\begin{proof}
+The solution of $x'=a(t)x$, $x(0)=1$, is
+$x(t)=\exp\bigl(\int_0^t a(s)\,ds\bigr)$. The cosine perturbation has
+integer period, so $\int_0^1\cos(2\pi Nt)\,dt=0$ and both exact endpoints
+equal $e^{L}$. Expanding the square and using the same orthogonality gives
+$\int_0^1 a_{1,N}^2=L^2+\varepsilon_N^2/2$. The inequality
+$\varepsilon_N>0$ is $e^z>1+z$ at $z=L/N>0$. Uniqueness of the
+minimizer is Proposition~\ref{prop:cs}. On the left-endpoint Euler grid,
+$\cos(2\pi Nt_n)=\cos(2\pi n)=1$, so
+$1+h a_{1,N}(t_n)=e^{L/N}$ and the product is $e^{L}$. For the constant
+field the product is $(1+L/N)^N<e^{L}$ because $\log(1+z)<z$ for
+$z=L/N>0$. The Class~S embedding is Appendix~\ref{app:p4p1}.
+\end{proof}
 
-A complementary scalar construction (Appendix~\ref{app:p4p1}) exhibits an
-admissible Class~S $\cR$-minimizer for which left-endpoint Euler has
-strictly larger endpoint error than a higher-$\cR$ Class~S path. That
-field is chosen after the grid. It is not the mechanism of
-Proposition~\ref{prop:scalar} or of the Gaussian census. A $36$ of $36$
-count on four candidate paths does not imply that a global
-$\cR$-minimizer minimizes fixed-NFE error; this construction blocks that
-generalization.
+The field $a_{1,N}$ is chosen after the grid. Shifted nodes, phase
+offsets, and frequencies other than $N$ destroy exact Euler aliasing
+(Table~\ref{tab:gridaware} in Appendix~\ref{app:robust}). Heun is not
+exact on the aligned oscillation. The construction is a
+solver-grid-dependent impossibility result, not evidence that naturally
+occurring schedules typically behave this way.
 
-\section{Experiments}
+\section{Finite Gaussian enumeration}
 \label{sec:experiments}
 
-\subsection{Setup}
-\label{subsec:setup}
-
-Source $N(0,I)$. Four centered targets, with seed $271828$ for low-rank
-factors: anisotropic Gaussians with condition number $4$ in dimensions $2$
-and $8$ (eigenvalues a geometric sequence from $1/2$ to $2$); and rank-$2$
-covariances $FF^\top+0.05 I$. The dimension-$2$ low-rank eigenvalues are
-$\numLrTwoMin$ and $\numLrTwoMax$; the dimension-$8$ low-rank eigenvalues are
-$0.05$ (six times), $\numLrEightA$, and $\numLrEightB$ (three decimals in
-the body; full float64 values in Appendix~\ref{app:tables}). Paths,
-solvers, budgets, and registration status are in Table~\ref{tab:setup}.
-Precision is float64, audited against an $80$-digit Gelbrich reference.
+Source $N(0,I)$. Four centered targets, with seed $271828$ for the
+headline factor matrices: anisotropic Gaussians with condition number
+$4$ in dimensions $2$ and $8$ (eigenvalues a geometric sequence from
+$1/2$ to $2$); and factor-plus-noise covariances
+$\Sigma=FF^\top+0.05 I$ with $F\in\RR^{d\times 2}$ having i.i.d.\
+standard-normal entries. When $d=2$ the factor has rank equal to the
+ambient dimension; when $d=8$ it is rank $2$ plus a noise floor. The
+dimension-$2$ eigenvalues are $\numLrTwoMin$ and $\numLrTwoMax$; the
+dimension-$8$ eigenvalues are $0.05$ (six times), $\numLrEightA$, and
+$\numLrEightB$. Paths, solvers, budgets, and status occupy
+Table~\ref{tab:setup}. Precision is float64, audited against an
+$80$-digit Gelbrich reference. Phase~4 is confirmatory on a grid frozen
+before the rerun, not a protocol recorded before discovery.
 
 \begin{table}[t]
   \centering
   \caption{Experimental grid. Headline $\cR$ is the continuous integral.
-  Ranking inversions were identified in the registered Phase~3 gate.
-  Phase~4 is a confirmatory reproduction on configurations frozen before the
-  rerun; it is not a preregistration that predates discovery. Status
-  ``confirmatory'' means reproduced on that frozen grid; ``post-hoc'' means
-  added after the Phase~3 observation. Reserve ``pre-registered'' for a
-  protocol recorded before any observation. The Gaussian drift and $\wtwo$
-  formula are closed form; the regularity integrand is exact, while multimode
-  $\cR$ is evaluated deterministically by adaptive quadrature.}
+  ``Confirmatory'' means reproduced on a frozen grid; ``post-hoc'' means
+  added after the Phase~3 observation. The Gaussian drift and $\wtwo$
+  formula are closed form; multimode $\cR$ is adaptive quadrature.}
   \label{tab:setup}
   \setlength{\tabcolsep}{3pt}
   \small
@@ -540,191 +499,97 @@ Precision is float64, audited against an $80$-digit Gelbrich reference.
     experiment & grid & paths & status \\
     \midrule
     pairwise comparator & $4$ geom.\ $\times$ $3$ solvers $\times$ $\{8,16,32\}$ & linear, VP & confirmatory \\
-    shared-schedule pairwise & same $36$ blocks & VP, Ex.~3.3 scalar & post-hoc \\
-    four-path census & same $36$ blocks & $+\,q_i=\lambda_i^t$ & post-hoc \\
+    shared-schedule pairwise & same $36$ tested blocks & VP, Ex.~3.3 scalar & post-hoc \\
+    four-path enumeration & same $36$ tested blocks & $+\,q_i=\lambda_i^t$ & post-hoc \\
     inversion map & $\lambda\in[0.05,100]\times$ $3\times 3$ & linear, VP & post-hoc \\
     geometry draws & $N=50$ i.i.d.\ $F$, $d\in\{2,8\}$ & linear, VP & post-hoc \\
-    robustness $\pm 10\%$, NFE $64,128$ & $66$ low-rank blocks & linear, VP & post-hoc \\
+    robustness $\pm 10\%$, NFE $64,128$ & $66$ factor-plus-noise blocks & linear, VP & post-hoc \\
     non-centered stress test & $2\times 3\times 3$ & linear, VP & confirmatory \\
     \bottomrule
   \end{tabular}}
 \end{table}
 
-\subsection{Statistical treatment and what the counts mean}
-\label{subsec:stats}
-
 Given a geometry, a path, a solver, and a budget, $\cR$ and $\wtwo$ are
-deterministic numerical quantities with no Monte Carlo sampling noise;
-float64 results are checked against high-precision references. The
-$36$-block grid is a complete enumeration of
-$4$ geometries $\times$ $3$ solvers $\times$ $3$ budgets, not a draw.
+deterministic numerical quantities. The $36$-block grid is a finite
+enumeration of $4$ geometries $\times$ $3$ solvers $\times$ $3$ budgets.
 Because $\cR$ is independent of solver and budget, and because the two
-anisotropic geometries share one $\cR$ pair, the census contains
+anisotropic geometries share one $\cR$ pair, the enumeration contains
 \nDistinctRComparisons{} distinct linear-versus-VP $\cR$ comparisons and
-nests into \nGeometrySolverCells{} geometry$\times$solver cells
-(Appendix~\ref{app:quadrature}). Each inversion is reported by the ratio
-of its $\wtwo$ margin to the $80$-digit floor; the pre-declared threshold
-is $\ge\separationThreshold$, and every census inversion lies above it.
-The only random ingredient, and the only confidence interval in the paper,
-is the draw of the low-rank factor $F$
-(Section~\ref{subsec:robust-geometry}).
+nests into \nGeometrySolverCells{} geometry$\times$solver cells. Each
+inversion margin exceeds the $80$-digit floor by a factor
+$\ge\separationThreshold$. No population-level inference is intended.
 
-\subsection{R as a pairwise comparator: linear versus VP}
-\label{subsec:pairwise}
+Linear versus VP invert in \nInversionCells{} of \nGeometrySolverCells{}
+geometry$\times$solver cells; \nAllNFEInvertCells{} of those cells invert
+at every NFE in $\{8,16,32\}$. On this enumeration the paired
+concordance score $(n_{\mathrm{agree}}-n_{\mathrm{invert}})/n$ equals
+$2/9$ over $36$ tested blocks. Stratified by solver ($n=12$ blocks per
+stratum) the score is $+1/2$ under Euler and RK4 and $-1/3$ under Heun.
+The strongest block is low-rank $d=8$, Euler, NFE~$8$:
+$\cR$ prefers linear ($\numRlinStrong$ versus $\numRvpStrong$) while
+$\wtwo$ prefers VP ($\numWlinStrong$ versus $\numWvpStrong$).
 
-Does $\cR[b]<\cR[b']$ imply $E[b]<E[b']$ at equal NFE for the linear and
-trigonometric VP interpolants? The protocol is the confirmatory Phase~4
-$36$-block census of Table~\ref{tab:setup}, with continuous $\cR$, on a grid
-frozen before the rerun. Linear versus VP
-invert in \nInversionCells{} of \nGeometrySolverCells{}
-geometry$\times$solver cells; \nAllNFEInvertCells{} of those cells invert at
-every NFE in $\{8,16,32\}$, from \nDistinctRComparisons{} distinct $\cR$
-comparisons. On this census the paired concordance score
-$(n_{\mathrm{agree}}-n_{\mathrm{invert}})/n$ between the $\cR$ order and the
-$\wtwo$ order equals $2/9$ over $36$ blocks. Stratified by solver
-($n=12$ blocks per stratum) the score is $+1/2$ under Euler and RK4 and
-$-1/3$ under Heun: rank agreement changes sign with the solver. The two
-anisotropic geometries share one $\cR$ pair, a structural tie in the
-value of $\cR$, not in the concordance denominator. Stratified by
-geometry ($n=9$ blocks per stratum) the scores occupy
-Table~\ref{tab:concordance}. The strongest block is low-rank,
-$d=8$, Euler, NFE $8$:
-$\cR$ prefers linear ($\numRlinStrong$ versus $\numRvpStrong$) while $\wtwo$
-prefers VP ($\numWlinStrong$ versus $\numWvpStrong$). Appendix~\ref{app:tables}
-lists every inverted row. This census does not estimate a population
-frequency, and it does not speak to learned fields.
+As a post-hoc pairwise comparison of two shared-schedule Class~Q paths,
+trigonometric VP versus Chen Example~3.3 with $M=\lambda_{\max}$ inverts
+in \nInFamilyInversions{} of $36$ tested blocks and \nInFamilyCells{} of
+$12$ cells. This is not a test of \citet[Proposition~3.9]{lipschitzguided2025}.
 
-\subsection{R as a pairwise comparison within the shared-schedule class: VP versus the scalar log-covariance schedule}
-\label{subsec:infamily}
+Among the four specified candidate paths on the same $36$ tested blocks,
+the per-mode log-covariance path has the smallest continuous $\cR$ and
+the smallest Gaussian $\wtwo$ in $36$ of $36$ tested blocks. When
+$\Sigma_1$ has at least two distinct eigenvalues, that path is not a
+Class~S shared interpolant. Theorem~\ref{thm:gridaware} blocks any
+reading of this count as a global minimizer theorem.
 
-When both paths are shared-schedule Class~Q paths, does the one with smaller
-$\cR$ have the smaller $\wtwo$? The protocol compares trigonometric VP to
-Chen Example~3.3 with a single ratio $M=\lambda_{\max}$ on the same $36$
-blocks (post-hoc). This is a pairwise comparison of two candidates, not a
-global minimization of $\cR$ over the shared-schedule class, and not a
-test of \citet[Proposition~3.9]{lipschitzguided2025}. The ranking inverts in
-\nInFamilyInversions{} of $36$ blocks and \nInFamilyCells{} of $12$ cells:
-anisotropic $d=2$, Euler at NFE $16$ and $32$; anisotropic $d=8$, Euler at
-NFE $8$, $16$, and $32$; low-rank $d=2$, Euler at NFE $8$ and Heun at NFE
-$8$, $16$, and $32$; low-rank $d=8$, none. Figure~\ref{fig:fourpaths} places
-the two shared-schedule paths next to linear and the per-mode path.
-Every pairwise inversion margin exceeds the $80$-digit floor by a factor
-greater than $\separationThreshold$. The comparison does not say that $A_2$
-fails as a global optimization objective on the shared-schedule class.
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth,alt={Three paired bar charts of regularity and W2 on commuting Gaussian interpolants.}]{figures/fig1_regimes.pdf}
+  \caption{Three comparisons on commuting Gaussian interpolants.
+  Continuous $\cR$ (left) and equal-NFE Gaussian $\wtwo$ (right).
+  (a)~Pairwise linear versus VP on low-rank $d=8$, Euler, NFE~$8$.
+  (b)~VP versus Chen Ex.~3.3 scalar on anisotropic $d=8$, Euler, NFE~$8$.
+  (c)~Four specified candidate paths on low-rank $d=8$, Euler, NFE~$8$.
+  Among those four paths, the per-mode path has the smallest $\cR$ and
+  the smallest $\wtwo$ in $36$ of $36$ tested blocks.}
+  \label{fig:regimes}
+\end{figure}
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth,alt={Four-path comparison of continuous regularity and Euler NFE-8 Wasserstein-2 on four centered Gaussian geometries.}]{figures/fig_four_paths.pdf}
-  \caption{Four paths on the four centered geometries: linear, trigonometric
-  VP, shared Chen Example~3.3 scalar schedule with $M=\lambda_{\max}$, and
-  the per-mode log-covariance schedule. Left: continuous
-  $\cR$. Right: Euler Gaussian $\wtwo$ at NFE $8$. Among these four
-  candidate paths, the per-mode schedule has the smallest $\cR$ and the
-  smallest $\wtwo$ in $36$ of $36$ blocks on the stated census. This
-  finite-census observation does not imply that a global $\cR$-minimizer
-  minimizes fixed-NFE error. When $\Sigma_1$ has at least two distinct
-  eigenvalues, the per-mode path is not a Class~S shared interpolant.
-  Exact-moment
-  modal Runge--Kutta; $\cR$ by adaptive quadrature except the per-mode
-  closed form.}
+  \caption{Four specified candidate paths on the four centered geometries.
+  Left: continuous $\cR$. Right: Euler Gaussian $\wtwo$ at NFE~$8$.}
   \label{fig:fourpaths}
 \end{figure}
 
-\subsection{Four-path census: the per-mode log-covariance path}
-\label{subsec:minimizer}
-
-If the per-mode schedule $q_i(t)=\lambda_i^t$ is included among the four
-candidate paths, does it attain both the smallest $\cR$ and the smallest
-$\wtwo$? Among the four candidate paths on the stated $36$-block census,
-the per-mode log-covariance path has the smallest continuous $\cR$ and
-the smallest Gaussian $\wtwo$ in $36$ of $36$ blocks. This finite-census
-observation does not imply that a global $\cR$-minimizer minimizes
-fixed-NFE error. When $\Sigma_1$ has at least two distinct eigenvalues,
-that path is not a Class~S shared interpolant. The observation is a
-census count on four candidates, not a sampling law, and it does not
-supply a practical multi-dimensional schedule.
-
-\subsection{Where the inversions live: a sweep over target variance}
-\label{subsec:region}
-
-Are linear-versus-VP inversions an artefact of $\lambda=4$? The protocol is
-a log-uniform sweep $\lambda\in[0.05,100]$ at \logLebesgueNodes{} nodes, for
-each of Euler, Heun, and RK4 and each NFE in $\{8,16,32\}$. The reported
-quantity is the Lebesgue measure in $\log\lambda$ of the inversion set, not
-a count of inverted nodes. At Heun NFE $8$ that measure is
-\logLebesgueHeunEight{} on an interval of log-length \logLebesgueSpan{},
-hence a fraction \logLebesgueHeunEightFrac. Doubling the resolution to
-$2561$ nodes changes every cell's measure by less than $1\%$ (maximum
-relative change \logLebesgueMaxRelChange). Figure~\ref{fig:region} displays
-the set. At $\lambda=4$ the inversion is present under Heun at every tested
-budget NFE$\in\{4,8,12,16,24,32,64,128,256\}$, absent under Euler, and mixed
-under RK4 (absent at NFE $8$ and $12$). Euler does invert at more extreme
-$\lambda$. The scalar example is solver-dependent, not an artefact of Heun
-at budget $8$ alone. The sweep does not yield a population law over target
-covariances.
+A log-uniform sweep $\lambda\in[0.05,100]$ locates linear-versus-VP
+inversions (Figure~\ref{fig:region}). At $\lambda=4$ the inversion is
+present under Heun at every tested budget
+NFE$\in\{4,8,12,16,24,32,64,128,256\}$, absent under Euler, and mixed
+under RK4. Euler does invert at more extreme $\lambda$. The scalar
+example is solver-dependent, not an artefact of Heun at budget $8$
+alone.
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=\linewidth,alt={Heat map of linear versus VP ranking inversions versus target variance lambda and solver budget.}]{figures/fig_inversion_region.pdf}
+  \includegraphics[width=\linewidth,alt={Heat map of linear versus VP ranking inversions versus target variance and solver budget.}]{figures/fig_inversion_region.pdf}
   \caption{Linear versus VP ranking inversion versus target variance
-  $\lambda$, for Euler, Heun, and RK4 at NFE $8$, $16$, and $32$. Dark
-  cells: $\cR$ and $\wtwo$ disagree. The dashed line is $\lambda=4$
-  (Proposition~\ref{prop:scalar}). The inversion set is reported in the
-  text by its Lebesgue measure in $\log\lambda$ on $[0.05,100]$, not by a
-  count of dark pixels. Numerical evaluation of a deterministic ranking.}
+  $\lambda$. Dark cells: $\cR$ and $\wtwo$ disagree. The dashed line is
+  $\lambda=4$ (Proposition~\ref{prop:scalar}).}
   \label{fig:region}
 \end{figure}
 
-\subsection{Robustness to the random geometry}
-\label{subsec:robust-geometry}
+Redrawing $F$ from $\texttt{torch.Generator}$ seeds $10000$ through
+$10049$ at $d\in\{2,8\}$, every one of the $50$ draws has at least one
+linear-versus-VP inversion among the nine solver-budget conditions.
+This descriptive fraction is reported only for the finite sampled
+geometries; no population-level inference is intended. The event is a
+post-hoc ``at least one inversion'' summary, not a preregistered
+geometry-level law.
 
-Does the low-rank inversion survive a redraw of $F$? The protocol draws
-\nSeedDraws{} i.i.d.\ rank-$2$ factors from \texttt{torch.Generator} with
-seeds $10000,\ldots,10049$, at $d\in\{2,8\}$, and records whether each
-geometry has at least one linear-versus-VP inversion among the nine
-solver-budget conditions. Unlike the $66$-block robustness grid of
-Appendix~\ref{app:robust}, these draws redraw $F$. Both dimensions invert in
-$50$ of $50$ draws. The $95\%$ Clopper--Pearson interval is
-$[\clopperLow,\clopperHigh]$ (Table~\ref{tab:seeds}). This is the only
-confidence interval in the paper. It is not a statement that inversion
-occurs for every low-rank geometry.
-
-\begin{table}[t]
-  \centering
-  \caption{Fraction of low-rank geometries with at least one linear-versus-VP
-  inversion, from \nSeedDraws{} i.i.d.\ draws of the rank-$2$ factor $F$
-  (seeds $10000$ through $10049$; \texttt{torch.Generator}). The interval is
-  exact Clopper--Pearson $95\%$. The existing $\pm 10\%$ robustness grid does
-  not redraw $F$. Inferential interval on a binomial geometry draw; not an
-  interval on $\cR$ or $\wtwo$.}
-  \label{tab:seeds}
-  \small
-  \input{generated/lowrank_seed_fraction}
-\end{table}
-
-\subsection{Numerical validity controls}
-\label{subsec:controls}
-
-Adaptive quadrature of $\max_i a_i(t)^2$ agrees in sign with $\Rhat$ on
-every headline geometry, including the scalar pair of
-Proposition~\ref{prop:scalar}. Trapezoidal estimates at $24$, $48$, $96$,
-and $192$ nodes converge to the same ordering (Appendix~\ref{app:quadrature}).
-All $72$ float64 $\wtwo$ values on the centered census agree with an
-$80$-digit reference to at most $\numPrecFloor$. Interval procedures for
-the VP Heun product occupy Appendix~\ref{app:quadrature}.
-
-A confirmatory non-centered family (Appendix~\ref{app:noncentered}) shifts
-the means so that $c(t)\ne 0$. Then $\cR$, which ignores $c$, is blind to a
-mean contribution in $\wtwo^2$. Of $18$ blocks, $11$ invert under continuous
-$\cR$, and several inversions including all dimension-$8$ Euler and Heun
-inversions are mean-driven. The family is a structural stress test of that
-blind spot, not an independent replication of the centered mechanism.
-
-Mixture targets are excluded. Dimension-$8$ mixture endpoint estimators
-failed a post-result calibration diagnostic; the census accepts Gaussian
-targets only.
-
-\FloatBarrier
+Mixture targets are excluded. A confirmatory non-centered family
+(Appendix~\ref{app:noncentered}) shows that $\cR$, which ignores $c(t)$,
+is blind to a mean contribution in $\wtwo^2$.
 
 \section{Related work}
 \label{sec:related}
@@ -732,58 +597,32 @@ targets only.
 Flow matching and stochastic interpolants supply the Gaussian path
 family~\citep{lipman2023flow,albergo2025stochastic,liu2023rectified,tong2024conditional}.
 Lipschitz-guided schedule design proposes the selection criterion tested
-here~\citep{lipschitzguided2025}. Solver-specific schedules and exact linear
-parts are documented in diffusion practice~\citep{sabour2024align,karras2022edm,lu2022dpmsolver,lu2022dpmsolverpp,zhang2023deis}.
+here~\citep{lipschitzguided2025}: minimize $A_2$ over scalar schedules,
+with a transfer formula that applies a designed schedule at inference
+without retraining. The present negative result is a limitation of a
+universal pairwise surrogate reading, not a refutation of that
+optimization programme.
+
+\citet{tao2026strain} give a broader dynamical error analysis, decomposing
+$\nabla v=S+\Omega$ and controlling Euler error by the logarithmic norm
+$\mu_2=\lambda_{\max}(S)$, together with material-derivative structure and
+learned-model experiments. In one dimension $\mu_2(a)=a$ and
+$\|A\|_2=|a|$. Their Theorem~5 concerns McCann displacement interpolation,
+which is not the independent-coupling linear or VP path studied here.
+The present contribution is narrower: an exact, fully certified scalar
+Gaussian ranking inversion, a closed-form $W_2$ comparison, a
+solver-grid-aware impossibility construction, and a transparent finite
+Gaussian enumeration. It does not provide a general numerical-error
+theory.
 
 \citet{stephanovitch2026lipschitz} prove sharp Lipschitz regularity of
 canonical flow-matching fields and Euler-type $\wtwo$ rates of order
 $\sqrt{d}/N$ up to logs. That is a bound, not a pairwise ranking of two
-interpolants at equal NFE. \citet{gupta2026sharpen} allocate Euler steps
-where a learned field is sharp; the path is held fixed. \citet{yuan2026instance}
-learn instance-aware grids. \citet{du2026lagrangian} select paths by a
-least-action principle. \citet{khan2026isofm} regularizes the material derivative
-of learned fields.
-
-\citet{tao2026strain} decompose $\nabla v=S+\Omega$ and control Euler error
-by the logarithmic norm $\mu_2=\lambda_{\max}(S)$, which is signed, whereas
-$\cR$ integrates $\|A\|_2^2$. In one dimension $\mu_2(a)=a$ and
-$\|A\|_2=|a|$. Their Theorem~5 states that McCann displacement interpolation
-has vanishing material derivative, hence Euler is of order $2$ in the
-Eulerian analysis; Remark~7 records the stronger Lagrangian exactness
-observed on that interpolant. Neither statement applies to the
-independent-coupling linear or VP path studied here. The present paper
-supplies a rationally certified Gaussian instance of ranking failure for
-the unsigned average $\|A\|_2^2$, together with a three-comparison map of
-pairwise ranking on this commuting Gaussian family. A counterexample to
-$\mu_2$ itself is outside our scope. \citet{benton2024error} bound
-$\wtwo$ of a learned flow by an $L^2$ velocity error and a Lipschitz
-constant of the approximate field: an error bound, not a pairwise ranking
-of two interpolants at equal NFE. Consistency models~\citep{song2023consistency}
-distill few-step maps. Align-your-steps~\citep{sabour2024align} and
-DPM-Solver~\citep{lu2022dpmsolver} design the solver grid rather than the
-interpolant. Those objects are distinct from the ranking question tested
-here.
-
-\section{Conclusion}
-\label{sec:conclusion}
-
-Averaged squared Jacobian regularity does not determine the equal-NFE
-Gaussian $\wtwo$ ranking of two fixed interpolants. The fact is proved by a
-one-dimensional Heun calculation whose integrals and linear factor are exact
-and whose VP factor is enclosed by a rational substitution in
-$\mathbb{Q}[\pi,\sqrt{2}]$.
-
-The same scalar splits into three comparisons. As a pairwise comparator of
-linear versus VP it inverts on a complete census. As a pairwise comparison
-of two shared-schedule Class~Q paths it still inverts. Among the four
-candidate paths on the stated $36$-block census, the per-mode
-log-covariance path has the smallest continuous $\cR$ and the smallest
-Gaussian $\wtwo$ in $36$ of $36$ blocks. This finite-census observation
-does not imply that a global $\cR$-minimizer minimizes fixed-NFE error.
-When $\Sigma_1$ has at least two distinct eigenvalues, that path is not a
-Class~S shared interpolant. Appendix~\ref{app:p4p1} gives an admissible
-Class~S $\cR$-minimizer whose left-endpoint Euler error is strictly larger
-than that of a higher-$\cR$ Class~S path.
+interpolants at equal NFE. Solver-specific schedules and exact linear
+parts are documented in diffusion
+practice~\citep{sabour2024align,karras2022edm,lu2022dpmsolver,zhang2023deis}.
+\citet{benton2024error} bound $\wtwo$ of a learned flow. Those objects
+are distinct from the ranking question tested here.
 
 \section{Limitations}
 \label{sec:limits}
@@ -793,12 +632,26 @@ field, image, video, or world-model quantity is reported. The solvers are
 three fixed-step Runge--Kutta methods at small equal-NFE budgets.
 Exponential integrators solve affine scalar modes exactly, so the
 comparisons concern generic RK discretizations of those modes rather than
-the best integrator for an affine field. The Euler construction of
-Appendix~\ref{app:p4p1} depends on the grid: the field is chosen after the
-grid. Extended robustness grids (NFE $64$ and $128$, $\pm 10\%$ noise-floor
-perturbations) are post-hoc. Census counts are hierarchical enumerations,
-not population frequencies. No counterexample to the signed logarithmic
-norm $\mu_2$ is provided.
+the best integrator for an affine field. Theorem~\ref{thm:gridaware}
+depends on the grid: the competitor is chosen after the grid and exploits
+exact aliasing. Census counts are hierarchical enumerations of specified
+candidates, not population frequencies. No counterexample to the signed
+logarithmic norm $\mu_2$ is provided. Sign loss is consistent with the
+Heun inversion and is not isolated as its unique cause.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+An integrated unsigned Jacobian-energy functional does not contain enough
+solver-specific temporal information to universally determine few-step
+endpoint error. A certified scalar Gaussian example shows that pairwise
+ordering by integrated Jacobian regularity can disagree with fixed-NFE
+Heun $\wtwo$ error. Local solver error depends on temporal and stagewise
+information not determined by that energy. A solver-grid-aware Gaussian
+construction shows that the global integrated-regularity minimizer need
+not minimize fixed-grid Euler error. A specified finite Gaussian
+enumeration contains both agreement and disagreement. The results
+establish a limitation of a universal surrogate interpretation.
 
 \FloatBarrier
 {\small
@@ -856,7 +709,10 @@ The change of variables $u=\pi t$ yields
 $\cR_{\mathrm{VP}}=(9\pi/4)\int_0^\pi \sin^2 u/(5-3\cos u)^2\,du$. The
 standard Weierstrass evaluation of the integrand gives
 $\int_0^\pi \sin^2 u/(5-3\cos u)^2\,du=\pi/36$, hence
-$\cR_{\mathrm{VP}}=\pi^2/16$. Both closed forms were checked by adaptive
+$\cR_{\mathrm{VP}}=\pi^2/16$. The comparison
+$\cR_{\mathrm{lin}}>\cR_{\mathrm{VP}}$ rearranges to
+$\pi^2-10\pi+16<0$, i.e.\ $(\pi-2)(\pi-8)<0$, which holds because
+$2<\pi<8$. Both closed forms were checked by adaptive
 quadrature (absolute discrepancy below $10^{-12}$; quadrature error
 estimates are not used as certificates).
 
@@ -942,40 +798,13 @@ implemented Heun factor leaves $\bigl(-a''/12+a^3/6\bigr)h^3+O(h^4)$. The
 $aa'$ terms cancel. The expansion was confirmed with independent symbolic
 algebra on the implemented expression.
 
-\section{Grid-aware Euler construction}
+\section{Class~S embedding of the grid-aware fields}
 \label{app:p4p1}
 
-\begin{proposition}
-\label{prop:euler}
-Fix $L>0$ and an integer $N\ge 1$. Let $h=1/N$ and let forward Euler use the
-left-endpoint grid $t_n=nh$ on $[0,1]$. Set
-$\varepsilon_N=N(e^{L/N}-1)-L>0$ and define $a_0(t)=L$ and
-$a_{1,N}(t)=L+\varepsilon_N\cos(2\pi Nt)$. For $x(0)=1$: both exact
-endpoints equal $e^{L}$; $\int_0^1 a_{1,N}^2=L^2+\varepsilon_N^2/2>\int_0^1 a_0^2$;
-Euler is exact for $a_{1,N}$; Euler has strictly positive endpoint error for
-$a_0$.
-\end{proposition}
-
-\begin{proof}
-The solution of $x'=a(t)x$, $x(0)=1$, is
-$x(t)=\exp\bigl(\int_0^t a(s)\,ds\bigr)$. The cosine perturbation has
-integer period, so $\int_0^1\cos(2\pi Nt)\,dt=0$ and both exact endpoints
-equal $e^{L}$. Expanding the square and using the same orthogonality gives
-$\int_0^1 a_{1,N}^2=L^2+\varepsilon_N^2/2$. The inequality
-$\varepsilon_N>0$ is $e^z>1+z$ at $z=L/N>0$, hence
-$\int_0^1 a_{1,N}^2>\int_0^1 a_0^2=L^2$.
-
-On the left-endpoint Euler grid, $\cos(2\pi Nt_n)=\cos(2\pi n)=1$, so
-$1+h a_{1,N}(t_n)=1+(L+\varepsilon_N)/N=e^{L/N}$. Every oscillatory Euler
-factor equals $e^{L/N}$ and the product is $e^{L}$. For the constant field
-every Euler factor equals $1+L/N$, and the product is $(1+L/N)^N$. Since
-$\log(1+z)<z$ for $z=L/N>0$, one has $(1+L/N)^N<e^{L}$.
-\end{proof}
-
-The field $a_{1,N}$ is chosen after the grid. The construction is not the
-mechanism of Proposition~\ref{prop:scalar}. An $80$-digit check confirms that
-the oscillatory Euler product equals $e^{L}$, but it is not a substitute for
-the argument above.
+The ODE comparison of Theorem~\ref{thm:gridaware} is proved in the main
+text. This appendix records the Class~S Gaussian embedding and the
+positivity hypotheses. The field $a_{1,N}$ is chosen after the grid. The
+construction is not the mechanism of Proposition~\ref{prop:scalar}.
 
 The same fields are Class~S Gaussian interpolants. Set $\lambda=e^{2L}$ and
 \begin{equation}
@@ -999,8 +828,9 @@ Thus $a_0$ is an admissible Class~S $\cR$-minimizer among one-dimensional
 variance paths from $1$ to $\lambda$,
 yet left-endpoint Euler has strictly larger endpoint error for $a_0$ than
 for the higher-$\cR$ path $a_{1,N}$. This construction blocks any inference
-from a finite-census $36$ of $36$ count on four candidates to the statement
-that a global $\cR$-minimizer minimizes fixed-NFE error.
+from a $36$ of $36$ count among four specified candidate paths on $36$
+tested blocks to the statement that a global $\cR$-minimizer minimizes
+fixed-NFE error.
 
 \section{Full block tables}
 \label{app:tables}
@@ -1009,12 +839,12 @@ Table~\ref{tab:allinv} lists every inverted linear-versus-VP solver-budget
 row under continuous $\cR$. These rows are a hierarchical listing of the
 \nInversionCells{} geometry$\times$solver cells, not a population rate.
 Table~\ref{tab:strongest} records the strongest centered block.
-Table~\ref{tab:logcov} reports the four-path census: among four candidate
-paths, the per-mode schedule has the smallest $\cR$ and the smallest
-$\wtwo$ in $36$ of $36$ blocks. This finite-census observation does not
-imply that a global $\cR$-minimizer minimizes fixed-NFE error. When
-$\Sigma_1$ has at least two distinct eigenvalues, that path is not a
-Class~S shared interpolant.
+Table~\ref{tab:logcov} reports the four-path enumeration: among four
+specified candidate paths, the per-mode schedule has the smallest $\cR$
+and the smallest $\wtwo$ in $36$ of $36$ tested blocks. This finite
+enumeration does not imply that a global $\cR$-minimizer minimizes
+fixed-NFE error. When $\Sigma_1$ has at least two distinct eigenvalues,
+that path is not a Class~S shared interpolant.
 Table~\ref{tab:infamily} lists the nine shared-schedule pairwise inversions.
 Figure~\ref{fig:eigenmode} illustrates identity~\eqref{eq:telescope} on the
 strongest block; Figure~\ref{fig:interaction} shows the low-rank
@@ -1068,12 +898,12 @@ solver-path split.
 
 \begin{table}[!htbp]
   \centering
-  \caption{Four candidate paths on the centered grid. Among these four
-  paths, the per-mode schedule has the smallest $\cR$ and the smallest
-  $\wtwo$ in $36$ of $36$ blocks. This finite-census observation does not
-  imply that a global $\cR$-minimizer minimizes fixed-NFE error. When
-  $\Sigma_1$ has at least two distinct eigenvalues, that path is not a
-  Class~S shared interpolant.}
+  \caption{Four specified candidate paths on the centered grid. Among
+  these four paths, the per-mode schedule has the smallest $\cR$ and the
+  smallest $\wtwo$ in $36$ of $36$ tested blocks. This finite enumeration
+  does not imply that a global $\cR$-minimizer minimizes fixed-NFE error.
+  When $\Sigma_1$ has at least two distinct eigenvalues, that path is not
+  a Class~S shared interpolant.}
   \label{tab:logcov}
   \scriptsize
   \setlength{\tabcolsep}{3.5pt}
@@ -1203,6 +1033,26 @@ every cell by less than $1\%$.
 \section{Robustness grids}
 \label{app:robust}
 
+Table~\ref{tab:gridaware} records aligned and perturbed evaluations of
+Theorem~\ref{thm:gridaware} at $L=\log 2$. Ranking inversion is recorded
+only when exact endpoints still match and the constant minimizer has
+strictly larger solver error. Phase offsets and interior nodes preserve
+endpoints but destroy Euler exactness. Non-integer frequencies break the
+common-endpoint constraint. Heun is not exact on the aligned oscillation.
+These checks show how quickly the aliasing phenomenon disappears when
+grid alignment is perturbed; they are not a population frequency.
+
+\begin{table}[ht]
+  \centering
+  \caption{Grid-aware robustness at $L=\log 2$. ``Ends'' records whether
+  the two exact endpoints still match. ``Invert'' records whether the
+  constant $\cR$-minimizer has strictly larger solver error.}
+  \label{tab:gridaware}
+  \scriptsize
+  \input{generated/grid_aware_robustness}
+\end{table}
+
+
 The post-hoc low-rank grid has $66$ preference blocks:
 $2$ dimensions, $3$ solvers, and, for each pair, the three primary NFE
 budgets $\{8,16,32\}$ at noise-floor perturbations
@@ -1213,10 +1063,10 @@ budgets are not run at $\delta\ne 0$. Table~\ref{tab:robust} summarizes the
 $66$ blocks. All $66$ follow the same solver-path split as the primary
 low-rank census: VP under Euler, linear under Heun and RK4.
 
-The geometry-draw experiment of Section~\ref{subsec:robust-geometry} is the
-one place $F$ is redrawn. The paired concordance score on the centered census is discussed
-in Appendix~\ref{app:quadrature} and recorded in Table~\ref{tab:concordance}.
-
+The geometry-draw experiment of Section~\ref{sec:experiments} is the
+one place $F$ is redrawn. The paired concordance score on the centered
+enumeration is discussed in Appendix~\ref{app:quadrature} and recorded in
+Table~\ref{tab:concordance}.
 \section{Reproducibility, artifacts, and provenance}
 \label{app:repro}
 
@@ -1227,17 +1077,14 @@ precision audit uses $80$-digit arithmetic. Compact artifacts live under
 \texttt{paper/arxiv/artifacts/} and are committed files. Rebuild commands
 are listed in \texttt{README.md}. A GitHub Release tag is a later owner
 publication gate and is not required to read the numbers in this PDF.
-The frozen Phase~4 experiment-code commit is recorded in \texttt{REVISION}.
-The Hydra \texttt{outputs/} tree is not part of the public snapshot;
-eigenvalues, exact-moment modal Runge--Kutta, and the compact JSON files
-suffice for Table~\ref{tab:strongest} and Proposition~\ref{prop:scalar}.
-The VP Heun polynomial occupies
-\texttt{paper/arxiv/artifacts/scalar\_counterexample.json};
-covariances occupy \texttt{paper/arxiv/artifacts/geometries.json}.
-The $80$-digit Gelbrich audit occupies the frozen Hydra tree when that
-tree is present.\footnote{Path
-\texttt{outputs/phase4\_precision\_2026-07-24-v1/}, not part of the public
-snapshot.}
+Frozen Phase~4 Hydra tables used by the eigenmode and non-centered
+figures live under \texttt{paper/arxiv/frozen\_runs/}. Compact derived
+artifacts occupy \texttt{paper/arxiv/artifacts/}. Eigenvalues, exact-moment
+modal Runge--Kutta, and those compact files suffice for
+Table~\ref{tab:strongest} and Proposition~\ref{prop:scalar}. The raw
+Hydra directory \texttt{outputs/} is not required to read the PDF.
+The $80$-digit Gelbrich audit is the frozen precision table in
+\texttt{paper/arxiv/frozen\_runs/}.
 \par}
 
 \begin{table}[ht]

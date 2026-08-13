@@ -67,15 +67,15 @@ def gpu_name() -> str:
 
 
 def package_lock_hash(repo_root: Path) -> str:
-    """Hash pyproject.toml as a lightweight lock proxy.
+    """Hash the dependency lock if present, otherwise pyproject.toml.
 
-    Phase 0 does not require a lockfile. Prefer a lockfile hash later.
+    Prefer ``requirements-lock.txt`` (hashed, pinned) when it exists.
     """
-    path = repo_root / "pyproject.toml"
-    if not path.is_file():
-        return "missing"
-    digest = hashlib.sha256(path.read_bytes()).hexdigest()
-    return digest
+    for name in ("requirements-lock.txt", "uv.lock", "pyproject.toml"):
+        path = repo_root / name
+        if path.is_file():
+            return hashlib.sha256(path.read_bytes()).hexdigest()
+    return "missing"
 
 
 def software_environment_hash() -> str:

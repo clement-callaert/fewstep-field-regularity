@@ -1,4 +1,4 @@
-"""Write census macros: paired concordance, Clopper--Pearson, log-Lebesgue."""
+"""Write enumeration macros: paired concordance and log-Lebesgue measure."""
 
 from __future__ import annotations
 
@@ -17,7 +17,7 @@ from fewstep_regularities.analysis.ranking_grids import (
 )
 from fractions import Fraction
 
-from fewstep_regularities.utils.hashing import sha256_file
+from fewstep_regularities.utils.hashing import sha256_file, write_compact_manifest
 
 ROOT = Path(__file__).resolve().parents[1]
 ART = ROOT / "paper" / "arxiv" / "artifacts"
@@ -57,18 +57,12 @@ def _refresh_manifest() -> None:
         "inversion_region.json",
         "lowrank_seed_fraction.json",
         "in_family_blocks.json",
+        "grid_aware_robustness.json",
     ):
         path = ART / name
         if path.is_file():
             files[name] = sha256_file(path)
-    files.pop("manifest.json", None)
-    MANIFEST.write_text(
-        json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8"
-    )
-    payload["files"]["manifest.json"] = sha256_file(MANIFEST)
-    MANIFEST.write_text(
-        json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8"
-    )
+    write_compact_manifest(MANIFEST, payload)
 
 
 def main() -> None:
@@ -156,8 +150,7 @@ def main() -> None:
         rf"\newcommand{{\pairedConcordanceHeun}}{{{tau_solver['heun']:.3f}}}",
         rf"\newcommand{{\pairedConcordanceRK}}{{{tau_solver['rk4']:.3f}}}",
         r"\newcommand{\nSeedDraws}{50}",
-        rf"\newcommand{{\clopperLow}}{{{cp_low:.3f}}}",
-        rf"\newcommand{{\clopperHigh}}{{{cp_high:.3f}}}",
+        rf"\newcommand{{\seedFraction}}{{{float(seeds['summary'][0]['fraction']):.2f}}}",
         rf"\newcommand{{\logLebesgueHeunEight}}{{{heun8['measure']:.3f}}}",
         rf"\newcommand{{\logLebesgueSpan}}{{{log_span:.3f}}}",
         rf"\newcommand{{\logLebesgueHeunEightFrac}}{{{heun8['fraction']:.3f}}}",
@@ -173,7 +166,7 @@ def main() -> None:
         r"\toprule",
         r"stratum & paired concordance \\",
         r"\midrule",
-        rf"census (36 blocks) & {_tau_as_tex(tau)} \\",
+        rf"tested 36-block grid & {_tau_as_tex(tau)} \\",
         rf"anisotropic $d=2$ & {_tau_as_tex(tau_family['anisotropic_gaussian_d2'])} \\",
         rf"anisotropic $d=8$ & {_tau_as_tex(tau_family['anisotropic_gaussian_d8'])} \\",
         rf"low-rank $d=2$ & {_tau_as_tex(tau_family['low_rank_gaussian_d2'])} \\",
@@ -206,18 +199,15 @@ def main() -> None:
     LEBESGUE_TEX.write_text("\n".join(leb_lines), encoding="utf-8")
 
     seed_lines = [
-        r"\begin{tabular}{lcccc}",
+        r"\begin{tabular}{lcc}",
         r"\toprule",
-        r"$d$ & $N$ & inversions & $\hat p$ & Clopper--Pearson 95\% \\",
+        r"$d$ & inversions / 50 & fraction \\",
         r"\midrule",
     ]
     for row in seeds["summary"]:
         seed_lines.append(
-            f"{row['dim']} & {row['n_seeds']} & "
-            f"{row['n_with_any_inversion']}/{row['n_seeds']} & "
-            f"{float(row['fraction']):.2f} & "
-            f"[{float(row['clopper_pearson_low']):.3f}, "
-            f"{float(row['clopper_pearson_high']):.3f}] \\\\"
+            f"{row['dim']} & {row['n_with_any_inversion']}/50 & "
+            f"{float(row['fraction']):.2f} \\\\"
         )
     seed_lines.extend([r"\bottomrule", r"\end{tabular}", ""])
     (GEN / "lowrank_seed_fraction.tex").write_text(

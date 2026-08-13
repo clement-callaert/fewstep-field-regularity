@@ -1,9 +1,11 @@
 {
+  "base_commit": "aaef59caa6e3d4bca79b4538bb3f3d6d1706a8e4",
+  "environment_lock_hash": "25195ab63834cda2c141fa7745e4949756797aca5f2cc75ab671e057d2a124b6",
   "figure_artifact_id": "arxiv_figures_2026-08-13-v1:fig_four_paths",
-  "figure_checksum_sha256": "57e732cade86bac4576f98aee6f58cbd7af172811591183816477100ed420876",
-  "generation_timestamp": "2026-08-13T17:38:51.381127+00:00",
-  "git_commit": "d71349012762318f2248ec2d4d69942884a4c872",
-  "git_status": "dirty (regenerate after committing)",
+  "figure_checksum_sha256": "2c53ffa29b782b2c292d93b784307719c1e5dd77b2f591ab3a01430cc9f056ae",
+  "generation_command": "python scripts/make_arxiv_figures.py",
+  "generation_timestamp": "2026-08-13T21:46:19.492524+00:00",
+  "git_commit": "aaef59caa6e3d4bca79b4538bb3f3d6d1706a8e4",
   "note": "Linear, trigonometric VP, shared Chen Ex. 3.3 (M=lambda_max), and per-mode log-covariance. R is continuous; W2 is Euler at NFE 8.",
   "plotting_config": {
     "kind": "four_path_R_and_euler8_W2"
@@ -13,5 +15,8 @@
   "source_run_ids": [
     "none_conceptual"
   ],
-  "source_table_hashes": {}
+  "source_table_hashes": {},
+  "working_tree_diff_sha256": "bc4ae0b39fb5f9f24e490eb8b6dac88eda843ef47687435e47ac72150fd041ba",
+  "working_tree_dirty": true,
+  "working_tree_status_sha256": "3c36aa6278779dd82115cf7ee3af5dea8a70d89f614c16cab731d4275fae5718"
 }

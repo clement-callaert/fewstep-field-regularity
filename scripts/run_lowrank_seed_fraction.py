@@ -86,17 +86,15 @@ def main() -> None:
         encoding="utf-8",
     )
     lines = [
-        r"\begin{tabular}{lccc}",
+        r"\begin{tabular}{lcc}",
         r"\toprule",
-        r"$d$ & inversions / 50 & fraction & Clopper--Pearson 95\% \\",
+        r"$d$ & inversions / 50 & fraction \\",
         r"\midrule",
     ]
     for row in summary:
         lines.append(
             f"{row['dim']} & {row['n_with_any_inversion']}/50 & "
-            f"{float(str(row['fraction'])):.2f} & "
-            f"[{float(str(row['clopper_pearson_low'])):.3f}, "
-            f"{float(str(row['clopper_pearson_high'])):.3f}] \\\\"
+            f"{float(str(row['fraction'])):.2f} \\\\"
         )
     lines.extend([r"\bottomrule", r"\end{tabular}", ""])
     OUT_TEX.write_text("\n".join(lines), encoding="utf-8")

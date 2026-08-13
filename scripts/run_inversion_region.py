@@ -20,6 +20,8 @@ from fewstep_regularities.analysis.ranking_grids import (
     path_regularity,
     path_w2,
 )
+from fewstep_regularities.utils.hashing import sha256_file
+from fewstep_regularities.utils.provenance import figure_sidecar_payload, write_json
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT_JSON = ROOT / "paper" / "arxiv" / "artifacts" / "inversion_region.json"
@@ -147,6 +149,36 @@ def main() -> None:
     fig.savefig(OUT_PDF_ARXIV, bbox_inches="tight")
     fig.savefig(OUT_PDF_GDDL, bbox_inches="tight")
     plt.close(fig)
+    for path, script, command, fig_id in (
+        (
+            OUT_PDF_ARXIV,
+            "scripts/run_inversion_region.py",
+            "python scripts/run_inversion_region.py",
+            "arxiv_figures_2026-08-13-v1:fig_inversion_region",
+        ),
+        (
+            OUT_PDF_GDDL,
+            "scripts/run_inversion_region.py",
+            "python scripts/run_inversion_region.py",
+            "workshop_figures_2026-08-13-v1:fig_inversion_region",
+        ),
+    ):
+        write_json(
+            path.with_suffix(path.suffix + ".json"),
+            figure_sidecar_payload(
+                path,
+                artifact_ids=[],
+                source_table_hashes={},
+                plotting_script=script,
+                plotting_config={"kind": "lambda_solver_nfe_inversion_heatmap"},
+                note=(
+                    "Linear versus VP ranking inversion versus target variance. "
+                    "Deterministic evaluation on a log-uniform lambda grid."
+                ),
+                generation_command=command,
+                figure_artifact_id=fig_id,
+            ),
+        )
 
     missing_invert = [
         value

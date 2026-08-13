@@ -1,4 +1,4 @@
-\begin{thebibliography}{22}
+\begin{thebibliography}{16}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -27,23 +27,12 @@ Yifan Chen, Eric Vanden-Eijnden, and Jiawei Xu.
 \newblock \emph{arXiv preprint arXiv:2509.01629}, 2025.
 \newblock version 3, 16 May 2026.
 
-\bibitem[Du et~al.(2026)Du, Zhang, and Li]{du2026lagrangian}
-Shukai Du, Junzhe Zhang, and Yiming Li.
-\newblock Lagrangian flow matching: A least-action framework for principled
-  path design.
-\newblock \emph{arXiv preprint arXiv:2605.15419}, 2026.
-
 \bibitem[Gelbrich(1990)]{gelbrich1990formula}
 Matthias Gelbrich.
 \newblock On a formula for the {$L^2$} {W}asserstein metric between measures on
   {E}uclidean and {H}ilbert spaces.
 \newblock \emph{Mathematische Nachrichten}, 147:\penalty0 185--203, 1990.
 \newblock \doi{10.1002/mana.19901470121}.
-
-\bibitem[Gupta et~al.(2026)Gupta, Lim, Yu, and Erichson]{gupta2026sharpen}
-Aditi Gupta, Soon~Hoe Lim, Annan Yu, and N.~Benjamin Erichson.
-\newblock Sharpen your flow: Sharpness-aware sampling for flow matching.
-\newblock \emph{arXiv preprint arXiv:2605.11547}, 2026.
 
 \bibitem[Hairer et~al.(1993)Hairer, N{\o}rsett, and Wanner]{hairer1993solving}
 Ernst Hairer, Syvert~P. N{\o}rsett, and Gerhard Wanner.
@@ -56,12 +45,6 @@ Tero Karras, Miika Aittala, Timo Aila, and Samuli Laine.
 \newblock Elucidating the design space of diffusion-based generative models.
 \newblock In \emph{Advances in Neural Information Processing Systems}, 2022.
 \newblock arXiv:2206.00364.
-
-\bibitem[Khan(2026)]{khan2026isofm}
-Tauhid Khan.
-\newblock Isokinetic flow matching for pathwise straightening of generative
-  flows.
-\newblock \emph{arXiv preprint arXiv:2604.04491}, 2026.
 
 \bibitem[Lipman et~al.(2023)Lipman, Chen, Ben-Hamu, Nickel, and
   Le]{lipman2023flow}
@@ -80,21 +63,12 @@ Xingchao Liu, Chengyue Gong, and Qiang Liu.
   (ICLR)}, 2023.
 \newblock arXiv:2209.03003.
 
-\bibitem[Lu et~al.(2022{\natexlab{a}})Lu, Zhou, Bao, Chen, Li, and
-  Zhu]{lu2022dpmsolver}
+\bibitem[Lu et~al.(2022)Lu, Zhou, Bao, Chen, Li, and Zhu]{lu2022dpmsolver}
 Cheng Lu, Yuhao Zhou, Fan Bao, Jianfei Chen, Chongxuan Li, and Jun Zhu.
 \newblock {DPM}-solver: A fast {ODE} solver for diffusion probabilistic model
   sampling in around 10 steps.
-\newblock In \emph{Advances in Neural Information Processing Systems},
-  2022{\natexlab{a}}.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2022.
 \newblock arXiv:2206.00927.
-
-\bibitem[Lu et~al.(2022{\natexlab{b}})Lu, Zhou, Bao, Chen, Li, and
-  Zhu]{lu2022dpmsolverpp}
-Cheng Lu, Yuhao Zhou, Fan Bao, Jianfei Chen, Chongxuan Li, and Jun Zhu.
-\newblock {DPM}-solver++: Fast solver for guided sampling of diffusion
-  probabilistic models.
-\newblock \emph{arXiv preprint arXiv:2211.01095}, 2022{\natexlab{b}}.
 
 \bibitem[Peyr{\'e} and Cuturi(2019)]{peyre2019computational}
 Gabriel Peyr{\'e} and Marco Cuturi.
@@ -118,14 +92,6 @@ Yang Song, Jascha Sohl-Dickstein, Diederik~P. Kingma, Abhishek Kumar, Stefano
   (ICLR)}, 2021.
 \newblock arXiv:2011.13456.
 
-\bibitem[Song et~al.(2023)Song, Dhariwal, Chen, and
-  Sutskever]{song2023consistency}
-Yang Song, Prafulla Dhariwal, Mark Chen, and Ilya Sutskever.
-\newblock Consistency models.
-\newblock In \emph{International Conference on Machine Learning ({ICML})},
-  2023.
-\newblock arXiv:2303.01469.
-
 \bibitem[St{\'e}phanovitch(2026)]{stephanovitch2026lipschitz}
 Arthur St{\'e}phanovitch.
 \newblock Lipschitz regularity in flow matching and diffusion models: Sharp
@@ -146,15 +112,6 @@ Alexander Tong, Kilian Fatras, Nikolay Malkin, Guillaume Huguet, Yanlei Zhang,
   minibatch optimal transport.
 \newblock \emph{Transactions on Machine Learning Research}, 2024.
 \newblock arXiv:2302.00482.
-
-\bibitem[Yuan et~al.(2026)Yuan, Wang, Zhao, Fu, Lei, Zhu, and
-  Zhang]{yuan2026instance}
-Liangyu Yuan, Ruoyu Wang, Tong Zhao, Dingwen Fu, Mingkun Lei, Beier Zhu, and
-  Chi Zhang.
-\newblock Few-step diffusion sampling through instance-aware discretizations.
-\newblock In \emph{Proceedings of the {IEEE/CVF} Conference on Computer Vision
-  and Pattern Recognition ({CVPR})}, pages 35882--35892, 2026.
-\newblock arXiv:2603.17671.
 
 \bibitem[Zhang and Chen(2023)]{zhang2023deis}
 Qinsheng Zhang and Yongxin Chen.
