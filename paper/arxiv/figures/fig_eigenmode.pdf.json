@@ -1,0 +1,27 @@
+{
+  "figure_artifact_id": "arxiv_figures_2026-08-13-v1:fig_eigenmode",
+  "figure_checksum_sha256": "07118be2da9805f08cbf30fcc04e89d8a81c8e3db74e395316eca775fcf557aa",
+  "generation_timestamp": "2026-08-13T10:41:05.743774+00:00",
+  "git_commit": "e48c9390e62b38f206342e6aeb7f160122ccc79c",
+  "git_status": "dirty (regenerate after committing)",
+  "note": "Source: phase4_decomposition_2026-07-24-v1:table. The modal decomposition is exact; any aggregate solver proxy is post-hoc and in-sample and is not shown as predictive.",
+  "plotting_config": {
+    "block": {
+      "dim": 8,
+      "nfe": 8,
+      "solver": "euler",
+      "target_family": "low_rank_gaussian"
+    },
+    "kind": "eigenmode_signed_defect_strongest_block"
+  },
+  "plotting_script": "scripts/make_arxiv_figures.py",
+  "source_artifact_ids": [
+    "phase4_decomposition_2026-07-24-v1:table"
+  ],
+  "source_run_ids": [
+    "phase4_decomposition_2026-07-24-v1"
+  ],
+  "source_table_hashes": {
+    "phase4_decomposition_2026-07-24-v1:table": "690d068c3693f99f38ddb17b479ab0e63b5ad859835f2092c5420175d954f252"
+  }
+}
