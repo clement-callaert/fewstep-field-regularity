@@ -1,21 +1,22 @@
 # Averaged Jacobian Regularity Does Not Order Few-Step Error in Flow Matching: A Certified Gaussian Counterexample
 
-Clément Callaert (CentraleSupélec and Université Paris-Saclay)
+arXiv: [TODO-ARXIV-ID](https://arxiv.org/abs/TODO-ARXIV-ID)
 
-Preprint sources: [`paper/arxiv/`](paper/arxiv/README.md). No arXiv identifier is assigned yet. Do not invent one.
-
-**Abstract.** Flow matching and stochastic interpolants specify a probability flow ODE whose few-step sampling error depends on the sampling schedule. Schedule design therefore needs an a priori criterion. Chen, Vanden-Eijnden, and Xu propose minimizing the averaged squared Jacobian norm $A_2$, a Lipschitz constant of the marginal field, as a selection criterion, without a proved bound on discretization error. This paper asks whether the order induced by $A_2$ between two paths is reliable at a fixed number of function evaluations (NFE). Already for centered Gaussian interpolants the implication fails. A certified one-dimensional Heun counterexample, a three-regime census, and an inversion map over target variance are given. The analysis is confined to commuting Gaussians; no learned field is used.
+**Abstract.** Flow matching and stochastic interpolants specify a probability flow ODE whose few-step sampling error depends on the sampling schedule. Schedule design therefore needs an a priori criterion. Chen, Vanden-Eijnden, and Xu propose minimizing the averaged squared Jacobian norm $A_2$, a Lipschitz constant of the marginal field, as a selection criterion, without a proved bound on discretization error. This paper asks whether the order induced by $A_2$ between two paths is reliable at a fixed number of function evaluations (NFE). Already for centered Gaussian interpolants the implication fails: for independent $N(0,1)$ and $N(0,4)$, the exact regularity integrals of the linear and trigonometric variance-preserving paths are $5\pi/8-1$ and $\pi^2/16$, while Heun at NFE 8 reverses Gaussian Wasserstein-2 distance. Three regimes then separate. As a pairwise comparator of linear versus VP, the ranking inverts in 5 of 12 geometry-by-solver cells. As an in-family objective, trigonometric VP versus the scalar log-covariance schedule (Chen Example 3.3 with $M=\lambda_{\max}$) invert in 9 of 36 blocks (4 of 12 cells). The unconstrained per-mode minimizer attains both the smallest regularity and the smallest Wasserstein-2 distance in 36 of 36 blocks, but is not a shared $(\alpha,\sigma)$ interpolant for $d\geq 2$. The analysis is confined to commuting Gaussians; no learned field is used.
 
 ```bibtex
-@misc{callaert2026averaged,
-  title={Averaged Jacobian Regularity Does Not Order Few-Step Error in Flow Matching: A Certified {G}aussian Counterexample},
-  author={Callaert, Cl{\'e}ment},
-  year={2026},
-  note={Preprint. Source: https://github.com/clement-callaert/fewstep-field-regularity},
+@article{callaert2026averaged,
+  title  = {Averaged Jacobian Regularity Does Not Order Few-Step Error in Flow Matching:
+            A Certified Gaussian Counterexample},
+  author = {Callaert, Cl\'ement},
+  year   = {2026},
+  eprint = {TODO-ARXIV-ID},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG}
 }
 ```
 
-GitHub also exposes this entry via [`CITATION.cff`](CITATION.cff).
+GitHub also exposes this entry via [`CITATION.cff`](CITATION.cff). No identifier is assigned yet; do not invent one. Preprint sources: [`paper/arxiv/`](paper/arxiv/README.md).
 
 ---
 
