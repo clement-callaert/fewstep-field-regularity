@@ -67,9 +67,11 @@ and recur in a separately pre-registered non-centered replication
 family. An exact modal decomposition expresses the mismatch through solver-stage
 sampling and signed one-step defects transported to the endpoint; an
 explicit scalar construction proves the non-implication for fixed-grid
-Euler. This is a controlled limitation study: it does not
-refute regularity-guided schedule design, and no learned model is
-evaluated.
+Euler. Pairwise linear-versus-VP ranking is not a substitute for an
+in-family objective: even among shared $(\alpha,\sigma)$ interpolants the
+unsigned average need not order equal-NFE $\wtwo$, and the unconstrained
+per-mode minimizer is not a shared interpolant for $d\geq 2$. No learned
+model is evaluated.
 \end{abstract}
 
 \section{Introduction}
@@ -331,11 +333,12 @@ paths, three solvers, $d\in\{2,8\}$, and small budgets, plus one
 pre-registered non-centered replication family; no learned neural field
 is evaluated and the proposition is grid-aware. Exponential and
 exact-linear integrators solve affine fields exactly, so the result concerns
-generic fixed-stage Runge--Kutta discretization. Our result does not refute
-Lipschitz-guided schedules: in the tested systems the averaged-regularity
-\emph{ordering} does not determine the fixed-NFE $\wtwo$ ordering, because
-the tested averaged-regularity scalar does not retain the temporal information
-carried by solver-stage sampling and transported signed defects. All
+generic fixed-stage Runge--Kutta discretization. Our result does not refute Lipschitz-guided schedules as an optimization
+device when the minimizer is admissible. In the tested systems the
+averaged-regularity \emph{ordering} of two fixed paths does not determine
+the fixed-NFE $\wtwo$ ordering, because the tested averaged-regularity
+scalar does not retain the temporal information carried by solver-stage
+sampling and transported signed defects. All
 numerical statements map to the accompanying audit artifacts.
 
 \bibliographystyle{plainnat}

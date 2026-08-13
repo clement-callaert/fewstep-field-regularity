@@ -15,6 +15,8 @@ from fewstep_regularities.analysis.ranking_grids import (
     SOLVERS,
     log_lebesgue_inversion_measure,
 )
+from fractions import Fraction
+
 from fewstep_regularities.utils.hashing import sha256_file
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -31,6 +33,15 @@ N_FINE = 1281
 N_DOUBLE = 2561
 LAM_MIN = 0.05
 LAM_MAX = 100.0
+
+
+def _tau_as_tex(value: float) -> str:
+    frac = Fraction(value).limit_denominator(36)
+    if abs(float(frac) - value) > 1e-9:
+        return f"{value:.3f}"
+    if frac.denominator == 1:
+        return rf"${frac.numerator}$"
+    return rf"${frac.numerator}/{frac.denominator}$"
 
 
 def _refresh_manifest() -> None:
@@ -162,14 +173,14 @@ def main() -> None:
         r"\toprule",
         r"stratum & Kendall $\tau$ \\",
         r"\midrule",
-        rf"census (36 blocks) & {tau:.3f} \\",
-        rf"anisotropic $d=2$ & {tau_family['anisotropic_gaussian_d2']:.3f} \\",
-        rf"anisotropic $d=8$ & {tau_family['anisotropic_gaussian_d8']:.3f} \\",
-        rf"low-rank $d=2$ & {tau_family['low_rank_gaussian_d2']:.3f} \\",
-        rf"low-rank $d=8$ & {tau_family['low_rank_gaussian_d8']:.3f} \\",
-        rf"Euler & {tau_solver['euler']:.3f} \\",
-        rf"Heun & {tau_solver['heun']:.3f} \\",
-        rf"RK4 & {tau_solver['rk4']:.3f} \\",
+        rf"census (36 blocks) & {_tau_as_tex(tau)} \\",
+        rf"anisotropic $d=2$ & {_tau_as_tex(tau_family['anisotropic_gaussian_d2'])} \\",
+        rf"anisotropic $d=8$ & {_tau_as_tex(tau_family['anisotropic_gaussian_d8'])} \\",
+        rf"low-rank $d=2$ & {_tau_as_tex(tau_family['low_rank_gaussian_d2'])} \\",
+        rf"low-rank $d=8$ & {_tau_as_tex(tau_family['low_rank_gaussian_d8'])} \\",
+        rf"Euler & {_tau_as_tex(tau_solver['euler'])} \\",
+        rf"Heun & {_tau_as_tex(tau_solver['heun'])} \\",
+        rf"RK4 & {_tau_as_tex(tau_solver['rk4'])} \\",
         r"\bottomrule",
         r"\end{tabular}",
         "",

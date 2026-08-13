@@ -152,7 +152,7 @@ def main() -> None:
     if hits:
         errors.append(f"abstract custom macros: {hits}")
     n_fig, n_tab = body_floats(body)
-    if n_fig > 4 or n_tab > 3:
+    if n_fig > 4 or n_tab > 2:
         errors.append(f"body floats figures={n_fig} tables={n_tab}")
     if errors:
         raise SystemExit("structure check failed:\n  " + "\n  ".join(errors))

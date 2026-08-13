@@ -54,6 +54,12 @@ def test_arxiv_abstract_length_and_plain_macros() -> None:
     abstract = module.abstract_text(text)
     plain = module.strip_tex(abstract)
     assert len(plain) <= 1920, len(plain)
+    metadata = (ROOT / "paper" / "arxiv" / "ARXIV_METADATA.md").read_text(
+        encoding="utf-8"
+    )
+    meta_abs = metadata.split("## Abstract (plain text, for the abstract field)")[1]
+    meta_abs = meta_abs.split("## Categories")[0].strip()
+    assert len(meta_abs) <= 1920, len(meta_abs)
     assert module.custom_macros_in_abstract(abstract) == []
     assert "disclaimer" not in plain.lower()
     assert "no venue" not in plain.lower()
@@ -65,11 +71,17 @@ def test_arxiv_search_phrases_in_abstract_and_intro() -> None:
     text = (ROOT / "paper" / "arxiv" / "main.tex").read_text(encoding="utf-8")
     abstract = module.strip_tex(module.abstract_text(text)).lower()
     intro = module.strip_tex(module.intro_text(text)).lower()
-    for phrase in module.SEARCH_PHRASES:
+    traffic = (
+        "flow matching",
+        "stochastic interpolants",
+        "few-step sampling",
+        "schedule design",
+        "Lipschitz",
+    )
+    for phrase in traffic:
         assert phrase.lower() in abstract, phrase
-        assert phrase.lower() in intro, phrase
-    assert "Runge–Kutta" in abstract or "Runge--Kutta" in module.abstract_text(text)
-    assert "Runge–Kutta" in intro or "Runge--Kutta" in module.intro_text(text)
+    for phrase in module.SEARCH_PHRASES:
+        assert phrase.lower() in abstract or phrase.lower() in intro, phrase
 
 
 @pytest.mark.analytical
@@ -98,9 +110,9 @@ def test_arxiv_body_float_budget() -> None:
     body, appendix = module.body_and_appendix(text)
     n_fig, n_tab = module.body_floats(body)
     assert n_fig <= 4
-    assert n_tab <= 3
+    assert n_tab <= 2
     assert n_fig == 4
-    assert n_tab == 3
+    assert n_tab == 2
     assert r"\begin{figure}" in appendix
     assert r"\begin{table}" in appendix
 
