@@ -1,0 +1,23 @@
+{
+  "figure_artifact_id": "arxiv_figures_2026-08-13-v1:fig2_inversions",
+  "figure_checksum_sha256": "e24e23679afdc3653fa9fb3723e5d8375093fcdb4012ae7e29b0720a73e8cc69",
+  "generation_timestamp": "2026-08-13T10:41:05.557375+00:00",
+  "git_commit": "e48c9390e62b38f206342e6aeb7f160122ccc79c",
+  "git_status": "dirty (regenerate after committing)",
+  "note": "Source: phase4_gaussian_reproduction_2026-07-24-v1:results. Log margin axis for 14 of 36 inversion blocks in the tested grid.",
+  "plotting_config": {
+    "block_definition": "two-path comparison per (family, dim, solver, nfe)",
+    "kind": "strongest_inversion_and_all_blocks",
+    "x_scale": "log"
+  },
+  "plotting_script": "scripts/make_arxiv_figures.py",
+  "source_artifact_ids": [
+    "phase4_gaussian_reproduction_2026-07-24-v1:results"
+  ],
+  "source_run_ids": [
+    "phase4_gaussian_reproduction_2026-07-24-v1"
+  ],
+  "source_table_hashes": {
+    "phase4_gaussian_reproduction_2026-07-24-v1:results": "b8930142cba5655ee553aae5ff400cd884c1137e77547d9a5fa94bd4e354973f"
+  }
+}

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import math
 
+import mpmath as mp
 import pytest
 
 from fewstep_regularities.analysis.affine_flow import (
@@ -161,4 +162,12 @@ def test_euler_nonimplication_construction() -> None:
     oscillatory_factor = (1.0 + (endpoint_log_factor + epsilon) / n_steps) ** n_steps
     exact_factor = math.exp(endpoint_log_factor)
     assert oscillatory_metric > constant_metric
+    assert oscillatory_factor == pytest.approx(exact_factor, rel=0.0, abs=1e-12)
     assert abs(oscillatory_factor - exact_factor) < abs(constant_factor - exact_factor)
+
+    with mp.workdps(80):
+        log_l = mp.mpf("1")
+        steps = mp.mpf("8")
+        eps = steps * (mp.exp(log_l / steps) - 1) - log_l
+        product = (1 + (log_l + eps) / steps) ** steps
+        assert abs(product - mp.exp(log_l)) < mp.mpf("10") ** (-70)

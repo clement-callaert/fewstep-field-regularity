@@ -1,0 +1,18 @@
+{
+  "figure_artifact_id": "arxiv_figures_2026-08-13-v1:fig1_conceptual",
+  "figure_checksum_sha256": "a66494e89390d19268e8307ac4d2f38fa26eaaa6869ebbe571d812a51fb0e61d",
+  "generation_timestamp": "2026-08-13T10:41:05.307992+00:00",
+  "git_commit": "e48c9390e62b38f206342e6aeb7f160122ccc79c",
+  "git_status": "dirty (regenerate after committing)",
+  "note": "Conceptual schematic only; curves and bars are illustrative and represent no measured quantity.",
+  "plotting_config": {
+    "consumes_artifacts": false,
+    "kind": "conceptual_schematic"
+  },
+  "plotting_script": "scripts/make_arxiv_figures.py",
+  "source_artifact_ids": [],
+  "source_run_ids": [
+    "none_conceptual"
+  ],
+  "source_table_hashes": {}
+}
