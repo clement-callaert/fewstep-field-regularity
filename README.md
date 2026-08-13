@@ -1,12 +1,12 @@
-# Averaged Jacobian Regularity Does Not Order Few-Step Error in Flow Matching: A Certified Gaussian Counterexample
+# Few-Step Flow-Matching Error Can Be Misranked by Averaged Jacobian Regularity: A Certified Gaussian Counterexample
 
 arXiv: [TODO-ARXIV-ID](https://arxiv.org/abs/TODO-ARXIV-ID)
 
-**Abstract.** Flow matching and stochastic interpolants specify a probability flow ODE whose few-step sampling error depends on the sampling schedule. Schedule design therefore needs an a priori criterion. Chen, Vanden-Eijnden, and Xu propose minimizing the averaged squared Jacobian norm $A_2$, a Lipschitz constant of the marginal field, as a selection criterion, without a proved bound on discretization error. This paper asks whether the order induced by $A_2$ between two paths is reliable at a fixed number of function evaluations (NFE). Already for centered Gaussian interpolants the implication fails: for independent $N(0,1)$ and $N(0,4)$, the exact regularity integrals of the linear and trigonometric variance-preserving paths are $5\pi/8-1$ and $\pi^2/16$, while Heun at NFE 8 reverses Gaussian Wasserstein-2 distance. Three regimes then separate. As a pairwise comparator of linear versus VP, the ranking inverts in 5 of 12 geometry-by-solver cells. As an in-family objective, trigonometric VP versus the scalar log-covariance schedule (Chen Example 3.3 with $M=\lambda_{\max}$) invert in 9 of 36 blocks (4 of 12 cells). The unconstrained per-mode minimizer attains both the smallest regularity and the smallest Wasserstein-2 distance in 36 of 36 blocks, but is not a shared $(\alpha,\sigma)$ interpolant for $d\geq 2$. The analysis is confined to commuting Gaussians; no learned field is used.
+**Abstract.** Does averaged squared Jacobian regularity rank two interpolants in the same order as equal-NFE endpoint error? Chen, Vanden-Eijnden, and Xu propose minimizing $A_2$, the time-integrated squared spatial Jacobian norm of a flow-matching marginal ODE, as a criterion for schedule design, without a proved discretization-error bound. Classical one-step bounds use a Lipschitz constant of the field; $A_2$ is not that constant. Already for independent $N(0,1)$ and $N(0,4)$, the exact regularity integrals of the linear and trigonometric variance-preserving Gaussian interpolants are $5\pi/8-1$ and $\pi^2/16$, while Heun at NFE 8 reverses Gaussian Wasserstein-2 distance. The linear Heun product is the rational $6797469/3559400$; a nonnegative element of $\mathbb{Q}[\pi,\sqrt{2}]$ yields $r_{\mathrm{VP}}<187/100$. The object is a flow matching marginal interpolant ODE, not a score-based probability-flow ODE. The Gaussian drift and $W_2$ formula are closed form; the regularity integrand is exact, while multimode $R$ is evaluated deterministically by adaptive quadrature. Pairwise and four-path census comparisons on commuting Gaussian interpolants are reported below; a finite census does not imply that a global $A_2$-minimizer minimizes fixed-NFE error. The analysis uses stochastic interpolants, few-step sampling, Runge--Kutta, and interpolation schedules; no learned field is used.
 
 ```bibtex
-@article{callaert2026averaged,
-  title  = {Averaged Jacobian Regularity Does Not Order Few-Step Error in Flow Matching:
+@article{callaert2026fewstep,
+  title  = {Few-Step Flow-Matching Error Can Be Misranked by Averaged Jacobian Regularity:
             A Certified Gaussian Counterexample},
   author = {Callaert, Cl\'ement},
   year   = {2026},
@@ -22,7 +22,7 @@ GitHub also exposes this entry via [`CITATION.cff`](CITATION.cff). No identifier
 
 Research software and manuscript for a controlled study of averaged
 field-regularity criteria versus few-step Gaussian Wasserstein error on
-commuting probability-flow ODEs.
+commuting flow-matching marginal ODEs.
 
 The public preprint sources are in
 [`paper/arxiv/`](paper/arxiv/README.md). Claim scope and status are
@@ -52,25 +52,44 @@ pre-commit install
 Default analytical precision is float64. Do not silently cast precision.
 
 ```bash
-pytest
+pytest -q -ra
 fewstep-regularities experiment=smoke
 python scripts/validate_artifacts.py outputs/phase0_smoke
 ```
 
+`validate_artifacts.py` checks Hydra run manifests under `outputs/`.
+Compact preprint checksums are checked by
+`python scripts/check_arxiv_release.py`.
+
 Experiment configurations live under
 [`configs/experiment`](configs/experiment). Research-process documents
-live under [`docs/`](docs). Completed run outputs validate with
-`python scripts/validate_artifacts.py outputs/<run_id>`.
+live under [`docs/`](docs/).
 
-Pinned Phase 4 artifacts used by the public manuscript are validated the
-same way. Figure and table generators:
+Pinned Phase 4 artifacts used by the public manuscript are validated with
+the compact-manifest checker. Commands that rebuild tables, figures, and
+the certified scalar identities:
 
 ```bash
-python scripts/make_arxiv_tables.py
+python scripts/verify_scalar_counterexample.py
+python scripts/run_log_covariance_comparison.py
 python scripts/run_in_family_comparison.py
+python scripts/run_inversion_region.py
+python scripts/run_lowrank_seed_fraction.py
 python scripts/run_arxiv_stats.py
 python scripts/make_arxiv_figures.py
+python scripts/make_arxiv_tables.py
+python scripts/check_arxiv_placeholder.py
+python scripts/check_arxiv_release.py
+python scripts/check_arxiv_structure.py
 ```
+
+Compile from `paper/arxiv/` and `paper/gddl2026/`:
+
+```bash
+latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+```
+
+Pack a clean arXiv source tree with `python scripts/pack_arxiv_source.py`.
 
 ## Repository structure
 

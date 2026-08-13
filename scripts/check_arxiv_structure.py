@@ -11,16 +11,16 @@ TEX = ROOT / "paper" / "arxiv" / "main.tex"
 SEARCH_PHRASES = (
     "flow matching",
     "stochastic interpolants",
-    "probability flow ODE",
     "few-step sampling",
     "sampling schedule",
     "schedule design",
-    "Lipschitz constant",
     "Jacobian norm",
     "Wasserstein-2 distance",
     "Heun method",
     "Runge–Kutta",
     "number of function evaluations (NFE)",
+    "flow-matching marginal",
+    "score-based probability-flow",
 )
 
 BODY_FORBIDDEN = (
@@ -44,13 +44,13 @@ REQUIRED_SECTIONS = (
     r"\\subsection{The variance-path invariant and the Cauchy--Schwarz bound}",
     r"\\subsection{A certified one-dimensional counterexample}",
     r"\\subsection{What the unsigned average discards}",
-    r"\\subsection{Three regimes: comparator, in-family objective, unconstrained minimiser}",
+    r"\\subsection{Three regimes: comparator, shared-schedule pairwise comparison, four-path census}",
     r"\\section{Experiments}",
     r"\\subsection{Setup}",
     r"\\subsection{Statistical treatment and what the counts mean}",
     r"\\subsection{R as a pairwise comparator: linear versus VP}",
-    r"\\subsection{R as an in-family objective: VP versus the scalar log-covariance schedule}",
-    r"\\subsection{The unconstrained R-minimiser}",
+    r"\\subsection{R as a pairwise comparison within the shared-schedule class: VP versus the scalar log-covariance schedule}",
+    r"\\subsection{Four-path census: the per-mode log-covariance path}",
     r"\\subsection{Where the inversions live: a sweep over target variance}",
     r"\\subsection{Robustness to the random geometry}",
     r"\\subsection{Numerical validity controls}",
@@ -115,6 +115,23 @@ def body_floats(body: str) -> tuple[int, int]:
     return figures, tables
 
 
+FORBIDDEN_PHRASES = (
+    r"regularity integral $\cR$ and Gaussian $\wtwo$ are available in closed form",
+    "a Lipschitz constant of the marginal field",
+    "every fixed-stage Runge--Kutta method samples",
+    "pre-specified $36$-block",
+    "on the same block",
+)
+
+
+def abstract_word_count(abstract: str) -> int:
+    return len(strip_tex(abstract).split())
+
+
+def forbidden_phrase_hits(text: str) -> list[str]:
+    return [phrase for phrase in FORBIDDEN_PHRASES if phrase in text]
+
+
 def custom_macros_in_abstract(abstract: str) -> list[str]:
     hits = []
     for macro in (r"\cR", r"\Rhat", r"\wtwo", r"\nBlocks", r"\citet"):
@@ -124,13 +141,36 @@ def custom_macros_in_abstract(abstract: str) -> list[str]:
 
 
 def thirty_six_without_restriction(text: str) -> list[str]:
-    """Return occurrences of 36 of 36 whose nearby window lacks the restriction."""
+    """Return 36-of-36 claims whose window lacks a finite-census fence."""
     pattern = re.compile(r"\$?36\$?\s+of\s+\$?36\$?")
     bad: list[str] = []
     for match in pattern.finditer(text):
-        window = text[max(0, match.start() - 400) : match.end() + 400]
-        collapsed = re.sub(r"\s+", " ", window)
-        if "not a shared" not in collapsed or "interpolant" not in collapsed:
+        window = text[max(0, match.start() - 500) : match.end() + 500]
+        collapsed = re.sub(r"\s+", " ", window).lower()
+        has_four = (
+            "four candidate" in collapsed
+            or "four paths" in collapsed
+            or "four schedules" in collapsed
+        )
+        has_fence = (
+            "does not imply" in collapsed
+            or "finite-census" in collapsed
+            or "finite census" in collapsed
+            or "not a global" in collapsed
+        )
+        if not (has_four and has_fence):
+            bad.append(collapsed[:180])
+    return bad
+
+
+def not_shared_without_eigenvalue_hypothesis(text: str) -> list[str]:
+    """Return 'not a shared' claims that omit distinct eigenvalues."""
+    pattern = re.compile(r"not a shared")
+    bad: list[str] = []
+    for match in pattern.finditer(text):
+        window = text[max(0, match.start() - 350) : match.end() + 350]
+        collapsed = re.sub(r"\s+", " ", window).lower()
+        if "distinct" not in collapsed or "eigenvalue" not in collapsed:
             bad.append(collapsed[:180])
     return bad
 
@@ -145,9 +185,18 @@ def main() -> None:
     bad = thirty_six_without_restriction(text)
     if bad:
         errors.append(f"36 of 36 without restriction: {bad[0]}")
+    shared = not_shared_without_eigenvalue_hypothesis(text)
+    if shared:
+        errors.append(f"not-shared without eigenvalue hypothesis: {shared[0]}")
     abstract = abstract_text(text)
+    n_words = abstract_word_count(abstract)
+    if n_words < 165 or n_words > 190:
+        errors.append(f"abstract word count {n_words} outside 165-190")
     if len(strip_tex(abstract)) > 1920:
         errors.append("abstract exceeds 1920 characters")
+    forbidden = forbidden_phrase_hits(text)
+    if forbidden:
+        errors.append(f"forbidden phrasing: {forbidden[0]}")
     hits = custom_macros_in_abstract(abstract)
     if hits:
         errors.append(f"abstract custom macros: {hits}")

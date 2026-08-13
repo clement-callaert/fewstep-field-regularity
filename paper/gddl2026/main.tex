@@ -7,6 +7,8 @@
 % c3fc2894e83d2517ca18b66741d6c595986d97957dc08ec08bb2125a7ec4555a
 % Retrieved 2026-07-24T18:17:44Z. Main-track checklist.tex is intentionally
 % not loaded (GDDL CFP does not require it).
+% Long-paper track: 5--9 pages excluding references
+% (https://gddl-neurips-2026.github.io/). This version targets 5--6 body pages.
 \usepackage[dblblindworkshop]{neurips_2026}
 \workshoptitle{Geometric Distributional Deep Learning: Bridging Optimal Transport, Learning and Structured Data}
 
@@ -15,15 +17,16 @@
 \usepackage{hyperref}
 \hypersetup{
   hidelinks,
-  pdftitle={},
+  pdftitle={Few-Step Flow-Matching Error Can Be Misranked by Averaged Jacobian Regularity: A Certified Gaussian Counterexample},
   pdfauthor={},
-  pdfsubject={},
-  pdfkeywords={},
+  pdfsubject={Anonymous workshop submission},
+  pdfkeywords={flow matching, stochastic interpolants, few-step sampling, Runge-Kutta, Gaussian interpolants, Wasserstein-2, interpolation schedules},
 }
 \usepackage{url}
 \usepackage{booktabs}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{graphicx}
+\usepackage{placeins}
 \usepackage{microtype}
 \usepackage{enumitem}
 \AtBeginDocument{%
@@ -40,8 +43,9 @@
 \newcommand{\cR}{\mathcal{R}}
 \newcommand{\Rhat}{\widehat{\mathcal{R}}_{24}}
 
-\title{Averaged Jacobian Regularity Does Not Order\\
-Few-Step Error of Gaussian Interpolant ODEs}
+\title{Few-Step Flow-Matching Error Can Be Misranked by\\
+Averaged Jacobian Regularity:\\
+A Certified Gaussian Counterexample}
 
 \author{%
   Anonymous Author(s)\\
@@ -52,24 +56,21 @@ Few-Step Error of Gaussian Interpolant ODEs}
 \maketitle
 
 \begin{abstract}
-Few-step sampling of a continuous-time generative model requires a
-probability path, a solver, and a budget of field evaluations (NFE).
-Chen et al.\ propose minimizing averaged squared Jacobian regularity
-$A_2$ as a path-selection criterion. We ask whether the order that this
-scalar induces between two interpolants is reliable at fixed NFE.
-Already for independent $N(0,1)$ and $N(0,4)$, the exact integrals are
-$5\pi/8-1$ (linear) and $\pi^2/16$ (trigonometric VP), while Heun at
-NFE~$8$ reverses Gaussian $\wtwo$. The linear factor is the rational
-$6797469/3559400$; a rational enclosure in $\mathbb{Q}[\pi,\sqrt{2}]$
-gives $r_{\mathrm{VP}}<187/100$. Three regimes then separate. As a
-pairwise comparator, linear versus VP invert in $5$ of $12$
-geometry$\times$solver cells ($4$ of $12$ at every NFE in
-$\{8,16,32\}$). As an in-family objective, trigonometric VP versus the
-scalar log-covariance schedule (Chen Ex.~3.3 with $M=\lambda_{\max}$)
-invert in 9 of 36 blocks and $4$ of $12$ cells. The unconstrained
-per-mode minimizer attains the smallest $\cR$ and the smallest $\wtwo$
-in $36$ of $36$ blocks, but is not a shared $(\alpha,\sigma)$ interpolant
-for $d\geq 2$.
+Does averaged squared Jacobian regularity rank two interpolants in the
+same order as equal-NFE endpoint error? Chen et al.\ propose minimizing
+$A_2$, the time-integrated squared spatial Jacobian norm of a
+flow-matching marginal ODE, as a path-selection criterion, without a
+proved discretization-error bound. Already for independent $N(0,1)$ and
+$N(0,4)$, the exact integrals are $5\pi/8-1$ (linear) and $\pi^2/16$
+(trigonometric VP), while Heun at NFE~$8$ reverses Gaussian $\wtwo$.
+The linear factor is the rational $6797469/3559400$; a rational enclosure
+in $\mathbb{Q}[\pi,\sqrt{2}]$ gives $r_{\mathrm{VP}}<187/100$. The object
+is a flow-matching marginal ODE, not a score-based probability-flow ODE.
+The Gaussian drift and $\wtwo$ formula are closed form; the regularity
+integrand is exact, while multimode $\cR$ is evaluated deterministically
+by adaptive quadrature. Pairwise and four-path census comparisons are
+reported below; a finite census does not imply that a global
+$A_2$-minimizer minimizes fixed-NFE error.
 \end{abstract}
 
 \section{Introduction}
@@ -77,22 +78,27 @@ for $d\geq 2$.
 Few-step sampling commits to a path, a solver, and a small NFE budget
 before any error is observed. Lipschitz constants enter classical
 one-step bounds~\citep{hairer1993solving}.
-\citet{lipschitzguided2025} propose minimizing averaged squared drift
-Lipschitzness (their Definition~3.2, denoted $A_2$) as a
-\emph{selection} criterion. They prove no bound relating $A_2$ to a
+\citet{lipschitzguided2025} propose minimizing $A_2$, the
+time-integrated squared spatial Jacobian norm (their Definition~3.2), as
+a \emph{selection} criterion. They prove no bound relating $A_2$ to a
 discretization error. We test whether the pairwise order that $A_2$
-induces between two admissible paths is reliable at equal NFE.
+induces between two interpolant paths is reliable at equal NFE on a
+flow-matching marginal ODE.
 
 We isolate that ranking question on commuting Gaussian interpolants,
-where the field is affine, Gaussian $\wtwo$ is closed-form, and the
-regularity integrand is known exactly. The leading result is a
-deterministic scalar Heun example
+where the field is affine. The Gaussian drift and $\wtwo$ formula are
+closed form; the regularity integrand is exact, while multimode $\cR$ is
+evaluated deterministically by adaptive quadrature. The leading result
+is a deterministic scalar Heun example
 (Section~\ref{sec:scalar}). A modal identity then records the signed
 information that $\cR$ discards (Section~\ref{sec:mechanism}).
-Section~\ref{sec:third} splits the ranking question into three regimes:
-pairwise linear versus VP, in-family VP versus the shared Chen Ex.~3.3
-scalar schedule, and the unconstrained per-mode minimizer, which is not
-a shared $(\alpha,\sigma)$ interpolant for $d\geq 2$.
+Section~\ref{sec:third} splits the ranking question into three
+comparisons: pairwise linear versus VP, pairwise VP versus the Chen
+Ex.~3.3 scalar schedule, and a four-path census including the per-mode
+path, which is not a $C^1$ shared interpolant when $\Sigma_1$ has at
+least two distinct eigenvalues. Section~\ref{sec:gridaware} records a
+complementary Class~S construction in which the $\cR$-minimizer is
+Euler-inexact.
 
 Contemporaneous work studies Lipschitz Euler
 rates~\citep{stephanovitch2026lipschitz}, sharpness-aware
@@ -103,27 +109,46 @@ objects. \citet{tao2026strain} give the general strain/vorticity form
 of the phenomenon; Section~\ref{sec:related} records the precise
 relation.
 
-\section{Gaussian flows and averaged regularity}
+\section{Gaussian interpolants and averaged regularity}
 \label{sec:setup}
 
 Let $X_0\sim N(\mu_0,\Sigma_0)$ and $X_1\sim N(\mu_1,\Sigma_1)$ be
-independent, and let $(\alpha,\sigma)$ satisfy
-$\alpha(0)=\sigma(1)=1$ and $\alpha(1)=\sigma(0)=0$. The interpolant
-$X_t=\alpha X_0+\sigma X_1$~\citep{albergo2025stochastic,lipman2023flow}
+independent. A shared schedule is a scalar pair $(\alpha,\sigma)$. We
+distinguish three regularity classes.
+\begin{itemize}[leftmargin=1.1em,itemsep=2pt]
+\item Class~S: $\alpha,\sigma\in C^1([0,1])$ with
+  $\alpha(0)=\sigma(1)=1$ and $\alpha(1)=\sigma(0)=0$. Linear and
+  trigonometric VP belong to Class~S.
+\item Class~Q: a $C^1$ path of SPD covariances $Q(t)$ with continuous
+  $A=\tfrac12 Q'Q^{-1}$. The per-mode schedule $q_i(t)=\lambda_i^t$ is
+  Class~Q.
+\item Class~R: $\alpha^2,\sigma^2\in C^1([0,1])$, $\alpha^2\ge 0$,
+  $\sigma^2\ge 0$, and
+  $\alpha(0)^2=1$, $\sigma(0)^2=0$, $\alpha(1)^2=0$, $\sigma(1)^2=1$.
+  Square roots need not be $C^1$ at the endpoints. Chen Ex.~3.3,
+  $\sigma(t)^2=(M^t-1)/(M-1)$ and $\alpha(t)^2=(M-M^t)/(M-1)$ for
+  $M>0$, $M\neq 1$, is Class~R and Class~Q, not Class~S. The $M=1$
+  limit is $\sigma(t)^2=t$, $\alpha(t)^2=1-t$.
+\end{itemize}
+The interpolant $X_t=\alpha X_0+\sigma X_1$~\citep{albergo2025stochastic,lipman2023flow}
 is Gaussian with mean $m_t=\alpha\mu_0+\sigma\mu_1$ and covariance
 $Q=\alpha^2\Sigma_0+\sigma^2\Sigma_1$. The marginal field is affine,
 \begin{equation}
   b(t,x)=A(t)\,x+c(t),\qquad
   A=C_t Q^{-1},\qquad
-  c=\dot m-Am,
+  c=\dot m-Am.
 \end{equation}
-with $C_t=\dot\alpha\alpha\,\Sigma_0+\dot\sigma\sigma\,\Sigma_1$. If
-$\Sigma_0=I$, then $Q$, $Q'$, $A$, and $\Sigma_1$ share the eigenbasis
-of $\Sigma_1$, and mode $i$ obeys $x_i'=a_i(t)x_i+c_i(t)$ with
-$q_i=\alpha^2+\lambda_i\sigma^2$ and $a_i=q_i'/(2q_i)$. The covariance
-drift formula is independent of the mean path $c(t)$. We compare the
-linear path $(1-t,t)$ and trigonometric VP
-$(\cos(\pi t/2),\sin(\pi t/2))$. Following
+The formula $C_t=\dot\alpha\alpha\,\Sigma_0+\dot\sigma\sigma\,\Sigma_1$
+holds on $(0,1)$; equivalently
+$C_t=\tfrac12(\alpha^2)'\,\Sigma_0+\tfrac12(\sigma^2)'\,\Sigma_1$, which
+extends continuously to $[0,1]$ for Class~R. This is a flow-matching
+marginal ODE, not a score-based probability-flow ODE in the sense
+of~\citet{song2021score}. If $\Sigma_0=I$, then $Q$, $Q'$, $A$, and
+$\Sigma_1$ share the eigenbasis of $\Sigma_1$, and mode $i$ obeys
+$x_i'=a_i(t)x_i+c_i(t)$ with $q_i=\alpha^2+\lambda_i\sigma^2$ and
+$a_i=q_i'/(2q_i)$. The covariance drift formula is independent of the
+mean path $c(t)$. We compare the linear path $(1-t,t)$ and trigonometric
+VP $(\cos(\pi t/2),\sin(\pi t/2))$. Following
 \citet[Definition~3.2]{lipschitzguided2025},
 $\cR[b]=\int_0^1\|A(t)\|_2^2\,dt$. For state-independent $A$ this
 coincides with their path expectation. By definition $\cR$ ignores
@@ -132,15 +157,16 @@ laws~\citep{gelbrich1990formula}.
 This is neither pathwise trajectory error nor local truncation error.
 Equal NFE uses $S=B/s$ steps with $s=1,2,4$ for Euler, Heun, and RK4.
 
-Any admissible variance path from $1$ to $\lambda>0$ obeys
+Any regular variance path from $1$ to $\lambda>0$ obeys
 $\int_0^1 a\,dt=\tfrac12\ln\lambda$. Hence
 $\cR=\int_0^1 a^2\,dt=(\int a)^2+\mathrm{Var}_t(a)\ge(\tfrac12\ln\lambda)^2$,
-with equality if and only if $a$ is constant. The minimizer is
-$q(t)=\lambda^t$, $a\equiv\tfrac12\ln\lambda$, which is Chen et al.\
-Example~3.3. In several dimensions, the per-mode schedule
-$q_i(t)=\lambda_i^t$ yields
-$\cR=(\tfrac12\max_i|\ln\lambda_i|)^2$. It is not in general a shared
-$(\alpha,\sigma)$ interpolant.
+with equality if and only if $a$ is constant. The one-dimensional
+minimizer is $q(t)=\lambda^t$, $a\equiv\tfrac12\ln\lambda$, which is
+Chen et al.\ Example~3.3. Linear and trigonometric VP are $C^1$ shared
+interpolants. In several dimensions, the per-mode
+schedule $q_i(t)=\lambda_i^t$ yields
+$\cR=(\tfrac12\max_i|\ln\lambda_i|)^2$. When $\Sigma_1$ has at least two
+distinct eigenvalues, that path is not a Class~S shared interpolant.
 
 \section{A one-dimensional Gaussian ranking counterexample}
 \label{sec:scalar}
@@ -183,7 +209,7 @@ supplement. Interval arithmetic is a cross-check only.
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.92\linewidth]{figures/fig_scalar.pdf}
+  \includegraphics[width=0.92\linewidth,alt={Scalar drifts of the linear and trigonometric VP interpolants between N(0,1) and N(0,4), with Heun nodes at NFE 8.}]{figures/fig_scalar.pdf}
   \caption{Scalar drifts $a_{\mathrm{lin}}(t)$ and $a_{\mathrm{VP}}(t)$
   for independent $N(0,1)$ and $N(0,4)$. The shaded region is
   $a_{\mathrm{lin}}<0$. Markers are the four Heun nodes at NFE~$8$.
@@ -199,8 +225,10 @@ supplement. Interval arithmetic is a cross-check only.
 For any independent linear coupling,
 $a_{\mathrm{lin}}(0)=-1<0<a_{\mathrm{lin}}(1)=+1$. The VP drift vanishes
 at the endpoints and does not change sign on $(0,1)$. Averaging
-$a^2$ therefore erases a qualitative distinction that every
-fixed-stage Runge--Kutta method samples.
+$a^2$ therefore erases a qualitative distinction. Fixed-stage
+Runge--Kutta methods use signed stage evaluations that $\cR$ discards;
+in the tested schemes, this distinction contributes to the observed
+inversion.
 
 Let $e_{n}=\sqrt{q(t_{n+1})/q(t_n)}$ and let $r_n$ be the numerical
 factor. The telescoping identity
@@ -216,7 +244,7 @@ $\tfrac12(a'+a^2)h^2$ for Euler and $(-a''/12+a^3/6)h^3$ for the
 implemented Heun factor. Those expansions involve different
 derivatives, signs, and stage locations.
 
-\section{\texorpdfstring{The $\cR$-minimizer and the inversion region}{The R-minimizer and the inversion region}}
+\section{\texorpdfstring{Four-path census and the inversion region}{Four-path census and the inversion region}}
 \label{sec:third}
 
 Source $N(0,I)$. Four centered targets: anisotropic Gaussians with
@@ -227,29 +255,53 @@ spectral norm, the two anisotropic dimensions share the same $\cR$
 pair $(0.972296,0.192270)$, so the grid contains three distinct
 linear-versus-VP $\cR$ comparisons. Each geometry is run under Euler,
 Heun, and RK4 at NFE $\{8,16,32\}$. Headline $\cR$ is the continuous
-integral of $\max_i a_i(t)^2$.
+integral of $\max_i a_i(t)^2$. Ranking inversions were identified in
+Phase~3; the counts below are a confirmatory Phase~4 reproduction on
+configurations frozen before the rerun, not a preregistration that
+predates discovery.
 
-The per-mode log-covariance path $q_i(t)=\lambda_i^t$ has the smallest
-$\cR$ on every geometry and the smallest Gaussian $\wtwo$ in all $36$
-blocks (Table~\ref{tab:threepath} reports Heun at NFE~$8$); it is not a
-shared $(\alpha,\sigma)$ interpolant for $d\geq 2$. Linear versus VP
+The per-mode log-covariance path $q_i(t)=\lambda_i^t$ is one of four
+candidate paths. Among those four paths on the stated $36$-block census it
+has the smallest $\cR$ on every geometry and the smallest Gaussian $\wtwo$
+in all $36$ blocks (Table~\ref{tab:threepath} reports Heun at NFE~$8$).
+This finite-census observation does not imply that a global $\cR$-minimizer
+minimizes fixed-NFE error. When $\Sigma_1$ has at least two distinct
+eigenvalues, that path is not a $C^1$ shared interpolant. Linear versus VP
 invert in $5$ of $12$ geometry$\times$solver cells; $4$ of those $12$
-invert at every tested NFE. Trigonometric VP versus the shared Chen
-Ex.~3.3 scalar schedule ($M=\lambda_{\max}$) invert in 9 of 36
+invert at every tested NFE. As a pairwise comparison within the
+shared-schedule class, trigonometric VP versus Chen Ex.~3.3 with
+$M=\lambda_{\max}$ invert in 9 of 36
 blocks and $4$ of $12$ cells: anisotropic $d=2$, Euler at NFE $16$ and
 $32$; anisotropic $d=8$, Euler at NFE $8$, $16$, and $32$; low-rank
 $d=2$, Euler at NFE $8$ and Heun at NFE $8$, $16$, and $32$; low-rank
 $d=8$, none. The fourteen inverted linear-versus-VP solver-budget rows
 are a hierarchical listing of those cells, not a population rate.
 
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth,height=0.46\textheight,keepaspectratio,alt={Three paired bar charts of regularity and W2: linear versus VP on low-rank d=8, VP versus Chen on anisotropic d=8, and four paths on low-rank d=8 Euler NFE 8.}]{figures/fig1_regimes.pdf}
+  \caption{Three comparisons for $\cR$. Each row shows continuous $\cR$
+  (left) and Euler NFE~$8$ Gaussian $\wtwo$ (right). (a)~linear versus VP
+  on low-rank $d=8$; (b)~VP versus Chen Ex.~3.3 on anisotropic $d=8$;
+  (c)~four paths on low-rank $d=8$. Counts: $5$ of $12$ cells, $9$ of $36$
+  blocks, $36$ of $36$ among four candidates. The last does not imply that
+  a global $\cR$-minimizer minimizes fixed-NFE error.}
+  \label{fig:regimes}
+\end{figure}
+
 \begin{table}[t]
   \centering
   \caption{Four schedules: linear, trigonometric VP, shared Chen Ex.~3.3
   scalar ($\cR_{\mathrm{sc}}$, $M=\lambda_{\max}$), and per-mode
   log-covariance ($\cR_{\mathrm{log}}$). $\cR$ is continuous; the last
-  column is the $\wtwo$-minimizer at Heun, NFE~$8$. Per-mode wins Heun-8
-  on every geometry; it is not a shared $(\alpha,\sigma)$ interpolant
-  for $d\geq 2$.}
+  column is the $\wtwo$-minimizer at Heun, NFE~$8$. Among these four
+  candidate paths, per-mode wins Heun-8 on every geometry. This
+  finite-census observation does not imply that a global $\cR$-minimizer
+  minimizes fixed-NFE error. When $\Sigma_1$ has at least two distinct
+  eigenvalues, the per-mode path is not a $C^1$ shared interpolant.
+  The Gaussian drift and $\wtwo$ formula are closed form; the regularity
+  integrand is exact, while multimode $\cR$ is evaluated deterministically
+  by adaptive quadrature.}
   \label{tab:threepath}
   \small
   \input{generated/log_covariance_workshop}
@@ -280,9 +332,9 @@ more extreme $\lambda$ on the same sweep. The scalar example is
 therefore solver-dependent, not an artefact of Heun at budget $8$
 alone.
 
-\begin{figure}[t]
+\begin{figure}[ht]
   \centering
-  \includegraphics[width=\linewidth]{figures/fig_inversion_region.pdf}
+  \includegraphics[width=\linewidth,height=0.32\textheight,keepaspectratio,alt={Heat map of linear versus VP ranking inversions versus target variance and solver budget.}]{figures/fig_inversion_region.pdf}
   \caption{Linear versus VP ranking inversion versus target variance
   $\lambda$. Dark cells: $\cR$ and $\wtwo$ disagree. The dashed line is
   $\lambda=4$ (Proposition~\ref{prop:scalar}).}
@@ -290,7 +342,28 @@ alone.
   \vspace{-8pt}
 \end{figure}
 
-\section{Related work and limitations}
+\FloatBarrier
+
+\section{A grid-aware Class~S Euler construction}
+\label{sec:gridaware}
+
+The $36$ of $36$ count is a finite census among four candidates. It does
+not imply that a global $\cR$-minimizer minimizes fixed-NFE error. The
+following construction makes that fence explicit. Fix $L>0$ and
+$N\ge 1$, set $h=1/N$ and $\varepsilon_N=N(e^{L/N}-1)-L>0$, and define
+$a_0(t)=L$ and $a_{1,N}(t)=L+\varepsilon_N\cos(2\pi Nt)$. Both exact
+endpoints of $x'=a(t)x$, $x(0)=1$ equal $e^{L}$. The constant field
+$a_0$ uniquely minimizes $\int_0^1 a^2$ among scalar fields with
+integral $L$. The oscillatory field has strictly larger regularity
+$\int a_{1,N}^2=L^2+\varepsilon_N^2/2$. Left-endpoint Euler is exact for
+$a_{1,N}$ and has strictly positive endpoint error for $a_0$. The
+embedding $q_k=\exp(2\int_0^t a_k)$,
+$\alpha_k=\sqrt{q_k}\cos(\pi t/2)$,
+$\sigma_k=\sqrt{q_k/e^{2L}}\sin(\pi t/2)$ lies in Class~S. The field
+$a_{1,N}$ is chosen after the grid; this is not the mechanism of
+Proposition~\ref{prop:scalar}.
+
+\section{Related work}
 \label{sec:related}
 
 Flow matching and interpolants supply the Gaussian
@@ -314,22 +387,41 @@ statement applies to the independent-coupling linear or VP path
 studied here. The present paper supplies a rationally certified
 Gaussian instance of ranking failure for the unsigned average
 $\|A\|_2^2$. A counterexample to $\mu_2$ itself is outside our
-scope.
+scope. \citet{benton2024error} bound $\wtwo$ of a learned flow; that is
+an error bound, not a pairwise ranking. Consistency
+models~\citep{song2023consistency} distill few-step maps.
+
+\section{Limitations}
+\label{sec:limits}
 
 The systems are commuting affine Gaussian interpolants, three
 fixed-step Runge--Kutta methods, and small equal-NFE budgets. No
 learned neural field is evaluated. Chen et al.\ prove no
 discretization-error bound and do not claim a universal pairwise
-ranking at fixed NFE. As an in-family objective, VP versus the shared
-Ex.~3.3 scalar schedule still invert in 9 of 36 blocks; $\cR$ is
-usable as an objective only when its minimizer is admissible. The
-Gaussian family is a
-probe in which $\cR$ and $\wtwo$ are closed form; in a learned field
-the linear part is not exact, so exponential integrators that solve an
-affine scalar mode exactly are not a drop-in substitute. Cell counts
-are hierarchical descriptive summaries, not population rates.
+ranking at fixed NFE. As a pairwise comparison within the
+shared-schedule class, VP versus Chen Ex.~3.3 with $M=\lambda_{\max}$
+still invert in 9 of 36 blocks. Among four candidate paths, the
+per-mode path wins $36$ of $36$ blocks on this census; that does not
+imply that a global $\cR$-minimizer minimizes fixed-NFE error. The
+Gaussian family is a probe in which the drift and $\wtwo$ formula are
+closed form; in a learned field the linear part is not exact, so
+exponential integrators that solve an affine scalar mode exactly are
+not a drop-in substitute. Cell counts are hierarchical descriptive
+summaries, not population rates.
 
-\clearpage
+\section{Conclusion}
+\label{sec:conclusion}
+
+Averaged squared Jacobian regularity can misrank equal-NFE Gaussian
+$\wtwo$ already for two $C^1$ interpolants of independent $N(0,1)$ and
+$N(0,4)$. The Heun calculation is exact on the linear path and
+rationally enclosed on trigonometric VP. The same split appears as a
+pairwise comparator ($5$ of $12$ geometry$\times$solver cells), as a
+pairwise shared-schedule comparison ($9$ of $36$ blocks), and as a
+four-candidate census ($36$ of $36$) that does not promote $A_2$ to a
+global few-step optimality theorem.
+
+\FloatBarrier
 \bibliographystyle{plainnat}
 \bibliography{references}
 

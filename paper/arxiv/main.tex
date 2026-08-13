@@ -21,10 +21,10 @@
 \captionsetup{font=small,skip=6pt}
 
 \hypersetup{
-  pdftitle={Averaged Jacobian Regularity Does Not Order Few-Step Error in Flow Matching: A Certified Gaussian Counterexample},
+  pdftitle={Few-Step Flow-Matching Error Can Be Misranked by Averaged Jacobian Regularity: A Certified Gaussian Counterexample},
   pdfauthor={Clément Callaert},
-  pdfsubject={Flow matching, stochastic interpolants, and averaged Jacobian regularity of Gaussian interpolant ODEs},
-  pdfkeywords={flow matching, stochastic interpolants, diffusion models, probability flow ODE, few-step sampling, sampling schedule, Lipschitz regularity, Wasserstein distance, Runge-Kutta, numerical analysis}
+  pdfsubject={Flow matching, stochastic interpolants, and averaged Jacobian regularity of flow-matching marginal ODEs},
+  pdfkeywords={flow matching, stochastic interpolants, few-step sampling, Runge-Kutta, Gaussian interpolants, Wasserstein-2, interpolation schedules}
 }
 
 \input{generated/numbers}
@@ -58,8 +58,8 @@
 \newcommand{\cR}{\mathcal{R}}
 \newcommand{\Rhat}{\widehat{\mathcal{R}}_{24}}
 
-\title{Averaged Jacobian Regularity Does Not Order\\
-Few-Step Error in Flow Matching:\\
+\title{Few-Step Flow-Matching Error Can Be Misranked by\\
+Averaged Jacobian Regularity:\\
 A Certified Gaussian Counterexample}
 \author{%
   Clément Callaert\\
@@ -72,26 +72,26 @@ A Certified Gaussian Counterexample}
 \maketitle
 
 \begin{abstract}
-Flow matching and stochastic interpolants specify a probability flow ODE
-whose few-step sampling error depends on the sampling schedule. Schedule
-design therefore needs an a priori criterion. Chen, Vanden-Eijnden, and Xu
-propose minimizing the averaged squared Jacobian norm $A_2$, a Lipschitz
-constant of the marginal field, as a selection criterion, without a proved
-bound on discretization error. This paper asks whether the order induced by
-$A_2$ between two paths is reliable at a fixed number of function
-evaluations (NFE). Already for centered Gaussian interpolants the
-implication fails: for independent $N(0,1)$ and $N(0,4)$, the exact
-regularity integrals of the linear and trigonometric variance-preserving
-paths are $5\pi/8-1$ and $\pi^2/16$, while Heun at NFE~$8$ reverses
-Gaussian Wasserstein-2 distance. Three regimes then separate. As a pairwise
-comparator of linear versus VP, the ranking inverts in $5$ of $12$
-geometry-by-solver cells. As an in-family objective, trigonometric VP
-versus the scalar log-covariance schedule (Chen Example~3.3 with
-$M=\lambda_{\max}$) invert in $9$ of $36$ blocks ($4$ of $12$ cells). The unconstrained
-per-mode minimizer attains both the smallest regularity and the smallest
-Wasserstein-2 distance in $36$ of $36$ blocks, but is not a shared
-$(\alpha,\sigma)$ interpolant for $d\geq 2$. The analysis is confined to
-commuting Gaussians; no learned field is used.
+Does averaged squared Jacobian regularity rank two interpolants in the same
+order as equal-NFE endpoint error? Chen, Vanden-Eijnden, and Xu propose
+minimizing $A_2$, the time-integrated squared spatial Jacobian norm of a
+flow-matching marginal ODE, as a criterion for schedule design, without a
+proved discretization-error bound. Classical one-step bounds use a Lipschitz
+constant of the field; $A_2$ is not that constant. Already for independent
+$N(0,1)$ and $N(0,4)$, the exact regularity integrals of the linear and
+trigonometric variance-preserving Gaussian interpolants are $5\pi/8-1$ and
+$\pi^2/16$, while Heun at NFE~$8$ reverses Gaussian Wasserstein-2 distance.
+The linear Heun product is the rational $6797469/3559400$; a nonnegative
+element of $\mathbb{Q}[\pi,\sqrt{2}]$ yields $r_{\mathrm{VP}}<187/100$.
+The object is a flow matching marginal interpolant ODE, not a score-based
+probability-flow ODE. The Gaussian drift and $W_2$ formula are closed form;
+the regularity integrand is exact, while multimode $\mathcal{R}$ is
+evaluated deterministically by adaptive quadrature. Pairwise and four-path
+census comparisons on commuting Gaussian interpolants are reported below; a
+finite census does not imply that a global $A_2$-minimizer minimizes
+fixed-NFE error. The analysis uses stochastic interpolants, few-step
+sampling, Runge--Kutta, and interpolation schedules; no learned field is
+used.
 \end{abstract}
 
 \section{Introduction}
@@ -107,44 +107,50 @@ alone.
 
 In the stochastic interpolants and flow matching setting,
 \citet{lipschitzguided2025} propose minimizing averaged squared Jacobian
-regularity (their Definition~3.2, denoted $A_2$) as a selection criterion.
+regularity (their Definition~3.2, denoted $A_2$, the time-integrated
+squared spatial Jacobian norm) as a selection criterion.
 The integrand is a Jacobian norm. They prove KL equivalence of schedules
 and a logarithmic scaling law. They prove no bound relating $A_2$ to
 discretization error, Wasserstein-2 distance, or sampling error. This paper
-asks whether the pairwise order that $A_2$ induces between two admissible
-paths is reliable at equal NFE on a probability flow ODE.
+asks whether the pairwise order that $A_2$ induces between two interpolant
+paths is reliable at equal NFE on a flow-matching marginal ODE.
 
-Commuting Gaussian interpolants are the right probe. Both the regularity
-integral $\cR$ and Gaussian $\wtwo$ are available in closed form, and the
-regularity integrand is known exactly, so any observed divergence is a
-property of the criterion rather than an estimation artefact. The family
-includes the linear interpolant, trigonometric variance-preserving (VP)
-path, and Chen et al.'s scalar log-covariance schedule, all shared
-$(\alpha,\sigma)$ interpolants, as well as the unconstrained per-mode
-minimizer of $\cR$.
+Commuting Gaussian interpolants are the right probe. The Gaussian drift and
+$\wtwo$ formula are closed form; the regularity integrand is exact, while
+multimode $\cR$ is evaluated deterministically by adaptive quadrature. Any
+observed divergence is therefore a property of the criterion rather than an
+estimation artefact. The family includes the linear interpolant and the
+trigonometric variance-preserving (VP) path, both $C^1$ shared schedules;
+the Chen scalar log-covariance schedule, a shared schedule whose
+square-root coefficients are not $C^1$ at the endpoints; and the per-mode
+log-covariance path.
 
 The leading logical result is a deterministic scalar example, proved by an
 exact integral, an exact rational product of the Heun method, and a
 rational enclosure of a two-stage Runge--Kutta product
 (Section~\ref{subsec:counterexample}). The same calculation then splits
-into three regimes, summarized in Figure~\ref{fig:regimes}: $\cR$ as a
-pairwise comparator of two fixed paths, $\cR$ as an in-family objective,
-and $\cR$ when its unconstrained minimizer is admissible.
+into three comparisons, summarized in Figure~\ref{fig:regimes}: $\cR$ as a
+pairwise comparator of two fixed Class~S paths, $\cR$ as a pairwise
+comparison of two shared-schedule Class~Q paths, and a four-path census
+that includes the per-mode Class~Q path.
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=\linewidth]{figures/fig1_regimes.pdf}
-  \caption{Three regimes for $\cR$ on commuting Gaussian interpolants.
-  Each panel shows continuous $\cR$ and equal-NFE Gaussian $\wtwo$
-  (lower is preferred). (a)~Pairwise linear versus VP on low-rank $d=8$,
-  Euler, NFE~$8$: $\cR$ and $\wtwo$ invert; this occurs in $5$ of $12$
-  geometry$\times$solver cells. (b)~In-family VP versus shared Chen
-  Ex.~3.3 scalar ($M=\lambda_{\max}$) on anisotropic $d=8$, Euler,
-  NFE~$8$: inversion, as in $9$ of $36$ blocks. (c)~Unconstrained
-  per-mode $q_i(t)=\lambda_i^{t}$ on the same block: smallest $\cR$ and
-  smallest $\wtwo$ in $36$ of $36$ blocks; not a shared $(\alpha,\sigma)$
-  interpolant for $d\geq 2$. Exact-moment modal Runge--Kutta; census
-  counts, not estimators.}
+  \includegraphics[width=\linewidth,alt={Three paired bar charts. Row (a) linear versus VP on low-rank d=8, Euler, NFE 8: regularity prefers linear while W2 prefers VP. Row (b) VP versus Chen Example 3.3 on anisotropic d=8, Euler, NFE 8. Row (c) four paths on low-rank d=8, Euler, NFE 8, with regularity values near 2.94, 4.73, 11.42, and 2.24.}]{figures/fig1_regimes.pdf}
+  \caption{Three comparisons for $\cR$ on commuting Gaussian interpolants.
+  Each row shows continuous $\cR$ (left) and equal-NFE Gaussian $\wtwo$
+  (right; lower is preferred). (a)~Pairwise linear versus VP on
+  low-rank $d=8$, Euler, NFE~$8$: $\cR$ and $\wtwo$ invert; this occurs
+  in $5$ of $12$ geometry$\times$solver cells. (b)~Shared-schedule pairwise
+  comparison, VP versus Chen Ex.~3.3 scalar ($M=\lambda_{\max}$) on
+  anisotropic $d=8$, Euler, NFE~$8$: inversion, as in $9$ of $36$ blocks.
+  (c)~Four candidate paths on low-rank $d=8$, Euler, NFE~$8$, including
+  per-mode $q_i(t)=\lambda_i^{t}$: smallest $\cR$ and smallest $\wtwo$ in
+  $36$ of $36$ blocks on this finite census. This does not imply that a
+  global $\cR$-minimizer minimizes fixed-NFE error. When $\Sigma_1$ has at
+  least two distinct eigenvalues, the per-mode path is not a Class~S shared
+  interpolant. Exact-moment modal Runge--Kutta; census counts, not
+  estimators.}
   \label{fig:regimes}
 \end{figure}
 
@@ -160,11 +166,14 @@ The contributions are as follows.
   a forced sign change of the linear drift
   (Section~\ref{subsec:discarded}). A truncation expansion in which those
   coefficients reduced to $\|A\|_2^2$ would contradict the account.
-\item A three-regime characterisation on a complete $4\times 3\times 3$
+\item A three-comparison characterisation on a complete $4\times 3\times 3$
   census: pairwise linear-versus-VP inversions in $5$ of $12$ cells;
-  in-family VP-versus-scalar-log-covariance inversions in $9$ of $36$
-  blocks; unconstrained per-mode minimizer smallest in $36$ of $36$
-  blocks, and not a shared $(\alpha,\sigma)$ interpolant for $d\geq 2$.
+  shared-schedule pairwise VP-versus-scalar-log-covariance inversions in
+  $9$ of $36$ blocks; among four candidate paths, the per-mode path has
+  the smallest $\cR$ and the smallest $\wtwo$ in $36$ of $36$ blocks.
+  This finite-census observation does not imply that a global
+  $\cR$-minimizer minimizes fixed-NFE error. When $\Sigma_1$ has at least
+  two distinct eigenvalues, that path is not a Class~S shared interpolant.
   Rank agreement between $\cR$ and $\wtwo$ changes sign with the solver
   (Sections~\ref{subsec:pairwise}--\ref{subsec:minimizer}). A census in
   which all three comparisons agreed would contradict the split.
@@ -181,12 +190,43 @@ The contributions are as follows.
 \label{subsec:interpolants}
 
 Let $X_0\sim N(\mu_0,\Sigma_0)$ and $X_1\sim N(\mu_1,\Sigma_1)$ be independent
-in $\RR^d$, with $\Sigma_0,\Sigma_1$ symmetric positive definite. Let
-$\alpha,\sigma:[0,1]\to\RR$ be $C^3$ and satisfy
+in $\RR^d$, with $\Sigma_0,\Sigma_1$ symmetric positive definite. A
+\emph{shared schedule} is a pair of scalar functions used for every
+eigenmode, equivalently $Q(t)=\alpha(t)^2\Sigma_0+\sigma(t)^2\Sigma_1$.
+We distinguish three regularity classes.
+\begin{itemize}[leftmargin=1.4em]
+\item \emph{Class~S} (shared $C^1$ interpolants): $\alpha,\sigma\in C^1([0,1])$
+  with
 \begin{equation}
   \alpha(0)=1,\quad \sigma(0)=0,\quad \alpha(1)=0,\quad \sigma(1)=1.
 \end{equation}
-The interpolant is
+  The linear path $(1-t,\,t)$ and trigonometric VP
+  $(\cos(\pi t/2),\,\sin(\pi t/2))$ belong to Class~S, as does the
+  grid-aware embedding of Appendix~\ref{app:p4p1}.
+\item \emph{Class~Q} (regular covariance paths): a $C^1$ path of positive
+  definite covariances $Q(t)$ with $Q(0)=\Sigma_0$, $Q(1)=\Sigma_1$, for
+  which $A(t)=\tfrac12 Q'(t)Q(t)^{-1}$ extends continuously to $[0,1]$.
+  Every Class~S interpolant induces a Class~Q path. The per-mode schedule
+  $q_i(t)=\lambda_i^t$ is Class~Q.
+\item \emph{Class~R} (regular squares): $\alpha^2,\sigma^2\in C^1([0,1])$,
+  $\alpha^2\ge 0$, $\sigma^2\ge 0$, and
+  \begin{equation}
+    \alpha(0)^2=1,\quad \sigma(0)^2=0,\quad \alpha(1)^2=0,\quad \sigma(1)^2=1.
+  \end{equation}
+  The square roots $\alpha=\sqrt{\alpha^2}$ and $\sigma=\sqrt{\sigma^2}$
+  need not be differentiable at the endpoints. Chen et al.'s scalar
+  log-covariance schedule $\sigma(t)^2=(M^t-1)/(M-1)$,
+  $\alpha(t)^2=(M-M^t)/(M-1)$ for $M>0$, $M\neq 1$ is Class~R:
+  $\sigma(t)\asymp\sqrt{t}$ as $t\to 0$ and $\alpha(t)\asymp\sqrt{1-t}$ as
+  $t\to 1$, so it is not Class~S. When $M=1$ the formulas are read in the
+  limit $\sigma(t)^2=t$, $\alpha(t)^2=1-t$. The covariance is $C^\infty$
+  and $A$ is continuous, so the path is Class~Q.
+\end{itemize}
+Two paths are called shared-schedule Class~Q paths when both lie in
+Class~Q and both use a single scalar pair $(\alpha,\sigma)$. We do not
+call a Class~R path a Class~S interpolant.
+
+The interpolant of a Class~S or Class~R schedule is
 \begin{equation}
   X_t=\alpha(t)X_0+\sigma(t)X_1,
   \label{eq:interpolant}
@@ -207,8 +247,12 @@ field
   c(t)=\dot m_t-A(t)m_t,
   \label{eq:affine}
 \end{equation}
-with $C_t=\dot\alpha\alpha\,\Sigma_0+\dot\sigma\sigma\,\Sigma_1$. This is a
-marginal interpolant ODE, not a score-based probability flow ODE in the sense
+with $C_t=\dot\alpha\alpha\,\Sigma_0+\dot\sigma\sigma\,\Sigma_1$ on $(0,1)$
+for Class~S and Class~R. Equivalently,
+$C_t=\tfrac12(\alpha^2)'\,\Sigma_0+\tfrac12(\sigma^2)'\,\Sigma_1$, which
+extends continuously to $[0,1]$ whenever $\alpha^2,\sigma^2\in C^1([0,1])$.
+This is a
+marginal interpolant ODE, not a score-based probability-flow ODE in the sense
 of~\citet{song2021score}, although the latter is an instance of a generative
 ODE. If $\mu_0=\mu_1=0$ and $\Sigma_0=I$, then $c\equiv 0$ and
 $A=\tfrac12 Q'Q^{-1}$.
@@ -218,7 +262,9 @@ eigenbasis of $\Sigma_1$. Simultaneous diagonalization with the identity is
 not an extra hypothesis. In that basis, mode $i$ with eigenvalue
 $\lambda_i>0$ obeys $x_i'=a_i(t)x_i+c_i(t)$ with
 $q_i(t)=\alpha(t)^2+\lambda_i\sigma(t)^2$ and
-$a_i(t)=q_i'(t)/(2q_i(t))$. The covariance drift depends only on the
+$a_i(t)=q_i'(t)/(2q_i(t))$. For a Class~Q path that is not shared, the
+same identity holds modewise with no single pair $(\alpha,\sigma)$. The
+covariance drift depends only on the
 variance schedule. The exact one-step factor on $[t_n,t_{n+1}]$ is
 $\sqrt{q_i(t_{n+1})/q_i(t_n)}$. For centered modes the exact endpoint factor
 is $\sqrt{\lambda_i}$.
@@ -254,7 +300,9 @@ For the affine field~\eqref{eq:affine} the integrand is deterministic and
   \cR[b]=\int_0^1 \bigl\|A(t)\bigr\|_2^2\,dt
   \label{eq:R}
 \end{equation}
-coincides with $A_2$. By definition $\cR$ ignores $c(t)$. For commuting
+coincides with $A_2$. Thus $A_2$ is the time-integrated squared spatial
+Jacobian norm, not a classical Lipschitz constant of the field. By definition
+$\cR$ ignores $c(t)$. For commuting
 $A(t)$, $\|A(t)\|_2=\max_i |a_i(t)|$. Headline comparisons use the continuous
 integral~\eqref{eq:R}. The historical $24$-node trapezoidal estimator is
 written $\Rhat$ and is used only as an implementation check. No trapezoidal
@@ -276,7 +324,7 @@ linear interpolant to trigonometric VP.
 
 \begin{proposition}
 \label{prop:cs}
-For any admissible one-dimensional variance path from $1$ to $\lambda>0$,
+For any Class~Q one-dimensional variance path from $1$ to $\lambda>0$,
 $\int_0^1 a(t)\,dt=\tfrac12\ln\lambda$. Consequently
 \begin{equation}
   \cR=\int_0^1 a(t)^2\,dt
@@ -292,11 +340,24 @@ $\int a^2$ as $(\int a)^2+\mathrm{Var}_t(a)$ gives the bound.
 \end{proof}
 
 Thus $\cR$ measures only the temporal variance of the log-covariance rate.
-Its unconstrained minimizer is the constant drift $a\equiv\tfrac12\ln\lambda$,
-i.e.\ $q(t)=\lambda^t$, which is \citet[Example~3.3]{lipschitzguided2025} in
-one dimension. In several dimensions the per-mode schedule $q_i(t)=\lambda_i^t$
-attains $\cR=\bigl(\tfrac12\max_i|\ln\lambda_i|\bigr)^2$. That schedule is
-not a shared $(\alpha,\sigma)$ interpolant for $d\geq 2$.
+Its unconstrained Class~Q minimizer is the constant drift
+$a\equiv\tfrac12\ln\lambda$, i.e.\ $q(t)=\lambda^t$, which is
+\citet[Example~3.3]{lipschitzguided2025} in one dimension. In several
+dimensions the per-mode schedule $q_i(t)=\lambda_i^t$ attains
+$\cR=\bigl(\tfrac12\max_i|\ln\lambda_i|\bigr)^2$. If $\Sigma_1$ has at
+least two distinct eigenvalues, that path is not a Class~S shared
+interpolant: matching $\alpha^2+\lambda_i\sigma^2=\lambda_i^t$ on two
+distinct eigenvalues forces $\sigma(t)\asymp\sqrt{t}$ as $t\to 0$. If
+three or more distinct eigenvalues are present, no shared
+$(\alpha,\sigma)$ exists even in Class~R, because
+$\alpha^2+\lambda\sigma^2$ is affine in $\lambda$ while $\lambda^t$ is
+not. \citet[Proposition~3.9]{lipschitzguided2025} optimize $A_2$ over
+shared scalar schedules under the spectral hypothesis
+$1\ge\lambda^{(1)}\ge\cdots\ge\lambda^{(d)}>0$, taking $M$ equal to the
+smallest eigenvalue. The geometries below have mixed spectra with some
+$\lambda_i>1$; the scalar candidate used in the census is Chen
+Example~3.3 with $M=\lambda_{\max}$. That is a pairwise comparison of two
+shared-schedule Class~Q paths, not a test of Proposition~3.9.
 
 \subsection{A certified one-dimensional counterexample}
 \label{subsec:counterexample}
@@ -351,7 +412,7 @@ Details occupy Appendix~\ref{app:scalar}.
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=\linewidth]{figures/fig_scalar.pdf}
+  \includegraphics[width=\linewidth,alt={Scalar drifts of the linear and trigonometric VP interpolants between N(0,1) and N(0,4), with Heun nodes at NFE 8 and the linear sign-change region shaded.}]{figures/fig_scalar.pdf}
   \caption{Scalar drifts $a_{\mathrm{lin}}(t)$ and $a_{\mathrm{VP}}(t)$
   for independent $N(0,1)$ and $N(0,4)$. The shaded region is
   $a_{\mathrm{lin}}<0$. Markers are the four Heun nodes at NFE~$8$.
@@ -389,36 +450,41 @@ $r_{i,n}$ is numerical. Prefixes are numerical; suffixes are exact. The
 identity holds without a non-vanishing hypothesis. Appendix~\ref{app:tables}
 illustrates the signed transported terms on the strongest centered block.
 
-The structural distinction that every fixed-stage Runge--Kutta method
-samples, and that $\cR$ erases, is a sign change. For any independent linear
+Fixed-stage Runge--Kutta methods use signed stage evaluations that $\cR$
+discards; in the tested schemes, this distinction contributes to the observed
+inversion. For any independent linear
 coupling, $a_{\mathrm{lin}}(0)=-1<0<a_{\mathrm{lin}}(1)=+1$. The VP drift
 vanishes at the endpoints and does not change sign on $(0,1)$.
 
-\subsection{Three regimes: comparator, in-family objective, unconstrained minimiser}
+\subsection{Three regimes: comparator, shared-schedule pairwise comparison, four-path census}
 \label{subsec:regimes}
 
-Proposition~\ref{prop:scalar} is a pairwise comparison of two fixed paths.
-Using $\cR$ as a design objective is a different question, and admitting its
-unconstrained minimizer is a third. The rest of the paper answers these
-three questions on one factorial grid.
+Proposition~\ref{prop:scalar} is a pairwise comparison of two fixed Class~S
+paths. Comparing two shared-schedule Class~Q paths is a different
+question, and enumerating four candidate paths including the per-mode
+Class~Q path is a third. The rest of the paper answers these three
+questions on one factorial grid.
 
 \begin{enumerate}[leftmargin=1.4em]
-\item $\cR$ as a \emph{pairwise comparator} between two arbitrary admissible
-  paths (linear versus trigonometric VP).
-\item $\cR$ as an \emph{in-family objective}: both paths are shared
-  $(\alpha,\sigma)$ interpolants, namely trigonometric VP and the scalar
-  Chen Example~3.3 schedule with $M=\lambda_{\max}$,
-  $\sigma^2(t)=(M^t-1)/(M-1)$ and $\alpha^2=1-\sigma^2$.
-\item $\cR$ as a criterion when its \emph{unconstrained minimizer} is
-  admissible. The per-mode schedule $q_i(t)=\lambda_i^t$ attains
-  $\bigl(\tfrac12\max_i|\ln\lambda_i|\bigr)^2$ and is not a shared
-  $(\alpha,\sigma)$ interpolant for $d\geq 2$.
+\item $\cR$ as a \emph{pairwise comparator} between two Class~S paths
+  (linear versus trigonometric VP).
+\item $\cR$ as a \emph{pairwise comparison within the shared-schedule
+  class}: trigonometric VP (Class~S, hence Class~Q) versus the scalar
+  Chen Example~3.3 schedule with $M=\lambda_{\max}$ (Class~R and Class~Q,
+  not Class~S).
+\item A \emph{four-path census} that additionally includes the per-mode
+  schedule $q_i(t)=\lambda_i^t$ (Class~Q; not Class~S when $\Sigma_1$ has
+  at least two distinct eigenvalues).
 \end{enumerate}
 
-A complementary scalar construction (Appendix~\ref{app:p4p1}) shows
-non-implication for left-endpoint Euler on a grid-aware oscillatory field.
-That field is chosen after the grid. It is not the mechanism of
-Proposition~\ref{prop:scalar} or of the Gaussian census.
+A complementary scalar construction (Appendix~\ref{app:p4p1}) exhibits an
+admissible Class~S $\cR$-minimizer for which left-endpoint Euler has
+strictly larger endpoint error than a higher-$\cR$ Class~S path. That
+field is chosen after the grid. It is not the mechanism of
+Proposition~\ref{prop:scalar} or of the Gaussian census. A $36$ of $36$
+count on four candidate paths does not imply that a global
+$\cR$-minimizer minimizes fixed-NFE error; this construction blocks that
+generalization.
 
 \section{Experiments}
 \label{sec:experiments}
@@ -433,16 +499,20 @@ covariances $FF^\top+0.05 I$. The dimension-$2$ low-rank eigenvalues are
 $\numLrTwoMin$ and $\numLrTwoMax$; the dimension-$8$ low-rank eigenvalues are
 $0.05$ (six times), $\numLrEightA$, and $\numLrEightB$ (three decimals in
 the body; full float64 values in Appendix~\ref{app:tables}). Paths,
-solvers, budgets, and pre-registration status are in Table~\ref{tab:setup}.
+solvers, budgets, and registration status are in Table~\ref{tab:setup}.
 Precision is float64, audited against an $80$-digit Gelbrich reference.
 
 \begin{table}[t]
   \centering
   \caption{Experimental grid. Headline $\cR$ is the continuous integral.
-  Status is relative to the registered Phase~4 linear-versus-VP census:
-  pre-specified experiments were declared before execution; post-hoc
-  experiments were added for this manuscript. Exact calculation of $\cR$
-  and Gaussian $\wtwo$ on each cell.}
+  Ranking inversions were identified in the registered Phase~3 gate.
+  Phase~4 is a confirmatory reproduction on configurations frozen before the
+  rerun; it is not a preregistration that predates discovery. Status
+  ``confirmatory'' means reproduced on that frozen grid; ``post-hoc'' means
+  added after the Phase~3 observation. Reserve ``pre-registered'' for a
+  protocol recorded before any observation. The Gaussian drift and $\wtwo$
+  formula are closed form; the regularity integrand is exact, while multimode
+  $\cR$ is evaluated deterministically by adaptive quadrature.}
   \label{tab:setup}
   \setlength{\tabcolsep}{3pt}
   \small
@@ -451,13 +521,13 @@ Precision is float64, audited against an $80$-digit Gelbrich reference.
     \toprule
     experiment & grid & paths & status \\
     \midrule
-    pairwise comparator & $4$ geom.\ $\times$ $3$ solvers $\times$ $\{8,16,32\}$ & linear, VP & pre-specified \\
-    in-family objective & same $36$ blocks & VP, Ex.~3.3 scalar & post-hoc \\
-    unconstrained minimiser & same $36$ blocks & $+\,q_i=\lambda_i^t$ & post-hoc \\
+    pairwise comparator & $4$ geom.\ $\times$ $3$ solvers $\times$ $\{8,16,32\}$ & linear, VP & confirmatory \\
+    shared-schedule pairwise & same $36$ blocks & VP, Ex.~3.3 scalar & post-hoc \\
+    four-path census & same $36$ blocks & $+\,q_i=\lambda_i^t$ & post-hoc \\
     inversion map & $\lambda\in[0.05,100]\times$ $3\times 3$ & linear, VP & post-hoc \\
     geometry draws & $N=50$ i.i.d.\ $F$, $d\in\{2,8\}$ & linear, VP & post-hoc \\
     robustness $\pm 10\%$, NFE $64,128$ & $66$ low-rank blocks & linear, VP & post-hoc \\
-    non-centered stress test & $2\times 3\times 3$ & linear, VP & pre-specified \\
+    non-centered stress test & $2\times 3\times 3$ & linear, VP & confirmatory \\
     \bottomrule
   \end{tabular}}
 \end{table}
@@ -466,8 +536,9 @@ Precision is float64, audited against an $80$-digit Gelbrich reference.
 \label{subsec:stats}
 
 Given a geometry, a path, a solver, and a budget, $\cR$ and $\wtwo$ are
-exact reals computed in float64 and checked at $80$ digits: there is no
-sampling noise. The $36$-block grid is a complete enumeration of
+deterministic numerical quantities with no Monte Carlo sampling noise;
+float64 results are checked against high-precision references. The
+$36$-block grid is a complete enumeration of
 $4$ geometries $\times$ $3$ solvers $\times$ $3$ budgets, not a draw.
 Because $\cR$ is independent of solver and budget, and because the two
 anisotropic geometries share one $\cR$ pair, the census contains
@@ -484,15 +555,17 @@ is the draw of the low-rank factor $F$
 \label{subsec:pairwise}
 
 Does $\cR[b]<\cR[b']$ imply $E[b]<E[b']$ at equal NFE for the linear and
-trigonometric VP interpolants? The protocol is the pre-specified $36$-block
-census of Table~\ref{tab:setup}, with continuous $\cR$. Linear versus VP
+trigonometric VP interpolants? The protocol is the confirmatory Phase~4
+$36$-block census of Table~\ref{tab:setup}, with continuous $\cR$, on a grid
+frozen before the rerun. Linear versus VP
 invert in \nInversionCells{} of \nGeometrySolverCells{}
 geometry$\times$solver cells; \nAllNFEInvertCells{} of those cells invert at
 every NFE in $\{8,16,32\}$, from \nDistinctRComparisons{} distinct $\cR$
-comparisons. On this census Kendall $\tau$ between the $\cR$ order and the
+comparisons. On this census the paired concordance score
+$(n_{\mathrm{agree}}-n_{\mathrm{invert}})/n$ between the $\cR$ order and the
 $\wtwo$ order equals $2/9$ over $36$ blocks. Stratified by solver, with
 $n=4$ geometries and a structural tie between the two anisotropic
-targets, $\tau=+1/2$ under Euler and RK4 and $\tau=-1/3$ under Heun: rank
+targets, the score is $+1/2$ under Euler and RK4 and $-1/3$ under Heun: rank
 agreement changes sign with the solver. The strongest block is low-rank,
 $d=8$, Euler, NFE $8$:
 $\cR$ prefers linear ($\numRlinStrong$ versus $\numRvpStrong$) while $\wtwo$
@@ -500,46 +573,55 @@ prefers VP ($\numWlinStrong$ versus $\numWvpStrong$). Appendix~\ref{app:tables}
 lists every inverted row. This census does not estimate a population
 frequency, and it does not speak to learned fields.
 
-\subsection{R as an in-family objective: VP versus the scalar log-covariance schedule}
+\subsection{R as a pairwise comparison within the shared-schedule class: VP versus the scalar log-covariance schedule}
 \label{subsec:infamily}
 
-When both paths are shared $(\alpha,\sigma)$ interpolants, does minimizing
-$\cR$ inside the family recover the smaller $\wtwo$? The protocol compares
-trigonometric VP to Chen Example~3.3 with a single ratio $M=\lambda_{\max}$
-on the same $36$ blocks (post-hoc). The ranking inverts in
+When both paths are shared-schedule Class~Q paths, does the one with smaller
+$\cR$ have the smaller $\wtwo$? The protocol compares trigonometric VP to
+Chen Example~3.3 with a single ratio $M=\lambda_{\max}$ on the same $36$
+blocks (post-hoc). This is a pairwise comparison of two candidates, not a
+global minimization of $\cR$ over the shared-schedule class, and not a
+test of \citet[Proposition~3.9]{lipschitzguided2025}. The ranking inverts in
 \nInFamilyInversions{} of $36$ blocks and \nInFamilyCells{} of $12$ cells:
 anisotropic $d=2$, Euler at NFE $16$ and $32$; anisotropic $d=8$, Euler at
 NFE $8$, $16$, and $32$; low-rank $d=2$, Euler at NFE $8$ and Heun at NFE
 $8$, $16$, and $32$; low-rank $d=8$, none. Figure~\ref{fig:fourpaths} places
-the two in-family paths next to linear and the unconstrained minimizer.
-Every in-family inversion margin exceeds the $80$-digit floor by a factor
+the two shared-schedule paths next to linear and the per-mode path.
+Every pairwise inversion margin exceeds the $80$-digit floor by a factor
 greater than $\separationThreshold$. The comparison does not say that $A_2$
-is a poor optimization objective when the minimizer is attained; that is
-the next regime.
+fails as a global optimization objective on the shared-schedule class.
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=\linewidth]{figures/fig_four_paths.pdf}
+  \includegraphics[width=\linewidth,alt={Four-path comparison of continuous regularity and Euler NFE-8 Wasserstein-2 on four centered Gaussian geometries.}]{figures/fig_four_paths.pdf}
   \caption{Four paths on the four centered geometries: linear, trigonometric
   VP, shared Chen Example~3.3 scalar schedule with $M=\lambda_{\max}$, and
-  the unconstrained per-mode log-covariance schedule. Left: continuous
-  $\cR$. Right: Euler Gaussian $\wtwo$ at NFE $8$. The per-mode schedule is
-  not a shared $(\alpha,\sigma)$ interpolant for $d\geq 2$. Exact-moment
+  the per-mode log-covariance schedule. Left: continuous
+  $\cR$. Right: Euler Gaussian $\wtwo$ at NFE $8$. Among these four
+  candidate paths, the per-mode schedule has the smallest $\cR$ and the
+  smallest $\wtwo$ in $36$ of $36$ blocks on the stated census. This
+  finite-census observation does not imply that a global $\cR$-minimizer
+  minimizes fixed-NFE error. When $\Sigma_1$ has at least two distinct
+  eigenvalues, the per-mode path is not a Class~S shared interpolant.
+  Exact-moment
   modal Runge--Kutta; $\cR$ by adaptive quadrature except the per-mode
   closed form.}
   \label{fig:fourpaths}
 \end{figure}
 
-\subsection{The unconstrained R-minimiser}
+\subsection{Four-path census: the per-mode log-covariance path}
 \label{subsec:minimizer}
 
-If the per-mode schedule $q_i(t)=\lambda_i^t$ is admitted, does it attain
-both the smallest $\cR$ and the smallest $\wtwo$? On the same $36$ blocks it
-does: smallest continuous $\cR$ in every block and smallest Gaussian
-$\wtwo$ in $36$ of $36$ blocks. It is not a shared $(\alpha,\sigma)$
-interpolant for $d\geq 2$. The observation is a census count on this family,
-not a sampling law, and it does not supply a practical multi-dimensional
-schedule.
+If the per-mode schedule $q_i(t)=\lambda_i^t$ is included among the four
+candidate paths, does it attain both the smallest $\cR$ and the smallest
+$\wtwo$? Among the four candidate paths on the stated $36$-block census,
+the per-mode log-covariance path has the smallest continuous $\cR$ and
+the smallest Gaussian $\wtwo$ in $36$ of $36$ blocks. This finite-census
+observation does not imply that a global $\cR$-minimizer minimizes
+fixed-NFE error. When $\Sigma_1$ has at least two distinct eigenvalues,
+that path is not a Class~S shared interpolant. The observation is a
+census count on four candidates, not a sampling law, and it does not
+supply a practical multi-dimensional schedule.
 
 \subsection{Where the inversions live: a sweep over target variance}
 \label{subsec:region}
@@ -562,7 +644,7 @@ covariances.
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=\linewidth]{figures/fig_inversion_region.pdf}
+  \includegraphics[width=\linewidth,alt={Heat map of linear versus VP ranking inversions versus target variance lambda and solver budget.}]{figures/fig_inversion_region.pdf}
   \caption{Linear versus VP ranking inversion versus target variance
   $\lambda$, for Euler, Heun, and RK4 at NFE $8$, $16$, and $32$. Dark
   cells: $\cR$ and $\wtwo$ disagree. The dashed line is $\lambda=4$
@@ -610,7 +692,7 @@ All $72$ float64 $\wtwo$ values on the centered census agree with an
 $80$-digit reference to at most $\numPrecFloor$. Interval procedures for
 the VP Heun product occupy Appendix~\ref{app:quadrature}.
 
-A pre-specified non-centered family (Appendix~\ref{app:noncentered}) shifts
+A confirmatory non-centered family (Appendix~\ref{app:noncentered}) shifts
 the means so that $c(t)\ne 0$. Then $\cR$, which ignores $c$, is blind to a
 mean contribution in $\wtwo^2$. Of $18$ blocks, $11$ invert under continuous
 $\cR$, and several inversions including all dimension-$8$ Euler and Heun
@@ -650,9 +732,16 @@ Eulerian analysis; Remark~7 records the stronger Lagrangian exactness
 observed on that interpolant. Neither statement applies to the
 independent-coupling linear or VP path studied here. The present paper
 supplies a rationally certified Gaussian instance of ranking failure for
-the unsigned average $\|A\|_2^2$, together with a three-regime map of when
-that scalar remains a reliable objective on this family. A counterexample to
-$\mu_2$ itself is outside our scope.
+the unsigned average $\|A\|_2^2$, together with a three-comparison map of
+pairwise ranking on this commuting Gaussian family. A counterexample to
+$\mu_2$ itself is outside our scope. \citet{benton2024error} bound
+$\wtwo$ of a learned flow by an $L^2$ velocity error and a Lipschitz
+constant of the approximate field: an error bound, not a pairwise ranking
+of two interpolants at equal NFE. Consistency models~\citep{song2023consistency}
+distill few-step maps. Align-your-steps~\citep{sabour2024align} and
+DPM-Solver~\citep{lu2022dpmsolver} design the solver grid rather than the
+interpolant. Those objects are distinct from the ranking question tested
+here.
 
 \section{Conclusion}
 \label{sec:conclusion}
@@ -663,16 +752,17 @@ one-dimensional Heun calculation whose integrals and linear factor are exact
 and whose VP factor is enclosed by a rational substitution in
 $\mathbb{Q}[\pi,\sqrt{2}]$.
 
-The same scalar splits into three regimes. As a pairwise comparator of
-linear versus VP it inverts on a complete census. As an in-family objective
-comparing two shared $(\alpha,\sigma)$ interpolants it still inverts. When
-its unconstrained minimizer is admitted, that minimizer attains the smallest
-$\cR$ and the smallest $\wtwo$ in $36$ of $36$ blocks; it is not a shared
-$(\alpha,\sigma)$ interpolant for $d\geq 2$.
-
-On this commuting Gaussian family, $\cR$ is usable as an objective to
-minimize whenever its minimizer is attainable, and is not usable to rank two
-fixed paths.
+The same scalar splits into three comparisons. As a pairwise comparator of
+linear versus VP it inverts on a complete census. As a pairwise comparison
+of two shared-schedule Class~Q paths it still inverts. Among the four
+candidate paths on the stated $36$-block census, the per-mode
+log-covariance path has the smallest continuous $\cR$ and the smallest
+Gaussian $\wtwo$ in $36$ of $36$ blocks. This finite-census observation
+does not imply that a global $\cR$-minimizer minimizes fixed-NFE error.
+When $\Sigma_1$ has at least two distinct eigenvalues, that path is not a
+Class~S shared interpolant. Appendix~\ref{app:p4p1} gives an admissible
+Class~S $\cR$-minimizer whose left-endpoint Euler error is strictly larger
+than that of a higher-$\cR$ Class~S path.
 
 \section{Limitations}
 \label{sec:limits}
@@ -761,9 +851,25 @@ At the Heun nodes the VP drift takes the values
 Positivity of $a(3/4)$ follows from $15\sqrt{2}>9$, or $15^2\cdot 2-9^2=369>0$
 after squaring. Each Heun factor is therefore strictly positive, so
 $0<r_{\mathrm{VP}}$ and $\wtwo^{\mathrm{VP}}=2-r_{\mathrm{VP}}$.
-The four-step product is an element $P(\pi,\sqrt{2})$ of
-$\mathbb{Q}[\pi,\sqrt{2}]$. Expanding and reducing $\sqrt{2}^2=2$ produces
-twelve monomials, all with nonnegative coefficients. Substituting any pair of
+The four-step product is the following element $P(\pi,\sqrt{2})$ of
+$\mathbb{Q}[\pi,\sqrt{2}]$, obtained by expanding the four Heun factors
+and reducing $\sqrt{2}^2=2$:
+\begin{equation}
+\begin{aligned}
+P(\pi,\sqrt{2})
+&= 1+\frac{3}{40}\pi+\frac{15}{164}\pi\sqrt{2}
++\frac{78579}{10758400}\pi^2+\frac{45}{5248}\pi^2\sqrt{2}\\
+&\quad+\frac{11421}{17213440}\pi^3
++\frac{4671}{17213440}\pi^3\sqrt{2}\\
+&\quad+\frac{5103}{275415040}\pi^4
++\frac{567}{55083008}\pi^4\sqrt{2}\\
+&\quad+\frac{243}{2203320320}\pi^5
++\frac{729}{2203320320}\pi^5\sqrt{2}
++\frac{729}{176265625600}\pi^6.
+\end{aligned}
+\end{equation}
+Each of the twelve coefficients is a ratio of nonnegative integers, hence
+nonnegative, and the constant term is $1$. Substituting any pair of
 upper bounds for $\pi$ and $\sqrt{2}$ is therefore valid.
 The bound $\sqrt{2}<99/70$ is the integer comparison $99^2-2\cdot 70^2=1$.
 The bound $\pi<355/113$ follows from Machin's formula
@@ -838,6 +944,31 @@ mechanism of Proposition~\ref{prop:scalar}. An $80$-digit check confirms that
 the oscillatory Euler product equals $e^{L}$, but it is not a substitute for
 the argument above.
 
+The same fields are Class~S Gaussian interpolants. Set $\lambda=e^{2L}$ and
+\begin{equation}
+\begin{aligned}
+  q_k(t)&=\exp\Bigl(2\int_0^t a_k(s)\,ds\Bigr),\\
+  \alpha_k(t)&=\sqrt{q_k(t)}\,\cos(\pi t/2),\\
+  \sigma_k(t)&=\sqrt{q_k(t)/\lambda}\,\sin(\pi t/2).
+\end{aligned}
+\end{equation}
+Then $q_k(0)=1$, $\int_0^1 a_k=L$ so $q_k(1)=\lambda$, and the endpoint
+conditions $\alpha_k(0)=\sigma_k(1)=1$, $\alpha_k(1)=\sigma_k(0)=0$ hold.
+Positivity $q_k>0$ and $C^\infty$ regularity of $a_k$ give
+$\alpha_k,\sigma_k\in C^\infty([0,1])$, hence the embedding belongs to
+Class~S. The identity
+$\alpha_k^2+\lambda\sigma_k^2=q_k$ is trigonometric, and
+$q_k'/(2q_k)=a_k$ by construction. Among scalar fields with fixed integral
+$L$, $a_0$ uniquely minimizes $\int_0^1 a^2$ (Proposition~\ref{prop:cs}).
+Euler has strictly positive endpoint error for $a_0$, while $a_{1,N}$ has
+strictly larger regularity and left-endpoint Euler is exact for $a_{1,N}$.
+Thus $a_0$ is an admissible Class~S $\cR$-minimizer among one-dimensional
+variance paths from $1$ to $\lambda$,
+yet left-endpoint Euler has strictly larger endpoint error for $a_0$ than
+for the higher-$\cR$ path $a_{1,N}$. This construction blocks any inference
+from a finite-census $36$ of $36$ count on four candidates to the statement
+that a global $\cR$-minimizer minimizes fixed-NFE error.
+
 \section{Full block tables}
 \label{app:tables}
 
@@ -845,10 +976,13 @@ Table~\ref{tab:allinv} lists every inverted linear-versus-VP solver-budget
 row under continuous $\cR$. These rows are a hierarchical listing of the
 \nInversionCells{} geometry$\times$solver cells, not a population rate.
 Table~\ref{tab:strongest} records the strongest centered block.
-Table~\ref{tab:logcov} reports the unconstrained per-mode schedule on every
-block: smallest $\cR$ and smallest $\wtwo$ in $36$ of $36$ blocks; it is not
-a shared $(\alpha,\sigma)$ interpolant for $d\geq 2$.
-Table~\ref{tab:infamily} lists the nine in-family inversions.
+Table~\ref{tab:logcov} reports the four-path census: among four candidate
+paths, the per-mode schedule has the smallest $\cR$ and the smallest
+$\wtwo$ in $36$ of $36$ blocks. This finite-census observation does not
+imply that a global $\cR$-minimizer minimizes fixed-NFE error. When
+$\Sigma_1$ has at least two distinct eigenvalues, that path is not a
+Class~S shared interpolant.
+Table~\ref{tab:infamily} lists the nine shared-schedule pairwise inversions.
 Figure~\ref{fig:eigenmode} illustrates identity~\eqref{eq:telescope} on the
 strongest block; Figure~\ref{fig:interaction} shows the low-rank
 solver-path split.
@@ -883,7 +1017,7 @@ solver-path split.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=\linewidth]{figures/fig_eigenmode.pdf}
+  \includegraphics[width=\linewidth,alt={Eigenmode transported exact-minus-method defects on the strongest centered low-rank block.}]{figures/fig_eigenmode.pdf}
   \caption{Modal contributions to squared Wasserstein error and transported
   signed defects for the strongest centered inversion. The bars reconstruct
   the telescoping identity~\eqref{eq:telescope}. Exact modal identity on one
@@ -893,7 +1027,7 @@ solver-path split.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=\linewidth]{figures/fig3_interaction.pdf}
+  \includegraphics[width=\linewidth,alt={Solver-by-path interaction of Gaussian W2 on low-rank geometries.}]{figures/fig3_interaction.pdf}
   \caption{Signed low-rank $\wtwo$ margin at equal NFE. Positive values
   prefer VP; negative values prefer linear. Vertical axis: symmetric-log
   with linear threshold $10^{-4}$. Exact-moment modal Runge--Kutta.}
@@ -902,10 +1036,12 @@ solver-path split.
 
 \begin{table}[ht]
   \centering
-  \caption{Per-mode log-covariance versus linear and VP on the centered
-  grid. The per-mode schedule has the smallest $\cR$ and the smallest
-  $\wtwo$ in $36$ of $36$ blocks; it is not a shared $(\alpha,\sigma)$
-  interpolant for $d\geq 2$. Census, not a population claim.}
+  \caption{Four candidate paths on the centered grid. Among these four
+  paths, the per-mode schedule has the smallest $\cR$ and the smallest
+  $\wtwo$ in $36$ of $36$ blocks. This finite-census observation does not
+  imply that a global $\cR$-minimizer minimizes fixed-NFE error. When
+  $\Sigma_1$ has at least two distinct eigenvalues, that path is not a
+  Class~S shared interpolant.}
   \label{tab:logcov}
   \small
   \input{generated/log_covariance_blocks}
@@ -913,9 +1049,9 @@ solver-path split.
 
 \begin{table}[ht]
   \centering
-  \caption{In-family inversions: trigonometric VP versus shared Chen
-  Example~3.3 with $M=\lambda_{\max}$. Nine of $36$ blocks; four of $12$
-  cells. Post-hoc census.}
+  \caption{Shared-schedule pairwise inversions: trigonometric VP versus
+  Chen Example~3.3 with $M=\lambda_{\max}$. Nine of $36$ blocks; four of
+  $12$ cells. Post-hoc pairwise census, not a global family optimum.}
   \label{tab:infamily}
   \small
   \input{generated/in_family_blocks}
@@ -952,7 +1088,7 @@ independent replication of the centered mechanism.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=\linewidth]{figures/fig_noncentered.pdf}
+  \includegraphics[width=\linewidth,alt={Signed mean and covariance contributions to W2 squared on all 18 non-centered Gaussian blocks.}]{figures/fig_noncentered.pdf}
   \caption{Signed path differences on all $18$ non-centered blocks.
   $\Delta_{\mathrm{mean}}=M_{\mathrm{lin}}-M_{\mathrm{VP}}$ and
   $\Delta_{\mathrm{cov}}=C_{\mathrm{lin}}-C_{\mathrm{VP}}$. A positive bar
@@ -981,7 +1117,7 @@ independent replication of the centered mechanism.
   $\Delta_{\mathrm{total}}=\Delta_{\mathrm{mean}}+\Delta_{\mathrm{cov}}$.}
   \label{tab:workshop-deltas}
   \small
-  \input{generated/noncentered_deltas}
+  \resizebox{\linewidth}{!}{\input{generated/noncentered_deltas}}
 \end{table}
 
 \section{Quadrature, precision, and interval procedures}
@@ -1012,12 +1148,13 @@ low-rank $d=8$ & $(\numRlinStrong,\numRvpStrong)$ & $1$ \\
 
 Frozen Gaussian $\wtwo$ on the centered census was checked against an
 $80$-digit Gelbrich reference. The maximum observed gap is the numerical
-floor $\numPrecFloor$. Kendall $\tau$ between the $\cR$ order and the
+floor $\numPrecFloor$. The paired concordance score
+$(n_{\mathrm{agree}}-n_{\mathrm{invert}})/n$ between the $\cR$ order and the
 $\wtwo$ order is a descriptive census statistic, not a test
-(Table~\ref{tab:kendall}). On the $36$ linear-versus-VP blocks,
-$\tau=2/9$. Stratified by solver, with $n=4$ geometries and a structural
-tie between the two anisotropic targets, $\tau=+1/2$ under Euler and RK4
-and $\tau=-1/3$ under Heun.
+(Table~\ref{tab:concordance}). On the $36$ linear-versus-VP blocks,
+the score is $2/9$. Stratified by solver, with $n=4$ geometries and a structural
+tie between the two anisotropic targets, the score is $+1/2$ under Euler and RK4
+and $-1/3$ under Heun.
 
 Scalar linear Heun factors are computed in exact rationals. The VP Heun
 product is certified by substituting $\pi<355/113$ and $\sqrt{2}<99/70$ into
@@ -1068,8 +1205,8 @@ $66$ blocks. All $66$ follow the same solver-path split as the primary
 low-rank census: VP under Euler, linear under Heun and RK4.
 
 The geometry-draw experiment of Section~\ref{subsec:robust-geometry} is the
-one place $F$ is redrawn. Kendall $\tau$ on the centered census is discussed
-in Appendix~\ref{app:quadrature} and recorded in Table~\ref{tab:kendall}.
+one place $F$ is redrawn. The paired concordance score on the centered census is discussed
+in Appendix~\ref{app:quadrature} and recorded in Table~\ref{tab:concordance}.
 
 \begin{table}[ht]
   \centering
@@ -1082,12 +1219,14 @@ in Appendix~\ref{app:quadrature} and recorded in Table~\ref{tab:kendall}.
 
 \begin{table}[ht]
   \centering
-  \caption{Kendall $\tau$ between the $\cR$ order and the $\wtwo$ order on
-  the linear-versus-VP census. Descriptive statistic on a complete
-  enumeration, not an inferential test.}
-  \label{tab:kendall}
+  \caption{Paired concordance score
+  $(n_{\mathrm{agree}}-n_{\mathrm{invert}})/n$ between the $\cR$ order and
+  the $\wtwo$ order on the linear-versus-VP census. Descriptive statistic
+  on a complete enumeration, not Kendall's $\tau$ and not an inferential
+  test.}
+  \label{tab:concordance}
   \small
-  \input{generated/kendall_census}
+  \input{generated/concordance_census}
 \end{table}
 
 \section{Reproducibility, artifacts, and provenance}
@@ -1099,7 +1238,8 @@ calculation uses exact rational and algebraic expressions together with
 validated bounds; the precision audit uses $80$-digit arithmetic.
 Compact artifacts used by this PDF live under
 \texttt{paper/arxiv/artifacts/}.
-They are committed files, produced by the commands below.
+They are committed files. Commands that rebuild tables, figures, and
+checksums are listed in the repository \texttt{README.md}.
 A GitHub Release tag is a later owner publication gate and is not required
 to read the numbers in this PDF.
 Experiment-code commit of the frozen Phase~4 grid:
@@ -1115,29 +1255,9 @@ The $80$-digit Gelbrich audit of the centered census occupies the frozen
 run \texttt{outputs/phase4\_precision\_2026-07-24-v1/} when that tree is
 present. Source and compact artifacts:
 \url{https://github.com/clement-callaert/fewstep-field-regularity}.
-\end{sloppypar}
-
-\begin{verbatim}
-python -m pip install -e ".[dev]"
-pytest
-python scripts/verify_scalar_counterexample.py
-python scripts/run_log_covariance_comparison.py
-python scripts/run_in_family_comparison.py
-python scripts/run_inversion_region.py
-python scripts/run_lowrank_seed_fraction.py
-python scripts/run_arxiv_stats.py
-python scripts/make_arxiv_figures.py
-python scripts/check_arxiv_placeholder.py
-python scripts/check_arxiv_release.py
-\end{verbatim}
-\begin{sloppypar}
 The placeholder check must pass with no retired commit token remaining.
 The release check verifies compact checksums. Tag existence is a manual
-publication gate (\texttt{--require-tag}), not a scientific failure of
-this manuscript. The compact-artifact builder
-\texttt{make\_arxiv\_compact\_artifacts.py} additionally reads frozen
-Phase~4 JSON when those files are present; it is not required to recompute
-Proposition~\ref{prop:scalar} or the three-path grid.
+publication gate, not a scientific failure of this manuscript.
 \end{sloppypar}
 
 \end{document}

@@ -25,6 +25,7 @@ from fewstep_regularities.analysis.scalar_gaussian_counterexample import (
     all_vp_heun_poly_coefficients_nonnegative,
     arctan_taylor_partial,
     certify,
+    DISPLAYED_VP_HEUN_PRODUCT,
     completed_square_linear_variance,
     evaluate_poly,
     float64_crosscheck,
@@ -192,6 +193,19 @@ def test_rational_and_integer_vp_certificate() -> None:
     assert Fraction(2) - bound > W2_VP_LOWER
     assert Fraction(187, 100) == R_VP_UPPER
     assert Fraction(13, 100) == W2_VP_LOWER
+
+
+@pytest.mark.analytical
+def test_displayed_heun_polynomial_is_the_exact_product() -> None:
+    product = vp_heun_product_poly()
+    assert product == DISPLAYED_VP_HEUN_PRODUCT
+    assert all_vp_heun_poly_coefficients_nonnegative(product)
+    assert all(coeff >= 0 for coeff in DISPLAYED_VP_HEUN_PRODUCT.values())
+    assert DISPLAYED_VP_HEUN_PRODUCT[(0, 0)] == 1
+    bound = evaluate_poly(DISPLAYED_VP_HEUN_PRODUCT, PI_UPPER, SQRT2_UPPER)
+    assert bound == Fraction(192113353671412470139303, 102753427879939708813312)
+    assert bound < R_VP_UPPER
+    assert 100 * bound.numerator < 187 * bound.denominator
 
 
 @pytest.mark.analytical
