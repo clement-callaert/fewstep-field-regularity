@@ -31,17 +31,24 @@ def scalar_variance(path_name: str, eigenvalue: float, time: float) -> float:
     if path_name == "variance_preserving":
         angle = 0.5 * math.pi * time
         return math.cos(angle) ** 2 + eigenvalue * math.sin(angle) ** 2
+    if path_name == "log_covariance":
+        # Chen et al. Ex. 3.3 per mode: q(t) = lambda^t.
+        return math.exp(time * math.log(eigenvalue))
     raise ValueError(f"Unsupported path {path_name!r}")
 
 
 def scalar_drift(path_name: str, eigenvalue: float, time: float) -> float:
     """Return the affine drift eigenvalue ``q'(t) / (2 q(t))``."""
+    if path_name == "log_covariance":
+        return 0.5 * math.log(eigenvalue)
     variance = scalar_variance(path_name, eigenvalue, time)
     if path_name == "linear":
         numerator = (1.0 + eigenvalue) * time - 1.0
         return numerator / variance
-    numerator = 0.25 * math.pi * (eigenvalue - 1.0) * math.sin(math.pi * time)
-    return numerator / variance
+    if path_name == "variance_preserving":
+        numerator = 0.25 * math.pi * (eigenvalue - 1.0) * math.sin(math.pi * time)
+        return numerator / variance
+    raise ValueError(f"Unsupported path {path_name!r}")
 
 
 def exact_transition_factor(
@@ -75,6 +82,9 @@ def scalar_affine_quantities(
         angle = 0.5 * torch.pi * t
         variance = torch.cos(angle) ** 2 + lam * torch.sin(angle) ** 2
         drift = 0.25 * torch.pi * (lam - 1.0) * torch.sin(torch.pi * t) / variance
+    elif path_name == "log_covariance":
+        variance = torch.exp(t * torch.log(lam))
+        drift = 0.5 * torch.log(lam) + 0.0 * t
     else:
         raise ValueError(f"Unsupported path {path_name!r}")
     first = torch.autograd.grad(drift, t, create_graph=True)[0]

@@ -5,7 +5,7 @@ Do not upload without an explicit owner decision.
 
 ## Title
 
-When Averaged Field Regularity Fails to Rank Few-Step Generative Paths
+Averaged Jacobian Regularity Does Not Order Few-Step Error of Gaussian Interpolant ODEs
 
 ## Author
 
@@ -17,7 +17,7 @@ When Averaged Field Regularity Fails to Rank Few-Step Generative Paths
 
 ## Abstract (plain text, for the abstract field)
 
-Choosing a probability path for few-step generative sampling is often guided by an averaged regularity scalar of the velocity field: a path with smaller averaged squared Jacobian norm is expected to discretize better at a fixed budget of function evaluations (NFE). This paper studies that ranking question in commuting Gaussian probability-flow ODEs, where endpoint laws and Gaussian 2-Wasserstein (W2) errors are available in closed form, the regularity integrand is analytically known, and sampling, training, and estimation noise are absent. On a registered grid of 72 equal-NFE configurations (36 two-path comparisons) the averaged-regularity ordering of linear versus variance-preserving paths does not determine the fixed-NFE W2 ordering: 14 of 36 blocks invert. The same phenomenon appears in a separately specified non-centered commuting family (11 of 18 blocks). All reported W2 values and inversion orderings survive an 80-digit reference calculation. An exact modal decomposition writes endpoint factor error as a transported sum of signed, solver-stage-dependent local defects, information that an unsigned time average of Jacobian norms cannot retain. An explicit scalar construction proves the corresponding non-implication for fixed-grid left-endpoint Euler, for every L>0 and every integer grid size N>=1. The construction is grid-aware and is not offered as the mechanism of the Gaussian inversions. The study is a controlled limitation: it does not refute regularity-guided schedule design, and no learned model is evaluated. The counts 14 of 36 and 11 of 18 are descriptive benchmark frequencies, not estimates of a population probability.
+Few-step sampling of a continuous-time generative model requires a probability path, a numerical solver, and a budget of field evaluations (NFE). Chen, Vanden-Eijnden, and Xu propose minimizing averaged squared Jacobian regularity A2 as a path-selection criterion. This paper asks whether the order that this scalar induces between two interpolants is reliable at fixed NFE. The implication fails already for centered Gaussian interpolants. The main logical result is a one-dimensional, seed-free counterexample: for independent N(0,1) and N(0,4) endpoints, the exact regularity integrals of the linear and trigonometric variance-preserving paths are 5 pi/8 - 1 and pi^2/16, while explicit Heun with NFE 8 reverses the Gaussian W2 ranking. The linear Heun factor is the rational 6797469/3559400; a rational enclosure in Q[pi, sqrt(2)] certifies W2_lin < 0.091 < 0.130 < W2_VP. On four centered geometries the per-mode log-covariance schedule (Chen et al. Example 3.3), which minimizes R, attains the smallest W2 in all 36 solver-budget blocks. Linear versus VP invert in 5 of 12 geometry-by-solver cells (4 of 12 at every NFE in {8,16,32}), from three distinct R comparisons. Thus R is reliable as an objective on this family and not reliable as a linear-versus-VP comparator away from that optimum.
 
 ## Categories (proposed, not submitted)
 
@@ -29,11 +29,11 @@ Rationale: the scientific object is a ranking failure for a generative-path regu
 
 ## Keywords
 
-flow matching, probability-flow ODE, few-step sampling, Wasserstein, Runge-Kutta, interpolant, field regularity
+flow matching, interpolant ODE, few-step sampling, Wasserstein, Runge-Kutta, field regularity
 
 ## Comments field (suggested)
 
-11 pages, 4 figures. Source and reproduction scripts:
+14 pages, figures. Source and reproduction scripts:
 https://github.com/clement-callaert/fewstep-field-regularity
 
 Do not put venue, review, or acceptance language in the comments field.

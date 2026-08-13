@@ -15,9 +15,10 @@ authorization to submit.
 ## Compile
 
 - [x] `latexmk -pdf` from `paper/arxiv/` succeeds.
-- [x] Second compile from a clean extraction of `arxiv-source.zip` succeeds.
+- [x] Second compile from `paper/arxiv/` with latexmk succeeds (14 pages).
+- [ ] Re-extract `arxiv-source.zip` and compile in a clean directory immediately before upload.
 - [x] No undefined citations or references in the final log.
-- [x] Overfull boxes checked (hashes wrapped; remaining overfulls recorded below if any).
+- [x] Overfull boxes checked: none in the final `main.log`.
 
 ## Content greps (PDF text and TeX)
 
@@ -37,15 +38,30 @@ authorization to submit.
 
 ## Numbers
 
-- [x] Macros from `scripts/make_arxiv_tables.py`.
+- [x] Macros from `scripts/make_arxiv_compact_artifacts.py` (continuous `R`).
+- [x] `make_arxiv_tables.py` is an alias and must not restore `Rhat_24`.
 - [x] `\precRatio` is `11528`.
-- [x] 14/36 and 11/18 from artifact recount.
+- [x] 5 of 12 geometry×solver cells (4 of 12 at all three NFE); 14 inverted rows remain in the appendix listing.
+- [x] Strongest-row `R` is `2.9441044083` vs `4.7305438136`, not the workshop `Rhat_24` pair.
+- [x] Scalar Heun counterexample: `R_lin = 5 pi/8 - 1`, `r_lin = 6797469/3559400`.
 - [x] Reconstruction residual distinct from 80-digit W2 gap.
+
+## Provenance
+
+- [x] Planned immutable release tag is `arxiv-v1`, created only after
+      GDDL notification. Not presented as a live GitHub Release URL.
+- [x] No retired commit-placeholder token remains in the arXiv tree.
+- [ ] Owner must create `arxiv-v1` on the final scientific commit and
+      publish the GitHub Release or Zenodo deposit before arXiv upload.
+      Tag existence is a manual publication gate, not a scientific failure.
 
 ## Owner actions still required
 
-- Choose arXiv license (`ARXIV_METADATA.md`).
-- Choose code `LICENSE`.
+- Create tag `arxiv-v1` on the final scientific commit.
+- Publish the GitHub Release or Zenodo deposit from that tagged tree.
+- Choose arXiv license (`ARXIV_METADATA.md`); none is selected here.
+- Choose a code license file: `pyproject.toml` currently says MIT, but no
+  `LICENSE` file exists. Do not treat that metadata line as a chosen license.
 - Authorize push and/or arXiv upload.
 - Obtain endorsement if the account needs it.
 - Optional: GitHub visibility during any overlapping anonymous review.

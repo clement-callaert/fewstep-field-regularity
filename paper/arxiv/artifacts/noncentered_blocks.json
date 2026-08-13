@@ -1,0 +1,490 @@
+{
+  "R_source": "recomputed continuous regularity from frozen eigenvalues",
+  "W2_source": "frozen outputs/workshop_external_validation_2026-07-24-v1",
+  "blocks": [
+    {
+      "R_linear": 1.0935369018949865,
+      "R_vp": 0.3423542188608442,
+      "W2_prefers": "VP",
+      "delta_cov": 0.07008429424379403,
+      "delta_mean": -0.019697801312900796,
+      "delta_total": 0.050386492930893235,
+      "dim": 2,
+      "inversion_R": false,
+      "linear": {
+        "W2": 0.26690871977236674,
+        "bures_term_sq": 0.0712402646905238,
+        "mean_fraction_of_W2sq": 6.2287003159583084e-30,
+        "mean_term_sq": 4.437342591868191e-31
+      },
+      "nfe": 8,
+      "primary_W2sq_driver": "covariance",
+      "solver": "euler",
+      "vp": {
+        "W2": 0.14440835072678646,
+        "bures_term_sq": 0.0011559704467297705,
+        "mean_fraction_of_W2sq": 0.9445678000098027,
+        "mean_term_sq": 0.019697801312900796
+      }
+    },
+    {
+      "R_linear": 1.0935369018949865,
+      "R_vp": 0.3423542188608442,
+      "W2_prefers": "VP",
+      "delta_cov": 0.018958105651223914,
+      "delta_mean": -0.005010761048059688,
+      "delta_total": 0.013947344603164227,
+      "dim": 2,
+      "inversion_R": false,
+      "linear": {
+        "W2": 0.13851127167705127,
+        "bures_term_sq": 0.019185372381593905,
+        "mean_fraction_of_W2sq": 0.0,
+        "mean_term_sq": 0.0
+      },
+      "nfe": 16,
+      "primary_W2sq_driver": "covariance",
+      "solver": "euler",
+      "vp": {
+        "W2": 0.07237422039946047,
+        "bures_term_sq": 0.00022726673036999132,
+        "mean_fraction_of_W2sq": 0.9566121563337482,
+        "mean_term_sq": 0.005010761048059688
+      }
+    },
+    {
+      "R_linear": 1.0935369018949865,
+      "R_vp": 0.3423542188608442,
+      "W2_prefers": "VP",
+      "delta_cov": 0.0049410670912265475,
+      "delta_mean": -0.0012661818405998533,
+      "delta_total": 0.003674885250626694,
+      "dim": 2,
+      "inversion_R": false,
+      "linear": {
+        "W2": 0.07064860972959275,
+        "bures_term_sq": 0.004991226056724307,
+        "mean_fraction_of_W2sq": 3.951238113921119e-29,
+        "mean_term_sq": 1.9721522630525295e-31
+      },
+      "nfe": 32,
+      "primary_W2sq_driver": "covariance",
+      "solver": "euler",
+      "vp": {
+        "W2": 0.03628141130245092,
+        "bures_term_sq": 5.0158965497759883e-05,
+        "mean_fraction_of_W2sq": 0.9618951526341725,
+        "mean_term_sq": 0.0012661818405998533
+      }
+    },
+    {
+      "R_linear": 1.0935369018949865,
+      "R_vp": 0.3423542188608442,
+      "W2_prefers": "linear",
+      "delta_cov": -0.0008296534578441372,
+      "delta_mean": -0.001401380245532589,
+      "delta_total": -0.002231033703376726,
+      "dim": 2,
+      "inversion_R": true,
+      "linear": {
+        "W2": 0.04402520266904125,
+        "bures_term_sq": 0.001938218470050157,
+        "mean_fraction_of_W2sq": 1.0175077234722124e-28,
+        "mean_term_sq": 1.9721522630525295e-31
+      },
+      "nfe": 8,
+      "primary_W2sq_driver": "mean",
+      "solver": "heun",
+      "vp": {
+        "W2": 0.06456974658016619,
+        "bures_term_sq": 0.0027678719278942943,
+        "mean_fraction_of_W2sq": 0.33612268753241087,
+        "mean_term_sq": 0.001401380245532589
+      }
+    },
+    {
+      "R_linear": 1.0935369018949865,
+      "R_vp": 0.3423542188608442,
+      "W2_prefers": "linear",
+      "delta_cov": -7.74026007521744e-05,
+      "delta_mean": -8.132945372172178e-05,
+      "delta_total": -0.00015873205447389618,
+      "dim": 2,
+      "inversion_R": true,
+      "linear": {
+        "W2": 0.00892658203191368,
+        "bures_term_sq": 7.968386677248418e-05,
+        "mean_fraction_of_W2sq": 2.6296562458197426e-27,
+        "mean_term_sq": 2.0954117794933126e-31
+      },
+      "nfe": 16,
+      "primary_W2sq_driver": "mean",
+      "solver": "heun",
+      "vp": {
+        "W2": 0.01544072282137013,
+        "bures_term_sq": 0.00015708646752465857,
+        "mean_fraction_of_W2sq": 0.34112425586576267,
+        "mean_term_sq": 8.132945372172178e-05
+      }
+    },
+    {
+      "R_linear": 1.0935369018949865,
+      "R_vp": 0.3423542188608442,
+      "W2_prefers": "linear",
+      "delta_cov": -5.428459400325102e-06,
+      "delta_mean": -4.800285348576016e-06,
+      "delta_total": -1.0228744748901117e-05,
+      "dim": 2,
+      "inversion_R": true,
+      "linear": {
+        "W2": 0.0019540997614263065,
+        "bures_term_sq": 3.818505877606348e-06,
+        "mean_fraction_of_W2sq": 6.45590293122969e-26,
+        "mean_term_sq": 2.4651903288156623e-31
+      },
+      "nfe": 32,
+      "primary_W2sq_driver": "covariance",
+      "solver": "heun",
+      "vp": {
+        "W2": 0.0037479661986879586,
+        "bures_term_sq": 9.24696527793145e-06,
+        "mean_fraction_of_W2sq": 0.341724190463134,
+        "mean_term_sq": 4.800285348576016e-06
+      }
+    },
+    {
+      "R_linear": 1.0935369018949865,
+      "R_vp": 0.3423542188608442,
+      "W2_prefers": "VP",
+      "delta_cov": 7.169012917851437e-05,
+      "delta_mean": -1.9309998812124732e-06,
+      "delta_total": 6.97591292973019e-05,
+      "dim": 2,
+      "inversion_R": false,
+      "linear": {
+        "W2": 0.009399123805021137,
+        "bures_term_sq": 8.834352830211502e-05,
+        "mean_fraction_of_W2sq": 5.580918888331616e-28,
+        "mean_term_sq": 4.930380657631324e-32
+      },
+      "nfe": 8,
+      "primary_W2sq_driver": "covariance",
+      "solver": "rk4",
+      "vp": {
+        "W2": 0.004310962654073115,
+        "bures_term_sq": 1.665339912360064e-05,
+        "mean_fraction_of_W2sq": 0.10390434905709729,
+        "mean_term_sq": 1.9309998812124732e-06
+      }
+    },
+    {
+      "R_linear": 1.0935369018949865,
+      "R_vp": 0.3423542188608442,
+      "W2_prefers": "VP",
+      "delta_cov": 1.1060234061943675e-08,
+      "delta_mean": -5.235990339393645e-10,
+      "delta_total": 1.053663502800431e-08,
+      "dim": 2,
+      "inversion_R": false,
+      "linear": {
+        "W2": 0.0002911250748270215,
+        "bures_term_sq": 8.475380919303888e-08,
+        "mean_fraction_of_W2sq": 2.3269187330101846e-24,
+        "mean_term_sq": 1.9721522630525295e-31
+      },
+      "nfe": 16,
+      "primary_W2sq_driver": "covariance",
+      "solver": "rk4",
+      "vp": {
+        "W2": 0.00027242829178525965,
+        "bures_term_sq": 7.36935751310952e-08,
+        "mean_fraction_of_W2sq": 0.007054957829235759,
+        "mean_term_sq": 5.235990339393645e-10
+      }
+    },
+    {
+      "R_linear": 1.0935369018949865,
+      "R_vp": 0.3423542188608442,
+      "W2_prefers": "linear",
+      "delta_cov": -5.405709213590631e-11,
+      "delta_mean": -7.527743582432067e-12,
+      "delta_total": -6.158483571833838e-11,
+      "dim": 2,
+      "inversion_R": true,
+      "linear": {
+        "W2": 1.3246721633042432e-05,
+        "bures_term_sq": 1.7547563402331434e-10,
+        "mean_fraction_of_W2sq": 1.1238895212029848e-21,
+        "mean_term_sq": 1.9721522630525295e-31
+      },
+      "nfe": 32,
+      "primary_W2sq_driver": "covariance",
+      "solver": "rk4",
+      "vp": {
+        "W2": 1.5396768158988844e-05,
+        "bures_term_sq": 2.2953272615922065e-10,
+        "mean_fraction_of_W2sq": 0.03175452908971185,
+        "mean_term_sq": 7.527743582432067e-12
+      }
+    },
+    {
+      "R_linear": 1.0935369018949865,
+      "R_vp": 0.3423542188608442,
+      "W2_prefers": "linear",
+      "delta_cov": 0.2207632928002718,
+      "delta_mean": -0.32522322249689484,
+      "delta_total": -0.10445992969662304,
+      "dim": 8,
+      "inversion_R": true,
+      "linear": {
+        "W2": 0.47142837195963594,
+        "bures_term_sq": 0.22224470988851286,
+        "mean_fraction_of_W2sq": 4.658738282778328e-30,
+        "mean_term_sq": 1.035379938102578e-30
+      },
+      "nfe": 8,
+      "primary_W2sq_driver": "mean",
+      "solver": "euler",
+      "vp": {
+        "W2": 0.5715808250677553,
+        "bures_term_sq": 0.001481417088241066,
+        "mean_fraction_of_W2sq": 0.9954655768276746,
+        "mean_term_sq": 0.32522322249689484
+      }
+    },
+    {
+      "R_linear": 1.0935369018949865,
+      "R_vp": 0.3423542188608442,
+      "W2_prefers": "linear",
+      "delta_cov": 0.05947256654206524,
+      "delta_mean": -0.08388777938979132,
+      "delta_total": -0.024415212847726082,
+      "dim": 8,
+      "inversion_R": true,
+      "linear": {
+        "W2": 0.2444555372019896,
+        "bures_term_sq": 0.059758509668713315,
+        "mean_fraction_of_W2sq": 6.022870884872857e-29,
+        "mean_term_sq": 3.599177880070866e-30
+      },
+      "nfe": 16,
+      "primary_W2sq_driver": "mean",
+      "solver": "euler",
+      "vp": {
+        "W2": 0.2901270799433231,
+        "bures_term_sq": 0.00028594312664807775,
+        "mean_fraction_of_W2sq": 0.9966029407028751,
+        "mean_term_sq": 0.08388777938979132
+      }
+    },
+    {
+      "R_linear": 1.0935369018949865,
+      "R_vp": 0.3423542188608442,
+      "W2_prefers": "linear",
+      "delta_cov": 0.015468308206404107,
+      "delta_mean": -0.02129902793442002,
+      "delta_total": -0.005830719728015911,
+      "dim": 8,
+      "inversion_R": true,
+      "linear": {
+        "W2": 0.12462319581050875,
+        "bures_term_sq": 0.015530940934024405,
+        "mean_fraction_of_W2sq": 3.1745537366832e-29,
+        "mean_term_sq": 4.930380657631325e-31
+      },
+      "nfe": 32,
+      "primary_W2sq_driver": "mean",
+      "solver": "euler",
+      "vp": {
+        "W2": 0.14615628847928616,
+        "bures_term_sq": 6.263272762029731e-05,
+        "mean_fraction_of_W2sq": 0.9970679841510827,
+        "mean_term_sq": 0.02129902793442002
+      }
+    },
+    {
+      "R_linear": 1.0935369018949865,
+      "R_vp": 0.3423542188608442,
+      "W2_prefers": "linear",
+      "delta_cov": -0.000496951242807353,
+      "delta_mean": -0.005927520092878804,
+      "delta_total": -0.006424471335686157,
+      "dim": 8,
+      "inversion_R": true,
+      "linear": {
+        "W2": 0.05884775499648022,
+        "bures_term_sq": 0.0034630582681257627,
+        "mean_fraction_of_W2sq": 9.823579017071477e-28,
+        "mean_term_sq": 3.4019626537656134e-30
+      },
+      "nfe": 8,
+      "primary_W2sq_driver": "mean",
+      "solver": "heun",
+      "vp": {
+        "W2": 0.09943605786540373,
+        "bures_term_sq": 0.003960009510933116,
+        "mean_fraction_of_W2sq": 0.599494548223004,
+        "mean_term_sq": 0.005927520092878804
+      }
+    },
+    {
+      "R_linear": 1.0935369018949865,
+      "R_vp": 0.3423542188608442,
+      "W2_prefers": "linear",
+      "delta_cov": -9.787629211488458e-05,
+      "delta_mean": -0.0003450746950637224,
+      "delta_total": -0.000442950987178607,
+      "dim": 8,
+      "inversion_R": true,
+      "linear": {
+        "W2": 0.011368422402734524,
+        "bures_term_sq": 0.0001292410279269962,
+        "mean_fraction_of_W2sq": 3.1472699558250718e-27,
+        "mean_term_sq": 4.067564042545842e-31
+      },
+      "nfe": 16,
+      "primary_W2sq_driver": "mean",
+      "solver": "heun",
+      "vp": {
+        "W2": 0.02392053542681692,
+        "bures_term_sq": 0.0002271173200418808,
+        "mean_fraction_of_W2sq": 0.6030749922297252,
+        "mean_term_sq": 0.0003450746950637224
+      }
+    },
+    {
+      "R_linear": 1.0935369018949865,
+      "R_vp": 0.3423542188608442,
+      "W2_prefers": "linear",
+      "delta_cov": -7.576731455460892e-06,
+      "delta_mean": -2.0743913851273006e-05,
+      "delta_total": -2.8320645306733897e-05,
+      "dim": 8,
+      "inversion_R": true,
+      "linear": {
+        "W2": 0.002429550322766682,
+        "bures_term_sq": 5.902714770855687e-06,
+        "mean_fraction_of_W2sq": 4.844585741370022e-25,
+        "mean_term_sq": 2.859620781426168e-30
+      },
+      "nfe": 32,
+      "primary_W2sq_driver": "mean",
+      "solver": "heun",
+      "vp": {
+        "W2": 0.005850073510443231,
+        "bures_term_sq": 1.347944622631658e-05,
+        "mean_fraction_of_W2sq": 0.6061331734886167,
+        "mean_term_sq": 2.0743913851273006e-05
+      }
+    },
+    {
+      "R_linear": 1.0935369018949865,
+      "R_vp": 0.3423542188608442,
+      "W2_prefers": "VP",
+      "delta_cov": 0.00030884064611325096,
+      "delta_mean": -3.909250759567813e-06,
+      "delta_total": 0.00030493139535368315,
+      "dim": 8,
+      "inversion_R": false,
+      "linear": {
+        "W2": 0.01821339202408203,
+        "bures_term_sq": 0.0003317276490228949,
+        "mean_fraction_of_W2sq": 1.3376462905453921e-27,
+        "mean_term_sq": 4.437342591868191e-31
+      },
+      "nfe": 8,
+      "primary_W2sq_driver": "covariance",
+      "solver": "rk4",
+      "vp": {
+        "W2": 0.005176509796108936,
+        "bures_term_sq": 2.2887002909643964e-05,
+        "mean_fraction_of_W2sq": 0.14588795910897964,
+        "mean_term_sq": 3.909250759567813e-06
+      }
+    },
+    {
+      "R_linear": 1.0935369018949865,
+      "R_vp": 0.3423542188608442,
+      "W2_prefers": "VP",
+      "delta_cov": 7.433020199343332e-08,
+      "delta_mean": -1.1376950272489325e-08,
+      "delta_total": 6.2953251720944e-08,
+      "dim": 8,
+      "inversion_R": false,
+      "linear": {
+        "W2": 0.0004053081756807395,
+        "bures_term_sq": 1.6427471727364917e-07,
+        "mean_fraction_of_W2sq": 5.1022136924521896e-24,
+        "mean_term_sq": 8.38164711797325e-31
+      },
+      "nfe": 16,
+      "primary_W2sq_driver": "covariance",
+      "solver": "rk4",
+      "vp": {
+        "W2": 0.00031831032900725225,
+        "bures_term_sq": 8.994451528021585e-08,
+        "mean_fraction_of_W2sq": 0.11228568606295265,
+        "mean_term_sq": 1.1376950272489325e-08
+      }
+    },
+    {
+      "R_linear": 1.0935369018949865,
+      "R_vp": 0.3423542188608442,
+      "W2_prefers": "linear",
+      "delta_cov": 2.0938917266732915e-11,
+      "delta_mean": -7.287617232217015e-11,
+      "delta_total": -5.1937255055437233e-11,
+      "dim": 8,
+      "inversion_R": true,
+      "linear": {
+        "W2": 1.7532626726851007e-05,
+        "bures_term_sq": 3.073929999430902e-10,
+        "mean_fraction_of_W2sq": 1.8284846924752012e-20,
+        "mean_term_sq": 5.620633949699709e-30
+      },
+      "nfe": 32,
+      "primary_W2sq_driver": "mean",
+      "solver": "rk4",
+      "vp": {
+        "W2": 1.89560084141817e-05,
+        "bures_term_sq": 2.864540826763573e-10,
+        "mean_fraction_of_W2sq": 0.20281112238230203,
+        "mean_term_sq": 7.287617232217015e-11
+      }
+    }
+  ],
+  "construction": {
+    "condition_number": 6,
+    "dims": [
+      2,
+      8
+    ],
+    "eigenvalues": "geometric from 6^{-1/2} to 6^{1/2}",
+    "index": "i = 0, ..., d-1",
+    "mu0_i": "0.75 * (-1)^i",
+    "mu1_i": "1 + 0.25 * i",
+    "nfe": [
+      8,
+      16,
+      32
+    ],
+    "nfe_accounting": "S = B/s with s=1,2,4; forward in t",
+    "solvers": [
+      "euler",
+      "heun",
+      "rk4"
+    ]
+  },
+  "description": "pre-specified non-centered stress test; R ignores c(t)",
+  "driver_definition": {
+    "C": "W2^2 - M",
+    "Delta_cov": "C_lin - C_VP",
+    "Delta_mean": "M_lin - M_VP",
+    "Delta_total": "Delta_mean + Delta_cov",
+    "M": "||hat m - mu_1||_2^2",
+    "covariance_driven": "Delta_cov * Delta_total > 0 and |Delta_cov| > |Delta_mean|",
+    "mean_driven": "Delta_mean * Delta_total > 0 and |Delta_mean| > |Delta_cov|"
+  },
+  "n_blocks": 18,
+  "n_inversions_continuous_R": 11
+}

@@ -1,0 +1,322 @@
+\documentclass{article}
+
+% Official NeurIPS 2026 style (dblblindworkshop track).
+% Source: https://media.neurips.cc/Conferences/NeurIPS2026/Formatting_Instructions_For_NeurIPS_2026.zip
+% linked from https://neurips.cc/Conferences/2026/CallForPapers ("Paper template").
+% neurips_2026.sty SHA-256:
+% c3fc2894e83d2517ca18b66741d6c595986d97957dc08ec08bb2125a7ec4555a
+% Retrieved 2026-07-24T18:17:44Z. Main-track checklist.tex is intentionally
+% not loaded (GDDL CFP does not require it).
+\usepackage[dblblindworkshop]{neurips_2026}
+\workshoptitle{Geometric Distributional Deep Learning: Bridging Optimal Transport, Learning and Structured Data}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\hypersetup{
+  hidelinks,
+  pdftitle={},
+  pdfauthor={},
+  pdfsubject={},
+  pdfkeywords={},
+}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{enumitem}
+\AtBeginDocument{%
+  \setlength{\abovedisplayskip}{5pt plus 1pt minus 2pt}%
+  \setlength{\belowdisplayskip}{5pt plus 1pt minus 2pt}%
+  \setlength{\abovedisplayshortskip}{3pt plus 1pt}%
+  \setlength{\belowdisplayshortskip}{3pt plus 1pt}%
+}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{assumption}{Assumption}
+
+\newcommand{\wtwo}{W_2}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\Rhat}{\widehat{\mathcal{R}}_{24}}
+
+\title{Averaged Jacobian Regularity Does Not Order Few-Step Error\\
+of Gaussian Interpolant ODEs}
+
+\author{%
+  Anonymous Author(s)\\
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Few-step sampling of a continuous-time generative model requires a
+probability path, a solver, and a budget of field evaluations (NFE).
+Chen et al.\ propose minimizing averaged squared Jacobian regularity
+$A_2$ as a path-selection criterion. We ask whether the order that this
+scalar induces between two interpolants is reliable at fixed NFE.
+Already for independent $N(0,1)$ and $N(0,4)$, the exact integrals are
+$5\pi/8-1$ (linear) and $\pi^2/16$ (trigonometric VP), while Heun at
+NFE~$8$ reverses Gaussian $\wtwo$. The linear factor is the rational
+$6797469/3559400$; a rational enclosure in $\mathbb{Q}[\pi,\sqrt{2}]$
+gives $r_{\mathrm{VP}}<187/100$. On four centered commuting geometries,
+the per-mode log-covariance schedule (Chen et al.\ Ex.~3.3), which
+minimizes $\cR$, attains the smallest $\wtwo$ in all $36$
+solver-budget blocks. Linear versus VP invert in $5$ of $12$
+geometry$\times$solver cells ($4$ of $12$ at every NFE in
+$\{8,16,32\}$), from three distinct $\cR$ comparisons. Thus $\cR$ is
+reliable as an objective on this family and not reliable as a
+linear-versus-VP comparator away from that optimum.
+\end{abstract}
+
+\section{Introduction}
+
+Few-step sampling commits to a path, a solver, and a small NFE budget
+before any error is observed. Lipschitz constants enter classical
+one-step bounds~\citep{hairer1993solving}.
+\citet{lipschitzguided2025} propose minimizing averaged squared drift
+Lipschitzness (their Definition~3.2, denoted $A_2$) as a
+\emph{selection} criterion. They prove no bound relating $A_2$ to a
+discretization error. We test whether the pairwise order that $A_2$
+induces between two admissible paths is reliable at equal NFE.
+
+We isolate that ranking question on commuting Gaussian interpolants,
+where the field is affine, Gaussian $\wtwo$ is closed-form, and the
+regularity integrand is known exactly. The leading result is a
+deterministic scalar Heun example
+(Section~\ref{sec:scalar}). A modal identity then records the signed
+information that $\cR$ discards (Section~\ref{sec:mechanism}). A third
+path---the Cauchy--Schwarz minimizer of $\cR$---and a $\lambda$-sweep
+show that $\cR$ is a reliable \emph{objective} on this family and an
+unreliable linear-versus-VP \emph{comparator}
+(Section~\ref{sec:third}).
+
+Contemporaneous work studies Lipschitz Euler
+rates~\citep{stephanovitch2026lipschitz}, sharpness-aware
+grids~\citep{gupta2026sharpen}, least-action
+paths~\citep{du2026lagrangian}, and instance-aware
+discretizations~\citep{yuan2026instance}. Those results control other
+objects. \citet{tao2026strain} give the general strain/vorticity form
+of the phenomenon; Section~\ref{sec:related} records the precise
+relation.
+
+\section{Gaussian flows and averaged regularity}
+\label{sec:setup}
+
+Let $X_0\sim N(\mu_0,\Sigma_0)$ and $X_1\sim N(\mu_1,\Sigma_1)$ be
+independent, and let $(\alpha,\sigma)$ satisfy
+$\alpha(0)=\sigma(1)=1$ and $\alpha(1)=\sigma(0)=0$. The interpolant
+$X_t=\alpha X_0+\sigma X_1$~\citep{albergo2025stochastic,lipman2023flow}
+is Gaussian with mean $m_t=\alpha\mu_0+\sigma\mu_1$ and covariance
+$Q=\alpha^2\Sigma_0+\sigma^2\Sigma_1$. The marginal field is affine,
+\begin{equation}
+  b(t,x)=A(t)\,x+c(t),\qquad
+  A=C_t Q^{-1},\qquad
+  c=\dot m-Am,
+\end{equation}
+with $C_t=\dot\alpha\alpha\,\Sigma_0+\dot\sigma\sigma\,\Sigma_1$. If
+$\Sigma_0=I$, then $Q$, $Q'$, $A$, and $\Sigma_1$ share the eigenbasis
+of $\Sigma_1$, and mode $i$ obeys $x_i'=a_i(t)x_i+c_i(t)$ with
+$q_i=\alpha^2+\lambda_i\sigma^2$ and $a_i=q_i'/(2q_i)$. The covariance
+drift formula is independent of the mean path $c(t)$. We compare the
+linear path $(1-t,t)$ and trigonometric VP
+$(\cos(\pi t/2),\sin(\pi t/2))$. Following
+\citet[Definition~3.2]{lipschitzguided2025},
+$\cR[b]=\int_0^1\|A(t)\|_2^2\,dt$. For state-independent $A$ this
+coincides with their path expectation. By definition $\cR$ ignores
+$c(t)$. Error is Gaussian $\wtwo$ of the endpoint
+laws~\citep{gelbrich1990formula}.
+This is neither pathwise trajectory error nor local truncation error.
+Equal NFE uses $S=B/s$ steps with $s=1,2,4$ for Euler, Heun, and RK4.
+
+Any admissible variance path from $1$ to $\lambda>0$ obeys
+$\int_0^1 a\,dt=\tfrac12\ln\lambda$. Hence
+$\cR=\int_0^1 a^2\,dt=(\int a)^2+\mathrm{Var}_t(a)\ge(\tfrac12\ln\lambda)^2$,
+with equality if and only if $a$ is constant. The minimizer is
+$q(t)=\lambda^t$, $a\equiv\tfrac12\ln\lambda$, which is Chen et al.\
+Example~3.3. In several dimensions, the per-mode schedule
+$q_i(t)=\lambda_i^t$ yields
+$\cR=(\tfrac12\max_i|\ln\lambda_i|)^2$. It is not in general a shared
+$(\alpha,\sigma)$ interpolant.
+
+\section{A one-dimensional Gaussian ranking counterexample}
+\label{sec:scalar}
+
+\begin{assumption}
+Endpoints $N(0,1)$ and $N(0,4)$ are independent. Schedules are linear
+and trigonometric VP. The solver is explicit Heun with NFE $8$ (four
+steps of size $1/4$).
+\end{assumption}
+
+\begin{proposition}
+\label{prop:scalar}
+Under the assumption,
+$\cR_{\mathrm{lin}}=5\pi/8-1>\cR_{\mathrm{VP}}=\pi^2/16$, while the
+Heun factors satisfy $r_{\mathrm{lin}}=6797469/3559400$ and
+$0<r_{\mathrm{VP}}<187/100$. Hence
+$\wtwo^{\mathrm{lin}}<0.091<0.130<\wtwo^{\mathrm{VP}}$.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+The linear variance is $q_{\mathrm{lin}}(t)=1-2t+5t^2$. Completing the
+square gives the equivalent identities
+$q_{\mathrm{lin}}(t)=5\bigl[(t-1/5)^2+(2/5)^2\bigr]
+=5(t-1/5)^2+4/5$. The substitution $u=t-1/5=(2/5)\tan\theta$ converts
+$\int a_{\mathrm{lin}}^2$ into $(5/2)\int\sin^2\theta\,d\theta$. Limits
+$\arctan(-1/2)$ and $\arctan 2$ together with
+$\arctan 2+\arctan(1/2)=\pi/2$ yield $\cR_{\mathrm{lin}}=5\pi/8-1$.
+The VP integral evaluates to $\pi^2/16$ by a Weierstrass identity.
+The four linear Heun factors are the rationals $47/52$, $6/5$,
+$497/370$, and $97/74$, all positive. Exact VP grid values are
+$a(0)=a(1)=0$, $a(1/2)=3\pi/10$, and
+$a(1/4)=(9+15\sqrt{2})\pi/82$,
+$a(3/4)=(-9+15\sqrt{2})\pi/82$. Positivity of $a(3/4)$ is
+$15^2\cdot 2-9^2=369>0$. The four-step product lies in
+$\mathbb{Q}[\pi,\sqrt{2}]$ with nonnegative coefficients, so
+substituting $\sqrt{2}<99/70$ and $\pi<355/113$ is valid and yields
+$r_{\mathrm{VP}}<187/100$ by an integer comparison in the anonymous
+supplement. Interval arithmetic is a cross-check only.
+\end{proof}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.92\linewidth]{figures/fig_scalar.pdf}
+  \caption{Proposition~\ref{prop:scalar}: exact $\cR$ versus certified
+  Heun $\wtwo$ at NFE~$8$. The VP bar is the certified lower bound.}
+  \label{fig:scalar}
+  \vspace{-8pt}
+\end{figure}
+
+\section{Sign change and transported defects}
+\label{sec:mechanism}
+
+For any independent linear coupling,
+$a_{\mathrm{lin}}(0)=-1<0<a_{\mathrm{lin}}(1)=+1$. The VP drift vanishes
+at the endpoints and does not change sign on $(0,1)$. Averaging
+$a^2$ therefore erases a qualitative distinction that every
+fixed-stage Runge--Kutta method samples.
+
+Let $e_{n}=\sqrt{q(t_{n+1})/q(t_n)}$ and let $r_n$ be the numerical
+factor. The telescoping identity
+\begin{equation}
+  \prod_{n} r_{n}-\prod_{n} e_{n}
+  =\sum_{n}(r_{n}-e_{n})
+  \Bigl(\prod_{j<n}r_{j}\Bigr)
+  \Bigl(\prod_{j>n}e_{j}\Bigr)
+\end{equation}
+is an accounting tool, not the content of the inversion. The content
+is the leading exact-minus-method coefficient:
+$\tfrac12(a'+a^2)h^2$ for Euler and $(-a''/12+a^3/6)h^3$ for the
+implemented Heun factor. Those expansions involve different
+derivatives, signs, and stage locations.
+
+\section{\texorpdfstring{The $\cR$-minimizer and the inversion region}{The R-minimizer and the inversion region}}
+\label{sec:third}
+
+Source $N(0,I)$. Four centered targets: anisotropic Gaussians with
+condition number $4$ in dimensions $2$ and $8$ (eigenvalues a
+geometric sequence from $1/2$ to $2$); low-rank covariances
+$FF^\top+0.05I$ of rank $2$ (seed $271828$). Because $\cR$ uses the
+spectral norm, the two anisotropic dimensions share the same $\cR$
+pair $(0.972296,0.192270)$, so the grid contains three distinct
+linear-versus-VP $\cR$ comparisons. Each geometry is run under Euler,
+Heun, and RK4 at NFE $\{8,16,32\}$. Headline $\cR$ is the continuous
+integral of $\max_i a_i(t)^2$.
+
+The per-mode log-covariance path $q_i(t)=\lambda_i^t$ has the smallest
+$\cR$ on every geometry and the smallest Gaussian $\wtwo$ in all $36$
+blocks (Table~\ref{tab:threepath} reports Heun at NFE~$8$). Linear
+versus VP invert in $5$ of $12$ geometry$\times$solver cells; $4$ of
+those $12$ invert at every tested NFE. The fourteen inverted
+solver-budget rows are a hierarchical listing of those cells, not a
+population rate.
+
+\begin{table}[t]
+  \centering
+  \caption{Per-mode log-covariance (Chen Ex.~3.3) versus linear and VP.
+  $\cR$ is continuous; the last column is the $\wtwo$-minimizer at Heun,
+  NFE~$8$. The same $\wtwo$ preference holds in all $36$ blocks.}
+  \label{tab:threepath}
+  \small
+  \input{generated/log_covariance_workshop}
+\end{table}
+
+\begin{table}[t]
+  \centering
+  \caption{Strongest centered inversion: low-rank, $d=8$, Euler, NFE~$8$.
+  Eigenvalues: $0.05$ (six times), $4.64827725629505$,
+  $10.675638226546441$.}
+  \label{tab:strongest}
+  \begin{tabular}{lccc}
+    \toprule
+    path & $\cR$ & $\Rhat$ & Gaussian $\wtwo$ \\
+    \midrule
+    linear & $\mathbf{2.9441044083}$ & $2.9476523251$ & $0.8108540111$ \\
+    VP & $4.7305438136$ & $4.7295206355$ & $\mathbf{0.4564779075}$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+A one-dimensional sweep $\lambda\in[0.05,100]$ (Figure~\ref{fig:region})
+locates the linear-versus-VP inversions. At $\lambda=4$, the inversion
+is present under Heun at every tested budget
+NFE$\in\{4,8,12,16,24,32,64,128,256\}$, absent under Euler, and mixed
+under RK4 (absent at NFE $8$ and $12$). Euler \emph{does} invert at
+more extreme $\lambda$ on the same sweep. The scalar example is
+therefore solver-dependent, not an artefact of Heun at budget $8$
+alone.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig_inversion_region.pdf}
+  \caption{Linear versus VP ranking inversion versus target variance
+  $\lambda$. Dark cells: $\cR$ and $\wtwo$ disagree. The dashed line is
+  $\lambda=4$ (Proposition~\ref{prop:scalar}).}
+  \label{fig:region}
+  \vspace{-8pt}
+\end{figure}
+
+\section{Related work and limitations}
+\label{sec:related}
+
+Flow matching and interpolants supply the Gaussian
+family~\citep{lipman2023flow,albergo2025stochastic,liu2023rectified,tong2024conditional}.
+Lipschitz-guided design proposes the selection criterion
+tested~\citep{lipschitzguided2025}. Solver-specific schedules and exact
+linear parts are documented in diffusion
+practice~\citep{sabour2024align,karras2022edm,lu2022dpmsolver,zhang2023deis}.
+\citet{stephanovitch2026lipschitz} prove sharp Lipschitz regularity of
+canonical flow-matching fields and Euler-type $\wtwo$ rates; that is a
+bound, not a pairwise ranking of two interpolants at equal NFE.
+
+\citet{tao2026strain} decompose $\nabla v=S+\Omega$ and control Euler
+error by the logarithmic norm $\mu_2=\lambda_{\max}(S)$, which is
+signed, whereas $\cR$ integrates $\|A\|_2^2$. In one dimension
+$\mu_2(a)=a$ and $\|A\|_2=|a|$. Their Theorem~5 states that McCann
+displacement interpolation has vanishing material derivative, hence
+Euler is order $2$ in the Eulerian analysis; Remark~7 records the
+stronger Lagrangian exactness observed on that interpolant. Neither
+statement applies to the independent-coupling linear or VP path
+studied here. The present paper supplies a rationally certified
+Gaussian instance of ranking failure for the unsigned average
+$\|A\|_2^2$. A counterexample to $\mu_2$ itself is outside our
+scope.
+
+The systems are commuting affine Gaussian interpolants, three
+fixed-step Runge--Kutta methods, and small equal-NFE budgets. No
+learned neural field is evaluated. Chen et al.\ prove no
+discretization-error bound and do not claim a universal pairwise
+ranking at fixed NFE; the example does not invalidate $A_2$ as an
+optimization objective within a path family. The Gaussian family is a
+probe in which $\cR$ and $\wtwo$ are closed form; in a learned field
+the linear part is not exact, so exponential integrators that solve an
+affine scalar mode exactly are not a drop-in substitute. Cell counts
+are hierarchical descriptive summaries, not population rates.
+
+\clearpage
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
