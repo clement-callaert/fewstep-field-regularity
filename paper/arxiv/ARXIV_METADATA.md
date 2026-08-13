@@ -49,7 +49,7 @@ flow matching, stochastic interpolants, diffusion models, probability flow ODE, 
 
 ## Comments field (suggested)
 
-23 pages, 7 figures, 12 tables. Code and compact artifacts: https://github.com/clement-callaert/fewstep-field-regularity
+23 pages, 4 figures, 2 tables in the main text. Code and compact artifacts: https://github.com/clement-callaert/fewstep-field-regularity
 
 Update the page/figure/table counts from the compiled PDF immediately before upload. Do not put venue, review, or acceptance language in the comments field.
 
