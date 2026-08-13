@@ -1,0 +1,10 @@
+--- /tmp/fewstep-corrected-20260813/paper/gddl2026/main.tex	2026-08-13 21:40:36.362449022 +0200
++++ /tmp/fewstep-pass5-20260813/paper/gddl2026/main.tex	2026-08-13 22:19:57.755964634 +0200
+@@ -449,7 +449,6 @@
+ \bibliography{references}
+ 
+ \appendix
+-\enlargethispage{8\baselineskip}
+ \section{Rational VP Heun certificate}
+ \label{app:vpheun}
+ 

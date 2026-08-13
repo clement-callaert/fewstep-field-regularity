@@ -1,0 +1,1 @@
+{"n_blocks": 36, "n_log_covariance_smallest_w2": 36, "wrote": "/tmp/fewstep-pass5-20260813/paper/arxiv/artifacts/log_covariance_blocks.json"}

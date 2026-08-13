@@ -1,0 +1,1 @@
+{"n_inversions": 9, "n_cells": 4, "wrote": "/tmp/fewstep-pass5-20260813/paper/arxiv/artifacts/in_family_blocks.json"}

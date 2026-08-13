@@ -1,0 +1,11 @@
+--- /tmp/fewstep-corrected-20260813/docs/ARXIV_SUBMISSION.md	2026-08-13 21:38:34.378646714 +0200
++++ /tmp/fewstep-pass5-20260813/docs/ARXIV_SUBMISSION.md	2026-08-13 22:11:33.824360717 +0200
+@@ -55,7 +55,7 @@
+ place the code URL is visible without opening the PDF.
+ 
+ ```
+-22 pages, 4 figures, 2 tables in the main text. Code and compact artifacts: https://github.com/clement-callaert/fewstep-field-regularity
++23 pages, 4 figures, 2 tables in the main text. Code and compact artifacts: https://github.com/clement-callaert/fewstep-field-regularity
+ ```
+ 
+ No venue, review, or acceptance language.
