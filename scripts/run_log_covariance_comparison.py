@@ -8,6 +8,7 @@ from pathlib import Path
 from fewstep_regularities.analysis.ranking_grids import (
     PRIMARY_NFE,
     SOLVERS,
+    four_path_scores,
     lowest_name,
     three_path_scores,
 )
@@ -103,16 +104,24 @@ def main() -> None:
         if int(str(row["nfe"])) == 8 and str(row["solver"]) == "heun"
     ]
     workshop_lines = [
-        r"\begin{tabular}{llcccc}",
+        r"\begin{tabular}{llccccc}",
         r"\toprule",
         r"family & $d$ & $\cR_{\mathrm{lin}}$ & $\cR_{\mathrm{VP}}$ & "
-        r"$\cR_{\mathrm{log}}$ & Heun-8 $W_2$ min \\",
+        r"$\cR_{\mathrm{sc}}$ & $\cR_{\mathrm{log}}$ & Heun-8 $W_2$ min \\",
         r"\midrule",
     ]
     for row in workshop_rows:
+        key = {
+            ("anisotropic", 2): "anisotropic_d2",
+            ("anisotropic", 8): "anisotropic_d8",
+            ("low-rank", 2): "low_rank_d2",
+            ("low-rank", 8): "low_rank_d8",
+        }[(str(row["family"]), int(str(row["dim"])))]
+        four = four_path_scores(payload[key]["eigenvalues"], "heun", 8)
         workshop_lines.append(
             f"{row['family']} & {row['dim']} & "
             f"{float(str(row['R_linear'])):.3f} & {float(str(row['R_vp'])):.3f} & "
+            f"{four['log_covariance_scalar'].regularity:.3f} & "
             f"{float(str(row['R_log'])):.3f} & "
             f"{PATH_LABEL[str(row['W2_prefers'])]} \\\\"
         )

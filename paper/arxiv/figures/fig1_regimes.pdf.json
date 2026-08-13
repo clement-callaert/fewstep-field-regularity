@@ -1,18 +1,20 @@
 {
   "figure_artifact_id": "arxiv_figures_2026-08-13-v1:fig1_regimes",
-  "figure_checksum_sha256": "5b3168a0a486f49c84f60d241b198b313fbc6eba601ae2b6eafab3bf108eebe3",
-  "generation_timestamp": "2026-08-13T14:35:10.439135+00:00",
-  "git_commit": "8a62952d6f04302c1a6c35a90531c6b18fe9ab2e",
+  "figure_checksum_sha256": "906625a93a6c3f5a30e85b29639aecf519329ec94257767fb35334f508738cd9",
+  "generation_timestamp": "2026-08-13T15:29:28.788442+00:00",
+  "git_commit": "f04caceeb8e386a903db9919ecb7f9449fb1962d",
   "git_status": "dirty (regenerate after committing)",
-  "note": "Schematic census of the three regimes. Counts are complete enumerations, not estimators.",
+  "note": "Headline R and W2 bars for the three regimes. Counts are complete enumerations, not estimators. Source geometries.json.",
   "plotting_config": {
-    "consumes_artifacts": false,
     "counts": {
       "in_family_blocks": "9/36",
       "minimizer": "36/36",
       "pairwise_cells": "5/12"
     },
-    "kind": "three_regime_census"
+    "in_family_block": "anisotropic_d8 euler NFE 8",
+    "kind": "three_regime_R_W2_bars",
+    "pairwise_block": "low_rank_d8 euler NFE 8",
+    "unconstrained_block": "low_rank_d8 euler NFE 8"
   },
   "plotting_script": "scripts/make_arxiv_figures.py",
   "source_artifact_ids": [],

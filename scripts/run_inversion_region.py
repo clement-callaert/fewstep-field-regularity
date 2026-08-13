@@ -7,7 +7,7 @@ from pathlib import Path
 
 import matplotlib
 
-matplotlib.use("Agg")
+matplotlib.use("pdf")
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.colors import ListedColormap
@@ -31,7 +31,35 @@ CONTROL_INVERT = (0.25, 0.5, 3.0, 4.0, 6.0)
 CONTROL_NO_INVERT = (0.05, 0.1, 0.9, 1.5, 2.0, 9.0, 16.0, 36.0, 100.0)
 
 
+def apply_paper_style() -> None:
+    plt.rcParams.update(
+        {
+            "text.usetex": True,
+            "text.latex.preamble": r"\usepackage{lmodern}",
+            "font.family": "serif",
+            "font.serif": ["Latin Modern Roman"],
+            "mathtext.fontset": "cm",
+            "pdf.fonttype": 42,
+            "font.size": 9,
+            "axes.titlesize": 9,
+            "axes.labelsize": 9,
+            "xtick.labelsize": 8,
+            "ytick.labelsize": 8,
+            "legend.fontsize": 8,
+            "axes.spines.top": False,
+            "axes.spines.right": False,
+            "axes.linewidth": 0.6,
+            "xtick.major.width": 0.6,
+            "ytick.major.width": 0.6,
+            "figure.facecolor": "white",
+            "axes.facecolor": "white",
+            "savefig.facecolor": "white",
+        }
+    )
+
+
 def main() -> None:
+    apply_paper_style()
     grid: list[dict[str, object]] = []
     for solver in SOLVERS:
         for nfe in PRIMARY_NFE:
@@ -66,11 +94,15 @@ def main() -> None:
         "W2_heun8_linear": path_w2("linear", "heun", [4.0], 8),
         "W2_heun8_vp": path_w2("variance_preserving", "heun", [4.0], 8),
     }
+    if OUT_JSON.is_file():
+        previous = json.loads(OUT_JSON.read_text(encoding="utf-8"))
+        if "log_lebesgue" in previous:
+            payload["log_lebesgue"] = previous["log_lebesgue"]
     OUT_JSON.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
 
-    cmap = ListedColormap(["#f7f4ee", "#b23a48"])
+    cmap = ListedColormap(["#f7f4ee", "#d55e00"])
     fig, axes = plt.subplots(
-        1, 3, figsize=(6.6, 2.15), sharey=True, layout="constrained"
+        1, 3, figsize=(5.45, 2.15), sharey=True, layout="constrained"
     )
     solver_titles = {"euler": "Euler", "heun": "Heun", "rk4": "RK4"}
     mesh = axes[0].pcolormesh(

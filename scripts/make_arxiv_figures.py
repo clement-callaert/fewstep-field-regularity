@@ -16,7 +16,7 @@ from typing import Any
 
 import matplotlib
 
-matplotlib.use("Agg")
+matplotlib.use("pdf")
 import matplotlib.pyplot as plt
 
 from fewstep_regularities.utils.hashing import sha256_file
@@ -57,26 +57,42 @@ STRONGEST_BLOCK = {
 # Categorical palette from an Okabe-Ito subset; checked for CVD safety.
 COLOR_LINEAR = "#0072B2"
 COLOR_VP = "#D55E00"
+COLOR_SCALAR = "#E69F00"
+COLOR_MINIMIZER = "#009E73"
 SOLVER_COLORS = {"euler": "#0072B2", "heun": "#D55E00", "rk4": "#009E73"}
 SOLVER_MARKERS = {"euler": "o", "heun": "s", "rk4": "^"}
 GRAY = "#5f6368"
+FIGWIDTH = 5.45
 
-plt.rcParams.update(
-    {
-        "font.size": 9,
-        "axes.titlesize": 9,
-        "axes.labelsize": 9,
-        "xtick.labelsize": 8,
-        "ytick.labelsize": 8,
-        "legend.fontsize": 8,
-        "axes.spines.top": False,
-        "axes.spines.right": False,
-        "axes.linewidth": 0.6,
-        "xtick.major.width": 0.6,
-        "ytick.major.width": 0.6,
-        "pdf.fonttype": 42,
-    }
-)
+
+def apply_paper_style() -> None:
+    plt.rcParams.update(
+        {
+            "text.usetex": True,
+            "text.latex.preamble": r"\usepackage{lmodern}",
+            "font.family": "serif",
+            "font.serif": ["Latin Modern Roman"],
+            "mathtext.fontset": "cm",
+            "pdf.fonttype": 42,
+            "font.size": 9,
+            "axes.titlesize": 9,
+            "axes.labelsize": 9,
+            "xtick.labelsize": 8,
+            "ytick.labelsize": 8,
+            "legend.fontsize": 8,
+            "axes.spines.top": False,
+            "axes.spines.right": False,
+            "axes.linewidth": 0.6,
+            "xtick.major.width": 0.6,
+            "ytick.major.width": 0.6,
+            "figure.facecolor": "white",
+            "axes.facecolor": "white",
+            "savefig.facecolor": "white",
+        }
+    )
+
+
+apply_paper_style()
 
 
 def _git(*args: str) -> subprocess.CompletedProcess[str]:
@@ -192,79 +208,86 @@ def phase4_blocks(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 def figure1_regimes() -> Path:
-    """Three-regime overview: pairwise, in-family, unconstrained minimiser.
+    """Three-regime bar overview: pairwise, in-family, unconstrained.
 
-    Inputs: none; census counts are the published 5/12, 9/36, and 36/36.
+    Inputs: paper/arxiv/artifacts/geometries.json via exact-moment modal RK.
     Outputs: path to the written figure PDF.
-    Units: schematic; not a measured trajectory.
-    Precision: integer census counts, not estimators.
+    Units: continuous R dimensionless; Gaussian W2 in the ambient metric.
+    Precision: float64 exact-moment factors; headline blocks Euler NFE 8.
     """
-    fig, axes = plt.subplots(1, 3, figsize=(6.8, 2.35))
-    panels = [
-        {
-            "title": "(a) pairwise comparator",
-            "pair": "linear vs VP",
-            "count": "5 of 12 cells invert",
-            "sub": "4 of 12 at every NFE\n3 distinct $R$ comparisons",
-            "verdict": r"$R$ does not order $W_2$",
-            "color": COLOR_VP,
-        },
-        {
-            "title": "(b) in-family objective",
-            "pair": "VP vs Chen Ex. 3.3 scalar",
-            "count": "9 of 36 blocks invert",
-            "sub": "4 of 12 geometry$\\times$solver cells\nboth paths are shared $(\\alpha,\\sigma)$",
-            "verdict": "still not a ranking rule",
-            "color": "#E69F00",
-        },
-        {
-            "title": "(c) unconstrained minimiser",
-            "pair": r"$q_i(t)=\lambda^{t}_{i}$",
-            "count": "smallest in 36 of 36",
-            "sub": "smallest $R$ and smallest $W_2$\nnot a shared interpolant for $d\\geq 2$",
-            "verdict": r"$R$ works as an objective",
-            "color": "#009E73",
-        },
-    ]
-    for ax, panel in zip(axes, panels, strict=True):
-        ax.set_xlim(0, 1)
-        ax.set_ylim(0, 1)
-        ax.axis("off")
-        ax.set_title(panel["title"], loc="left", fontsize=8.5, pad=2)
-        ax.text(0.5, 0.82, panel["pair"], ha="center", va="center", fontsize=8, color=GRAY)
-        ax.text(
-            0.5,
-            0.52,
-            panel["count"],
-            ha="center",
-            va="center",
-            fontsize=11,
-            fontweight="bold",
-            color=panel["color"],
-        )
-        ax.text(0.5, 0.28, panel["sub"], ha="center", va="center", fontsize=7, color="#333333")
-        ax.text(
-            0.5,
-            0.08,
-            panel["verdict"],
-            ha="center",
-            va="center",
-            fontsize=8,
-            style="italic",
-        )
-        ax.add_patch(
-            plt.Rectangle(
-                (0.04, 0.02),
-                0.92,
-                0.96,
-                fill=False,
-                linewidth=0.8,
-                edgecolor="#d0d0d0",
-                transform=ax.transAxes,
-                clip_on=False,
-            )
-        )
-    fig.subplots_adjust(wspace=0.18)
+    import numpy as np
+
+    from fewstep_regularities.analysis.ranking_grids import four_path_scores
+
+    payload = json.loads(
+        (ROOT / "paper/arxiv/artifacts/geometries.json").read_text(encoding="utf-8")
+    )
+    low8 = four_path_scores(payload["low_rank_d8"]["eigenvalues"], "euler", 8)
+    aniso8 = four_path_scores(payload["anisotropic_d8"]["eigenvalues"], "euler", 8)
+
+    def _bars(ax: Any, names: list[str], colors: list[str], values: list[float]) -> None:
+        x = np.arange(len(names))
+        bars = ax.bar(x, values, color=colors, width=0.62)
+        ax.set_xticks(x, names, fontsize=7)
+        ax.bar_label(bars, [f"{v:.2f}" for v in values], padding=1.2, fontsize=7)
+        ax.set_ylim(0.0, max(values) * 1.32)
+
+    fig, axes = plt.subplots(2, 3, figsize=(FIGWIDTH, 2.72), layout="constrained")
+    _bars(
+        axes[0, 0],
+        ["lin", "VP"],
+        [COLOR_LINEAR, COLOR_VP],
+        [low8["linear"].regularity, low8["variance_preserving"].regularity],
+    )
+    _bars(
+        axes[1, 0],
+        ["lin", "VP"],
+        [COLOR_LINEAR, COLOR_VP],
+        [low8["linear"].w2, low8["variance_preserving"].w2],
+    )
+    axes[0, 0].set_title(r"(a) pairwise: 5 of 12 invert", loc="left", fontsize=8)
+    axes[0, 0].set_ylabel(r"$\mathcal{R}$")
+    axes[1, 0].set_ylabel(r"$W_2$")
+
+    _bars(
+        axes[0, 1],
+        ["VP", r"Ex.\ 3.3"],
+        [COLOR_VP, COLOR_SCALAR],
+        [
+            aniso8["variance_preserving"].regularity,
+            aniso8["log_covariance_scalar"].regularity,
+        ],
+    )
+    _bars(
+        axes[1, 1],
+        ["VP", r"Ex.\ 3.3"],
+        [COLOR_VP, COLOR_SCALAR],
+        [aniso8["variance_preserving"].w2, aniso8["log_covariance_scalar"].w2],
+    )
+    axes[0, 1].set_title(r"(b) in-family: 9 of 36 invert", loc="left", fontsize=8)
+
+    _bars(
+        axes[0, 2],
+        ["lin", "VP", "per-mode"],
+        [COLOR_LINEAR, COLOR_VP, COLOR_MINIMIZER],
+        [
+            low8["linear"].regularity,
+            low8["variance_preserving"].regularity,
+            low8["log_covariance"].regularity,
+        ],
+    )
+    _bars(
+        axes[1, 2],
+        ["lin", "VP", "per-mode"],
+        [COLOR_LINEAR, COLOR_VP, COLOR_MINIMIZER],
+        [
+            low8["linear"].w2,
+            low8["variance_preserving"].w2,
+            low8["log_covariance"].w2,
+        ],
+    )
+    axes[0, 2].set_title(r"(c) unconstrained: 36 of 36", loc="left", fontsize=8)
+
     out = FIGURE_DIR / ("fig1_regimes" + FIGURE_SUFFIX)
     fig.savefig(out, bbox_inches="tight")
     plt.close(fig)
@@ -294,32 +317,31 @@ def figure_four_paths() -> Path:
     labels = {
         "linear": "linear",
         "variance_preserving": "VP",
-        "log_covariance_scalar": "Ex. 3.3",
+        "log_covariance_scalar": r"Ex.\ 3.3",
         "log_covariance": r"per-mode",
     }
     colors = {
         "linear": COLOR_LINEAR,
         "variance_preserving": COLOR_VP,
-        "log_covariance_scalar": "#E69F00",
-        "log_covariance": "#009E73",
+        "log_covariance_scalar": COLOR_SCALAR,
+        "log_covariance": COLOR_MINIMIZER,
     }
-    geom_labels = []
+    tick_labels = [r"$d{=}2$", r"$d{=}8$", r"$d{=}2$", r"$d{=}8$"]
     r_vals = {path: [] for path in FOUR_PATHS}
     w_vals = {path: [] for path in FOUR_PATHS}
-    for key, family, dim in GEOM_KEYS:
+    for key, _family, _dim in GEOM_KEYS:
         eigenvalues = payload[key]["eigenvalues"]
         scores = four_path_scores(eigenvalues, "euler", 8)
-        geom_labels.append(f"{family}\n$d={dim}$")
         for path in FOUR_PATHS:
             r_vals[path].append(scores[path].regularity)
             w_vals[path].append(scores[path].w2)
 
-    fig, axes = plt.subplots(1, 2, figsize=(6.8, 2.45), layout="constrained")
-    x = np.arange(len(geom_labels), dtype=float)
+    fig, axes = plt.subplots(1, 2, figsize=(6.4, 3.05), layout="constrained")
+    x = np.arange(len(tick_labels), dtype=float)
     width = 0.18
     offsets = (-1.5, -0.5, 0.5, 1.5)
     for ax, store, ylabel, title in (
-        (axes[0], r_vals, r"$R=\int_0^1\|A(t)\|_2^2\,dt$", "regularity (lower preferred)"),
+        (axes[0], r_vals, r"$R=\int_0^1\Vert A(t)\Vert_2^2\,dt$", "regularity (lower preferred)"),
         (axes[1], w_vals, r"Euler $W_2$ at NFE $8$", "endpoint error (lower preferred)"),
     ):
         for offset, path in zip(offsets, FOUR_PATHS, strict=True):
@@ -330,10 +352,31 @@ def figure_four_paths() -> Path:
                 color=colors[path],
                 label=labels[path],
             )
-        ax.set_xticks(x, geom_labels, fontsize=7)
+        ax.set_xticks(x, [r"$d{=}2$", r"$d{=}8$", r"$d{=}2$", r"$d{=}8$"], fontsize=8)
+        ax.annotate(
+            "aniso.",
+            xy=(0.5, 0.0),
+            xycoords=("data", "axes fraction"),
+            xytext=(0, -16),
+            textcoords="offset points",
+            ha="center",
+            va="top",
+            fontsize=8,
+        )
+        ax.annotate(
+            "low-rank",
+            xy=(2.5, 0.0),
+            xycoords=("data", "axes fraction"),
+            xytext=(0, -16),
+            textcoords="offset points",
+            ha="center",
+            va="top",
+            fontsize=8,
+        )
         ax.set_ylabel(ylabel)
         ax.set_title(title, loc="left", fontsize=8.5)
         ax.set_yscale("log")
+        ax.tick_params(axis="x", pad=2)
     handles, legend_labels = axes[0].get_legend_handles_labels()
     fig.legend(
         handles,
@@ -370,7 +413,7 @@ def figure2_inversions() -> tuple[Path, list[str]]:
         raise ValueError(f"Expected 14 Phase 4 inversion blocks, got {len(inversions)}")
 
     strongest = max(inversions, key=lambda b: abs(b["w2_delta"]))
-    fig = plt.figure(figsize=(6.8, 2.4))
+    fig = plt.figure(figsize=(FIGWIDTH, 2.4))
     gs = fig.add_gridspec(1, 3, width_ratios=[0.5, 0.5, 1.7], wspace=1.25)
     ax_m = fig.add_subplot(gs[0])
     ax_w = fig.add_subplot(gs[1])
@@ -529,7 +572,7 @@ def figure_eigenmode() -> tuple[Path, list[str]]:
             )
 
     fig, (ax_w2, ax_def) = plt.subplots(
-        1, 2, figsize=(6.8, 2.2), gridspec_kw={"wspace": 0.35}
+        1, 2, figsize=(FIGWIDTH, 2.2), gridspec_kw={"wspace": 0.35}
     )
     mode_idx = [int(m["mode_index"]) for m in lin["modes"]]
     width = 0.38
@@ -613,7 +656,7 @@ def figure3_interaction() -> tuple[Path, list[str]]:
         b for b in phase4_blocks(payload["rows"]) if b["family"] == "low_rank_gaussian"
     ]
     solver_names = {"euler": "Euler", "heun": "Heun", "rk4": "RK4"}
-    fig, axes = plt.subplots(1, 2, figsize=(6.8, 2.2), sharey=True)
+    fig, axes = plt.subplots(1, 2, figsize=(FIGWIDTH, 2.2), sharey=True)
     for ax, dim in zip(axes, (2, 8), strict=True):
         for solver in ("euler", "heun", "rk4"):
             pts = sorted(
@@ -655,28 +698,72 @@ def figure3_interaction() -> tuple[Path, list[str]]:
 
 
 def figure_scalar_counterexample() -> Path:
-    """Bar comparison of exact R and certified W2 for the 1D Heun example."""
-    payload = json.loads(
-        (ROOT / "paper/arxiv/artifacts/scalar_counterexample.json").read_text(
-            encoding="utf-8"
-        )
+    """Exact scalar drifts a_lin(t) and a_VP(t) on [0,1], with Heun nodes."""
+    import numpy as np
+
+    from fewstep_regularities.analysis.affine_flow import scalar_drift
+
+    eigenvalue = 4.0
+    t = np.linspace(0.0, 1.0, 401)
+    a_lin = np.array([scalar_drift("linear", eigenvalue, ti) for ti in t])
+    a_vp = np.array([scalar_drift("variance_preserving", eigenvalue, ti) for ti in t])
+    nodes = np.array([0.0, 0.25, 0.5, 0.75])
+    a_lin_nodes = np.array([scalar_drift("linear", eigenvalue, ti) for ti in nodes])
+    a_vp_nodes = np.array(
+        [scalar_drift("variance_preserving", eigenvalue, ti) for ti in nodes]
     )
-    r_lin = float(payload["R_linear"])
-    r_vp = float(payload["R_vp"])
-    w_lin = float(payload["W2_linear_float"])
-    w_vp = 2.0 - float(payload["r_vp_rational_upper_float"])
-    fig, axes = plt.subplots(1, 2, figsize=(6.4, 2.5))
-    colors = [COLOR_LINEAR, COLOR_VP]
-    labels = ["linear", "VP"]
-    axes[0].bar(labels, [r_lin, r_vp], color=colors, width=0.55)
-    axes[0].set_ylabel(r"$R=\int_0^1 a(t)^2\,dt$")
-    axes[0].set_title("exact regularity (lower is preferred)", loc="left")
-    axes[1].bar(labels, [w_lin, w_vp], color=colors, width=0.55)
-    axes[1].set_ylabel(r"Heun $W_2$ at NFE $8$")
-    axes[1].set_title("endpoint error (lower is preferred)", loc="left")
-    fig.tight_layout()
+
+    fig, ax = plt.subplots(figsize=(FIGWIDTH, 2.35), layout="constrained")
+    ax.axhline(0.0, color="0.45", lw=0.8)
+    ax.fill_between(
+        t,
+        a_lin,
+        0.0,
+        where=(a_lin < 0.0),
+        color=COLOR_LINEAR,
+        alpha=0.18,
+        interpolate=True,
+    )
+    ax.plot(t, a_lin, color=COLOR_LINEAR, lw=1.8, label=r"$a_{\mathrm{lin}}$")
+    ax.plot(t, a_vp, color=COLOR_VP, lw=1.8, label=r"$a_{\mathrm{VP}}$")
+    ax.plot(nodes, a_lin_nodes, "o", color=COLOR_LINEAR, ms=5.5, zorder=3)
+    ax.plot(nodes, a_vp_nodes, "s", color=COLOR_VP, ms=5.0, zorder=3)
+    ax.annotate(
+        r"$a_{\mathrm{lin}}(0)=-1$",
+        xy=(0.0, -1.0),
+        xytext=(0.14, -1.32),
+        fontsize=8,
+        color=COLOR_LINEAR,
+        arrowprops={"arrowstyle": "-", "color": COLOR_LINEAR, "lw": 0.6},
+    )
+    ax.annotate(
+        r"$a_{\mathrm{lin}}(1)=+1$",
+        xy=(1.0, 1.0),
+        xytext=(0.88, 0.55),
+        textcoords="data",
+        ha="center",
+        va="center",
+        fontsize=8,
+        color=COLOR_LINEAR,
+        bbox={"boxstyle": "round,pad=0.15", "fc": "white", "ec": "none", "alpha": 0.9},
+        arrowprops={
+            "arrowstyle": "->",
+            "color": COLOR_LINEAR,
+            "lw": 0.7,
+            "shrinkA": 4,
+            "shrinkB": 3,
+        },
+    )
+    ax.set_xlim(0.0, 1.0)
+    ax.set_ylim(-1.55, 1.55)
+    ax.set_xlabel(r"$t$")
+    ax.set_ylabel(r"$a(t)$")
+    ax.legend(frameon=False, loc="upper left")
     out = FIGURE_DIR / ("fig_scalar" + FIGURE_SUFFIX)
     fig.savefig(out, bbox_inches="tight")
+    workshop = ROOT / "paper" / "gddl2026" / "figures" / ("fig_scalar" + FIGURE_SUFFIX)
+    workshop.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(workshop, bbox_inches="tight")
     plt.close(fig)
     return out
 
@@ -700,7 +787,7 @@ def figure_noncentered_decomposition() -> tuple[Path, list[str]]:
 
     solver_abbrev = {"euler": "Eu", "heun": "He", "rk4": "RK"}
     fig, axes = plt.subplots(
-        2, 1, figsize=(6.8, 4.8), sharex=True, gridspec_kw={"hspace": 0.28}
+        2, 1, figsize=(FIGWIDTH, 4.8), sharex=True, gridspec_kw={"hspace": 0.28}
     )
     width = 0.38
     for ax, dim in zip(axes, (2, 8), strict=True):
@@ -753,13 +840,15 @@ def main() -> None:
         fig1,
         artifact_ids=[],
         plotting_config={
-            "kind": "three_regime_census",
-            "consumes_artifacts": False,
+            "kind": "three_regime_R_W2_bars",
+            "pairwise_block": "low_rank_d8 euler NFE 8",
+            "in_family_block": "anisotropic_d8 euler NFE 8",
+            "unconstrained_block": "low_rank_d8 euler NFE 8",
             "counts": {"pairwise_cells": "5/12", "in_family_blocks": "9/36", "minimizer": "36/36"},
         },
         note=(
-            "Schematic census of the three regimes. Counts are complete "
-            "enumerations, not estimators."
+            "Headline R and W2 bars for the three regimes. Counts are complete "
+            "enumerations, not estimators. Source geometries.json."
         ),
     )
     written.append(fig1)
@@ -767,8 +856,8 @@ def main() -> None:
     write_sidecar(
         fig_s,
         artifact_ids=[],
-        plotting_config={"kind": "scalar_gaussian_heun_counterexample"},
-        note="Source: paper/arxiv/artifacts/scalar_counterexample.json.",
+        plotting_config={"kind": "scalar_drift_lin_vp_heun_nodes"},
+        note="Exact closed-form drifts a_lin and a_VP on [0,1]; Heun nodes at NFE 8.",
     )
     written.append(fig_s)
     fig4 = figure_four_paths()

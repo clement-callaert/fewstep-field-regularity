@@ -1,12 +1,12 @@
 {
   "figure_artifact_id": "arxiv_figures_2026-08-13-v1:fig_scalar",
-  "figure_checksum_sha256": "7aa8fcf637b53bbdbd98988c271e07590710ff15057d0adcaf56cc550cc4c819",
-  "generation_timestamp": "2026-08-13T14:18:15.765358+00:00",
-  "git_commit": "8a62952d6f04302c1a6c35a90531c6b18fe9ab2e",
+  "figure_checksum_sha256": "d6ad8a4246e7853c8907bd8fde2875c5405b34f26d3921b18fa4870f5cbe2a5f",
+  "generation_timestamp": "2026-08-13T15:39:20.814221+00:00",
+  "git_commit": "f04caceeb8e386a903db9919ecb7f9449fb1962d",
   "git_status": "dirty (regenerate after committing)",
-  "note": "Source: paper/arxiv/artifacts/scalar_counterexample.json.",
+  "note": "Exact closed-form drifts a_lin and a_VP on [0,1]; Heun nodes at NFE 8.",
   "plotting_config": {
-    "kind": "scalar_gaussian_heun_counterexample"
+    "kind": "scalar_drift_lin_vp_heun_nodes"
   },
   "plotting_script": "scripts/make_arxiv_figures.py",
   "source_artifact_ids": [],

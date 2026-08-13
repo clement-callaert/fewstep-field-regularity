@@ -40,8 +40,8 @@
 \newcommand{\cR}{\mathcal{R}}
 \newcommand{\Rhat}{\widehat{\mathcal{R}}_{24}}
 
-\title{Averaged Jacobian Regularity Does Not Order Few-Step Error\\
-of Gaussian Interpolant ODEs}
+\title{Averaged Jacobian Regularity Does Not Order\\
+Few-Step Error of Gaussian Interpolant ODEs}
 
 \author{%
   Anonymous Author(s)\\
@@ -61,14 +61,15 @@ Already for independent $N(0,1)$ and $N(0,4)$, the exact integrals are
 $5\pi/8-1$ (linear) and $\pi^2/16$ (trigonometric VP), while Heun at
 NFE~$8$ reverses Gaussian $\wtwo$. The linear factor is the rational
 $6797469/3559400$; a rational enclosure in $\mathbb{Q}[\pi,\sqrt{2}]$
-gives $r_{\mathrm{VP}}<187/100$. On four centered commuting geometries,
-the per-mode log-covariance schedule (Chen et al.\ Ex.~3.3), which
-minimizes $\cR$, attains the smallest $\wtwo$ in all $36$
-solver-budget blocks. Linear versus VP invert in $5$ of $12$
+gives $r_{\mathrm{VP}}<187/100$. Three regimes then separate. As a
+pairwise comparator, linear versus VP invert in $5$ of $12$
 geometry$\times$solver cells ($4$ of $12$ at every NFE in
-$\{8,16,32\}$), from three distinct $\cR$ comparisons. Thus $\cR$ is
-reliable as an objective on this family and not reliable as a
-linear-versus-VP comparator away from that optimum.
+$\{8,16,32\}$). As an in-family objective, trigonometric VP versus the
+scalar log-covariance schedule (Chen Ex.~3.3 with $M=\lambda_{\max}$)
+invert in 9 of 36 blocks and $4$ of $12$ cells. The unconstrained
+per-mode minimizer attains the smallest $\cR$ and the smallest $\wtwo$
+in $36$ of $36$ blocks, but is not a shared $(\alpha,\sigma)$ interpolant
+for $d\geq 2$.
 \end{abstract}
 
 \section{Introduction}
@@ -87,11 +88,11 @@ where the field is affine, Gaussian $\wtwo$ is closed-form, and the
 regularity integrand is known exactly. The leading result is a
 deterministic scalar Heun example
 (Section~\ref{sec:scalar}). A modal identity then records the signed
-information that $\cR$ discards (Section~\ref{sec:mechanism}). A third
-path---the Cauchy--Schwarz minimizer of $\cR$---and a $\lambda$-sweep
-show that $\cR$ is a reliable \emph{objective} on this family and an
-unreliable linear-versus-VP \emph{comparator}
-(Section~\ref{sec:third}).
+information that $\cR$ discards (Section~\ref{sec:mechanism}).
+Section~\ref{sec:third} splits the ranking question into three regimes:
+pairwise linear versus VP, in-family VP versus the shared Chen Ex.~3.3
+scalar schedule, and the unconstrained per-mode minimizer, which is not
+a shared $(\alpha,\sigma)$ interpolant for $d\geq 2$.
 
 Contemporaneous work studies Lipschitz Euler
 rates~\citep{stephanovitch2026lipschitz}, sharpness-aware
@@ -183,8 +184,11 @@ supplement. Interval arithmetic is a cross-check only.
 \begin{figure}[t]
   \centering
   \includegraphics[width=0.92\linewidth]{figures/fig_scalar.pdf}
-  \caption{Proposition~\ref{prop:scalar}: exact $\cR$ versus certified
-  Heun $\wtwo$ at NFE~$8$. The VP bar is the certified lower bound.}
+  \caption{Scalar drifts $a_{\mathrm{lin}}(t)$ and $a_{\mathrm{VP}}(t)$
+  for independent $N(0,1)$ and $N(0,4)$. The shaded region is
+  $a_{\mathrm{lin}}<0$. Markers are the four Heun nodes at NFE~$8$.
+  $a_{\mathrm{lin}}(0)=-1<0<a_{\mathrm{lin}}(1)=+1$. Exact evaluation
+  of the closed-form drifts.}
   \label{fig:scalar}
   \vspace{-8pt}
 \end{figure}
@@ -227,17 +231,25 @@ integral of $\max_i a_i(t)^2$.
 
 The per-mode log-covariance path $q_i(t)=\lambda_i^t$ has the smallest
 $\cR$ on every geometry and the smallest Gaussian $\wtwo$ in all $36$
-blocks (Table~\ref{tab:threepath} reports Heun at NFE~$8$). Linear
-versus VP invert in $5$ of $12$ geometry$\times$solver cells; $4$ of
-those $12$ invert at every tested NFE. The fourteen inverted
-solver-budget rows are a hierarchical listing of those cells, not a
-population rate.
+blocks (Table~\ref{tab:threepath} reports Heun at NFE~$8$); it is not a
+shared $(\alpha,\sigma)$ interpolant for $d\geq 2$. Linear versus VP
+invert in $5$ of $12$ geometry$\times$solver cells; $4$ of those $12$
+invert at every tested NFE. Trigonometric VP versus the shared Chen
+Ex.~3.3 scalar schedule ($M=\lambda_{\max}$) invert in 9 of 36
+blocks and $4$ of $12$ cells: anisotropic $d=2$, Euler at NFE $16$ and
+$32$; anisotropic $d=8$, Euler at NFE $8$, $16$, and $32$; low-rank
+$d=2$, Euler at NFE $8$ and Heun at NFE $8$, $16$, and $32$; low-rank
+$d=8$, none. The fourteen inverted linear-versus-VP solver-budget rows
+are a hierarchical listing of those cells, not a population rate.
 
 \begin{table}[t]
   \centering
-  \caption{Per-mode log-covariance (Chen Ex.~3.3) versus linear and VP.
-  $\cR$ is continuous; the last column is the $\wtwo$-minimizer at Heun,
-  NFE~$8$. The same $\wtwo$ preference holds in all $36$ blocks.}
+  \caption{Four schedules: linear, trigonometric VP, shared Chen Ex.~3.3
+  scalar ($\cR_{\mathrm{sc}}$, $M=\lambda_{\max}$), and per-mode
+  log-covariance ($\cR_{\mathrm{log}}$). $\cR$ is continuous; the last
+  column is the $\wtwo$-minimizer at Heun, NFE~$8$. Per-mode wins Heun-8
+  on every geometry; it is not a shared $(\alpha,\sigma)$ interpolant
+  for $d\geq 2$.}
   \label{tab:threepath}
   \small
   \input{generated/log_covariance_workshop}
@@ -308,8 +320,10 @@ The systems are commuting affine Gaussian interpolants, three
 fixed-step Runge--Kutta methods, and small equal-NFE budgets. No
 learned neural field is evaluated. Chen et al.\ prove no
 discretization-error bound and do not claim a universal pairwise
-ranking at fixed NFE; the example does not invalidate $A_2$ as an
-optimization objective within a path family. The Gaussian family is a
+ranking at fixed NFE. As an in-family objective, VP versus the shared
+Ex.~3.3 scalar schedule still invert in 9 of 36 blocks; $\cR$ is
+usable as an objective only when its minimizer is admissible. The
+Gaussian family is a
 probe in which $\cR$ and $\wtwo$ are closed form; in a learned field
 the linear part is not exact, so exponential integrators that solve an
 affine scalar mode exactly are not a drop-in substitute. Cell counts

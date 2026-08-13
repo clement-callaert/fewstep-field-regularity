@@ -1,6 +1,6 @@
 \documentclass[11pt,a4paper]{article}
 
-\usepackage[margin=1in]{geometry}
+\usepackage[a4paper,margin=1.4in]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
@@ -9,8 +9,6 @@
 \usepackage{array}
 \usepackage{graphicx}
 \usepackage{xcolor}
-\usepackage{tikz}
-\usetikzlibrary{positioning}
 \usepackage{microtype}
 \usepackage{enumitem}
 \usepackage{natbib}
@@ -47,9 +45,6 @@
 \newcommand{\numLrTwoMax}{2.97}
 \newcommand{\numLrEightA}{4.65}
 \newcommand{\numLrEightB}{10.7}
-\definecolor{regimeFail}{RGB}{213,94,0}
-\definecolor{regimeMid}{RGB}{180,110,0}
-\definecolor{regimeOk}{RGB}{0,122,84}
 
 \newtheorem{proposition}{Proposition}
 \newtheorem{definition}{Definition}
@@ -62,8 +57,9 @@
 \newcommand{\cR}{\mathcal{R}}
 \newcommand{\Rhat}{\widehat{\mathcal{R}}_{24}}
 
-\title{Averaged Jacobian Regularity Does Not Order Few-Step Error\\
-in Flow Matching: A Certified Gaussian Counterexample}
+\title{Averaged Jacobian Regularity Does Not Order\\
+Few-Step Error in Flow Matching:\\
+A Certified Gaussian Counterexample}
 \author{%
   Clément Callaert\\
   CentraleSupélec and Université Paris-Saclay\\
@@ -82,26 +78,19 @@ propose minimizing the averaged squared Jacobian norm $A_2$, a Lipschitz
 constant of the marginal field, as a selection criterion, without a proved
 bound on discretization error. This paper asks whether the order induced by
 $A_2$ between two paths is reliable at a fixed number of function
-evaluations (NFE).
-
-Already for centered Gaussian interpolants the implication fails. For
-independent $N(0,1)$ and $N(0,4)$ endpoints, the exact regularity integrals
-of the linear and trigonometric variance-preserving paths are $5\pi/8-1$
-and $\pi^2/16$. Explicit Heun method, a two-stage Runge--Kutta scheme, with
-NFE $8$ reverses the ranking of Gaussian Wasserstein-2 distance: the linear
-factor is the rational $6797469/3559400$, and a rational enclosure of the
-VP product in $\mathbb{Q}[\pi,\sqrt{2}]$ yields $r_{\mathrm{VP}}<187/100$.
-
-Three regimes then separate. As a pairwise comparator of linear versus VP,
-the ranking inverts in $5$ of $12$ geometry-by-solver cells ($4$ of $12$ at
-every tested NFE), from $3$ distinct regularity comparisons. As an
-in-family objective, trigonometric VP versus the scalar log-covariance
-schedule (Chen Example 3.3 with $M=\lambda_{\max}$) invert in $9$ of $36$
-blocks and $4$ of $12$ cells. The unconstrained per-mode minimizer attains
-both the smallest regularity and the smallest Wasserstein-2 distance in
-$36$ of $36$ blocks, but is not a shared $(\alpha,\sigma)$ interpolant for
-$d\geq 2$. The analysis is confined to commuting Gaussians; no learned
-field is used.
+evaluations (NFE). Already for centered Gaussian interpolants the
+implication fails: for independent $N(0,1)$ and $N(0,4)$, the exact
+regularity integrals of the linear and trigonometric variance-preserving
+paths are $5\pi/8-1$ and $\pi^2/16$, while Heun at NFE~$8$ reverses
+Gaussian Wasserstein-2 distance. Three regimes then separate. As a pairwise
+comparator of linear versus VP, the ranking inverts in $5$ of $12$
+geometry-by-solver cells. As an in-family objective, trigonometric VP
+versus the scalar log-covariance schedule (Chen Example~3.3 with
+$M=\lambda_{\max}$) invert in $9$ of $36$ blocks ($4$ of $12$ cells). The unconstrained
+per-mode minimizer attains both the smallest regularity and the smallest
+Wasserstein-2 distance in $36$ of $36$ blocks, but is not a shared
+$(\alpha,\sigma)$ interpolant for $d\geq 2$. The analysis is confined to
+commuting Gaussians; no learned field is used.
 \end{abstract}
 
 \section{Introduction}
@@ -143,48 +132,18 @@ and $\cR$ when its unconstrained minimizer is admissible.
 
 \begin{figure}[t]
   \centering
-  \begin{tikzpicture}[
-      font=\small,
-      card/.style={
-        draw=black!22,
-        fill=black!1.5,
-        line width=0.4pt,
-        inner sep=7pt,
-        outer sep=0pt,
-        text width=4.58cm,
-        minimum height=3.55cm,
-        align=center
-      }
-    ]
-    \node[card] (a) {%
-      \textbf{(a) pairwise}\\[3pt]
-      linear vs VP\\[5pt]
-      \textcolor{regimeFail}{\bfseries 5 of 12 cells invert}\\[4pt]
-      \mbox{4 of 12 at every NFE}\\
-      \mbox{3 distinct $\cR$ comparisons}\\[5pt]
-      \textit{$\cR$ does not order $\wtwo$}};
-    \node[card, right=2.6mm of a] (b) {%
-      \textbf{(b) in-family}\\[3pt]
-      VP vs Chen Ex.~3.3\\[5pt]
-      \textcolor{regimeMid}{\bfseries 9 of 36 blocks invert}\\[4pt]
-      \mbox{4 of 12 geom.\ $\times$ solver cells}\\
-      \mbox{both paths shared $(\alpha,\sigma)$}\\[5pt]
-      \textit{still not a ranking rule}};
-    \node[card, right=2.6mm of b] (c) {%
-      \textbf{(c) unconstrained}\\[3pt]
-      $q_i(t)=\lambda_i^{t}$\\[5pt]
-      \textcolor{regimeOk}{\bfseries smallest in 36 of 36}\\[4pt]
-      \mbox{smallest $\cR$ and smallest $\wtwo$}\\
-      \mbox{not shared $(\alpha,\sigma)$ for $d\geq 2$}\\[5pt]
-      \textit{$\cR$ works as an objective}};
-    \fill[regimeFail] (a.north west) rectangle ([yshift=-2.1pt]a.north east);
-    \fill[regimeMid]  (b.north west) rectangle ([yshift=-2.1pt]b.north east);
-    \fill[regimeOk]   (c.north west) rectangle ([yshift=-2.1pt]c.north east);
-  \end{tikzpicture}
+  \includegraphics[width=\linewidth]{figures/fig1_regimes.pdf}
   \caption{Three regimes for $\cR$ on commuting Gaussian interpolants.
-  Orange: ranking inversion. Green: the $\cR$-minimizer also minimizes
-  $\wtwo$. Panel~(c) is not a shared $(\alpha,\sigma)$ interpolant for
-  $d\geq 2$. Census counts, not estimators.}
+  Each panel shows continuous $\cR$ and equal-NFE Gaussian $\wtwo$
+  (lower is preferred). (a)~Pairwise linear versus VP on low-rank $d=8$,
+  Euler, NFE~$8$: $\cR$ and $\wtwo$ invert; this occurs in $5$ of $12$
+  geometry$\times$solver cells. (b)~In-family VP versus shared Chen
+  Ex.~3.3 scalar ($M=\lambda_{\max}$) on anisotropic $d=8$, Euler,
+  NFE~$8$: inversion, as in $9$ of $36$ blocks. (c)~Unconstrained
+  per-mode $q_i(t)=\lambda_i^{t}$ on the same block: smallest $\cR$ and
+  smallest $\wtwo$ in $36$ of $36$ blocks; not a shared $(\alpha,\sigma)$
+  interpolant for $d\geq 2$. Exact-moment modal Runge--Kutta; census
+  counts, not estimators.}
   \label{fig:regimes}
 \end{figure}
 
@@ -204,7 +163,8 @@ The contributions are as follows.
   census: pairwise linear-versus-VP inversions in $5$ of $12$ cells;
   in-family VP-versus-scalar-log-covariance inversions in $9$ of $36$
   blocks; unconstrained per-mode minimizer smallest in $36$ of $36$
-  blocks, and not a shared $(\alpha,\sigma)$ interpolant for $d\geq 2$
+  blocks, and not a shared $(\alpha,\sigma)$ interpolant for $d\geq 2$.
+  Rank agreement between $\cR$ and $\wtwo$ changes sign with the solver
   (Sections~\ref{subsec:pairwise}--\ref{subsec:minimizer}). A census in
   which all three comparisons agreed would contradict the split.
 \item An inversion map over target variance
@@ -354,10 +314,10 @@ below are positive, so $\wtwo=\bigl||r|-2\bigr|=|r-2|$.
 \begin{proposition}
 \label{prop:scalar}
 Under Assumption~\ref{ass:scalar},
-\begin{align}
-  \cR_{\mathrm{lin}}&=\frac{5\pi}{8}-1,\\
-  \cR_{\mathrm{VP}}&=\frac{\pi^2}{16},
-\end{align}
+\begin{equation}
+  \cR_{\mathrm{lin}}=\frac{5\pi}{8}-1,\qquad
+  \cR_{\mathrm{VP}}=\frac{\pi^2}{16},
+\end{equation}
 so averaged regularity prefers VP. The Heun endpoint factors satisfy
 \begin{equation}
   r_{\mathrm{lin}}=\frac{6797469}{3559400},\qquad
@@ -391,10 +351,11 @@ Details occupy Appendix~\ref{app:scalar}.
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{figures/fig_scalar.pdf}
-  \caption{Proposition~\ref{prop:scalar}: exact $\cR$ (left) and Heun
-  $\wtwo$ at NFE $8$ (right). The right-hand VP bar is the certified lower
-  bound $2-P(355/113,99/70)$, not a statistical interval. Regularity prefers
-  VP; endpoint error prefers linear. Exact calculation.}
+  \caption{Scalar drifts $a_{\mathrm{lin}}(t)$ and $a_{\mathrm{VP}}(t)$
+  for independent $N(0,1)$ and $N(0,4)$. The shaded region is
+  $a_{\mathrm{lin}}<0$. Markers are the four Heun nodes at NFE~$8$.
+  $a_{\mathrm{lin}}(0)=-1<0<a_{\mathrm{lin}}(1)=+1$; the VP drift does not
+  change sign on $(0,1)$. Exact evaluation of the closed-form drifts.}
   \label{fig:scalar}
 \end{figure}
 
@@ -482,8 +443,9 @@ Precision is float64, audited against an $80$-digit Gelbrich reference.
   experiments were added for this manuscript. Exact calculation of $\cR$
   and Gaussian $\wtwo$ on each cell.}
   \label{tab:setup}
-  \setlength{\tabcolsep}{3.5pt}
+  \setlength{\tabcolsep}{3pt}
   \small
+  \resizebox{\linewidth}{!}{%
   \begin{tabular}{llll}
     \toprule
     experiment & grid & paths & status \\
@@ -496,59 +458,26 @@ Precision is float64, audited against an $80$-digit Gelbrich reference.
     robustness $\pm 10\%$, NFE $64,128$ & $66$ low-rank blocks & linear, VP & post-hoc \\
     non-centered stress test & $2\times 3\times 3$ & linear, VP & pre-specified \\
     \bottomrule
-  \end{tabular}
+  \end{tabular}}
 \end{table}
 
 \subsection{Statistical treatment and what the counts mean}
 \label{subsec:stats}
 
-Almost every quantity in this paper is deterministic. Given a geometry, a
-path, a solver, and a budget, $\cR$ and $\wtwo$ are exact reals computed in
-float64 and checked at $80$ digits. There is no sampling noise on those
-cells. A hypothesis test, a standard-error interval, or a confidence
-interval on $\cR$, on $\wtwo$, or on a census count such as ``$5$ of $12$''
-would not be an inference: it would confuse a calculation with a sample.
-Five instruments replace that confusion.
-
-First, the $36$-block grid is a complete enumeration of the factorial plan
-$4$ geometries $\times$ $3$ solvers $\times$ $3$ budgets, not a draw. The
-counts are census counts.
-
-Second, the dependence is nested. $\cR$ depends on neither solver nor
-budget, so its preference is constant on each geometry. The anisotropic
-geometries $d=2$ and $d=8$ share the $\cR$ pair $(\numRlinAniso,\numRvpAniso)$
-because the spectral norm retains only the extreme eigenvalues. The census
-therefore contains \nDistinctRComparisons{} distinct linear-versus-VP $\cR$
-comparisons, and the $36$ rows nest into \nGeometrySolverCells{}
-geometry$\times$solver cells. Body values below are three-decimal displays
-of the float64 integrals; the exact digits are in Appendix~\ref{app:tables}.
-
-{\centering
-\small
-\begin{tabular}{lcc}
-\toprule
-geometry & $(\cR_{\mathrm{lin}},\cR_{\mathrm{VP}})$ & distinct $\cR$ pair \\
-\midrule
-anisotropic $d=2$ and $d=8$ & $(\numRlinAniso,\numRvpAniso)$ & $1$ (shared) \\
-low-rank $d=2$ & $(\numRlinLowTwo,\numRvpLowTwo)$ & $1$ \\
-low-rank $d=8$ & $(\numRlinStrong,\numRvpStrong)$ & $1$ \\
-\bottomrule
-\end{tabular}\par}
-
-Third, each inversion is reported by a separation ratio
-$\mathrm{margin}/\mathrm{floor}$, where the floor is the maximum observed
-gap between float64 $\wtwo$ and the $80$-digit reference
-($\numPrecFloor$). The pre-declared threshold is
-$\ge\separationThreshold$. Every inversion in the census lies above it;
-the smallest linear-versus-VP margin is $\precRatio$ times the floor.
-
-Fourth, the only random ingredient, and the only legitimate inference, is
-the draw of the low-rank factor $F$ (Section~\ref{subsec:robust-geometry}).
-
-Fifth, Kendall $\tau$ between the $\cR$-induced order and the $\wtwo$-induced
-order is reported as a descriptive statistic on a census, not an inferential
-test. On the $36$ linear-versus-VP blocks, $\tau=\kendallTauCensus$
-(Euler $\kendallTauEuler$, Heun $\kendallTauHeun$, RK4 $\kendallTauRK$).
+Given a geometry, a path, a solver, and a budget, $\cR$ and $\wtwo$ are
+exact reals computed in float64 and checked at $80$ digits: there is no
+sampling noise. The $36$-block grid is a complete enumeration of
+$4$ geometries $\times$ $3$ solvers $\times$ $3$ budgets, not a draw.
+Because $\cR$ is independent of solver and budget, and because the two
+anisotropic geometries share one $\cR$ pair, the census contains
+\nDistinctRComparisons{} distinct linear-versus-VP $\cR$ comparisons and
+nests into \nGeometrySolverCells{} geometry$\times$solver cells
+(Appendix~\ref{app:quadrature}). Each inversion is reported by the ratio
+of its $\wtwo$ margin to the $80$-digit floor; the pre-declared threshold
+is $\ge\separationThreshold$, and every census inversion lies above it.
+The only random ingredient, and the only confidence interval in the paper,
+is the draw of the low-rank factor $F$
+(Section~\ref{subsec:robust-geometry}).
 
 \subsection{R as a pairwise comparator: linear versus VP}
 \label{subsec:pairwise}
@@ -559,8 +488,12 @@ census of Table~\ref{tab:setup}, with continuous $\cR$. Linear versus VP
 invert in \nInversionCells{} of \nGeometrySolverCells{}
 geometry$\times$solver cells; \nAllNFEInvertCells{} of those cells invert at
 every NFE in $\{8,16,32\}$, from \nDistinctRComparisons{} distinct $\cR$
-comparisons. Table~\ref{tab:regimes} collects the three census counts.
-The strongest block is low-rank, $d=8$, Euler, NFE $8$:
+comparisons. On this census Kendall $\tau$ between the $\cR$ order and the
+$\wtwo$ order equals $2/9$ over $36$ blocks. Stratified by solver, with
+$n=4$ geometries and a structural tie between the two anisotropic
+targets, $\tau=+1/2$ under Euler and RK4 and $\tau=-1/3$ under Heun: rank
+agreement changes sign with the solver. The strongest block is low-rank,
+$d=8$, Euler, NFE $8$:
 $\cR$ prefers linear ($\numRlinStrong$ versus $\numRvpStrong$) while $\wtwo$
 prefers VP ($\numWlinStrong$ versus $\numWvpStrong$). Appendix~\ref{app:tables}
 lists every inverted row. This census does not estimate a population
@@ -606,32 +539,6 @@ $\wtwo$ in $36$ of $36$ blocks. It is not a shared $(\alpha,\sigma)$
 interpolant for $d\geq 2$. The observation is a census count on this family,
 not a sampling law, and it does not supply a practical multi-dimensional
 schedule.
-
-\begin{table}[t]
-  \centering
-  \caption{Three regimes for $\cR$ on the commuting Gaussian census.
-  Pairwise and in-family counts are complete enumerations of
-  $4$ geometries $\times$ $3$ solvers $\times$ $3$ NFE budgets.
-  The unconstrained minimizer attains both the smallest $\cR$ and the
-  smallest $\wtwo$ in $36$ of $36$ blocks; it is not a shared
-  $(\alpha,\sigma)$ interpolant for $d\geq 2$. Exact calculations, not
-  estimators.}
-  \label{tab:regimes}
-  \small
-  \begin{tabular}{lp{4.6cm}p{6.2cm}}
-    \toprule
-    regime & comparison & census \\
-    \midrule
-    pairwise comparator & linear vs VP &
-      $5$ of $12$ cells invert ($4$ of $12$ at every NFE) \\
-    in-family objective & VP vs Ex.~3.3 scalar ($M=\lambda_{\max}$) &
-      $9$ of $36$ blocks invert ($4$ of $12$ cells) \\
-    unconstrained minimiser & per-mode $q_i(t)=\lambda_i^t$,
-      not a shared $(\alpha,\sigma)$ interpolant for $d\geq 2$ &
-      smallest $\cR$ and $\wtwo$ in $36$ of $36$ blocks \\
-    \bottomrule
-  \end{tabular}
-\end{table}
 
 \subsection{Where the inversions live: a sweep over target variance}
 \label{subsec:region}
@@ -838,16 +745,18 @@ $321331\cdot 1000<91\cdot 3559400$ is an integer comparison, so
 $\wtwo^{\mathrm{lin}}<0.091$.
 
 \paragraph{Exact VP grid and rational certificate.}
-The VP drift is
-$a_{\mathrm{VP}}(t)=(3\pi/2)\sin(\pi t)/(5-3\cos(\pi t))$. Evaluating at the
-Heun nodes gives
-\begin{align}
-  a(0)&=0,\\
-  a(1/4)&=\frac{(9+15\sqrt{2})\pi}{82},\\
-  a(1/2)&=\frac{3\pi}{10},\\
-  a(3/4)&=\frac{(-9+15\sqrt{2})\pi}{82},\\
-  a(1)&=0.
-\end{align}
+At the Heun nodes the VP drift takes the values
+\begin{equation}
+  \begin{array}{c@{\quad}ccccc}
+    t & 0 & 1/4 & 1/2 & 3/4 & 1 \\
+    a_{\mathrm{VP}}(t) &
+      0 &
+      \tfrac{(9+15\sqrt{2})\pi}{82} &
+      \tfrac{3\pi}{10} &
+      \tfrac{(-9+15\sqrt{2})\pi}{82} &
+      0
+  \end{array}
+\end{equation}
 Positivity of $a(3/4)$ follows from $15\sqrt{2}>9$, or $15^2\cdot 2-9^2=369>0$
 after squaring. Each Heun factor is therefore strictly positive, so
 $0<r_{\mathrm{VP}}$ and $\wtwo^{\mathrm{VP}}=2-r_{\mathrm{VP}}$.
@@ -1084,6 +993,31 @@ the same sign. Adaptive quadrature is used for multi-mode $\cR$; the scalar
 integrals of Appendix~\ref{app:scalar} are closed form. Scipy error
 estimates are not interval certificates.
 
+Because $\cR$ depends on neither solver nor budget, the $36$ linear-versus-VP
+rows nest into $12$ geometry$\times$solver cells. The two anisotropic
+geometries share one $\cR$ pair, so the census contains three distinct
+$\cR$ comparisons:
+{\centering
+\small
+\begin{tabular}{lcc}
+\toprule
+geometry & $(\cR_{\mathrm{lin}},\cR_{\mathrm{VP}})$ & distinct $\cR$ pair \\
+\midrule
+anisotropic $d=2$ and $d=8$ & $(\numRlinAniso,\numRvpAniso)$ & $1$ (shared) \\
+low-rank $d=2$ & $(\numRlinLowTwo,\numRvpLowTwo)$ & $1$ \\
+low-rank $d=8$ & $(\numRlinStrong,\numRvpStrong)$ & $1$ \\
+\bottomrule
+\end{tabular}\par}
+
+Frozen Gaussian $\wtwo$ on the centered census was checked against an
+$80$-digit Gelbrich reference. The maximum observed gap is the numerical
+floor $\numPrecFloor$. Kendall $\tau$ between the $\cR$ order and the
+$\wtwo$ order is a descriptive census statistic, not a test
+(Table~\ref{tab:kendall}). On the $36$ linear-versus-VP blocks,
+$\tau=2/9$. Stratified by solver, with $n=4$ geometries and a structural
+tie between the two anisotropic targets, $\tau=+1/2$ under Euler and RK4
+and $\tau=-1/3$ under Heun.
+
 Scalar linear Heun factors are computed in exact rationals. The VP Heun
 product is certified by substituting $\pi<355/113$ and $\sqrt{2}<99/70$ into
 a nonnegative element of $\mathbb{Q}[\pi,\sqrt{2}]$; the ranking inequality
@@ -1091,9 +1025,7 @@ is the integer comparison in Appendix~\ref{app:scalar}. An independent
 interval enclosure at $40$ decimal digits
 (\texttt{mpmath}~\mpmathVersion) and an $80$-digit (non-interval) product
 are recorded as cross-checks against the float64 Heun implementation.
-Frozen Gaussian $\wtwo$ values on the centered census were checked against
-an $80$-digit Gelbrich reference. Default numerical precision for the
-benchmark runs is float64.
+Default numerical precision for the benchmark runs is float64.
 
 Table~\ref{tab:lebesgue} reports the log-Lebesgue measure of the
 linear-versus-VP inversion set on $[0.05,100]$. The declared resolution is
@@ -1135,9 +1067,8 @@ $66$ blocks. All $66$ follow the same solver-path split as the primary
 low-rank census: VP under Euler, linear under Heun and RK4.
 
 The geometry-draw experiment of Section~\ref{subsec:robust-geometry} is the
-one place $F$ is redrawn. Kendall $\tau$ on the centered census, labelled as
-a descriptive statistic and not a test, is recorded in
-Table~\ref{tab:kendall}.
+one place $F$ is redrawn. Kendall $\tau$ on the centered census is discussed
+in Appendix~\ref{app:quadrature} and recorded in Table~\ref{tab:kendall}.
 
 \begin{table}[ht]
   \centering
