@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import json
 import subprocess
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -154,7 +154,7 @@ def write_sidecar(
         "plotting_config": plotting_config,
         "git_commit": git_commit(),
         "git_status": git_status_flag(),
-        "generation_timestamp": datetime.now(UTC).isoformat(),
+        "generation_timestamp": datetime.now(timezone.utc).isoformat(),
         "figure_checksum_sha256": sha256_file(figure_path),
         "note": note,
     }
@@ -191,77 +191,160 @@ def phase4_blocks(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return blocks
 
 
-def figure1_conceptual() -> Path:
-    """Write the conceptual signed-defect schematic.
+def figure1_regimes() -> Path:
+    """Three-regime overview: pairwise, in-family, unconstrained minimiser.
 
-    Inputs: none; no artifact bytes are read.
+    Inputs: none; census counts are the published 5/12, 9/36, and 36/36.
     Outputs: path to the written figure PDF.
-    Units: schematic axes only; not measured data.
-    Precision: illustrative curves; not tied to an NFE budget or artifact ID.
+    Units: schematic; not a measured trajectory.
+    Precision: integer census counts, not estimators.
+    """
+    fig, axes = plt.subplots(1, 3, figsize=(6.8, 2.35))
+    panels = [
+        {
+            "title": "(a) pairwise comparator",
+            "pair": "linear vs VP",
+            "count": "5 of 12 cells invert",
+            "sub": "4 of 12 at every NFE\n3 distinct $R$ comparisons",
+            "verdict": r"$R$ does not order $W_2$",
+            "color": COLOR_VP,
+        },
+        {
+            "title": "(b) in-family objective",
+            "pair": "VP vs Chen Ex. 3.3 scalar",
+            "count": "9 of 36 blocks invert",
+            "sub": "4 of 12 geometry$\\times$solver cells\nboth paths are shared $(\\alpha,\\sigma)$",
+            "verdict": "still not a ranking rule",
+            "color": "#E69F00",
+        },
+        {
+            "title": "(c) unconstrained minimiser",
+            "pair": r"$q_i(t)=\lambda^{t}_{i}$",
+            "count": "smallest in 36 of 36",
+            "sub": "smallest $R$ and smallest $W_2$\nnot a shared interpolant for $d\\geq 2$",
+            "verdict": r"$R$ works as an objective",
+            "color": "#009E73",
+        },
+    ]
+    for ax, panel in zip(axes, panels, strict=True):
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 1)
+        ax.axis("off")
+        ax.set_title(panel["title"], loc="left", fontsize=8.5, pad=2)
+        ax.text(0.5, 0.82, panel["pair"], ha="center", va="center", fontsize=8, color=GRAY)
+        ax.text(
+            0.5,
+            0.52,
+            panel["count"],
+            ha="center",
+            va="center",
+            fontsize=11,
+            fontweight="bold",
+            color=panel["color"],
+        )
+        ax.text(0.5, 0.28, panel["sub"], ha="center", va="center", fontsize=7, color="#333333")
+        ax.text(
+            0.5,
+            0.08,
+            panel["verdict"],
+            ha="center",
+            va="center",
+            fontsize=8,
+            style="italic",
+        )
+        ax.add_patch(
+            plt.Rectangle(
+                (0.04, 0.02),
+                0.92,
+                0.96,
+                fill=False,
+                linewidth=0.8,
+                edgecolor="#d0d0d0",
+                transform=ax.transAxes,
+                clip_on=False,
+            )
+        )
+    fig.subplots_adjust(wspace=0.18)
+    out = FIGURE_DIR / ("fig1_regimes" + FIGURE_SUFFIX)
+    fig.savefig(out, bbox_inches="tight")
+    plt.close(fig)
+    return out
+
+
+def figure_four_paths() -> Path:
+    """Four-path R and Euler-8 W2 on the four centered geometries.
+
+    Inputs: paper/arxiv/artifacts/geometries.json and exact-moment modal RK.
+    Outputs: path to fig_four_paths.pdf.
+    Units: continuous R dimensionless; Gaussian W2 in the ambient metric.
+    Precision: float64 exact-moment factors; R by adaptive quadrature except
+    the per-mode log-covariance closed form.
     """
     import numpy as np
 
-    fig, (ax1, ax2, ax3) = plt.subplots(
-        1,
-        3,
-        figsize=(6.8, 2.1),
-        gridspec_kw={"width_ratios": [1.3, 1.05, 0.7], "wspace": 0.45},
+    from fewstep_regularities.analysis.ranking_grids import (
+        FOUR_PATHS,
+        GEOM_KEYS,
+        four_path_scores,
     )
 
-    t = np.linspace(0.0, 1.0, 400)
-    field_a = 1.05 + 0.25 * np.sin(2.2 * np.pi * t)
-    field_b = 1.25 + 0.55 * np.sin(4.4 * np.pi * t + 0.6)
-    ax1.plot(t, field_a, color=COLOR_LINEAR, lw=1.6)
-    ax1.plot(t, field_b, color=COLOR_VP, lw=1.6, ls="--")
-    ax1.text(0.36, 0.72, "path A", color=COLOR_LINEAR, fontsize=8.5)
-    ax1.text(0.03, 1.9, "path B", color=COLOR_VP, fontsize=8.5)
-    stages = np.linspace(0, 1, 5)[:-1]
-    ax1.plot(stages, np.interp(stages, t, field_a), "o", ms=4, color=COLOR_LINEAR)
-    ax1.plot(stages, np.interp(stages, t, field_b), "s", ms=4, color=COLOR_VP)
-    ax1.axhline(float(np.mean(field_a)), color=COLOR_LINEAR, lw=0.9, alpha=0.5)
-    ax1.axhline(float(np.mean(field_b)), color=COLOR_VP, lw=0.9, alpha=0.5)
-    ax1.set_xlabel("time $t$")
-    ax1.set_ylabel(r"$\Vert \partial_x b_t \Vert$ (schematic)")
-    ax1.set_xlim(0, 1.0)
-    ax1.set_ylim(0.45, 2.05)
-    ax1.set_title("(a) fields and averages", loc="left")
-
-    steps = np.arange(1, 5)
-    defects_a = np.array([0.30, 0.34, 0.38, 0.42])
-    defects_b = np.array([0.55, -0.45, 0.50, -0.40])
-    width = 0.38
-    ax2.bar(steps - width / 2, defects_a, width, color=COLOR_LINEAR, label="path A")
-    ax2.bar(
-        steps + width / 2,
-        defects_b,
-        width,
-        color=COLOR_VP,
-        hatch="//",
-        edgecolor="white",
-        label="path B",
+    payload = json.loads(
+        (ROOT / "paper/arxiv/artifacts/geometries.json").read_text(encoding="utf-8")
     )
-    ax2.axhline(0.0, color=GRAY, lw=0.9)
-    ax2.set_xticks(steps, [str(n) for n in steps])
-    ax2.set_xlabel("solver step")
-    ax2.set_ylabel("local defect")
-    ax2.set_title("(b) signed defects", loc="left")
+    labels = {
+        "linear": "linear",
+        "variance_preserving": "VP",
+        "log_covariance_scalar": "Ex. 3.3",
+        "log_covariance": r"per-mode",
+    }
+    colors = {
+        "linear": COLOR_LINEAR,
+        "variance_preserving": COLOR_VP,
+        "log_covariance_scalar": "#E69F00",
+        "log_covariance": "#009E73",
+    }
+    geom_labels = []
+    r_vals = {path: [] for path in FOUR_PATHS}
+    w_vals = {path: [] for path in FOUR_PATHS}
+    for key, family, dim in GEOM_KEYS:
+        eigenvalues = payload[key]["eigenvalues"]
+        scores = four_path_scores(eigenvalues, "euler", 8)
+        geom_labels.append(f"{family}\n$d={dim}$")
+        for path in FOUR_PATHS:
+            r_vals[path].append(scores[path].regularity)
+            w_vals[path].append(scores[path].w2)
 
-    totals = [float(np.abs(defects_a.sum())), float(np.abs(defects_b.sum()))]
-    bars = ax3.bar(
-        [0, 1],
-        totals,
-        width=0.55,
-        color=[COLOR_LINEAR, COLOR_VP],
-        hatch=["", "//"],
-        edgecolor=["none", "white"],
+    fig, axes = plt.subplots(1, 2, figsize=(6.8, 2.45), layout="constrained")
+    x = np.arange(len(geom_labels), dtype=float)
+    width = 0.18
+    offsets = (-1.5, -0.5, 0.5, 1.5)
+    for ax, store, ylabel, title in (
+        (axes[0], r_vals, r"$R=\int_0^1\|A(t)\|_2^2\,dt$", "regularity (lower preferred)"),
+        (axes[1], w_vals, r"Euler $W_2$ at NFE $8$", "endpoint error (lower preferred)"),
+    ):
+        for offset, path in zip(offsets, FOUR_PATHS, strict=True):
+            ax.bar(
+                x + offset * width,
+                store[path],
+                width,
+                color=colors[path],
+                label=labels[path],
+            )
+        ax.set_xticks(x, geom_labels, fontsize=7)
+        ax.set_ylabel(ylabel)
+        ax.set_title(title, loc="left", fontsize=8.5)
+        ax.set_yscale("log")
+    handles, legend_labels = axes[0].get_legend_handles_labels()
+    fig.legend(
+        handles,
+        legend_labels,
+        loc="upper center",
+        ncol=4,
+        frameon=False,
+        bbox_to_anchor=(0.5, 1.08),
+        fontsize=8,
     )
-    ax3.bar_label(bars, ["A", "B"], padding=2, fontsize=8)
-    ax3.set_xticks([0, 1], ["path A", "path B"])
-    ax3.set_ylim(0, 1.75)
-    ax3.set_ylabel("endpoint\nerror")
-    ax3.set_title("(c) ranking reversed", loc="left")
-    # Spacing uses gridspec wspace; tight_layout conflicts with that on mpl 3.11+.
-    out = FIGURE_DIR / ("fig1_conceptual" + FIGURE_SUFFIX)
+    out = FIGURE_DIR / ("fig_four_paths" + FIGURE_SUFFIX)
     fig.savefig(out, bbox_inches="tight")
     plt.close(fig)
     return out
@@ -571,63 +654,189 @@ def figure3_interaction() -> tuple[Path, list[str]]:
     return out, [artifact_id]
 
 
+def figure_scalar_counterexample() -> Path:
+    """Bar comparison of exact R and certified W2 for the 1D Heun example."""
+    payload = json.loads(
+        (ROOT / "paper/arxiv/artifacts/scalar_counterexample.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    r_lin = float(payload["R_linear"])
+    r_vp = float(payload["R_vp"])
+    w_lin = float(payload["W2_linear_float"])
+    w_vp = 2.0 - float(payload["r_vp_rational_upper_float"])
+    fig, axes = plt.subplots(1, 2, figsize=(6.4, 2.5))
+    colors = [COLOR_LINEAR, COLOR_VP]
+    labels = ["linear", "VP"]
+    axes[0].bar(labels, [r_lin, r_vp], color=colors, width=0.55)
+    axes[0].set_ylabel(r"$R=\int_0^1 a(t)^2\,dt$")
+    axes[0].set_title("exact regularity (lower is preferred)", loc="left")
+    axes[1].bar(labels, [w_lin, w_vp], color=colors, width=0.55)
+    axes[1].set_ylabel(r"Heun $W_2$ at NFE $8$")
+    axes[1].set_title("endpoint error (lower is preferred)", loc="left")
+    fig.tight_layout()
+    out = FIGURE_DIR / ("fig_scalar" + FIGURE_SUFFIX)
+    fig.savefig(out, bbox_inches="tight")
+    plt.close(fig)
+    return out
+
+
+def figure_noncentered_decomposition() -> tuple[Path, list[str]]:
+    """Signed mean and covariance path differences on the non-centered family."""
+    artifact_id = "workshop_external_validation_2026-07-24-v1:results"
+    payload = load_pinned(artifact_id)
+    compact = json.loads(
+        (ROOT / "paper/arxiv/artifacts/noncentered_blocks.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    blocks = compact["blocks"]
+    if len(blocks) != 18:
+        raise ValueError(f"expected 18 non-centered blocks, got {len(blocks)}")
+    for row in blocks:
+        for key in ("delta_mean", "delta_cov", "delta_total"):
+            if key not in row:
+                raise KeyError(f"missing {key} in non-centered compact artifact")
+
+    solver_abbrev = {"euler": "Eu", "heun": "He", "rk4": "RK"}
+    fig, axes = plt.subplots(
+        2, 1, figsize=(6.8, 4.8), sharex=True, gridspec_kw={"hspace": 0.28}
+    )
+    width = 0.38
+    for ax, dim in zip(axes, (2, 8), strict=True):
+        rows = [row for row in blocks if int(row["dim"]) == dim]
+        y = list(range(len(rows)))
+        labels = [
+            f"{solver_abbrev[row['solver']]} {row['nfe']}"
+            + (r"$^\ast$" if row["inversion_R"] else "")
+            for row in rows
+        ]
+        mean_vals = [row["delta_mean"] for row in rows]
+        cov_vals = [row["delta_cov"] for row in rows]
+        ax.barh(
+            [yi - width / 2 for yi in y],
+            mean_vals,
+            width,
+            color=COLOR_LINEAR,
+            label=r"$\Delta_{\mathrm{mean}}$",
+        )
+        ax.barh(
+            [yi + width / 2 for yi in y],
+            cov_vals,
+            width,
+            color=COLOR_VP,
+            hatch="//",
+            edgecolor="white",
+            label=r"$\Delta_{\mathrm{cov}}$",
+        )
+        ax.axvline(0.0, color="#333333", lw=1.0)
+        ax.set_xscale("symlog", linthresh=1e-6)
+        ax.set_yticks(y, labels, fontsize=8)
+        ax.set_title(f"$d={dim}$", loc="left")
+        ax.legend(frameon=False, loc="lower right", fontsize=8)
+        ax.grid(axis="x", alpha=0.25, linewidth=0.4)
+    axes[1].set_xlabel(
+        r"signed path difference (symlog; $+$ means linear larger than VP)"
+    )
+    out = FIGURE_DIR / ("fig_noncentered" + FIGURE_SUFFIX)
+    fig.savefig(out, bbox_inches="tight")
+    plt.close(fig)
+    del payload
+    return out, [artifact_id]
+
+
 def main() -> None:
     FIGURE_DIR.mkdir(parents=True, exist_ok=True)
-    fig1 = figure1_conceptual()
+    written: list[Path] = []
+    fig1 = figure1_regimes()
     write_sidecar(
         fig1,
         artifact_ids=[],
         plotting_config={
-            "kind": "conceptual_schematic",
+            "kind": "three_regime_census",
             "consumes_artifacts": False,
+            "counts": {"pairwise_cells": "5/12", "in_family_blocks": "9/36", "minimizer": "36/36"},
         },
         note=(
-            "Conceptual schematic only; curves and bars are illustrative and "
-            "represent no measured quantity."
+            "Schematic census of the three regimes. Counts are complete "
+            "enumerations, not estimators."
         ),
     )
-    fig2, ids2 = figure2_inversions()
+    written.append(fig1)
+    fig_s = figure_scalar_counterexample()
     write_sidecar(
-        fig2,
-        artifact_ids=ids2,
-        plotting_config={
-            "kind": "strongest_inversion_and_all_blocks",
-            "block_definition": "two-path comparison per (family, dim, solver, nfe)",
-            "x_scale": "log",
-        },
-        note=(
-            "Source: phase4_gaussian_reproduction_2026-07-24-v1:results. "
-            "Log margin axis for 14 of 36 inversion blocks in the tested grid."
-        ),
+        fig_s,
+        artifact_ids=[],
+        plotting_config={"kind": "scalar_gaussian_heun_counterexample"},
+        note="Source: paper/arxiv/artifacts/scalar_counterexample.json.",
     )
-    fig_e, ids_e = figure_eigenmode()
+    written.append(fig_s)
+    fig4 = figure_four_paths()
     write_sidecar(
-        fig_e,
-        artifact_ids=ids_e,
-        plotting_config={
-            "kind": "eigenmode_signed_defect_strongest_block",
-            "block": STRONGEST_BLOCK,
-        },
+        fig4,
+        artifact_ids=[],
+        plotting_config={"kind": "four_path_R_and_euler8_W2"},
         note=(
-            "Source: phase4_decomposition_2026-07-24-v1:table. "
-            "The modal decomposition is exact; any aggregate solver proxy is "
-            "post-hoc and in-sample and is not shown as predictive."
+            "Linear, trigonometric VP, shared Chen Ex. 3.3 (M=lambda_max), "
+            "and per-mode log-covariance. R is continuous; W2 is Euler at NFE 8."
         ),
     )
-    fig3, ids3 = figure3_interaction()
-    write_sidecar(
-        fig3,
-        artifact_ids=ids3,
-        plotting_config={
-            "kind": "lowrank_solver_path_interaction",
-            "y_scale": "symlog linthresh 1e-4",
-        },
-        note=(
-            "Source: phase4_gaussian_reproduction_2026-07-24-v1:results. "
-            "Signed low-rank W2 margins versus equal-NFE Euler, Heun, and RK4."
-        ),
-    )
-    for path in (fig1, fig2, fig_e, fig3):
+    written.append(fig4)
+    outputs_root = ROOT / "outputs" / "phase4_gaussian_reproduction_2026-07-24-v1"
+    if outputs_root.is_dir():
+        fig2, ids2 = figure2_inversions()
+        write_sidecar(
+            fig2,
+            artifact_ids=ids2,
+            plotting_config={
+                "kind": "strongest_inversion_and_all_blocks",
+                "block_definition": "two-path comparison per (family, dim, solver, nfe)",
+                "x_scale": "log",
+            },
+            note=(
+                "Source: phase4_gaussian_reproduction_2026-07-24-v1:results. "
+                "Log margin axis for 14 of 36 inversion blocks in the tested grid."
+            ),
+        )
+        written.append(fig2)
+        fig_e, ids_e = figure_eigenmode()
+        write_sidecar(
+            fig_e,
+            artifact_ids=ids_e,
+            plotting_config={
+                "kind": "eigenmode_signed_defect_strongest_block",
+                "block": STRONGEST_BLOCK,
+            },
+            note=(
+                "Source: phase4_decomposition_2026-07-24-v1:table. "
+                "The modal decomposition is exact; any aggregate solver proxy is "
+                "post-hoc and in-sample and is not shown as predictive."
+            ),
+        )
+        written.append(fig_e)
+        fig3, ids3 = figure3_interaction()
+        write_sidecar(
+            fig3,
+            artifact_ids=ids3,
+            plotting_config={
+                "kind": "lowrank_solver_path_interaction",
+                "y_scale": "symlog linthresh 1e-4",
+            },
+            note=(
+                "Source: phase4_gaussian_reproduction_2026-07-24-v1:results. "
+                "Signed low-rank W2 margins versus equal-NFE Euler, Heun, and RK4."
+            ),
+        )
+        written.append(fig3)
+        fig_n, ids_n = figure_noncentered_decomposition()
+        write_sidecar(
+            fig_n,
+            artifact_ids=ids_n,
+            plotting_config={"kind": "noncentered_mean_bures_split"},
+            note="Signed Delta_mean and Delta_cov on all 18 blocks; * marks inversions.",
+        )
+        written.append(fig_n)
+    for path in written:
         print(path.relative_to(ROOT), sha256_file(path)[:16])
 
 

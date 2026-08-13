@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+title: "Averaged Jacobian Regularity Does Not Order Few-Step Error in Flow Matching: A Certified Gaussian Counterexample"
+message: "If you use this software or the accompanying manuscript, please cite it as below."
+type: software
+authors:
+  - family-names: Callaert
+    given-names: Clément
+    email: callaert.clement@gmail.com
+    affiliation: "CentraleSupélec and Université Paris-Saclay"
+license: CC-BY-4.0
+repository-code: "https://github.com/clement-callaert/fewstep-field-regularity"
+url: "https://github.com/clement-callaert/fewstep-field-regularity"
+abstract: >
+  Flow matching and stochastic interpolants specify a probability flow ODE
+  whose few-step sampling error depends on the sampling schedule. Chen,
+  Vanden-Eijnden, and Xu propose minimizing averaged squared Jacobian
+  regularity A2 as a path-selection criterion. This work gives a certified
+  Gaussian counterexample and a three-regime map of when that scalar orders
+  equal-NFE Wasserstein-2 error.
+keywords:
+  - flow matching
+  - stochastic interpolants
+  - few-step sampling
+  - Lipschitz regularity
+  - Wasserstein distance
+  - Runge-Kutta
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Callaert
+      given-names: Clément
+  title: "Averaged Jacobian Regularity Does Not Order Few-Step Error in Flow Matching: A Certified Gaussian Counterexample"
+  year: 2026
+  journal: arXiv

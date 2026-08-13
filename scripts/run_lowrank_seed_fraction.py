@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 import json
-import math
 from pathlib import Path
 
 import torch
 
+from fewstep_regularities.analysis.census_statistics import clopper_pearson
 from fewstep_regularities.analysis.ranking_grids import (
     PRIMARY_NFE,
     SOLVERS,
@@ -23,13 +23,9 @@ BASE_SEED = 10000
 DIMS = (2, 8)
 
 
-def binomial_interval(successes: int, n: int, z: float = 1.96) -> tuple[float, float]:
-    """Return a Wald interval clipped to [0, 1]."""
-    if n <= 0:
-        raise ValueError("n must be positive")
-    p = successes / n
-    half = z * math.sqrt(p * (1.0 - p) / n)
-    return max(0.0, p - half), min(1.0, p + half)
+def binomial_interval(successes: int, n: int) -> tuple[float, float]:
+    """Return a Clopper--Pearson 95 percent interval."""
+    return clopper_pearson(successes, n)
 
 
 def geometry_inverts(eigenvalues: list[float]) -> bool:
@@ -68,27 +64,39 @@ def main() -> None:
                 "n_seeds": N_SEEDS,
                 "n_with_any_inversion": hits,
                 "fraction": hits / N_SEEDS,
-                "wald_low": lo,
-                "wald_high": hi,
+                "clopper_pearson_low": lo,
+                "clopper_pearson_high": hi,
             }
         )
     summary = [row for row in records if "n_seeds" in row]
+    draws = [row for row in records if "seed" in row]
     OUT_JSON.write_text(
-        json.dumps({"n_seeds": N_SEEDS, "summary": summary, "draws": records}, indent=2)
+        json.dumps(
+            {
+                "n_seeds": N_SEEDS,
+                "interval": "Clopper-Pearson 95 percent exact",
+                "generator": "torch.Generator manual_seed 10000..10049",
+                "redraws_F": True,
+                "summary": summary,
+                "draws": draws,
+            },
+            indent=2,
+        )
         + "\n",
         encoding="utf-8",
     )
     lines = [
         r"\begin{tabular}{lccc}",
         r"\toprule",
-        r"$d$ & inversions / 50 & fraction & Wald 95\% \\",
+        r"$d$ & inversions / 50 & fraction & Clopper--Pearson 95\% \\",
         r"\midrule",
     ]
     for row in summary:
         lines.append(
             f"{row['dim']} & {row['n_with_any_inversion']}/50 & "
             f"{float(str(row['fraction'])):.2f} & "
-            f"[{float(str(row['wald_low'])):.2f}, {float(str(row['wald_high'])):.2f}] \\\\"
+            f"[{float(str(row['clopper_pearson_low'])):.3f}, "
+            f"{float(str(row['clopper_pearson_high'])):.3f}] \\\\"
         )
     lines.extend([r"\bottomrule", r"\end{tabular}", ""])
     OUT_TEX.write_text("\n".join(lines), encoding="utf-8")
