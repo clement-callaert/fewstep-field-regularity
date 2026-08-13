@@ -5,38 +5,59 @@ Do not upload without an explicit owner decision.
 
 ## Title
 
-Averaged Jacobian Regularity Does Not Order Few-Step Error of Gaussian Interpolant ODEs
+Averaged Jacobian Regularity Does Not Order Few-Step Error in Flow Matching: A Certified Gaussian Counterexample
+
+Hard constraints: no LaTeX macros, no mathematical symbols, under 120 characters,
+contains "flow matching". Character count: 108. Word count: 15.
 
 ## Author
 
 - Name: Clément Callaert
 - Affiliation: CentraleSupélec and Université Paris-Saclay
 - Email: callaert.clement@gmail.com
-- ORCID: none (by instruction)
+- ORCID: owner action required before upload (Semantic Scholar / OpenAlex / Google Scholar merge on ORCID)
+- Graphy: always "Clément Callaert" in the PDF, arXiv, GitHub, LinkedIn, and BibTeX
 - Postal address, laboratory, supervisor, funding: none (by instruction)
 
 ## Abstract (plain text, for the abstract field)
 
-Few-step sampling of a continuous-time generative model requires a probability path, a numerical solver, and a budget of field evaluations (NFE). Chen, Vanden-Eijnden, and Xu propose minimizing averaged squared Jacobian regularity A2 as a path-selection criterion. This paper asks whether the order that this scalar induces between two interpolants is reliable at fixed NFE. The implication fails already for centered Gaussian interpolants. The main logical result is a one-dimensional, seed-free counterexample: for independent N(0,1) and N(0,4) endpoints, the exact regularity integrals of the linear and trigonometric variance-preserving paths are 5 pi/8 - 1 and pi^2/16, while explicit Heun with NFE 8 reverses the Gaussian W2 ranking. The linear Heun factor is the rational 6797469/3559400; a rational enclosure in Q[pi, sqrt(2)] certifies W2_lin < 0.091 < 0.130 < W2_VP. On four centered geometries the per-mode log-covariance schedule (Chen et al. Example 3.3), which minimizes R, attains the smallest W2 in all 36 solver-budget blocks. Linear versus VP invert in 5 of 12 geometry-by-solver cells (4 of 12 at every NFE in {8,16,32}), from three distinct R comparisons. Thus R is reliable as an objective on this family and not reliable as a linear-versus-VP comparator away from that optimum.
+Flow matching and stochastic interpolants specify a probability flow ODE whose few-step sampling error depends on the sampling schedule. Schedule design therefore needs an a priori criterion. Chen, Vanden-Eijnden, and Xu propose minimizing the averaged squared Jacobian norm A_2, a Lipschitz constant of the marginal field, as a selection criterion, without a proved bound on discretization error. This paper asks whether the order induced by A_2 between two paths is reliable at a fixed number of function evaluations (NFE). Already for centered Gaussian interpolants the implication fails. For independent N(0,1) and N(0,4) endpoints, the exact regularity integrals of the linear and trigonometric variance-preserving paths are 5 pi/8 - 1 and pi^2/16. Explicit Heun method, a two-stage Runge-Kutta scheme, with NFE 8 reverses the ranking of Gaussian Wasserstein-2 distance: the linear factor is the rational 6797469/3559400, and a rational enclosure of the VP product in Q[pi, sqrt(2)] yields r_VP < 187/100. Three regimes then separate. As a pairwise comparator of linear versus VP, the ranking inverts in 5 of 12 geometry-by-solver cells (4 of 12 at every tested NFE), from 3 distinct regularity comparisons. As an in-family objective, trigonometric VP versus the scalar log-covariance schedule (Chen Example 3.3 with M = lambda_max) invert in 9 of 36 blocks and 4 of 12 cells. The unconstrained per-mode minimizer attains both the smallest regularity and the smallest Wasserstein-2 distance in 36 of 36 blocks, but is not a shared (alpha, sigma) interpolant for d >= 2. The analysis is confined to commuting Gaussians; no learned field is used.
 
 ## Categories (proposed, not submitted)
 
 - Primary: `cs.LG`
-- Secondary: `math.NA`
-- Optional further secondary: `stat.ML` if the current taxonomy still lists it as a cross-list for this kind of work.
+- Cross-list: `stat.ML`
+- Cross-list: `math.NA`
 
-Rationale: the scientific object is a ranking failure for a generative-path regularity scalar; the method is ODE analysis plus closed-form Gaussian W2.
+Do not cross-list beyond these three. `math.NA` is intentional: the object is Runge-Kutta endpoint error and a Jacobian-norm criterion.
+
+## MSC 2020 (arXiv form fields)
+
+- `65L05` numerical methods for IVPs, ODEs
+- `65L70` error bounds for numerical methods for ODEs
+- `68T07` neural networks and deep learning
+- `49Q22` optimal transportation
+
+## ACM class (arXiv form fields)
+
+- `G.1.7` Numerical Analysis -- Ordinary Differential Equations
+- `I.2.6` Learning
 
 ## Keywords
 
-flow matching, interpolant ODE, few-step sampling, Wasserstein, Runge-Kutta, field regularity
+flow matching, stochastic interpolants, diffusion models, probability flow ODE, few-step sampling, sampling schedule, Lipschitz regularity, Wasserstein distance, Runge-Kutta, numerical analysis
 
 ## Comments field (suggested)
 
-14 pages, figures. Source and reproduction scripts:
-https://github.com/clement-callaert/fewstep-field-regularity
+19 pages, 7 figures, 13 tables. Code and compact artifacts: https://github.com/clement-callaert/fewstep-field-regularity
 
-Do not put venue, review, or acceptance language in the comments field.
+Update the page/figure/table counts from the compiled PDF immediately before upload. Do not put venue, review, or acceptance language in the comments field.
+
+## License (prepared choice)
+
+**CC BY 4.0.** The arXiv license chosen at upload is irrevocable for that version
+(https://info.arxiv.org/help/license/). CC BY permits redistribution and
+inclusion in corpora and aggregators.
 
 ## Journal reference / DOI
 
@@ -46,28 +67,12 @@ None.
 
 https://github.com/clement-callaert/fewstep-field-regularity
 
-Public preprint path after this branch is merged by the owner: `paper/arxiv/`.
+Public preprint path: `paper/arxiv/`.
 
-## License options (owner must choose; none is selected here)
+## Timing (owner action)
 
-The arXiv license chosen at upload is irrevocable for that version
-(https://info.arxiv.org/help/license/ and the submittal agreement,
-checked 2026-08-13).
-
-| Option | What it allows | Main consequence |
-| --- | --- | --- |
-| CC BY 4.0 | Share and adapt, including commercial use, with attribution | Most journal-friendly among the open CC options; others may republish adapted versions |
-| CC BY-SA 4.0 | Same, but adaptations must use the same license | Copyleft on derivatives; some publishers dislike ShareAlike |
-| CC BY-NC-SA 4.0 | Non-commercial share-alike | Blocks commercial reuse; can conflict with some publisher policies |
-| CC BY-NC-ND 4.0 | Non-commercial, no derivatives | Strong reuse limit; translations and overlays need separate permission |
-| CC0 1.0 | Public domain dedication | Copyright is waived to the extent allowed; strongest reuse, least control |
-| arXiv.org perpetual non-exclusive license 1.0 | arXiv may distribute; no general reuse grant to third parties | Default-like restricted reuse; others must ask the author |
-
-If a journal or funder requires a license not in the list, arXiv currently
-says: select the arXiv non-exclusive license and print the desired license
-on the first page, provided it does not restrict arXiv's own license.
-
-This file does not choose.
+Submit before 14:00 ET for the next day's announcement. Prefer a Tuesday--Friday
+announcement; Monday listings include the weekend and are the longest.
 
 ## Endorsement
 
@@ -78,5 +83,4 @@ behalf.
 
 ## What this file is not
 
-Not an upload. Not a claim of institutional endorsement. Not a license
-grant.
+Not an upload. Not a claim of institutional endorsement. Not an assigned arXiv id.

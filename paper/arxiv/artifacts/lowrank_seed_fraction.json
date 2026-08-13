@@ -6,16 +6,16 @@
       "n_seeds": 50,
       "n_with_any_inversion": 50,
       "fraction": 1.0,
-      "wald_low": 1.0,
-      "wald_high": 1.0
+      "clopper_pearson_low": 0.9288782635357954,
+      "clopper_pearson_high": 1.0
     },
     {
       "dim": 8,
       "n_seeds": 50,
       "n_with_any_inversion": 50,
       "fraction": 1.0,
-      "wald_low": 1.0,
-      "wald_high": 1.0
+      "clopper_pearson_low": 0.9288782635357954,
+      "clopper_pearson_high": 1.0
     }
   ],
   "draws": [
@@ -270,14 +270,6 @@
       "inversion_any_block": true
     },
     {
-      "dim": 2,
-      "n_seeds": 50,
-      "n_with_any_inversion": 50,
-      "fraction": 1.0,
-      "wald_low": 1.0,
-      "wald_high": 1.0
-    },
-    {
       "dim": 8,
       "seed": 10000,
       "inversion_any_block": true
@@ -526,14 +518,9 @@
       "dim": 8,
       "seed": 10049,
       "inversion_any_block": true
-    },
-    {
-      "dim": 8,
-      "n_seeds": 50,
-      "n_with_any_inversion": 50,
-      "fraction": 1.0,
-      "wald_low": 1.0,
-      "wald_high": 1.0
     }
-  ]
+  ],
+  "interval": "Clopper-Pearson 95 percent exact",
+  "generator": "torch.Generator manual_seed 10000..10049",
+  "redraws_F": true
 }

@@ -15,7 +15,7 @@ authorization to submit.
 ## Compile
 
 - [x] `latexmk -pdf` from `paper/arxiv/` succeeds.
-- [x] Second compile from `paper/arxiv/` with latexmk succeeds (14 pages).
+- [x] Second compile from `paper/arxiv/` with latexmk succeeds (20 pages).
 - [ ] Re-extract `arxiv-source.zip` and compile in a clean directory immediately before upload.
 - [x] No undefined citations or references in the final log.
 - [x] Overfull boxes checked: none in the final `main.log`.
@@ -59,7 +59,7 @@ authorization to submit.
 
 - Create tag `arxiv-v1` on the final scientific commit.
 - Publish the GitHub Release or Zenodo deposit from that tagged tree.
-- Choose arXiv license (`ARXIV_METADATA.md`); none is selected here.
+- Confirm arXiv license at upload (`ARXIV_METADATA.md` prepares CC BY 4.0).
 - Choose a code license file: `pyproject.toml` currently says MIT, but no
   `LICENSE` file exists. Do not treat that metadata line as a chosen license.
 - Authorize push and/or arXiv upload.

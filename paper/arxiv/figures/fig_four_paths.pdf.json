@@ -1,0 +1,17 @@
+{
+  "figure_artifact_id": "arxiv_figures_2026-08-13-v1:fig_four_paths",
+  "figure_checksum_sha256": "90b93fd2ca1bdb6bc0a953f4508af01a22ce586638a535785516b8f9e687e87e",
+  "generation_timestamp": "2026-08-13T14:34:34.119402+00:00",
+  "git_commit": "8a62952d6f04302c1a6c35a90531c6b18fe9ab2e",
+  "git_status": "dirty (regenerate after committing)",
+  "note": "Linear, trigonometric VP, shared Chen Ex. 3.3 (M=lambda_max), and per-mode log-covariance. R is continuous; W2 is Euler at NFE 8.",
+  "plotting_config": {
+    "kind": "four_path_R_and_euler8_W2"
+  },
+  "plotting_script": "scripts/make_arxiv_figures.py",
+  "source_artifact_ids": [],
+  "source_run_ids": [
+    "none_conceptual"
+  ],
+  "source_table_hashes": {}
+}

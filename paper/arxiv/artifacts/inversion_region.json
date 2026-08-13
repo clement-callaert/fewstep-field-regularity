@@ -2242,5 +2242,69 @@
   "R_linear_lambda4": 0.9634954084936208,
   "R_vp_lambda4": 0.616850275067939,
   "W2_heun8_linear": 0.09027673203348852,
-  "W2_heun8_vp": 0.1303736583386823
+  "W2_heun8_vp": 0.1303736583386823,
+  "log_lebesgue": {
+    "lam_min": 0.05,
+    "lam_max": 100.0,
+    "n_nodes": 1281,
+    "n_nodes_doubled": 2561,
+    "log_span": 7.600902459542082,
+    "max_relative_change_on_doubling": 0.0020134228187979695,
+    "cells": {
+      "euler_8": {
+        "measure": 2.4435713766417857,
+        "fraction": 0.32148437499999166,
+        "doubled_measure": 2.4420868253801564,
+        "relative_change": 0.0006075334143377885
+      },
+      "euler_16": {
+        "measure": 2.5563972725256106,
+        "fraction": 0.33632812499999126,
+        "doubled_measure": 2.5519436187407227,
+        "relative_change": 0.0017421602787456446
+      },
+      "euler_32": {
+        "measure": 2.6692231684094354,
+        "fraction": 0.35117187499999086,
+        "doubled_measure": 2.667738617147806,
+        "relative_change": 0.0005561735261401557
+      },
+      "heun_8": {
+        "measure": 3.337271236142609,
+        "fraction": 0.4390624999999886,
+        "doubled_measure": 3.3402403386659136,
+        "relative_change": 0.0008896797153163304
+      },
+      "heun_16": {
+        "measure": 3.723254564166221,
+        "fraction": 0.4898437499999874,
+        "doubled_measure": 3.726223666689517,
+        "relative_change": 0.0007974481658792374
+      },
+      "heun_32": {
+        "measure": 3.9845355862129734,
+        "fraction": 0.5242187499999865,
+        "doubled_measure": 3.990473791259528,
+        "relative_change": 0.0014903129657321634
+      },
+      "rk4_8": {
+        "measure": 2.211981379827619,
+        "fraction": 0.29101562499999245,
+        "doubled_measure": 2.21643503361252,
+        "relative_change": 0.0020134228187979695
+      },
+      "rk4_16": {
+        "measure": 3.0819284191423737,
+        "fraction": 0.4054687499999895,
+        "doubled_measure": 3.0819284191424114,
+        "relative_change": 1.2248040091651306e-14
+      },
+      "rk4_32": {
+        "measure": 3.4322825168868825,
+        "fraction": 0.45156249999998826,
+        "doubled_measure": 3.432282516886928,
+        "relative_change": 1.3326755122723465e-14
+      }
+    }
+  }
 }

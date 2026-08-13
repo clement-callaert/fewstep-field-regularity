@@ -1,4 +1,23 @@
-# fewstep-field-regularity
+# Averaged Jacobian Regularity Does Not Order Few-Step Error in Flow Matching: A Certified Gaussian Counterexample
+
+Clément Callaert (CentraleSupélec and Université Paris-Saclay)
+
+Preprint sources: [`paper/arxiv/`](paper/arxiv/README.md). No arXiv identifier is assigned yet. Do not invent one.
+
+**Abstract.** Flow matching and stochastic interpolants specify a probability flow ODE whose few-step sampling error depends on the sampling schedule. Schedule design therefore needs an a priori criterion. Chen, Vanden-Eijnden, and Xu propose minimizing the averaged squared Jacobian norm $A_2$, a Lipschitz constant of the marginal field, as a selection criterion, without a proved bound on discretization error. This paper asks whether the order induced by $A_2$ between two paths is reliable at a fixed number of function evaluations (NFE). Already for centered Gaussian interpolants the implication fails. A certified one-dimensional Heun counterexample, a three-regime census, and an inversion map over target variance are given. The analysis is confined to commuting Gaussians; no learned field is used.
+
+```bibtex
+@misc{callaert2026averaged,
+  title={Averaged Jacobian Regularity Does Not Order Few-Step Error in Flow Matching: A Certified {G}aussian Counterexample},
+  author={Callaert, Cl{\'e}ment},
+  year={2026},
+  note={Preprint. Source: https://github.com/clement-callaert/fewstep-field-regularity},
+}
+```
+
+GitHub also exposes this entry via [`CITATION.cff`](CITATION.cff).
+
+---
 
 Research software and manuscript for a controlled study of averaged
 field-regularity criteria versus few-step Gaussian Wasserstein error on
@@ -47,6 +66,8 @@ same way. Figure and table generators:
 
 ```bash
 python scripts/make_arxiv_tables.py
+python scripts/run_in_family_comparison.py
+python scripts/run_arxiv_stats.py
 python scripts/make_arxiv_figures.py
 ```
 
