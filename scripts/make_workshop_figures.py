@@ -1,8 +1,10 @@
-"""Build the three workshop paper figures with provenance sidecars.
+"""Build workshop paper figures with provenance sidecars.
 
 Inputs are explicit artifact files with pinned SHA-256 checksums. The
 script refuses to run on a checksum mismatch and never scans directories.
-Figure 1 is conceptual and consumes no artifact.
+The live workshop PDF uses fig_scalar, fig1_regimes, and
+fig_inversion_region. Hydra-backed figures are skipped when outputs/
+is absent.
 """
 
 from __future__ import annotations
@@ -49,6 +51,10 @@ GRAY = "#5f6368"
 
 plt.rcParams.update(
     {
+        "text.usetex": False,
+        "mathtext.fontset": "cm",
+        "font.family": "serif",
+        "font.serif": ["DejaVu Serif"],
         "font.size": 9,
         "axes.titlesize": 9,
         "axes.labelsize": 9,
@@ -61,29 +67,51 @@ plt.rcParams.update(
         "xtick.major.width": 0.6,
         "ytick.major.width": 0.6,
         "pdf.fonttype": 42,
+        "ps.fonttype": 42,
     }
 )
 
 
+def _revision_commit() -> str | None:
+    path = ROOT / "REVISION"
+    if not path.is_file():
+        return None
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if line.lower().startswith("commit:"):
+            return line.split(":", 1)[1].strip()
+    return None
+
+
 def git_commit() -> str:
-    return subprocess.run(
-        ["git", "rev-parse", "HEAD"],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
-        check=True,
-    ).stdout.strip()
+    pinned = _revision_commit()
+    if pinned:
+        return pinned
+    try:
+        return subprocess.run(
+            ["git", "-c", f"safe.directory={ROOT}", "rev-parse", "HEAD"],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.strip()
+    except (subprocess.CalledProcessError, FileNotFoundError, OSError):
+        return "snapshot-without-git"
 
 
 def git_status_flag() -> str:
-    out = subprocess.run(
-        ["git", "status", "--porcelain"],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
-        check=True,
-    ).stdout.strip()
-    return "clean" if not out else "dirty (regenerate after committing)"
+    if (ROOT / "REVISION").is_file() and not (ROOT / ".git").exists():
+        return "git-archive-snapshot"
+    try:
+        out = subprocess.run(
+            ["git", "-c", f"safe.directory={ROOT}", "status", "--porcelain"],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.strip()
+        return "clean" if not out else "dirty (regenerate after committing)"
+    except (subprocess.CalledProcessError, FileNotFoundError, OSError):
+        return "git-unavailable"
 
 
 def load_pinned(artifact_id: str) -> Any:
@@ -373,41 +401,39 @@ def figure3_interaction() -> tuple[Path, list[str]]:
 
 def main() -> None:
     FIGURE_DIR.mkdir(parents=True, exist_ok=True)
-    fig1 = figure1_conceptual()
-    write_sidecar(
-        fig1,
-        artifact_ids=[],
-        plotting_config={
-            "kind": "conceptual_schematic",
-            "consumes_artifacts": False,
-        },
-        note=(
-            "Conceptual schematic only; curves and bars are illustrative and "
-            "represent no measured quantity."
-        ),
-    )
-    fig2, ids2 = figure2_inversions()
-    write_sidecar(
-        fig2,
-        artifact_ids=ids2,
-        plotting_config={
-            "kind": "strongest_inversion_and_all_blocks",
-            "block_definition": "two-path comparison per (family, dim, solver, nfe)",
-            "x_scale": "log",
-        },
-        note="Log margin axis; no visual exaggeration of differences.",
-    )
-    fig3, ids3 = figure3_interaction()
-    write_sidecar(
-        fig3,
-        artifact_ids=ids3,
-        plotting_config={
-            "kind": "lowrank_solver_path_interaction",
-            "y_scale": "symlog linthresh 1e-4",
-        },
-        note="Signed margins; zero line marks path-preference boundary.",
-    )
-    for path in (fig1, fig2, fig3):
+    written: list[Path] = []
+    outputs_root = ROOT / "outputs" / "phase4_gaussian_reproduction_2026-07-24-v1"
+    if outputs_root.is_dir() and (outputs_root / "results.json").is_file():
+        fig2, ids2 = figure2_inversions()
+        write_sidecar(
+            fig2,
+            artifact_ids=ids2,
+            plotting_config={
+                "kind": "strongest_inversion_and_all_blocks",
+                "block_definition": "two-path comparison per (family, dim, solver, nfe)",
+                "x_scale": "log",
+            },
+            note="Log margin axis; no visual exaggeration of differences.",
+        )
+        written.append(fig2)
+        fig3, ids3 = figure3_interaction()
+        write_sidecar(
+            fig3,
+            artifact_ids=ids3,
+            plotting_config={
+                "kind": "lowrank_solver_path_interaction",
+                "y_scale": "symlog linthresh 1e-4",
+            },
+            note="Signed margins; zero line marks path-preference boundary.",
+        )
+        written.append(fig3)
+    else:
+        print(
+            "skipping Hydra-backed figures (fig2_inversions, fig3_interaction): "
+            "outputs/ is not in the public snapshot; use the shipped PDFs under "
+            "paper/gddl2026/figures/"
+        )
+    for path in written:
         print(path.relative_to(ROOT), sha256_file(path)[:16])
 
 

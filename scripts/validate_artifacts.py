@@ -40,6 +40,40 @@ def require_fields(
     return missing
 
 
+COMPACT_RELEASE_TAG = "arxiv-v1"
+
+
+def is_compact_manifest(manifest: dict[str, Any]) -> bool:
+    """Return True for the preprint compact checksum manifest."""
+    return isinstance(manifest.get("files"), dict) and "artifact_release_id" in manifest
+
+
+def validate_compact_manifest(manifest: dict[str, Any], run_dir: Path) -> list[str]:
+    """Validate compact preprint checksums. Does not check Hydra fields.
+
+    The public verification path that also checks retired-commit placeholders
+    is ``scripts/check_arxiv_release.py``. This function only checks the
+    ``files`` checksum table in ``paper/arxiv/artifacts/manifest.json``.
+    """
+    errors: list[str] = []
+    files = manifest.get("files", {})
+    if not isinstance(files, dict) or not files:
+        return ["compact manifest missing files"]
+    for name, expected in files.items():
+        if name == "manifest.json":
+            continue
+        path = run_dir / str(name)
+        if not path.is_file():
+            errors.append(f"missing compact artefact {name}")
+            continue
+        actual = sha256_file(path)
+        if actual != expected:
+            errors.append(f"checksum mismatch for {name}: {actual}")
+    if manifest.get("planned_release_tag") != COMPACT_RELEASE_TAG:
+        errors.append("manifest planned_release_tag is not arxiv-v1")
+    return errors
+
+
 def validate_manifest(manifest: dict[str, Any], run_dir: Path) -> list[str]:
     errors: list[str] = []
     errors.extend(
@@ -127,6 +161,8 @@ def validate_path(target: Path) -> list[str]:
     else:
         return [f"No manifest.json found under {target}"]
     manifest = load_json(manifest_path)
+    if is_compact_manifest(manifest):
+        return validate_compact_manifest(manifest, run_dir)
     return validate_manifest(manifest, run_dir)
 
 

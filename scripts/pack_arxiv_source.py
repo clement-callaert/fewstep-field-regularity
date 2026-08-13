@@ -8,7 +8,9 @@ the executable form of the five preflight checks:
 3. Figures are PDF, with relative paths that stay inside the archive.
 4. No .aux, .log, .out, or .synctex.gz files are packed.
 5. Compiling the archive in a clean directory yields the same page count
-   as paper/arxiv/main.pdf and no '??' in the PDF text.
+   as paper/arxiv/main.pdf, no '??' in the PDF text, embedded fonts, and
+   no Type 3 fonts. Bitwise PDF hashes are not compared across TeX
+   versions; semantic identity (page count, extracted text, fonts) is.
 
 Usage:
   python scripts/pack_arxiv_source.py
@@ -87,6 +89,12 @@ def collect_members() -> list[tuple[Path, str, bytes | None]]:
     for path in sorted((SRC / "generated").glob("*.tex")):
         members.append((path, f"generated/{path.name}", None))
     used_figures = {Path(p).name for p in includegraphics_paths(tex)}
+    dead = SRC / "figures" / "fig1_conceptual.pdf"
+    if dead.is_file():
+        raise RuntimeError(
+            "fig1_conceptual.pdf is not referenced by main.tex and must not "
+            "be shipped under paper/arxiv/figures/"
+        )
     for path in sorted((SRC / "figures").glob("*.pdf")):
         if path.name not in used_figures:
             continue
@@ -129,6 +137,120 @@ def archive_page_count() -> int:
     raise RuntimeError("pdfinfo did not report Pages")
 
 
+ARXIV_TAIL_MARK = "fewstep-field-regularity"
+WORKSHOP_TAIL_MARK = "cross-check, not the proof"
+
+
+def pdf_page_count(pdf: Path) -> int:
+    info = subprocess.check_output(["pdfinfo", str(pdf)], text=True)
+    for line in info.splitlines():
+        if line.startswith("Pages:"):
+            return int(line.split(":", 1)[1])
+    raise RuntimeError(f"pdfinfo did not report Pages for {pdf}")
+
+
+def pdf_page_text(pdf: Path, page: int) -> str:
+    return subprocess.check_output(
+        ["pdftotext", "-f", str(page), "-l", str(page), str(pdf), "-"],
+        text=True,
+        errors="replace",
+    )
+
+
+def last_nonempty_line(text: str) -> str:
+    lines = [line.strip() for line in text.splitlines() if line.strip()]
+    if not lines:
+        raise RuntimeError("extracted PDF text is empty")
+    return lines[-1]
+
+
+def check_document_complete(pdf: Path, needle: str) -> None:
+    """Fail if the last page of ``pdf`` does not contain ``needle``.
+
+    Catches mid-sentence truncation from ``\\enlargethispage`` stretching
+    material past the physical page edge (no Overfull box is emitted).
+    """
+    pages = pdf_page_count(pdf)
+    last = pdf_page_text(pdf, pages)
+    if needle not in last:
+        preview = last_nonempty_line(last) if last.strip() else "<empty>"
+        raise RuntimeError(
+            f"{pdf} last page is missing {needle!r}; last nonempty line is "
+            f"{preview!r}. The PDF may be truncated."
+        )
+
+
+def check_folio_not_overprinted(pdf: Path) -> None:
+    """Fail if body text overlaps the footer folio or extends past the page.
+
+    ``pdftotext -bbox`` emits HTML coordinates (origin at the top-left, y
+    downward) and, on current poppler, ``<page>`` tags with no number
+    attribute. Pages are counted in document order. The running folio is
+    the bottom-most word whose text equals the 1-based page index and that
+    sits in the footer band. Glyphs with ``yMax`` past the page height are
+    the ``\\enlargethispage`` truncation signature: LaTeX emits no Overfull
+    box while still typesetting off the paper.
+    """
+    raw = subprocess.check_output(
+        ["pdftotext", "-bbox", str(pdf), "-"],
+        text=True,
+        errors="replace",
+    )
+    page_chunks = [chunk for chunk in re.split(r"(?=<page )", raw) if chunk.startswith("<page")]
+    word_re = re.compile(
+        r'<word xMin="([^"]+)" yMin="([^"]+)" xMax="([^"]+)" yMax="([^"]+)">([^<]*)</word>'
+    )
+    collisions: list[str] = []
+    for index, chunk in enumerate(page_chunks, start=1):
+        height_match = re.search(r'height="([^"]+)"', chunk)
+        if height_match is None:
+            continue
+        height = float(height_match.group(1))
+        page_no = str(index)
+        words = [
+            (float(m.group(1)), float(m.group(2)), float(m.group(3)), float(m.group(4)), m.group(5))
+            for m in word_re.finditer(chunk)
+        ]
+        for x0, y0, x1, y1, text in words:
+            if y1 > height + 0.5:
+                collisions.append(
+                    f"page {page_no}: {text!r} extends past the page edge "
+                    f"(yMax={y1:.1f} > height={height:.1f})"
+                )
+                break
+        folios = [w for w in words if w[4] == page_no]
+        if not folios:
+            continue
+        # Bottom-most matching glyph; skip in-body numerals (equation
+        # numbers, citations). The running folio sits in the footer band.
+        folio = max(folios, key=lambda w: w[1])
+        if folio[1] < 0.88 * height:
+            continue
+        fx0, fy0, fx1, fy1, _ = folio
+        for x0, y0, x1, y1, text in words:
+            if text == page_no and abs(y0 - fy0) < 1.0:
+                continue
+            vertical = not (y1 < fy0 - 0.4 or y0 > fy1 + 0.4)
+            horizontal = not (x1 < fx0 - 2.0 or x0 > fx1 + 2.0)
+            if vertical and horizontal:
+                collisions.append(f"page {page_no}: {text!r} overlaps folio")
+    if collisions:
+        raise RuntimeError("folio overprint: " + "; ".join(collisions[:6]))
+
+
+def check_embedded_fonts(pdf: Path) -> None:
+    """Require embedded fonts and forbid Type 3. Do not compare PDF hashes."""
+    import importlib.util
+
+    path = Path(__file__).with_name("check_pdf_fonts.py")
+    spec = importlib.util.spec_from_file_location("check_pdf_fonts", path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError("cannot load check_pdf_fonts.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    module.check_embedded_fonts(pdf)
+
+
 def verify_clean_compile(archive: Path) -> None:
     expected_pages = archive_page_count()
     with tempfile.TemporaryDirectory(prefix="arxiv-pack-") as raw:
@@ -169,6 +291,9 @@ def verify_clean_compile(archive: Path) -> None:
         )
         if "??" in text:
             raise RuntimeError("clean compile PDF contains '??'")
+        check_embedded_fonts(built)
+        check_document_complete(built, ARXIV_TAIL_MARK)
+        check_folio_not_overprinted(built)
 
 
 def main() -> None:
@@ -184,7 +309,7 @@ def main() -> None:
     if args.skip_compile:
         return
     verify_clean_compile(archive)
-    print("clean compile passed:", archive_page_count(), "pages, no '??'")
+    print("clean compile passed:", archive_page_count(), "pages, embedded fonts, no Type 3")
 
 
 if __name__ == "__main__":

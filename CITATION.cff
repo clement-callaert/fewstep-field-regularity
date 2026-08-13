@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 title: "Few-Step Flow-Matching Error Can Be Misranked by Averaged Jacobian Regularity: A Certified Gaussian Counterexample"
-message: "If you use this software or the accompanying manuscript, please cite it as below."
+message: "If you use this software or the accompanying manuscript, please cite it as below. The software is MIT-licensed. The manuscript, figures, and compact artifacts are CC BY 4.0."
 type: preprint
 authors:
   - family-names: Callaert
@@ -8,7 +8,7 @@ authors:
     orcid: TODO-ORCID
     email: callaert.clement@gmail.com
     affiliation: "CentraleSupélec and Université Paris-Saclay"
-license: CC-BY-4.0
+license: MIT
 repository-code: "https://github.com/clement-callaert/fewstep-field-regularity"
 date-released: TODO
 identifiers:

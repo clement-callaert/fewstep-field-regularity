@@ -5,10 +5,10 @@ Do not upload without an explicit owner decision.
 
 ## Title
 
-Few-Step Flow-Matching Error Can Be Misranked by Averaged Jacobian Regularity: A Certified Gaussian Counterexample
+Averaged Jacobian Regularity Can Misrank Few-Step Flow-Matching Schedules: A Certified Gaussian Counterexample
 
 Hard constraints: no LaTeX macros, no mathematical symbols, under 120 characters,
-contains "flow matching" (as "Flow-Matching"). Character count: 114. Word count: 14.
+contains "flow matching" (as "Flow-Matching"). Character count: 110. Word count: 12.
 
 ## Author
 
@@ -21,7 +21,7 @@ contains "flow matching" (as "Flow-Matching"). Character count: 114. Word count:
 
 ## Abstract (plain text, for the abstract field)
 
-Does averaged squared Jacobian regularity rank two interpolants in the same order as equal-NFE endpoint error? Chen, Vanden-Eijnden, and Xu propose minimizing A_2, the time-integrated squared spatial Jacobian norm of a flow-matching marginal ODE, as a criterion for schedule design, without a proved discretization-error bound. Classical one-step bounds use a Lipschitz constant of the field; A_2 is not that constant. Already for independent N(0,1) and N(0,4), the exact regularity integrals of the linear and trigonometric variance-preserving Gaussian interpolants are 5 pi/8 - 1 and pi^2/16, while Heun at NFE 8 reverses Gaussian Wasserstein-2 distance. The linear Heun product is the rational 6797469/3559400; a nonnegative element of Q[pi, sqrt(2)] yields r_VP < 187/100. The object is a flow matching marginal interpolant ODE, not a score-based probability-flow ODE. The Gaussian drift and W_2 formula are closed form; the regularity integrand is exact, while multimode R is evaluated deterministically by adaptive quadrature. Pairwise and four-path census comparisons on commuting Gaussian interpolants are reported below; a finite census does not imply that a global A_2-minimizer minimizes fixed-NFE error. The analysis uses stochastic interpolants, few-step sampling, Runge-Kutta, and interpolation schedules; no learned field is used.
+Few-step sampling in flow matching and stochastic interpolants requires an interpolation schedule to be chosen before any endpoint error is observed. A natural question for schedule design is whether a scalar regularity functional ranks two schedules in the same order as equal-NFE discretization error. Chen, Vanden-Eijnden, and Xu propose minimizing A_2, the time-integrated squared spatial Jacobian norm of a flow-matching marginal ODE. They prove no bound relating A_2 to discretization error, Wasserstein-2 distance, or sampling error. Classical one-step bounds use a Lipschitz constant of the field; A_2 is not that constant. Already for independent N(0,1) and N(0,4), exact regularity integrals prefer the trigonometric variance-preserving interpolant while the Heun method at NFE 8 prefers the linear path in Gaussian Wasserstein-2 distance. The inversion is certified by an exact rational Heun product and a nonnegative polynomial in pi and sqrt(2), not by floating-point comparison. Fixed-stage Runge-Kutta methods use signed stage evaluations that the unsigned time average discards. All comparisons use exact Gaussian marginal fields. Multimode results are finite deterministic censuses, not a global optimality proof, and no learned vector field is used.
 
 ## Categories (proposed, not submitted)
 
@@ -49,7 +49,7 @@ flow matching, stochastic interpolants, few-step sampling, Runge-Kutta, Gaussian
 
 ## Comments field (suggested)
 
-25 pages, 4 figures, 2 tables in the main text. Code and compact artifacts: https://github.com/clement-callaert/fewstep-field-regularity
+23 pages, 4 figures, 2 tables in the main text. Code and compact artifacts: https://github.com/clement-callaert/fewstep-field-regularity
 
 Update the page/figure/table counts from the compiled PDF immediately before upload. Do not put venue, review, or acceptance language in the comments field.
 
@@ -85,6 +85,20 @@ behalf.
 
 Not an upload. Not a claim of institutional endorsement. Not an assigned arXiv id.
 
-## Dual submission `[OPEN]`
+## Dual submission `[CLOSED]`
 
-The official GDDL 2026 CFP (https://gddl-neurips-2026.github.io/, retrieved 2026-08-13) states that the workshop is non-archival and that "Workshop submissions can be subsequently or concurrently submitted to other venues." That is not, by itself, a signed permission to post a de-anonymized arXiv preprint during double-blind review. Keep this item open until the organizers or OpenReview state an explicit preprint rule. This file is not permission to deposit.
+Official sources retrieved 2026-08-13:
+
+1. GDDL 2026 CFP (https://gddl-neurips-2026.github.io/): non-archival;
+   concurrent or subsequent submission to other venues is allowed;
+   double-blind via OpenReview; follow the NeurIPS 2026 template and
+   instructions.
+2. NeurIPS 2026 Main Track Handbook, Preprints: a non-anonymous preprint
+   will not result in rejection; do not write "Under review at NeurIPS";
+   aggressive advertising of a paper under submission may be deemed a
+   violation.
+3. GDDL OpenReview invitation `NeurIPS.cc/2026/Workshop/GDDL/-/Submission`:
+   no preprint field and no supplement-PDF field.
+
+A non-anonymous preprint is allowed. It must not be promoted aggressively
+during review. This file is not permission to deposit.

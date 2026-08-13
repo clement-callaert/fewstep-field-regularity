@@ -107,6 +107,12 @@ outputs/                     Run outputs with gitignored contents
 artifacts/                   Optional curated artifacts
 ```
 
+## License
+
+The code, tests, and scripts are MIT; see [LICENSE](LICENSE). The manuscript,
+figures, and compact artifacts under `paper/` are CC BY 4.0, matching the
+planned arXiv deposit.
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Commits are created and pushed by
