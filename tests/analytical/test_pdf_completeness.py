@@ -3,11 +3,24 @@
 from __future__ import annotations
 
 import importlib.util
+import shutil
 from pathlib import Path
 
 import pytest
 
 ROOT = Path(__file__).resolve().parents[2]
+
+
+def _require_poppler(*commands: str) -> None:
+    """Skip PDF-tool tests when Poppler is not installed.
+
+    GitHub Actions CPU jobs do not include ``pdfinfo``, ``pdftotext``, or
+    ``pdffonts`` unless the workflow installs ``poppler-utils``. Local
+    release checks still run these tests when the binaries are present.
+    """
+    missing = [name for name in commands if shutil.which(name) is None]
+    if missing:
+        pytest.skip("missing " + ", ".join(missing) + " (install poppler-utils)")
 
 
 def _load_pack():
@@ -30,6 +43,7 @@ def _load_fonts():
 
 @pytest.mark.analytical
 def test_arxiv_pdf_last_page_contains_source_url() -> None:
+    _require_poppler("pdfinfo", "pdftotext")
     pack = _load_pack()
     pdf = ROOT / "paper" / "arxiv" / "main.pdf"
     assert pdf.is_file()
@@ -38,6 +52,7 @@ def test_arxiv_pdf_last_page_contains_source_url() -> None:
 
 @pytest.mark.analytical
 def test_workshop_pdf_last_page_contains_certificate_close() -> None:
+    _require_poppler("pdfinfo", "pdftotext")
     pack = _load_pack()
     pdf = ROOT / "paper" / "gddl2026" / "main.pdf"
     assert pdf.is_file()
@@ -46,6 +61,7 @@ def test_workshop_pdf_last_page_contains_certificate_close() -> None:
 
 @pytest.mark.analytical
 def test_folios_not_overprinted_on_either_pdf() -> None:
+    _require_poppler("pdftotext")
     pack = _load_pack()
     pack.check_folio_not_overprinted(ROOT / "paper" / "arxiv" / "main.pdf")
     pack.check_folio_not_overprinted(ROOT / "paper" / "gddl2026" / "main.pdf")
@@ -53,6 +69,7 @@ def test_folios_not_overprinted_on_either_pdf() -> None:
 
 @pytest.mark.analytical
 def test_both_compiled_pdfs_have_embedded_fonts_no_type3() -> None:
+    _require_poppler("pdffonts")
     fonts = _load_fonts()
     fonts.check_embedded_fonts(ROOT / "paper" / "arxiv" / "main.pdf")
     fonts.check_embedded_fonts(ROOT / "paper" / "gddl2026" / "main.pdf")
