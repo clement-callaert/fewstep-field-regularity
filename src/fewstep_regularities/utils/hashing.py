@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 from pathlib import Path
+from typing import Any
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -29,7 +30,7 @@ MANIFEST_SELF_KEY = "manifest.json"
 MANIFEST_SELF_PLACEHOLDER = ""
 
 
-def canonical_manifest_payload(payload: dict) -> dict:
+def canonical_manifest_payload(payload: dict[str, Any]) -> dict[str, Any]:
     """Return a copy of a compact-artifact manifest with the self-hash blanked.
 
     A file cannot contain its own ordinary cryptographic hash. The canonical
@@ -48,7 +49,7 @@ def canonical_manifest_payload(payload: dict) -> dict:
     return data
 
 
-def sha256_manifest(payload: dict) -> str:
+def sha256_manifest(payload: dict[str, Any]) -> str:
     """Return the canonical self-hash of a compact-artifact manifest."""
     import json
 
@@ -59,7 +60,7 @@ def sha256_manifest(payload: dict) -> str:
     return sha256_bytes(encoded)
 
 
-def write_compact_manifest(path: Path, payload: dict) -> str:
+def write_compact_manifest(path: Path, payload: dict[str, Any]) -> str:
     """Write a compact manifest and fill the canonical self-hash.
 
     The self-hash is SHA-256 of the JSON object after blanking
