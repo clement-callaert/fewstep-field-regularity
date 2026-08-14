@@ -8,6 +8,7 @@ from pathlib import Path
 from fewstep_regularities.analysis.ranking_grids import (
     PRIMARY_NFE,
     SOLVERS,
+    family_display_label,
     four_path_scores,
     lowest_name,
     three_path_scores,
@@ -82,8 +83,9 @@ def main() -> None:
         r"\midrule",
     ]
     for row in rows:
-                lines.append(
-            f"{row['family']} & {row['dim']} & {row['solver']} & {row['nfe']} & "
+        lines.append(
+            f"{family_display_label(str(row['family']), int(str(row['dim'])))} & "
+            f"{row['dim']} & {row['solver']} & {row['nfe']} & "
             f"{PATH_LABEL[str(row['R_prefers'])]} & {PATH_LABEL[str(row['W2_prefers'])]} & "
             f"{float(str(row['W2_log'])):.4g} & {float(str(row['W2_linear'])):.4g} \\\\"
         )
@@ -122,7 +124,8 @@ def main() -> None:
         }[(str(row["family"]), int(str(row["dim"])))]
         four = four_path_scores(payload[key]["eigenvalues"], "heun", 8)
         workshop_lines.append(
-            f"{row['family']} & {row['dim']} & "
+            f"{family_display_label(str(row['family']), int(str(row['dim'])))} & "
+            f"{row['dim']} & "
             f"{float(str(row['R_linear'])):.3f} & {float(str(row['R_vp'])):.3f} & "
             f"{four['log_covariance_scalar'].regularity:.3f} & "
             f"{float(str(row['R_log'])):.3f} & "

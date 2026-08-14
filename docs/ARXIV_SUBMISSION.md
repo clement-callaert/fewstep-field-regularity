@@ -1,8 +1,16 @@
 # arXiv submission kit
 
-Prepared 2026-08-13. This file is the form-field copy source for an upload
-**after GDDL notification**. It is not an upload. Do not invent an arXiv
-identifier. Do not deposit before the workshop decision.
+Prepared 2026-08-14. This file is the form-field copy source for an owner
+upload. It is not an upload. Do not invent an arXiv identifier.
+
+The GDDL 2026 CFP states that the workshop is non-archival and that
+submissions may be concurrently or subsequently submitted to other
+venues. The NeurIPS 2026 Main Track Handbook states that a non-anonymous
+arXiv preprint will not cause rejection, provided the public version does
+not say “Under review at NeurIPS” and the paper is not aggressively
+advertised during review. Concurrent arXiv + anonymous GDDL is therefore
+allowed by the published policies. This file is not organizer permission
+beyond those texts.
 
 The compiled PDF is `paper/arxiv/main.pdf`. Source is packed by
 `python scripts/pack_arxiv_source.py`.
@@ -19,7 +27,7 @@ Character count: update from the compiled abstract. Limit: 1920. One paragraph. 
 reduced to ASCII (`A_2`, `W_2`).
 
 <!-- BEGIN ARXIV ABSTRACT -->
-Few-step sampling in flow matching and stochastic interpolants requires an interpolation schedule, equivalently a sampling schedule, to be chosen before any endpoint error is observed. Averaged squared Jacobian regularity is a plausible criterion for schedule design. Chen, Vanden-Eijnden, and Xu propose minimizing A_2, the time-integrated squared spatial Jacobian norm of a flow-matching marginal ODE. Classical one-step bounds use a Lipschitz constant of the field; A_2 is not that constant, and they prove no universal ranking of equal-NFE solver error. This paper studies that narrower question. For independent N(0,1) and N(0,4), the exact integrals are 5 pi/8 - 1 and pi^2/16, so regularity prefers trigonometric VP, while explicit Heun at NFE 8 prefers the linear path in Gaussian Wasserstein-2 distance. The inversion is certified by an exact rational Heun product and a nonnegative element of Q[pi, sqrt(2)]. A complementary construction shows that, for every step count N and every admissible endpoint log-scale, the unique integrated-regularity minimizer can have strictly larger N-step Euler endpoint error than a higher-regularity competitor aligned to that solver grid. A specified finite Gaussian enumeration of four candidate paths on 36 tested blocks contains both agreement and pairwise disagreement. The results establish a limitation of a universal surrogate interpretation. They do not refute Chen et al., do not evaluate learned velocity fields, and do not estimate a population frequency of failure.
+Few-step sampling in flow matching and stochastic interpolants requires an interpolation schedule, equivalently a sampling schedule, to be chosen before any endpoint error is observed. Averaged squared Jacobian regularity is a plausible schedule-design criterion, but it is not a solver-specific discretization-error functional. Chen, Vanden-Eijnden, and Xu propose minimizing A_2, the time-integrated squared spatial Jacobian Lipschitzness of a flow-matching marginal ODE. They do not claim or prove that A_2 universally ranks equal-NFE solver error. We study that narrower surrogate question. For independent N(0,1) and N(0,4), the exact integrals are 5 pi/8 - 1 and pi^2/16, so regularity prefers trigonometric VP, while explicit Heun, a two-stage Runge-Kutta method, at eight number of function evaluations (NFE 8) prefers the linear path in Gaussian Wasserstein-2 distance. The inversion is certified by an exact rational Heun product and a nonnegative element of Q[pi, sqrt(2)]. A complementary construction shows that, for every step count N and every admissible endpoint log-scale, the unique integrated-regularity minimizer can have strictly larger N-step Euler endpoint error than a higher-regularity competitor aligned to that solver grid. A specified finite Gaussian enumeration of four candidate paths on 36 tested blocks contains both agreement and pairwise disagreement. The results establish a limitation of a universal surrogate interpretation. They do not evaluate learned velocity fields and do not estimate a population frequency of failure.
 <!-- END ARXIV ABSTRACT -->
 
 `tests/analytical/test_release_gate.py` checks that this block is at most
@@ -55,7 +63,7 @@ This field appears in the daily listing and is indexed. It is the only
 place the code URL is visible without opening the PDF.
 
 ```
-23 pages, 4 figures, 2 tables in the main text. Code and compact artifacts: https://github.com/clement-callaert/fewstep-field-regularity
+21 pages, 4 figures, 1 table in the main text. Code and compact artifacts: https://github.com/clement-callaert/fewstep-field-regularity
 ```
 
 No venue, review, or acceptance language.

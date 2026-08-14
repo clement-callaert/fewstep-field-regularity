@@ -77,7 +77,7 @@ def test_arxiv_forbidden_phrasing_absent() -> None:
     assert r"\alpha^2\ge 0" in text
     assert r"When $M=1$" in text
     assert "confirmatory" in text
-    assert "low-rank $d=8$, Euler, NFE~$8$" in text
+    assert "rank-2 factor-plus-noise $d=8$, Euler, NFE~$8$" in text
     assert "on the same block" not in text
     assert "would contradict" not in text
 
@@ -95,10 +95,17 @@ def test_arxiv_search_phrases_in_abstract_and_intro() -> None:
         "schedule design",
         "Lipschitz",
     )
+
+    def contains(haystack: str, needle: str) -> bool:
+        needle_l = needle.lower()
+        if needle_l in haystack:
+            return True
+        return needle_l.replace("-", " ") in haystack.replace("-", " ")
+
     for phrase in traffic:
-        assert phrase.lower() in abstract, phrase
+        assert contains(abstract, phrase), phrase
     for phrase in module.SEARCH_PHRASES:
-        assert phrase.lower() in abstract or phrase.lower() in intro, phrase
+        assert contains(abstract, phrase) or contains(intro, phrase), phrase
 
 
 @pytest.mark.analytical
@@ -239,3 +246,13 @@ def test_compact_in_family_artifact_counts() -> None:
     assert payload["n_inversions"] == 9
     assert payload["n_cells"] == 4
     assert payload["status"] == "post-hoc"
+
+
+@pytest.mark.analytical
+def test_family_display_label_is_not_low_rank_at_d2() -> None:
+    from fewstep_regularities.analysis.ranking_grids import family_display_label
+
+    assert family_display_label("low-rank", 2) == r"factor+noise"
+    assert family_display_label("low-rank", 8) == r"rank-2 factor+noise"
+    assert family_display_label("low_rank_gaussian", 8) == r"rank-2 factor+noise"
+    assert family_display_label("anisotropic_gaussian", 2) == "anisotropic"

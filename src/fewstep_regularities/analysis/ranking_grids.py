@@ -31,6 +31,23 @@ GEOM_KEYS = (
 )
 
 
+def family_display_label(family: str, dim: int | None = None) -> str:
+    """Return a reader-facing family name for tables and captions.
+
+    Internal artifact keys such as ``low_rank_d2`` are unchanged. At
+    ``d=2`` the factor rank equals the ambient dimension, so that case
+    is not called low-rank.
+    """
+    key = str(family).replace("_gaussian", "").replace("_", "-")
+    if key in {"low-rank", "low-rank-gaussian"}:
+        if dim == 8:
+            return r"rank-2 factor+noise"
+        return r"factor+noise"
+    if key.startswith("anisotropic"):
+        return "anisotropic"
+    return str(family)
+
+
 @dataclass(frozen=True)
 class PathScores:
     """Regularity and endpoint W2 for one path on one geometry."""
