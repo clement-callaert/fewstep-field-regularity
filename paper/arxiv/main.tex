@@ -617,7 +617,7 @@ solver-grid-aware impossibility construction, and a transparent finite
 Gaussian enumeration. It does not provide a general numerical-error
 theory.
 
-\citet{stephanovitch2026lipschitz} prove sharp Lipschitz regularity of
+\citet{stephanovitch2026lipschitz} proves sharp Lipschitz regularity of
 canonical flow-matching fields and Euler-type $\wtwo$ rates of order
 $\sqrt{d}/N$ up to logs. That is a bound, not a pairwise ranking of two
 interpolants at equal NFE. Solver-specific schedules and exact linear
@@ -625,6 +625,17 @@ parts are documented in diffusion
 practice~\citep{sabour2024align,karras2022edm,lu2022dpmsolver,zhang2023deis}.
 \citet{benton2024error} bound $\wtwo$ of a learned flow. Those objects
 are distinct from the ranking question tested here.
+
+Complementary solver-aware approaches use temporal information rather
+than an integrated spatial-Jacobian energy.
+\citet{gupta2026sharpen} construct SharpEuler, calibrating Euler grids
+from trajectory acceleration estimated on pretrained flow-matching
+models. \citet{khan2026isofm} regularizes material acceleration during
+training. Other work modifies the coupling or prior design to produce
+straighter, OT-like flows~\citep{malnick2026otdesign}. The present
+contribution is neither a sampler nor a training regularizer: it gives
+a certified ranking non-implication and a solver-grid-aware
+impossibility result for the stated classes.
 
 \section{Limitations}
 \label{sec:limits}
@@ -1039,8 +1050,10 @@ Table~\ref{tab:gridaware} records aligned and perturbed evaluations of
 Theorem~\ref{thm:gridaware} at $L=\log 2$. Ranking inversion is recorded
 only when exact endpoints still match and the constant minimizer has
 strictly larger solver error. Phase offsets and interior nodes preserve
-endpoints but destroy Euler exactness. Non-integer frequencies break the
-common-endpoint constraint. Heun is not exact on the aligned oscillation.
+endpoints but destroy Euler exactness. Frequencies outside
+$(\tfrac12\mathbb{Z})$ break the common-endpoint constraint; the tested
+half-integer frequency ($f=4.5$) preserves the endpoints while destroying
+Euler exactness. Heun is not exact on the aligned oscillation.
 These checks show how quickly the aliasing phenomenon disappears when
 grid alignment is perturbed; they are not a population frequency.
 

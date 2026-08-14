@@ -1,8 +1,20 @@
+# PASS 8 release audit (historical; pre-merge snapshot)
+
+**Historical.** This file describes the 2026-08-14 artifact-carrier
+state on `fix/pass6-polish` before pull request #1 was merged. Pull
+request #1 was subsequently merged as
+`25186a5337ae8c85a9367051da24953b80b133a5`. Statements such as “merge to
+`main` is an owner decision” were true of that pre-merge state. This file
+is **not** the current release audit. See `STALE_AUDIT_NOTICE.md` and
+`audit/PASS9_POST_MERGE_RELEASE.md`.
+
+The remainder of the file is kept as a snapshot of that earlier pass.
+
 # PASS 8 release audit
 
-Current audit of `paper/arxiv/` and `paper/gddl2026/` after the bounded
-release pass. `PASS7_FINAL_AUDIT.md` is historical (commit `44bc8fe`).
-See `STALE_AUDIT_NOTICE.md`.
+Audit of `paper/arxiv/` and `paper/gddl2026/` after the bounded
+release pass on `fix/pass6-polish`. `PASS7_FINAL_AUDIT.md` is historical
+(commit `44bc8fe`). See `STALE_AUDIT_NOTICE.md`.
 
 This file lives in the artifact-carrier commit. It does **not** contain
 that commit’s own SHA. Generated PDFs, sidecars, compact artifacts, and

@@ -403,7 +403,7 @@ Lipschitz-guided design proposes the selection criterion
 tested~\citep{lipschitzguided2025}. Solver-specific schedules and exact
 linear parts are documented in diffusion
 practice~\citep{sabour2024align,karras2022edm,lu2022dpmsolver,zhang2023deis}.
-\citet{stephanovitch2026lipschitz} prove sharp Lipschitz regularity of
+\citet{stephanovitch2026lipschitz} proves sharp Lipschitz regularity of
 canonical flow-matching fields and Euler-type $\wtwo$ rates; that is a
 bound, not a pairwise ranking of two interpolants at equal NFE.
 
@@ -421,6 +421,13 @@ $\|A\|_2^2$. A counterexample to $\mu_2$ itself is outside our
 scope. \citet{benton2024error} bound $\wtwo$ of a learned flow; that is
 an error bound, not a pairwise ranking. Consistency
 models~\citep{song2023consistency} distill few-step maps.
+Complementary solver-aware methods use temporal information rather than
+an integrated spatial-Jacobian energy.
+\citet{gupta2026sharpen} calibrate Euler grids from trajectory
+acceleration on pretrained flow-matching models. The present
+contribution is neither a sampler nor a training regularizer: it gives
+a certified ranking non-implication and a solver-grid-aware
+impossibility result for the stated classes.
 
 \section{Limitations}
 \label{sec:limits}

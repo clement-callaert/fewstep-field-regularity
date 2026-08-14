@@ -99,7 +99,7 @@ not distributed; the derived `robustness_lowrank.json` is.
 ## Repository structure
 
 ```text
-audit/                       Historical audits; see PASS7 for the current record
+audit/                       Historical audits; current release audit is PASS9
 configs/                     Hydra configuration groups
 docs/                        Research process documents
 paper/arxiv/                 Public preprint sources

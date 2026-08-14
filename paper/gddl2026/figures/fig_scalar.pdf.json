@@ -1,11 +1,11 @@
 {
-  "base_commit": "f6bdd65d4eddb2bfb5abf519c2f62241ea4fba64",
+  "base_commit": "0b5605dd46e7e68640b375cfa93514eeb6f078c5",
   "environment_lock_hash": "25195ab63834cda2c141fa7745e4949756797aca5f2cc75ab671e057d2a124b6",
   "figure_artifact_id": "workshop_figures_2026-08-13-v1:fig_scalar",
-  "figure_checksum_sha256": "2594db221455f659ea4fb41bf7cedab6e55ddf866196d0bd2f10d52ec49dac60",
+  "figure_checksum_sha256": "b49eb1953fb8a809b269c421a52f70cd24c9a5c48b980cbcee39989ac3d4361b",
   "generation_command": "python scripts/make_workshop_figures.py",
-  "generation_timestamp": "2026-08-14T16:23:04.804452+00:00",
-  "git_commit": "f6bdd65d4eddb2bfb5abf519c2f62241ea4fba64",
+  "generation_timestamp": "2026-08-14T19:59:59.713487+00:00",
+  "git_commit": "0b5605dd46e7e68640b375cfa93514eeb6f078c5",
   "note": "Copied from paper/arxiv/figures/fig_scalar.pdf for the anonymous PDF.",
   "plotting_config": {
     "kind": "copied_from_arxiv",
@@ -13,12 +13,12 @@
   },
   "plotting_script": "scripts/make_workshop_figures.py",
   "source_artifact_ids": [],
-  "source_commit": "f6bdd65d4eddb2bfb5abf519c2f62241ea4fba64",
+  "source_commit": "0b5605dd46e7e68640b375cfa93514eeb6f078c5",
   "source_run_ids": [
     "none_conceptual"
   ],
   "source_table_hashes": {},
-  "working_tree_diff_sha256": "e6d6a43556606a55499c40a2ede344084a1e65c36f97bd525b952d6178a1bdf8",
+  "working_tree_diff_sha256": "51b831bbbdf20cecd78714045eec8a2a2adb374e47b7c016b9df8441322e5814",
   "working_tree_dirty": true,
-  "working_tree_status_sha256": "8d732301b26b82f0fce51510ec2cecf9dfc6d3d137edf565035d0a49ecded1ac"
+  "working_tree_status_sha256": "70b7dbd5facca0f3402b1159bc38339ddfc833a2bfc1f34db384e85a21500a62"
 }
