@@ -409,7 +409,7 @@ def figure_four_paths() -> Path:
             fontsize=8,
         )
         ax.annotate(
-            "low-rank",
+            "factor+noise",
             xy=(2.5, 0.0),
             xycoords=("data", "axes fraction"),
             xytext=(0, -16),
@@ -733,7 +733,12 @@ def figure3_interaction() -> tuple[Path, list[str]]:
         ax.set_yticks([1e-1, 1e-3, 0.0, -1e-3, -1e-1])
         ax.set_xticks([8, 16, 32], ["8", "16", "32"])
         ax.set_xlabel("NFE (equal across solvers)")
-        ax.set_title(f"low-rank target, $d={dim}$", loc="left")
+        title = (
+            rf"rank-2 factor+noise target, $d={dim}$"
+            if dim == 8
+            else rf"factor+noise target, $d={dim}$"
+        )
+        ax.set_title(title, loc="left")
     axes[0].set_ylabel(r"$W_2(\mathrm{linear})-W_2(\mathrm{VP})$")
     fig.tight_layout()
     out = FIGURE_DIR / ("fig3_interaction" + FIGURE_SUFFIX)
@@ -811,7 +816,7 @@ def figure_scalar_counterexample() -> Path:
     ax.legend(frameon=False, loc="lower right")
     ax.set_title(r"(a) signed drifts", loc="left", fontsize=8)
     ax.annotate(
-        "unsigned average discards sign",
+        r"shaded: $a_{\mathrm{lin}}<0$",
         xy=(0.18, -0.45),
         xytext=(0.42, -1.38),
         fontsize=7,
@@ -1026,7 +1031,7 @@ def main() -> None:
             },
             note=(
                 "Source: phase4_gaussian_reproduction_2026-07-24-v1:results. "
-                "Signed low-rank W2 margins versus equal-NFE Euler, Heun, and RK4."
+                "Signed factor-plus-noise W2 margins versus equal-NFE Euler, Heun, and RK4."
             ),
         )
         written.append(fig3)

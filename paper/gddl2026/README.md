@@ -17,8 +17,11 @@ and is not edited in place. A former separate supplement is archived at
 - NeurIPS 2026 `dblblindworkshop` (not camera-ready / final).
 - Official CFP (https://gddl-neurips-2026.github.io/, retrieved 2026-08-13):
   short papers 2--4 pages excluding references; long papers 5--9 pages
-  excluding references. This version targets the **long** track at 5--6
-  body pages.
+  excluding references. This version is a **long** paper: seven PDF pages
+  total. Main text occupies pages 1--6 (the conclusion ends on page 6).
+  References begin on page 6 and continue onto page 7. Appendix A occupies
+  the remainder of page 7. Six pages excluding references, within the
+  long-paper 5--9 page rule.
 - No author name, email, GitHub username, or identifying artefact URL.
 - No NeurIPS-review-status wording in the anonymous PDF or this README.
 - One anonymous PDF: the rational VP Heun certificate is Appendix A after

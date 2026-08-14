@@ -1,11 +1,11 @@
 {
-  "base_commit": "aaef59caa6e3d4bca79b4538bb3f3d6d1706a8e4",
+  "base_commit": "9f0bd9df39bb1e40987319cc26d0eda22d41035e",
   "environment_lock_hash": "25195ab63834cda2c141fa7745e4949756797aca5f2cc75ab671e057d2a124b6",
   "figure_artifact_id": "workshop_figures_2026-08-13-v1:fig_inversion_region",
-  "figure_checksum_sha256": "7f3fdbd4969e3abef6e4d332c6c4b939e00711065cf1b047facc4d9d221e3824",
+  "figure_checksum_sha256": "ca9be00a966357d23b72ee4966300c68f5090ba318f2f20c055ae4e160dc4cbf",
   "generation_command": "python scripts/make_workshop_figures.py",
-  "generation_timestamp": "2026-08-13T21:46:19.492524+00:00",
-  "git_commit": "aaef59caa6e3d4bca79b4538bb3f3d6d1706a8e4",
+  "generation_timestamp": "2026-08-14T05:59:12.541778+00:00",
+  "git_commit": "9f0bd9df39bb1e40987319cc26d0eda22d41035e",
   "note": "Copied from paper/arxiv/figures/fig_inversion_region.pdf for the anonymous PDF.",
   "plotting_config": {
     "kind": "copied_from_arxiv",
@@ -17,7 +17,7 @@
     "none_conceptual"
   ],
   "source_table_hashes": {},
-  "working_tree_diff_sha256": "bc4ae0b39fb5f9f24e490eb8b6dac88eda843ef47687435e47ac72150fd041ba",
+  "working_tree_diff_sha256": "6fc59bc6b6cfc24427435a7497d5a592b9ca40b487daa2665496135bc5a3a9e8",
   "working_tree_dirty": true,
-  "working_tree_status_sha256": "3c36aa6278779dd82115cf7ee3af5dea8a70d89f614c16cab731d4275fae5718"
+  "working_tree_status_sha256": "2c9b7faad21991b692b8fd2fb02430f3e79ac476e23550d6c6af8d94b6015c5f"
 }

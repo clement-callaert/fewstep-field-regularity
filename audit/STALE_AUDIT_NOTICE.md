@@ -7,4 +7,4 @@ workshop PDF). They are retained as history.
 
 They are **not** the current audit of the manuscripts in `paper/arxiv/`
 and `paper/gddl2026/`. See `audit/PASS7_FINAL_AUDIT.md` for the record
-produced after the scientific-repositioning pass.
+after the scientific-repositioning pass and the 2026-08-14 polish.

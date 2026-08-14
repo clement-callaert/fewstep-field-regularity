@@ -9,6 +9,7 @@ from fewstep_regularities.analysis.ranking_grids import (
     GEOM_KEYS,
     PRIMARY_NFE,
     SOLVERS,
+    family_display_label,
     four_path_scores,
     path_regularity,
     path_w2,
@@ -103,7 +104,8 @@ def main() -> None:
         if not row["inversion"]:
             continue
         lines.append(
-            f"{row['family']} & {row['dim']} & {row['solver']} & {row['nfe']} & "
+            f"{family_display_label(str(row['family']), int(str(row['dim'])))} & "
+            f"{row['dim']} & {row['solver']} & {row['nfe']} & "
             f"{row['R_prefers']} & {row['W2_prefers']} \\\\"
         )
     lines.extend([r"\bottomrule", r"\end{tabular}", ""])

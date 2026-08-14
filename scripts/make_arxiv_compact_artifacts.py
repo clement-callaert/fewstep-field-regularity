@@ -10,6 +10,7 @@ import mpmath as mp
 import torch
 
 from fewstep_regularities.analysis.continuous_regularity import regularity_report
+from fewstep_regularities.analysis.ranking_grids import family_display_label
 from fewstep_regularities.analysis.scalar_gaussian_counterexample import (
     EXACT_ENDPOINT_FACTOR,
     LINEAR_HEUN_FACTOR,
@@ -583,7 +584,7 @@ def main() -> None:
         r"\midrule",
     ]
     for block in inversions:
-        fam = "anisotropic" if block["family"] == "anisotropic_gaussian" else "low-rank"
+        fam = family_display_label(str(block["family"]), int(block["dim"]))
         inv_lines.append(
             f"{fam} & {block['dim']} & {block['solver']} & {block['nfe']} & "
             f"{block['R_prefers']} & {block['W2_prefers']} & "
@@ -639,8 +640,8 @@ def main() -> None:
     quad_names = [
         ("scalar $\lambda=4$", "scalar_lambda4"),
         ("anisotropic $d=2,8$", "anisotropic_d2"),
-        ("low-rank $d=2$", "low_rank_d2"),
-        ("low-rank $d=8$", "low_rank_d8"),
+        ("factor+noise $d=2$", "low_rank_d2"),
+        ("rank-2 factor+noise $d=8$", "low_rank_d8"),
         ("non-centered anisotropic $d=2,8$", "shifted_anisotropic_d2"),
     ]
     for label, key in quad_names:

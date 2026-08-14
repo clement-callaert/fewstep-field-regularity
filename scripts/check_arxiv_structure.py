@@ -112,6 +112,9 @@ FORBIDDEN_PHRASES = (
     "on the same block",
     "would contradict",
     "complete census",
+    "they prove no universal",
+    "prove no universal ranking",
+    "without a proved universal",
 )
 
 

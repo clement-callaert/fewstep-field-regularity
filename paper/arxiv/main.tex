@@ -75,25 +75,26 @@ A Certified Gaussian Counterexample}
 Few-step sampling in flow matching and stochastic interpolants requires
 an interpolation schedule, equivalently a sampling schedule, to be chosen
 before any endpoint error is observed. Averaged squared Jacobian
-regularity is a plausible criterion for schedule design. Chen,
-Vanden-Eijnden, and Xu propose minimizing $A_2$, the time-integrated
-squared spatial Jacobian norm of a flow-matching marginal ODE. Classical
-one-step bounds use a Lipschitz constant of the field; $A_2$ is not that
-constant, and they prove no universal ranking of equal-NFE solver error.
-This paper studies that narrower question. For independent $N(0,1)$ and
-$N(0,4)$, the exact integrals are $5\pi/8-1$ and $\pi^2/16$, so
-regularity prefers trigonometric VP, while explicit Heun at NFE~$8$
-prefers the linear path in Gaussian Wasserstein-2 distance. The inversion
-is certified by an exact rational Heun product and a nonnegative element
-of $\mathbb{Q}[\pi,\sqrt{2}]$. A complementary construction shows that,
-for every step count $N$ and every admissible endpoint log-scale, the
-unique integrated-regularity minimizer can have strictly larger $N$-step
-Euler endpoint error than a higher-regularity competitor aligned to that
+regularity is a plausible schedule-design criterion, but it is not a
+solver-specific discretization-error functional. Chen, Vanden-Eijnden,
+and Xu propose minimizing $A_2$, the time-integrated squared spatial
+Jacobian Lipschitzness of a flow-matching marginal ODE. They do not claim or
+prove that $A_2$ universally ranks equal-NFE solver error. We study that
+narrower surrogate question. For independent $N(0,1)$ and $N(0,4)$, the
+exact integrals are $5\pi/8-1$ and $\pi^2/16$, so regularity prefers
+trigonometric VP, while explicit Heun, a two-stage Runge--Kutta method,
+at eight number of function evaluations (NFE~$8$) prefers the linear
+path in Gaussian Wasserstein-2 distance. The inversion is certified by
+an exact rational Heun product and a nonnegative element of
+$\mathbb{Q}[\pi,\sqrt{2}]$. A complementary construction shows that, for
+every step count $N$ and every admissible endpoint log-scale, the unique
+integrated-regularity minimizer can have strictly larger $N$-step Euler
+endpoint error than a higher-regularity competitor aligned to that
 solver grid. A specified finite Gaussian enumeration of four candidate
 paths on $36$ tested blocks contains both agreement and pairwise
-disagreement. The results establish a limitation of a universal surrogate
-interpretation. They do not refute Chen et al., do not evaluate learned
-velocity fields, and do not estimate a population frequency of failure.
+disagreement. The results establish a limitation of a universal
+surrogate interpretation. They do not evaluate learned velocity fields
+and do not estimate a population frequency of failure.
 \end{abstract}
 
 \section{Introduction}
@@ -401,7 +402,8 @@ $x'=a(t)x$ are $\tfrac12(a'+a^2)h^2$ for explicit Euler and
 $\bigl(-a''/12+a^3/6\bigr)h^3$ for the implemented Heun factor
 $1+(h/2)\bigl(a(t)+a(t+h)(1+ha(t))\bigr)$ (Appendix~\ref{app:solvers}).
 These involve different derivatives, signs, and stage locations.
-Averaging $\|A\|_2^2$ retains none of them. The expansions establish that
+The scalar integral of $\|A\|_2^2$ does not determine these derivatives,
+signs, or stagewise values. The expansions establish that
 local solver error depends on temporal and stagewise information not
 determined by integrated Jacobian energy. They do not isolate sign loss
 as the unique source of the certified inversion.
@@ -525,7 +527,7 @@ at every NFE in $\{8,16,32\}$. On this enumeration the paired
 concordance score $(n_{\mathrm{agree}}-n_{\mathrm{invert}})/n$ equals
 $2/9$ over $36$ tested blocks. Stratified by solver ($n=12$ blocks per
 stratum) the score is $+1/2$ under Euler and RK4 and $-1/3$ under Heun.
-The strongest block is low-rank $d=8$, Euler, NFE~$8$:
+The strongest block is rank-2 factor-plus-noise $d=8$, Euler, NFE~$8$:
 $\cR$ prefers linear ($\numRlinStrong$ versus $\numRvpStrong$) while
 $\wtwo$ prefers VP ($\numWlinStrong$ versus $\numWvpStrong$).
 
@@ -546,9 +548,9 @@ reading of this count as a global minimizer theorem.
   \includegraphics[width=\linewidth,alt={Three paired bar charts of regularity and W2 on commuting Gaussian interpolants.}]{figures/fig1_regimes.pdf}
   \caption{Three comparisons on commuting Gaussian interpolants.
   Continuous $\cR$ (left) and equal-NFE Gaussian $\wtwo$ (right).
-  (a)~Pairwise linear versus VP on low-rank $d=8$, Euler, NFE~$8$.
+  (a)~Pairwise linear versus VP on rank-2 factor-plus-noise $d=8$, Euler, NFE~$8$.
   (b)~VP versus Chen Ex.~3.3 scalar on anisotropic $d=8$, Euler, NFE~$8$.
-  (c)~Four specified candidate paths on low-rank $d=8$, Euler, NFE~$8$.
+  (c)~Four specified candidate paths on rank-2 factor-plus-noise $d=8$, Euler, NFE~$8$.
   Among those four paths, the per-mode path has the smallest $\cR$ and
   the smallest $\wtwo$ in $36$ of $36$ tested blocks.}
   \label{fig:regimes}
@@ -847,7 +849,7 @@ fixed-NFE error. When $\Sigma_1$ has at least two distinct eigenvalues,
 that path is not a Class~S shared interpolant.
 Table~\ref{tab:infamily} lists the nine shared-schedule pairwise inversions.
 Figure~\ref{fig:eigenmode} illustrates identity~\eqref{eq:telescope} on the
-strongest block; Figure~\ref{fig:interaction} shows the low-rank
+strongest block; Figure~\ref{fig:interaction} shows the factor-plus-noise
 solver-path split.
 
 \begin{table}[!htbp]
@@ -863,7 +865,7 @@ solver-path split.
 
 \begin{table}[!htbp]
   \centering
-  \caption{Strongest centered inversion: low-rank, $d=8$, Euler, NFE $8$.
+  \caption{Strongest centered inversion: rank-2 factor-plus-noise, $d=8$, Euler, NFE $8$.
   $\cR$ is the continuous integral; $\Rhat$ is shown only as a check.
   Eigenvalues: $0.05$ (six times), $4.64827725629505$,
   $10.675638226546441$. Deterministic calculation: $\cR$ is evaluated by
@@ -882,15 +884,15 @@ solver-path split.
 
 \begin{figure}[!htbp]
   \centering
-  \includegraphics[width=\linewidth,height=0.30\textheight,keepaspectratio,alt={Eigenmode transported exact-minus-method defects on the strongest centered low-rank block.}]{figures/fig_eigenmode.pdf}
+  \includegraphics[width=\linewidth,height=0.30\textheight,keepaspectratio,alt={Eigenmode transported exact-minus-method defects on the strongest centered rank-2 factor-plus-noise block.}]{figures/fig_eigenmode.pdf}
   \caption{Modal contributions to squared Wasserstein error and transported
   signed defects for the strongest centered inversion. The bars reconstruct
   the telescoping identity~\eqref{eq:telescope}. Exact modal identity on one
   block; illustration, not an independent causal test.}
   \label{fig:eigenmode}
   \vspace{0.5em}
-  \includegraphics[width=\linewidth,height=0.22\textheight,keepaspectratio,alt={Solver-by-path interaction of Gaussian W2 on low-rank geometries.}]{figures/fig3_interaction.pdf}
-  \caption{Signed low-rank $\wtwo$ margin at equal NFE. Positive values
+  \includegraphics[width=\linewidth,height=0.22\textheight,keepaspectratio,alt={Solver-by-path interaction of Gaussian W2 on factor-plus-noise geometries.}]{figures/fig3_interaction.pdf}
+  \caption{Signed factor-plus-noise $\wtwo$ margin at equal NFE. Positive values
   prefer VP; negative values prefer linear. Vertical axis: symmetric-log
   with linear threshold $10^{-4}$. Exact-moment modal Runge--Kutta.}
   \label{fig:interaction}
@@ -944,7 +946,7 @@ Table~\ref{tab:workshop} reports the driver of each path preference.
 Several inversions, including all dimension-$8$ Euler and Heun inversions,
 are mean-driven: $\cR$ cannot see them. The family was specified before
 execution as a stress test of this structural blind spot, not as an
-independent replication of the centered mechanism.
+independent replication of the centered inversions.
 
 \begin{figure}[!htbp]
   \centering
@@ -998,8 +1000,8 @@ $\cR$ comparisons:
 geometry & $(\cR_{\mathrm{lin}},\cR_{\mathrm{VP}})$ & distinct $\cR$ pair \\
 \midrule
 anisotropic $d=2$ and $d=8$ & $(\numRlinAniso,\numRvpAniso)$ & $1$ (shared) \\
-low-rank $d=2$ & $(\numRlinLowTwo,\numRvpLowTwo)$ & $1$ \\
-low-rank $d=8$ & $(\numRlinStrong,\numRvpStrong)$ & $1$ \\
+factor+noise $d=2$ & $(\numRlinLowTwo,\numRvpLowTwo)$ & $1$ \\
+rank-2 factor+noise $d=8$ & $(\numRlinStrong,\numRvpStrong)$ & $1$ \\
 \bottomrule
 \end{tabular}\par}
 
@@ -1053,7 +1055,7 @@ grid alignment is perturbed; they are not a population frequency.
 \end{table}
 
 
-The post-hoc low-rank grid has $66$ preference blocks:
+The post-hoc factor-plus-noise grid has $66$ preference blocks:
 $2$ dimensions, $3$ solvers, and, for each pair, the three primary NFE
 budgets $\{8,16,32\}$ at noise-floor perturbations
 $\delta\in\{-0.1,0,0.1\}$, plus NFE $\{64,128\}$ at $\delta=0$ only. The
@@ -1061,7 +1063,7 @@ perturbation multiplies the noise variance $0.05$ by $(1+\delta)$; the
 factor $F$ is regenerated from seed $271828$ and is not redrawn. Extra
 budgets are not run at $\delta\ne 0$. Table~\ref{tab:robust} summarizes the
 $66$ blocks. All $66$ follow the same solver-path split as the primary
-low-rank census: VP under Euler, linear under Heun and RK4.
+factor-plus-noise census: VP under Euler, linear under Heun and RK4.
 
 The geometry-draw experiment of Section~\ref{sec:experiments} is the
 one place $F$ is redrawn. The paired concordance score on the centered
@@ -1099,7 +1101,7 @@ The $80$-digit Gelbrich audit is the frozen precision table in
     \setlength{\tabcolsep}{2.5pt}
     \resizebox{\linewidth}{!}{\input{generated/quadrature_comparison}}
     \vspace{0.7em}
-    \caption{Post-hoc low-rank robustness: all $66$ blocks follow the same
+    \caption{Post-hoc factor-plus-noise robustness: all $66$ blocks follow the same
     solver-path split as the primary grid. The factor $F$ is not redrawn.}
     \label{tab:robust}
     \scriptsize

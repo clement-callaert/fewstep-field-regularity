@@ -82,22 +82,24 @@ A Certified Gaussian Counterexample}
 \begin{abstract}
 Few-step sampling in flow matching and stochastic interpolants requires
 an interpolation schedule before any endpoint error is observed.
-Averaged squared Jacobian regularity is a plausible criterion for
-schedule design. Chen et al.\ propose minimizing $A_2$, the
-time-integrated squared spatial Jacobian norm of a flow-matching
-marginal ODE, without a proved universal ranking of equal-NFE solver
-error. For independent $N(0,1)$ and $N(0,4)$, exact regularity integrals
-prefer trigonometric VP while explicit Heun at NFE~$8$ prefers the
-linear path in Gaussian $W_2$. The inversion is certified by an exact
-rational Heun product and a nonnegative polynomial in $\pi$ and
-$\sqrt{2}$. A grid-aware construction shows that, for every step count
-$N$, the unique integrated-regularity minimizer can have strictly larger
-$N$-step Euler error than a higher-regularity competitor aligned to that
-grid. A specified finite Gaussian enumeration of four candidate paths on
-$36$ tested blocks contains both agreement and pairwise disagreement.
-The results establish a limitation of a universal surrogate
-interpretation. They do not refute Chen et al., do not evaluate learned
-fields, and do not estimate a population frequency of failure.
+Averaged squared Jacobian regularity is a plausible schedule-design
+criterion, but it is not a solver-specific discretization-error
+functional. Chen et al.\ propose minimizing $A_2$, the time-integrated
+squared spatial Jacobian Lipschitzness of a flow-matching marginal ODE. They do
+not claim or prove that $A_2$ universally ranks equal-NFE solver error.
+For independent $N(0,1)$ and $N(0,4)$, exact regularity integrals prefer
+trigonometric VP while explicit Heun, a two-stage Runge--Kutta method,
+at eight number of function evaluations (NFE~$8$) prefers the linear
+path in Gaussian $W_2$. The inversion is certified by an exact rational
+Heun product and a nonnegative polynomial in $\pi$ and $\sqrt{2}$. A
+grid-aware construction shows that, for every step count $N$, the unique
+integrated-regularity minimizer can have strictly larger $N$-step Euler
+error than a higher-regularity competitor aligned to that grid. A
+specified finite Gaussian enumeration of four candidate paths on $36$
+tested blocks contains both agreement and pairwise disagreement. The
+results establish a limitation of a universal surrogate interpretation.
+They do not evaluate learned fields and do not estimate a population
+frequency of failure.
 \end{abstract}
 
 \section{Introduction}
@@ -107,9 +109,9 @@ before any error is observed. Lipschitz constants enter classical
 one-step bounds~\citep{hairer1993solving}.
 \citet{lipschitzguided2025} propose minimizing $A_2$, the
 time-integrated squared spatial Jacobian norm (their Definition~3.2), as
-a schedule-design objective in a specified admissible family. They prove
-no universal pairwise ranking of equal-NFE solver error. We study that
-narrower question on a flow-matching marginal ODE.
+a schedule-design objective in a specified admissible family. They do
+not claim or prove that $A_2$ universally ranks equal-NFE solver error.
+We study that narrower surrogate question on a flow-matching marginal ODE.
 
 The object is an integrated unsigned Jacobian energy. For a fixed
 finite-step solver, endpoint error depends on stagewise field values,
@@ -254,10 +256,11 @@ Appendix~\ref{app:vpheun}. Interval arithmetic is a cross-check only.
 For any independent linear coupling,
 $a_{\mathrm{lin}}(0)=-1<0<a_{\mathrm{lin}}(1)=+1$. The VP drift vanishes
 at the endpoints and does not change sign on $(0,1)$. Averaging
-$a^2$ therefore erases a qualitative distinction. Fixed-stage
-Runge--Kutta methods use signed stage evaluations that $\cR$ discards;
-in the tested schemes, this distinction contributes to the observed
-inversion.
+$a^2$ does not retain that sign change. Fixed-stage
+Runge--Kutta methods use signed stage evaluations that are not
+determined by $\cR$. The sign difference is consistent with the
+observed inversion, but the analysis does not isolate it as a causal
+contribution.
 
 Let $e_{n}=\sqrt{q(t_{n+1})/q(t_n)}$ and let $r_n$ be the numerical
 factor. The telescoping identity
@@ -308,8 +311,8 @@ blocks and $4$ of $12$ cells.
   \centering
   \includegraphics[width=0.92\linewidth,height=0.38\textheight,keepaspectratio,alt={Three paired bar charts of regularity and W2.}]{figures/fig1_regimes.pdf}
   \caption{Three comparisons. Left: $\cR$. Right: Euler NFE~$8$ $\wtwo$.
-  (a)~linear vs VP, low-rank $d=8$; (b)~VP vs Chen Ex.~3.3, anisotropic
-  $d=8$; (c)~four specified paths, low-rank $d=8$. Among those four
+  (a)~linear vs VP, rank-2 factor-plus-noise $d=8$; (b)~VP vs Chen Ex.~3.3, anisotropic
+  $d=8$; (c)~four specified paths, rank-2 factor-plus-noise $d=8$. Among those four
   paths, per-mode wins $\cR$ and $\wtwo$ in $36$ of $36$ tested blocks.}
   \label{fig:regimes}
 \end{figure}
@@ -327,7 +330,7 @@ blocks and $4$ of $12$ cells.
 
 \begin{table}[t]
   \centering
-  \caption{Strongest centered inversion: low-rank, $d=8$, Euler, NFE~$8$.
+  \caption{Strongest centered inversion: rank-2 factor-plus-noise, $d=8$, Euler, NFE~$8$.
   Eigenvalues: $0.05$ (six times), $4.64827725629505$,
   $10.675638226546441$. Deterministic calculation: $\cR$ is evaluated by
   adaptive quadrature, while $\wtwo$ uses exact Gaussian moments
@@ -421,9 +424,9 @@ models~\citep{song2023consistency} distill few-step maps.
 
 The systems are commuting affine Gaussian interpolants, three
 fixed-step Runge--Kutta methods, and small equal-NFE budgets. No
-learned neural field is evaluated. Chen et al.\ prove no
-discretization-error bound and do not claim a universal pairwise
-ranking at fixed NFE. Among four specified candidate paths, the
+learned neural field is evaluated. Chen et al.\ do not claim or prove a
+discretization-error bound, nor that $A_2$ universally ranks equal-NFE
+solver error. Among four specified candidate paths, the
 per-mode path wins $36$ of $36$ tested blocks; that does not
 imply that a global $\cR$-minimizer minimizes fixed-NFE error.
 Theorem~\ref{thm:gridaware} is grid-aligned by construction. Cell

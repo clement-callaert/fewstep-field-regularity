@@ -17,9 +17,9 @@ differently. It is not a submission note.
   tested blocks, 4 of 12 cells. The 36 of 36 per-mode count is a
   four-candidate finite enumeration, not a global $W_2$ optimality theorem.
 - The manuscript reports hierarchical descriptive counts. The $N=50$
-  redraw of the low-rank factor is a descriptive 50/50 fraction on the
-  sampled geometries, not a population interval and not a $p$-value on
-  deterministic $R$ or $W_2$.
+  redraw of the factor-plus-noise matrix $F$ is a descriptive 50/50
+  fraction on the sampled geometries, not a population interval and not a
+  $p$-value on deterministic $R$ or $W_2$.
 
 ## Form
 

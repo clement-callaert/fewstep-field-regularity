@@ -33,8 +33,23 @@ A deterministic existence proof is not a run.
 | P4-P1 | supported | supported | unchanged grid-aware Euler construction | Complementary; not the Gaussian mechanism | Grid-aware Euler only | 2026-08-13 |
 | P4-C4 | (new) | under-test | 36/36 among four candidate paths on the centered grid | Finite-census count; not a W2 optimality theorem | Single sweep; P4-P1 blocks global minimizer reading | 2026-08-13 |
 
-Manuscript policy after this revision: P4-P2 may be stated as a theorem. P4-C1 may be stated only as a hierarchical descriptive count (5 of 12 geometry×solver cells; not 14 of 36 as a headline). P4-C2 may be stated only as a descriptive split on the tested low-rank family. P4-C4 may be stated only as an observed 36/36 count among four candidates, not as a supported law and not as evidence that R is reliable when its minimizer is admissible.
+Manuscript policy after this revision: P4-P2 may be stated as a theorem. P4-C1 may be stated only as a hierarchical descriptive count (5 of 12 geometry×solver cells; not 14 of 36 as a headline). P4-C2 may be stated only as a descriptive split on the tested factor-plus-noise family. P4-C4 may be stated only as an observed 36/36 count among four candidates, not as a supported law and not as evidence that R is reliable when its minimizer is admissible.
 
-## Dual submission `[OPEN]`
+## Dual submission `[CLOSED]`
 
-The official GDDL 2026 CFP (https://gddl-neurips-2026.github.io/, retrieved 2026-08-13) states that the workshop is non-archival and that "Workshop submissions can be subsequently or concurrently submitted to other venues." That is not, by itself, a signed permission to post a de-anonymized arXiv preprint during double-blind review. Keep this item `[OPEN]` until the organizers or OpenReview state an explicit preprint rule. Do not treat this CFP sentence as permission to deposit.
+Official sources retrieved 2026-08-13:
+
+1. GDDL 2026 CFP (https://gddl-neurips-2026.github.io/): the workshop is
+   non-archival, and submissions may be concurrently or subsequently
+   submitted to other venues.
+2. NeurIPS 2026 Main Track Handbook, Preprints
+   (https://neurips.cc/Conferences/2026/MainTrackHandbook): a
+   non-anonymous arXiv preprint will not cause rejection, provided the
+   public version does not claim to be under review and the paper is not
+   aggressively advertised during review.
+
+Public non-anonymous arXiv preprint: allowed. Anonymous GDDL submission:
+allowed. Concurrent submission: allowed by the workshop CFP. Aggressive
+promotion during review: should be avoided. The public arXiv PDF must not
+say "Under review at NeurIPS". The workshop PDF must remain anonymous.
+This is not a signed organizer letter beyond the published policy.
