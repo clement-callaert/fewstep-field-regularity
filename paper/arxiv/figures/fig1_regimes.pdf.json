@@ -1,11 +1,11 @@
 {
-  "base_commit": "9f0bd9df39bb1e40987319cc26d0eda22d41035e",
+  "base_commit": "f6bdd65d4eddb2bfb5abf519c2f62241ea4fba64",
   "environment_lock_hash": "25195ab63834cda2c141fa7745e4949756797aca5f2cc75ab671e057d2a124b6",
   "figure_artifact_id": "arxiv_figures_2026-08-13-v1:fig1_regimes",
-  "figure_checksum_sha256": "a2fe5f51e0cf44a00db3dc61d689758701806afc83184aea8fb6c177599f5003",
+  "figure_checksum_sha256": "436d18c3d43d21960dfd181bdc831106dbfe57b2444fcd15492742d3b18e0235",
   "generation_command": "python scripts/make_arxiv_figures.py",
-  "generation_timestamp": "2026-08-14T05:59:10.923420+00:00",
-  "git_commit": "9f0bd9df39bb1e40987319cc26d0eda22d41035e",
+  "generation_timestamp": "2026-08-14T16:23:03.212007+00:00",
+  "git_commit": "f6bdd65d4eddb2bfb5abf519c2f62241ea4fba64",
   "note": "Headline R and W2 bars for the three regimes. Counts are a finite enumeration of the four specified candidate paths, not estimators. Source geometries.json.",
   "plotting_config": {
     "counts": {
@@ -20,11 +20,12 @@
   },
   "plotting_script": "scripts/make_arxiv_figures.py",
   "source_artifact_ids": [],
+  "source_commit": "f6bdd65d4eddb2bfb5abf519c2f62241ea4fba64",
   "source_run_ids": [
     "none_conceptual"
   ],
   "source_table_hashes": {},
-  "working_tree_diff_sha256": "f743df5efc0c3dbc1cf1d71092017ec1a88cf3c9462ad154bfe14b491208b2ab",
+  "working_tree_diff_sha256": "f42cd124b24ad7d1fb51a6acfbfd5d10feb608497e3e18edc04c6902986f217b",
   "working_tree_dirty": true,
-  "working_tree_status_sha256": "2c9b7faad21991b692b8fd2fb02430f3e79ac476e23550d6c6af8d94b6015c5f"
+  "working_tree_status_sha256": "d568258ad1840e51591ad868acf9e14fbbcbebc34e422908e1e3730d3d9bc877"
 }
