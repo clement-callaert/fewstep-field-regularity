@@ -626,6 +626,17 @@ practice~\citep{sabour2024align,karras2022edm,lu2022dpmsolver,zhang2023deis}.
 \citet{benton2024error} bound $\wtwo$ of a learned flow. Those objects
 are distinct from the ranking question tested here.
 
+Complementary solver-aware approaches use temporal information rather
+than an integrated spatial-Jacobian energy.
+\citet{gupta2026sharpen} construct SharpEuler, calibrating Euler grids
+from trajectory acceleration estimated on pretrained flow-matching
+models. \citet{khan2026isofm} regularize material acceleration during
+training. Other work modifies the coupling or prior design to produce
+straighter, OT-like flows~\citep{malnick2026otdesign}. The present
+contribution is neither a sampler nor a training regularizer: it gives
+a certified ranking non-implication and a solver-grid-aware
+impossibility result for the stated classes.
+
 \section{Limitations}
 \label{sec:limits}
 
