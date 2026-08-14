@@ -1,3 +1,11 @@
+# Repository inventory (historical; 2026-08-13)
+
+**Historical.** This inventory describes commit
+`e48c9390e62b38f206342e6aeb7f160122ccc79c`. It is not the current tree.
+Pull request #1 is merged; `talks/wald-interview-2026-08-21/` is on
+public `main`. The current release audit is
+`audit/PASS9_POST_MERGE_RELEASE.md`.
+
 # Repository inventory
 
 Audit date: 2026-08-13.
