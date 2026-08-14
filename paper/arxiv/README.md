@@ -40,9 +40,10 @@ python scripts/check_arxiv_structure.py
 ```
 
 Default `pytest` must pass without a GitHub Release tag. Tag existence
-is a later owner publication gate after workshop notification
+is a later owner publication gate
 (`python scripts/check_arxiv_release.py --require-tag`). Do not present
-a release URL as live before that gate.
+a release URL as live before that gate. Those checks are repository
+maintenance; they are not stated in the public PDF.
 
 ## Files
 

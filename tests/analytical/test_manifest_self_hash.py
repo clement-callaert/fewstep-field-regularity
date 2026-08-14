@@ -31,5 +31,6 @@ def test_provenance_root_is_repository() -> None:
     assert (ROOT / "pyproject.toml").is_file()
     state = source_state()
     assert state["base_commit"] != "unknown"
+    assert state["source_commit"] == state["base_commit"]
     assert state["environment_lock_hash"] != "missing"
     assert isinstance(state["working_tree_dirty"], bool)

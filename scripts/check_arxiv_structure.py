@@ -28,7 +28,7 @@ BODY_FORBIDDEN = (
     ".json",
     ".py",
     "sha256",
-    "commit",
+    "git commit",
     "scripts/",
     "pip install",
     "pytest",
@@ -115,6 +115,9 @@ FORBIDDEN_PHRASES = (
     "they prove no universal",
     "prove no universal ranking",
     "without a proved universal",
+    "eight number of function evaluations",
+    "budget of number of function evaluations",
+    "Jacobian Lipschitzness",
 )
 
 

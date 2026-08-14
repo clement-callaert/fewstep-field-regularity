@@ -1,3 +1,13 @@
+# PASS 7 audit (historical; 44bc8fe polish)
+
+**Historical.** This file describes the 2026-08-14 editorial polish that
+landed as commit `44bc8fe9faf78aebb328a18e0f6dd87252467e5e`. It recorded a
+dirty working tree and an uncommitted state that is no longer current.
+It is **not** the current release audit. See `STALE_AUDIT_NOTICE.md` and,
+after the artifact-carrier commit, `audit/PASS8_RELEASE.md`.
+
+The remainder of the file is kept as a snapshot of that earlier pass.
+
 # PASS 7 final audit (updated 2026-08-14)
 
 This is the current audit of `paper/arxiv/` and `paper/gddl2026/` after the

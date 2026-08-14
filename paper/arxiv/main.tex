@@ -73,45 +73,45 @@ A Certified Gaussian Counterexample}
 
 \begin{abstract}
 Few-step sampling in flow matching and stochastic interpolants requires
-an interpolation schedule, equivalently a sampling schedule, to be chosen
-before any endpoint error is observed. Averaged squared Jacobian
-regularity is a plausible schedule-design criterion, but it is not a
-solver-specific discretization-error functional. Chen, Vanden-Eijnden,
-and Xu propose minimizing $A_2$, the time-integrated squared spatial
-Jacobian Lipschitzness of a flow-matching marginal ODE. They do not claim or
-prove that $A_2$ universally ranks equal-NFE solver error. We study that
-narrower surrogate question. For independent $N(0,1)$ and $N(0,4)$, the
-exact integrals are $5\pi/8-1$ and $\pi^2/16$, so regularity prefers
-trigonometric VP, while explicit Heun, a two-stage Runge--Kutta method,
-at eight number of function evaluations (NFE~$8$) prefers the linear
+choosing an interpolation schedule before endpoint error is observed.
+Averaged squared Lipschitzness of the drift, measured by the
+time-integrated squared $2$-norm of its spatial Jacobian, is a plausible
+schedule-design criterion, but it is not a solver-specific
+discretization-error functional. Chen, Vanden-Eijnden, and Xu propose
+minimizing this quantity, denoted $A_2$; they do not claim or prove that
+$A_2$ universally ranks equal-NFE solver error. We study that narrower
+surrogate question. For independent $N(0,1)$ and $N(0,4)$, the exact
+regularity integrals are $5\pi/8-1$ and $\pi^2/16$, so regularity prefers
+trigonometric VP, whereas explicit Heun, a two-stage Runge--Kutta method,
+with a budget of eight function evaluations (NFE~$8$), prefers the linear
 path in Gaussian Wasserstein-2 distance. The inversion is certified by
 an exact rational Heun product and a nonnegative element of
 $\mathbb{Q}[\pi,\sqrt{2}]$. A complementary construction shows that, for
 every step count $N$ and every admissible endpoint log-scale, the unique
 integrated-regularity minimizer can have strictly larger $N$-step Euler
-endpoint error than a higher-regularity competitor aligned to that
+endpoint error than a higher-regularity competitor aligned with that
 solver grid. A specified finite Gaussian enumeration of four candidate
 paths on $36$ tested blocks contains both agreement and pairwise
-disagreement. The results establish a limitation of a universal
-surrogate interpretation. They do not evaluate learned velocity fields
-and do not estimate a population frequency of failure.
+disagreement. These results limit a universal surrogate interpretation;
+they do not evaluate learned velocity fields or estimate a population
+failure frequency.
 \end{abstract}
 
 \section{Introduction}
 \label{sec:intro}
 
-A few-step sampler engages a probability path, a numerical solver, and a
-budget of number of function evaluations (NFE) before any endpoint error
-is observed. Few-step sampling therefore makes the sampling schedule a
-design choice that must be made a priori. Classical one-step bounds
+A few-step sampler commits to a probability path, a numerical solver, and a
+function-evaluation budget before any endpoint error is observed.
+Few-step sampling therefore makes the sampling schedule a design choice
+that must be made a priori. Classical one-step bounds
 involve a Lipschitz constant of the field~\citep{hairer1993solving}. A
 scalar functional of the path that can be evaluated before discretization
 is an attractive surrogate.
 
 In the stochastic interpolants and flow matching setting,
-\citet{lipschitzguided2025} propose minimizing averaged squared Jacobian
-regularity (their Definition~3.2, denoted $A_2$) as a schedule-design
-objective. They prove KL equivalence of scalar schedules after a
+\citet{lipschitzguided2025} propose minimizing averaged squared
+Lipschitzness of the drift (their Definition~3.2, denoted $A_2$) as a
+schedule-design objective. They prove KL equivalence of scalar schedules after a
 posteriori diffusion tuning, a transfer formula, and a logarithmic
 scaling law for the one-dimensional log-covariance minimizer. They
 minimize $A_2$ in specified admissible families. They do not claim, and
@@ -1073,16 +1073,16 @@ Table~\ref{tab:concordance}.
 \label{app:repro}
 
 {\small\raggedright
+Code, compact artifacts, frozen inputs, and reproducibility instructions
+are available at
+\url{https://github.com/clement-callaert/fewstep-field-regularity}.
 Default numerical precision is float64. The scalar calculation uses exact
 rational and algebraic expressions together with validated bounds; the
 precision audit uses $80$-digit arithmetic. Compact artifacts live under
-\texttt{paper/arxiv/artifacts/} and are committed files. Rebuild commands
-are listed in \texttt{README.md}. A GitHub Release tag is a later owner
-publication gate and is not required to read the numbers in this PDF.
-Frozen Phase~4 Hydra tables used by the eigenmode and non-centered
-figures live under \texttt{paper/arxiv/frozen\_runs/}. Compact derived
-artifacts occupy \texttt{paper/arxiv/artifacts/}. Eigenvalues, exact-moment
-modal Runge--Kutta, and those compact files suffice for
+\texttt{paper/arxiv/artifacts/} and are committed files. Frozen Phase~4
+Hydra tables used by the eigenmode and non-centered figures live under
+\texttt{paper/arxiv/frozen\_runs/}. Eigenvalues, exact-moment modal
+Runge--Kutta, and those compact files suffice for
 Table~\ref{tab:strongest} and Proposition~\ref{prop:scalar}. The raw
 Hydra directory \texttt{outputs/} is not required to read the PDF.
 The $80$-digit Gelbrich audit is the frozen precision table in
@@ -1132,9 +1132,6 @@ The $80$-digit Gelbrich audit is the frozen precision table in
   \vspace{0.8em}
   {\small\raggedright
   Source: \url{https://github.com/clement-callaert/fewstep-field-regularity}.
-  The placeholder check must pass with no retired commit token remaining.
-  The release check verifies compact checksums. Tag existence is a manual
-  publication gate, not a scientific failure of this manuscript.
   \par}
 \end{table}
 

@@ -81,25 +81,28 @@ A Certified Gaussian Counterexample}
 
 \begin{abstract}
 Few-step sampling in flow matching and stochastic interpolants requires
-an interpolation schedule before any endpoint error is observed.
-Averaged squared Jacobian regularity is a plausible schedule-design
-criterion, but it is not a solver-specific discretization-error
-functional. Chen et al.\ propose minimizing $A_2$, the time-integrated
-squared spatial Jacobian Lipschitzness of a flow-matching marginal ODE. They do
-not claim or prove that $A_2$ universally ranks equal-NFE solver error.
-For independent $N(0,1)$ and $N(0,4)$, exact regularity integrals prefer
-trigonometric VP while explicit Heun, a two-stage Runge--Kutta method,
-at eight number of function evaluations (NFE~$8$) prefers the linear
-path in Gaussian $W_2$. The inversion is certified by an exact rational
-Heun product and a nonnegative polynomial in $\pi$ and $\sqrt{2}$. A
-grid-aware construction shows that, for every step count $N$, the unique
+choosing an interpolation schedule before endpoint error is observed.
+Averaged squared Lipschitzness of the drift, measured by the
+time-integrated squared $2$-norm of its spatial Jacobian, is a plausible
+schedule-design criterion, but it is not a solver-specific
+discretization-error functional. Chen, Vanden-Eijnden, and Xu propose
+minimizing this quantity, denoted $A_2$; they do not claim or prove that
+$A_2$ universally ranks equal-NFE solver error. We study that narrower
+surrogate question. For independent $N(0,1)$ and $N(0,4)$, the exact
+regularity integrals are $5\pi/8-1$ and $\pi^2/16$, so regularity prefers
+trigonometric VP, whereas explicit Heun, a two-stage Runge--Kutta method,
+with a budget of eight function evaluations (NFE~$8$), prefers the linear
+path in Gaussian Wasserstein-2 distance. The inversion is certified by
+an exact rational Heun product and a nonnegative element of
+$\mathbb{Q}[\pi,\sqrt{2}]$. A complementary construction shows that, for
+every step count $N$ and every admissible endpoint log-scale, the unique
 integrated-regularity minimizer can have strictly larger $N$-step Euler
-error than a higher-regularity competitor aligned to that grid. A
-specified finite Gaussian enumeration of four candidate paths on $36$
-tested blocks contains both agreement and pairwise disagreement. The
-results establish a limitation of a universal surrogate interpretation.
-They do not evaluate learned fields and do not estimate a population
-frequency of failure.
+endpoint error than a higher-regularity competitor aligned with that
+solver grid. A specified finite Gaussian enumeration of four candidate
+paths on $36$ tested blocks contains both agreement and pairwise
+disagreement. These results limit a universal surrogate interpretation;
+they do not evaluate learned velocity fields or estimate a population
+failure frequency.
 \end{abstract}
 
 \section{Introduction}
@@ -108,7 +111,7 @@ Few-step sampling commits to a path, a solver, and a small NFE budget
 before any error is observed. Lipschitz constants enter classical
 one-step bounds~\citep{hairer1993solving}.
 \citet{lipschitzguided2025} propose minimizing $A_2$, the
-time-integrated squared spatial Jacobian norm (their Definition~3.2), as
+averaged squared Lipschitzness of the drift (their Definition~3.2), as
 a schedule-design objective in a specified admissible family. They do
 not claim or prove that $A_2$ universally ranks equal-NFE solver error.
 We study that narrower surrogate question on a flow-matching marginal ODE.
