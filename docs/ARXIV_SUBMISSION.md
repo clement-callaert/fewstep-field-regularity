@@ -23,7 +23,7 @@ No LaTeX macros. No mathematical symbols. Character count: 110. Word count: 12.
 
 ## Abstract (plain text, arXiv form field)
 
-Character count: update from the compiled abstract. Limit: 1920. One paragraph. Macros expanded; `$...$`
+Character count: 1520. Limit: 1920. One paragraph. Macros expanded; `$...$`
 reduced to ASCII (`A_2`, `W_2`).
 
 <!-- BEGIN ARXIV ABSTRACT -->
