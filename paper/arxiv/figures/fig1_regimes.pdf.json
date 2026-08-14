@@ -1,0 +1,31 @@
+{
+  "base_commit": "f6bdd65d4eddb2bfb5abf519c2f62241ea4fba64",
+  "environment_lock_hash": "25195ab63834cda2c141fa7745e4949756797aca5f2cc75ab671e057d2a124b6",
+  "figure_artifact_id": "arxiv_figures_2026-08-13-v1:fig1_regimes",
+  "figure_checksum_sha256": "436d18c3d43d21960dfd181bdc831106dbfe57b2444fcd15492742d3b18e0235",
+  "generation_command": "python scripts/make_arxiv_figures.py",
+  "generation_timestamp": "2026-08-14T16:23:03.212007+00:00",
+  "git_commit": "f6bdd65d4eddb2bfb5abf519c2f62241ea4fba64",
+  "note": "Headline R and W2 bars for the three regimes. Counts are a finite enumeration of the four specified candidate paths, not estimators. Source geometries.json.",
+  "plotting_config": {
+    "counts": {
+      "in_family_blocks": "9/36",
+      "minimizer": "36/36",
+      "pairwise_cells": "5/12"
+    },
+    "in_family_block": "anisotropic_d8 euler NFE 8",
+    "kind": "three_regime_R_W2_bars",
+    "pairwise_block": "low_rank_d8 euler NFE 8",
+    "unconstrained_block": "low_rank_d8 euler NFE 8"
+  },
+  "plotting_script": "scripts/make_arxiv_figures.py",
+  "source_artifact_ids": [],
+  "source_commit": "f6bdd65d4eddb2bfb5abf519c2f62241ea4fba64",
+  "source_run_ids": [
+    "none_conceptual"
+  ],
+  "source_table_hashes": {},
+  "working_tree_diff_sha256": "f42cd124b24ad7d1fb51a6acfbfd5d10feb608497e3e18edc04c6902986f217b",
+  "working_tree_dirty": true,
+  "working_tree_status_sha256": "d568258ad1840e51591ad868acf9e14fbbcbebc34e422908e1e3730d3d9bc877"
+}

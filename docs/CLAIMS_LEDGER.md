@@ -13,7 +13,43 @@ Allowed statuses: `proposed`, `under-test`, `supported`, `contradicted`,
 | H3 | Temporal stiffness and Jacobian variation explain errors not captured by spatial Lipschitzness. | hypothesis | Residual analysis after controlling for spatial metrics | | phase3_gate_analysis_final_audit_2026-07-23-v2:correlations | inconclusive | The temporal residual association is small and positive, but no support threshold was registered for it. |
 | H4 | Metric rankings may change across solvers and target geometries. | hypothesis | Reproducible ranking inversions across at least two families or solvers | phase3_gate_analysis_final_audit_2026-07-23-v2:inversions; phase3_gate_analysis_final_audit_2026-07-23-v2:interactions | Euler-specific evidence triggers pivot rule 8 | under-test | Condition 2 holds after uncalibrated dimension 8 mixture blocks are excluded. One registered gate run cannot mark the claim supported. |
 | GATE | Decision gate conditions for continuing to a full paper. | process | See docs/DECISION_GATE.md | phase3_gate_analysis_final_audit_2026-07-23-v2:decision | Superseded analysis outputs contained reporting defects and uncalibrated mixture evidence | under-test | Continue to Phase 4 review only. Do not start Phase 5 before human review. |
-| P4-C1 | The baseline regularity ordering does not determine the fixed-NFE path ordering in the tested exact Gaussian configurations. | Phase 4 empirical claim | Clean reproduction, precision audit, and a limited mathematical explanation | phase4_gaussian_reproduction_2026-07-24-v1:results; phase4_precision_2026-07-24-v1:validation; phase4_decomposition_2026-07-24-v1:table | No contradiction in the focused grid | under-test | Fourteen inversions reproduce. Precision and decomposition pass. The single focused evidence chain cannot mark this supported. |
+| P4-C1 | The baseline regularity ordering does not determine the fixed-NFE path ordering in the tested exact Gaussian configurations. | Phase 4 empirical claim | Clean reproduction, precision audit, and a limited mathematical explanation | phase4_gaussian_reproduction_2026-07-24-v1:results; phase4_precision_2026-07-24-v1:validation; phase4_decomposition_2026-07-24-v1:table; paper/arxiv/artifacts/centered_blocks.json | No contradiction in the focused grid | under-test | 5 of 12 geometry×solver cells invert (4 of 12 at every NFE in {8,16,32}); 14 inverted solver-budget rows remain a hierarchical listing of those cells. Three distinct R comparisons. Not a population rate. The single focused evidence chain cannot mark this supported. |
 | P4-C2 | The preferred path depends on the solver in the tested low-rank Gaussian configurations. | Phase 4 empirical claim | Clean reproduction at both dimensions and all registered NFE budgets, followed by precision checks | phase4_gaussian_reproduction_2026-07-24-v1:results; phase4_precision_2026-07-24-v1:validation; phase4_robustness_2026-07-24-v1:table | Broad novelty is weakened by solver-specific schedule literature | under-test | The pattern survives both dimensions, NFE 8 through 128 where tested, and ±10 percent perturbations. It is not universal or novel as a broad claim. |
 | P4-C3 | A solver-specific local error quantity explains the observed path preference better than the averaged regularity baseline. | Phase 4 explanatory claim | Derived quantity, source audit, numerical checks, and out-of-sample validation | phase4_diagnostics_2026-07-24-v1:table | Same-grid post-hoc comparison only; no external validation | inconclusive | The leading proxy agrees in 29 of 36 blocks versus 22 for baseline, but cannot establish predictive superiority from the design data. |
 | P4-P1 | A minimal affine proposition establishes non-implication between averaged regularity ordering and fixed-step numerical error ordering. | proposition | Explicit assumptions, complete derivation or construction, counterexample search, numerical checks, and expert review | docs/PHASE4_MATHEMATICAL_ANALYSIS.md; docs/P4_P1_PROOF_AUDIT.md; tests/analytical/test_affine_flow_analysis.py | Construction is grid-aware and may be too artificial for a main claim | supported | Proof verified on 2026-07-24 after an independent adversarial review found no fatal or major flaw. The field depends on the Euler grid. This is a narrow logical non-implication, not a mechanism for all Gaussian inversions or a novelty claim. |
+| P4-P2 | On the centered scalar Gaussian interpolant with target variance 4, exact averaged regularity prefers VP while Heun at NFE 8 prefers the linear path in Gaussian W2. | proposition | Closed-form integrals, exact rational linear Heun product, interval enclosure of the VP product, automated tests | src/fewstep_regularities/analysis/scalar_gaussian_counterexample.py; tests/analytical/test_scalar_gaussian_counterexample.py; paper/arxiv/artifacts/scalar_counterexample.json | Solver-dependent (present under Heun at every tested budget; absent under Euler at λ=4); not a neural-field claim | supported | Added 2026-08-13. Deterministic existence claim. Does not promote P4-C1 to a population law. |
+| P4-C4 | Among four specified candidate paths on the stated 36 tested blocks, the per-mode log-covariance path has the smallest continuous R and the smallest Gaussian W2 in 36 of 36 tested blocks. | Phase 4 empirical claim | Exact-moment modal RK on committed eigenvalues; four-path script | paper/arxiv/artifacts/log_covariance_blocks.json; scripts/run_log_covariance_comparison.py | Grid-aware Euler (P4-P1) blocks any reading as a global R-minimizer W2 theorem | under-test | Finite enumeration on four candidates only. Does not imply that a global R-minimizer minimizes fixed-NFE error. Not a statement that R is reliable as an objective. |
+
+## Status revisions (2026-08-13)
+
+Ledger rule: no claim may be marked supported from a single experimental run.
+A deterministic existence proof is not a run.
+
+| ID | old status | new status | evidence | rationale | residual limitation | date |
+| --- | --- | --- | --- | --- | --- | --- |
+| P4-P2 | (new) | supported | exact R integrals; rational linear Heun factor; mpmath.iv VP enclosure; pytest | Logical non-implication inside the Gaussian family | Heun, NFE 8, lambda=4 only | 2026-08-13 |
+| P4-C1 | under-test | under-test | 5 of 12 geometry×solver cells (4 of 12 at all three NFE); 14/36 rows are the hierarchical listing | Descriptive cell counts; not upgraded | Single evidence chain; hierarchical, not iid; anisotropic d=8 Heun does not invert at NFE 8 | 2026-08-13 |
+| P4-C2 | under-test | under-test | 18/18 primary low-rank split; 66/66 post-hoc robustness | Solver-path pattern remains descriptive | Post-hoc robustness; not a universal schedule rule | 2026-08-13 |
+| P4-P1 | supported | supported | unchanged grid-aware Euler construction | Complementary; not the Gaussian mechanism | Grid-aware Euler only | 2026-08-13 |
+| P4-C4 | (new) | under-test | 36/36 among four candidate paths on the centered grid | Finite-census count; not a W2 optimality theorem | Single sweep; P4-P1 blocks global minimizer reading | 2026-08-13 |
+
+Manuscript policy after this revision: P4-P2 may be stated as a theorem. P4-C1 may be stated only as a hierarchical descriptive count (5 of 12 geometry×solver cells; not 14 of 36 as a headline). P4-C2 may be stated only as a descriptive split on the tested factor-plus-noise family. P4-C4 may be stated only as an observed 36/36 count among four candidates, not as a supported law and not as evidence that R is reliable when its minimizer is admissible.
+
+## Dual submission `[CLOSED]`
+
+Official sources retrieved 2026-08-13:
+
+1. GDDL 2026 CFP (https://gddl-neurips-2026.github.io/): the workshop is
+   non-archival, and submissions may be concurrently or subsequently
+   submitted to other venues.
+2. NeurIPS 2026 Main Track Handbook, Preprints
+   (https://neurips.cc/Conferences/2026/MainTrackHandbook): a
+   non-anonymous arXiv preprint will not cause rejection, provided the
+   public version does not claim to be under review and the paper is not
+   aggressively advertised during review.
+
+Public non-anonymous arXiv preprint: allowed. Anonymous GDDL submission:
+allowed. Concurrent submission: allowed by the workshop CFP. Aggressive
+promotion during review: should be avoided. The public arXiv PDF must not
+say "Under review at NeurIPS". The workshop PDF must remain anonymous.
+This is not a signed organizer letter beyond the published policy.

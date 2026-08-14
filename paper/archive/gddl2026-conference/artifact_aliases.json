@@ -1,0 +1,62 @@
+{
+  "_comment": [
+    "Anonymized artifact alias manifest for the workshop paper.",
+    "The paper cites aliases (A1..A7); this file maps each alias to the",
+    "full artifact identity and provenance. It ships inside the anonymized",
+    "audit bundle. WARNING (double-blind): the code_commit values are",
+    "hashes of a public repository and are searchable; before uploading",
+    "the bundle, either keep the repository private for the review period",
+    "or strip the code_commit field from the uploaded copy."
+  ],
+  "aliases": {
+    "A1": {
+      "artifact_id": "phase4_gaussian_reproduction_2026-07-24-v1:results",
+      "checksum_sha256": "b8930142cba5655ee553aae5ff400cd884c1137e77547d9a5fa94bd4e354973f",
+      "config_hash": "82ec484f42fb",
+      "code_commit": "083dbf96b5bf189650d7d3d519b99887f18aa15e",
+      "release_ready": true
+    },
+    "A2": {
+      "artifact_id": "phase4_precision_2026-07-24-v1:table",
+      "checksum_sha256": "5f8800a697c61c2eab2306281fe4fb1b01dee67bc3c678dd7ba4a626d9dc8e1b",
+      "config_hash": "d58d1bb54cd0",
+      "code_commit": "2a28fd41193fb2c2500d13af4b2c364601c1d12b",
+      "release_ready": true
+    },
+    "A3": {
+      "artifact_id": "phase4_diagnostics_2026-07-24-v1:table",
+      "checksum_sha256": "5c5a1e4c1c47ef254b13559ef13c187d24c9f1e79a17454974d55f9348565ba1",
+      "config_hash": "c135d79214f2",
+      "code_commit": "f3ad0f96024175228fd622e83c28c4d681fd70a7",
+      "release_ready": true
+    },
+    "A4": {
+      "artifact_id": "phase4_robustness_2026-07-24-v1:table",
+      "checksum_sha256": "3cace6e3d016f0c3e893a656fb76acfad11ce4569debc6ea418fe5aeec7d6306",
+      "config_hash": "1b10d16804d3",
+      "code_commit": "08c14852676196d0a697b2f65be6bd5ba44d06f5",
+      "release_ready": true
+    },
+    "A5": {
+      "artifact_id": "workshop_external_validation_2026-07-24-v1:results",
+      "checksum_sha256": "4234bc2baefa8390414db9e037c7d028408cb04591e2b6302524ed8ad3bd205d",
+      "config_hash": "308b83791f5c",
+      "code_commit": "508101e759a2a035b194f9a4c56fab28fcac6f39",
+      "release_ready": true
+    },
+    "A6": {
+      "artifact_id": "workshop_external_validation_2026-07-24-v1:inversions",
+      "checksum_sha256": "cceebdfcba6f7cec4a7ff9e137d4a53f8c7e389acc0222a20805f16204a1b875",
+      "config_hash": "308b83791f5c",
+      "code_commit": "508101e759a2a035b194f9a4c56fab28fcac6f39",
+      "release_ready": true
+    },
+    "A7": {
+      "artifact_id": "workshop_external_validation_2026-07-24-v1:precision",
+      "checksum_sha256": "6e242b87f5cf56f773d1b3c1cd40bae5d4feda55b7fef9179674e8796e0ee39b",
+      "config_hash": "308b83791f5c",
+      "code_commit": "508101e759a2a035b194f9a4c56fab28fcac6f39",
+      "release_ready": true
+    }
+  }
+}

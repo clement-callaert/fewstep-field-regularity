@@ -1,0 +1,24 @@
+\begin{tabular}{cccccl}
+\toprule
+$d$ & solver & NFE & inversion & $W_2$ prefers & $W_2^2$ driver \\
+\midrule
+2 & euler & 8 & no & VP & covariance \\
+2 & euler & 16 & no & VP & covariance \\
+2 & euler & 32 & no & VP & covariance \\
+2 & heun & 8 & yes & linear & mean \\
+2 & heun & 16 & yes & linear & mean \\
+2 & heun & 32 & yes & linear & covariance \\
+2 & rk4 & 8 & no & VP & covariance \\
+2 & rk4 & 16 & no & VP & covariance \\
+2 & rk4 & 32 & yes & linear & covariance \\
+8 & euler & 8 & yes & linear & mean \\
+8 & euler & 16 & yes & linear & mean \\
+8 & euler & 32 & yes & linear & mean \\
+8 & heun & 8 & yes & linear & mean \\
+8 & heun & 16 & yes & linear & mean \\
+8 & heun & 32 & yes & linear & mean \\
+8 & rk4 & 8 & no & VP & covariance \\
+8 & rk4 & 16 & no & VP & covariance \\
+8 & rk4 & 32 & yes & linear & mean \\
+\bottomrule
+\end{tabular}

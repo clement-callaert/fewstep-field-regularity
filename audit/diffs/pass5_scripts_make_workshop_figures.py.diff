@@ -1,0 +1,36 @@
+--- /tmp/fewstep-corrected-20260813/scripts/make_workshop_figures.py	2026-08-13 21:19:40.628684678 +0200
++++ /tmp/fewstep-pass5-20260813/scripts/make_workshop_figures.py	2026-08-13 22:08:26.036537370 +0200
+@@ -1,8 +1,10 @@
+-"""Build the three workshop paper figures with provenance sidecars.
++"""Build workshop paper figures with provenance sidecars.
+ 
+ Inputs are explicit artifact files with pinned SHA-256 checksums. The
+ script refuses to run on a checksum mismatch and never scans directories.
+-Figure 1 is conceptual and consumes no artifact.
++The live workshop PDF uses fig_scalar, fig1_regimes, and
++fig_inversion_region. Hydra-backed figures are skipped when outputs/
++is absent.
+ """
+ 
+ from __future__ import annotations
+@@ -400,20 +402,6 @@
+ def main() -> None:
+     FIGURE_DIR.mkdir(parents=True, exist_ok=True)
+     written: list[Path] = []
+-    fig1 = figure1_conceptual()
+-    write_sidecar(
+-        fig1,
+-        artifact_ids=[],
+-        plotting_config={
+-            "kind": "conceptual_schematic",
+-            "consumes_artifacts": False,
+-        },
+-        note=(
+-            "Conceptual schematic only; curves and bars are illustrative and "
+-            "represent no measured quantity."
+-        ),
+-    )
+-    written.append(fig1)
+     outputs_root = ROOT / "outputs" / "phase4_gaussian_reproduction_2026-07-24-v1"
+     if outputs_root.is_dir() and (outputs_root / "results.json").is_file():
+         fig2, ids2 = figure2_inversions()

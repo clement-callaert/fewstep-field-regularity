@@ -1,0 +1,70 @@
+{
+  "artifact_manifest": [
+    {
+      "artifact_id": "phase4_precision_2026-07-24-v1:table",
+      "code_status": "clean",
+      "config_hash": "d58d1bb54cd0a24c741cacc87aff1a03c95fc8cc672e7d1006f8ed9a27dc192b",
+      "creation_timestamp": "2026-07-24T11:30:04.049522+00:00",
+      "git_commit": "2a28fd41193fb2c2500d13af4b2c364601c1d12b",
+      "input_artifact_hashes": {
+        "phase4_gaussian_reproduction_2026-07-24-v1:results": "b8930142cba5655ee553aae5ff400cd884c1137e77547d9a5fa94bd4e354973f"
+      },
+      "kind": "table",
+      "output_checksum": "5f8800a697c61c2eab2306281fe4fb1b01dee67bc3c678dd7ba4a626d9dc8e1b",
+      "path": "/home/calla/AI_projects/fewstep-field-regularity/outputs/phase4_precision_2026-07-24-v1/table.json",
+      "producing_run_id": "phase4_precision_2026-07-24-v1",
+      "random_seeds": [
+        0
+      ],
+      "software_environment_hash": "5e1050c1800d4f47d2e7c3bd03ca03af6481587cd7c95fc022d2a928b264f36e"
+    },
+    {
+      "artifact_id": "phase4_precision_2026-07-24-v1:validation",
+      "code_status": "clean",
+      "config_hash": "d58d1bb54cd0a24c741cacc87aff1a03c95fc8cc672e7d1006f8ed9a27dc192b",
+      "creation_timestamp": "2026-07-24T11:30:04.049522+00:00",
+      "git_commit": "2a28fd41193fb2c2500d13af4b2c364601c1d12b",
+      "input_artifact_hashes": {
+        "phase4_gaussian_reproduction_2026-07-24-v1:results": "b8930142cba5655ee553aae5ff400cd884c1137e77547d9a5fa94bd4e354973f"
+      },
+      "kind": "table",
+      "output_checksum": "9c13a0c1a29fa45f90c6dd3bb65505588f1999ca50d5bb76c64502c12fd761e7",
+      "path": "/home/calla/AI_projects/fewstep-field-regularity/outputs/phase4_precision_2026-07-24-v1/validation.json",
+      "producing_run_id": "phase4_precision_2026-07-24-v1",
+      "random_seeds": [
+        0
+      ],
+      "software_environment_hash": "5e1050c1800d4f47d2e7c3bd03ca03af6481587cd7c95fc022d2a928b264f36e"
+    }
+  ],
+  "code_status": "clean",
+  "command_line": ".venv/bin/fewstep-regularities experiment=phase4_precision artifact_policy=phase4_release_ready",
+  "config_hash": "d58d1bb54cd0a24c741cacc87aff1a03c95fc8cc672e7d1006f8ed9a27dc192b",
+  "cuda_version": "null",
+  "end_time": "2026-07-24T11:30:04.050854+00:00",
+  "extras": {
+    "audit_kind": "precision",
+    "device": "cpu",
+    "hard_stop_minutes": 45.0,
+    "input_artifacts": {
+      "phase4_gaussian_reproduction_2026-07-24-v1:results": "b8930142cba5655ee553aae5ff400cd884c1137e77547d9a5fa94bd4e354973f"
+    },
+    "mode": "phase4_affine_audit",
+    "phase": 4,
+    "precision": "float64"
+  },
+  "git_commit": "2a28fd41193fb2c2500d13af4b2c364601c1d12b",
+  "gpu_name": "cpu",
+  "package_lock_hash": "a331ba7784c62f7bd8f512b87b098d68628caf63b90fdc36c68184f3e500520d",
+  "python_version": "3.11.15",
+  "random_seeds": [
+    0
+  ],
+  "release_ready": true,
+  "resolved_config_path": "/home/calla/AI_projects/fewstep-field-regularity/outputs/phase4_precision_2026-07-24-v1/resolved_config.yaml",
+  "run_id": "phase4_precision_2026-07-24-v1",
+  "runtime_s": 0.177238,
+  "software_environment_hash": "5e1050c1800d4f47d2e7c3bd03ca03af6481587cd7c95fc022d2a928b264f36e",
+  "start_time": "2026-07-24T11:30:03.873616+00:00",
+  "unresolved_config_path": "/home/calla/AI_projects/fewstep-field-regularity/outputs/phase4_precision_2026-07-24-v1/unresolved_config.yaml"
+}
