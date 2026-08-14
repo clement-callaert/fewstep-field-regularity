@@ -38,7 +38,7 @@ controls its own deadline and rules.
 | Notification | September 29, 2026 AoE |
 | Camera-ready or final program | Final program October 16, 2026 |
 | Archival status | Non-archival, no official proceedings |
-| Page limit | Short: 2 to 4 pages. Long: 5 to 8 pages. References excluded. |
+| Page limit | Short: 2 to 4 pages. Long: 5 to 9 pages. References excluded. |
 | Anonymity | Anonymized, double-blind review |
 | Template | NeurIPS 2026 template and instructions |
 | Supplementary material | No separate supplementary-file rule stated. The call excludes references from the page limit but does not explicitly exclude an appendix. Recheck before submission. |
