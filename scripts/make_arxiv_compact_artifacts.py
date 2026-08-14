@@ -638,7 +638,7 @@ def main() -> None:
         r"\midrule",
     ]
     quad_names = [
-        ("scalar $\lambda=4$", "scalar_lambda4"),
+        (r"scalar $\lambda=4$", "scalar_lambda4"),
         ("anisotropic $d=2,8$", "anisotropic_d2"),
         ("factor+noise $d=2$", "low_rank_d2"),
         ("rank-2 factor+noise $d=8$", "low_rank_d8"),

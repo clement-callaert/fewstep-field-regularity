@@ -1,8 +1,10 @@
 """Honest source-state records for figures and compact artifacts.
 
-Because this repository may be modified without a commit, provenance
-records must not claim a clean HEAD. They record the base commit, a hash
-of the tracked working-tree diff, and an explicit dirty flag.
+Provenance records the git HEAD at generation time as ``source_commit``.
+That SHA is the scientific source snapshot, not the later artifact-carrier
+commit that stores generated PDFs and sidecars. A tracked file cannot
+contain the SHA of the commit that adds the file. Records also include a
+hash of the tracked working-tree diff and an explicit dirty flag.
 """
 
 from __future__ import annotations
@@ -42,6 +44,7 @@ def source_state(repo_root: Path | None = None) -> dict[str, Any]:
     diff_text = diff.stdout if diff.returncode == 0 else ""
     dirty = bool(status_text.strip())
     return {
+        "source_commit": base,
         "base_commit": base,
         "working_tree_dirty": dirty,
         "working_tree_diff_sha256": sha256_bytes(diff_text.encode()),
@@ -73,6 +76,7 @@ def figure_sidecar_payload(
         "plotting_script": plotting_script,
         "plotting_config": plotting_config,
         "generation_command": generation_command,
+        "source_commit": state["source_commit"],
         "git_commit": state["base_commit"],
         "base_commit": state["base_commit"],
         "working_tree_dirty": state["working_tree_dirty"],
