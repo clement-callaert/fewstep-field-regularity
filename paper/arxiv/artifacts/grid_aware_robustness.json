@@ -245,11 +245,12 @@
     }
   ],
   "source_state": {
-    "base_commit": "9f0bd9df39bb1e40987319cc26d0eda22d41035e",
+    "base_commit": "f6bdd65d4eddb2bfb5abf519c2f62241ea4fba64",
     "environment_lock_hash": "25195ab63834cda2c141fa7745e4949756797aca5f2cc75ab671e057d2a124b6",
-    "recorded_at": "2026-08-14T05:53:15.097957+00:00",
-    "working_tree_diff_sha256": "5c7aded4fac702220228c19f8d2cd8b0133dacec64834e43708fef84d02097dc",
+    "recorded_at": "2026-08-14T16:22:51.175130+00:00",
+    "source_commit": "f6bdd65d4eddb2bfb5abf519c2f62241ea4fba64",
+    "working_tree_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "working_tree_dirty": true,
-    "working_tree_status_sha256": "83b97805d3591056df720cf68559f4c6719e57938571fad49a672e51efc4f2d0"
+    "working_tree_status_sha256": "da59a473f32c7ee088dcb7aef12061c093f3bda9b0962859b047594ecc2ee829"
   }
 }

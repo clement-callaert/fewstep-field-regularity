@@ -1,11 +1,11 @@
 {
-  "base_commit": "9f0bd9df39bb1e40987319cc26d0eda22d41035e",
+  "base_commit": "f6bdd65d4eddb2bfb5abf519c2f62241ea4fba64",
   "environment_lock_hash": "25195ab63834cda2c141fa7745e4949756797aca5f2cc75ab671e057d2a124b6",
   "figure_artifact_id": "arxiv_figures_2026-08-13-v1:fig3_interaction",
-  "figure_checksum_sha256": "120dea2ad18f38cc928e4cc19d678be0eadfc72c935e0a41cdcebda978b5bc33",
+  "figure_checksum_sha256": "a92b6f0e4629b3d40f1c886cdef816706dab7c3e19b42da49f500e58289645f4",
   "generation_command": "python scripts/make_arxiv_figures.py",
-  "generation_timestamp": "2026-08-14T05:59:11.931676+00:00",
-  "git_commit": "9f0bd9df39bb1e40987319cc26d0eda22d41035e",
+  "generation_timestamp": "2026-08-14T16:23:04.196223+00:00",
+  "git_commit": "f6bdd65d4eddb2bfb5abf519c2f62241ea4fba64",
   "note": "Source: phase4_gaussian_reproduction_2026-07-24-v1:results. Signed factor-plus-noise W2 margins versus equal-NFE Euler, Heun, and RK4.",
   "plotting_config": {
     "kind": "lowrank_solver_path_interaction",
@@ -15,13 +15,14 @@
   "source_artifact_ids": [
     "phase4_gaussian_reproduction_2026-07-24-v1:results"
   ],
+  "source_commit": "f6bdd65d4eddb2bfb5abf519c2f62241ea4fba64",
   "source_run_ids": [
     "phase4_gaussian_reproduction_2026-07-24-v1"
   ],
   "source_table_hashes": {
     "phase4_gaussian_reproduction_2026-07-24-v1:results": "b8930142cba5655ee553aae5ff400cd884c1137e77547d9a5fa94bd4e354973f"
   },
-  "working_tree_diff_sha256": "d23105cf8003bd71672e27a1c73bbeefcb20fdd69b571bcfe3bf36ddda81edcc",
+  "working_tree_diff_sha256": "96c1aadf1b740a140606fd8396cc030dc73988cd666c572b69f2f9be5a07a627",
   "working_tree_dirty": true,
-  "working_tree_status_sha256": "2c9b7faad21991b692b8fd2fb02430f3e79ac476e23550d6c6af8d94b6015c5f"
+  "working_tree_status_sha256": "065dca4b154ed571a03e6780234f3c71a0d7e824de72b17aa8702a613091e582"
 }

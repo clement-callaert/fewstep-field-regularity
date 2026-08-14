@@ -1,22 +1,23 @@
 {
-  "base_commit": "9f0bd9df39bb1e40987319cc26d0eda22d41035e",
+  "base_commit": "f6bdd65d4eddb2bfb5abf519c2f62241ea4fba64",
   "environment_lock_hash": "25195ab63834cda2c141fa7745e4949756797aca5f2cc75ab671e057d2a124b6",
   "figure_artifact_id": "arxiv_figures_2026-08-13-v1:fig_inversion_region",
-  "figure_checksum_sha256": "ca9be00a966357d23b72ee4966300c68f5090ba318f2f20c055ae4e160dc4cbf",
+  "figure_checksum_sha256": "a8aa340f2b9abd610b5c91b7e260e327e609239430459c04d71448f39690b7fc",
   "generation_command": "python scripts/run_inversion_region.py",
-  "generation_timestamp": "2026-08-14T05:53:21.117646+00:00",
-  "git_commit": "9f0bd9df39bb1e40987319cc26d0eda22d41035e",
+  "generation_timestamp": "2026-08-14T16:22:56.218591+00:00",
+  "git_commit": "f6bdd65d4eddb2bfb5abf519c2f62241ea4fba64",
   "note": "Linear versus VP ranking inversion versus target variance. Deterministic evaluation on a log-uniform lambda grid.",
   "plotting_config": {
     "kind": "lambda_solver_nfe_inversion_heatmap"
   },
   "plotting_script": "scripts/run_inversion_region.py",
   "source_artifact_ids": [],
+  "source_commit": "f6bdd65d4eddb2bfb5abf519c2f62241ea4fba64",
   "source_run_ids": [
     "none_conceptual"
   ],
   "source_table_hashes": {},
-  "working_tree_diff_sha256": "993e9355cc60d3939368565e92819f3d450ddc072537f6a37771432f30b29a53",
+  "working_tree_diff_sha256": "ff340e1c64c972ef6ef96d0b504f9a850bf304a45c930a7b6ec303c48707020d",
   "working_tree_dirty": true,
-  "working_tree_status_sha256": "0f10d3e9b972bf6cf130faff3f1271f99fe7aa06ad784e51f412eca1470f9fd4"
+  "working_tree_status_sha256": "3984c3e8cfdf0ccc30e63ce857a3b9deafe744354e81f12a02127317cbab2764"
 }

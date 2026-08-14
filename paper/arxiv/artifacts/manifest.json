@@ -2,23 +2,24 @@
   "artifact_release_id": "arxiv-compact-2026-08-13-local",
   "canonical_self_hash_rule": "SHA-256 of compact JSON with files.manifest.json blanked; sorted keys, separators (',', ':')",
   "compact_manifest_source_state": {
-    "base_commit": "9f0bd9df39bb1e40987319cc26d0eda22d41035e",
+    "base_commit": "f6bdd65d4eddb2bfb5abf519c2f62241ea4fba64",
     "environment_lock_hash": "25195ab63834cda2c141fa7745e4949756797aca5f2cc75ab671e057d2a124b6",
-    "recorded_at": "2026-08-14T05:53:17.146987+00:00",
-    "working_tree_diff_sha256": "fa1da49ebb26e69044a25283520ac870f5e213313753a69240ff1e094018ea56",
+    "recorded_at": "2026-08-14T16:22:53.463178+00:00",
+    "source_commit": "f6bdd65d4eddb2bfb5abf519c2f62241ea4fba64",
+    "working_tree_diff_sha256": "83ccfddecd7cb4244fe67723f590b7aa23dc0d2018cca4165079b92bb834b34a",
     "working_tree_dirty": true,
-    "working_tree_status_sha256": "e24ab94e184314bebbd9381f8fc6ea4e9b7faef3d4d64f70aeaab1cab4fc1b0c"
+    "working_tree_status_sha256": "91181e87e12b26d6616e27041e806b9cc987882e0306abdbd674b6f0be94ba36"
   },
   "experiment_code_commit": "e48c9390e62b38f206342e6aeb7f160122ccc79c",
   "files": {
     "centered_blocks.json": "5724beacd05036f340e5ab34434926c554efe7cc6e055fff2ea4bb249d5b9789",
     "geometries.json": "450d71cbe81e559e3d23cb2ebbbab336555e03c672caadf847ad3be386bf52d8",
-    "grid_aware_robustness.json": "cbc35b19bfed9d7e169d6f9fde70c24a743e19657b91c3bdf450303922ffbc0e",
+    "grid_aware_robustness.json": "17120940db740a78a8680c6d95540359333d68fba6e451d5ff517895a9fcd6ec",
     "in_family_blocks.json": "4c4dfc67bb72aff70aef178b82ee89109c5d61111c49029ad3b5574f968214a5",
     "inversion_region.json": "e059118ed0688563af8fe69faa311c09e9f143f1e0f1c4813dca2efa00efa807",
     "log_covariance_blocks.json": "b9f5e2d78fa95e733a958240d734053e54c14a3ccb07668c3aeb53e5fc751cde",
     "lowrank_seed_fraction.json": "375d1cbf887aece22f50dee1de55e6438b481829042ef2f0079f2a2054d27f97",
-    "manifest.json": "d7453d871696e11ef9b116540cde33ddb806a27ee9b7fef6bba3904352f77253",
+    "manifest.json": "31ae60566229d0f4f5b6d3611fc1b2b2e87b1304e69f3b48c144981a7d9f0dfb",
     "noncentered_blocks.json": "d37136d23ebf5a709cb620472cf2109cbf07379ce6d01bb794d610e183e62126",
     "robustness_lowrank.json": "54d2bfad025d10fdaf99e6aee76881013e918666a05c5167444a178fa2f3d894",
     "scalar_counterexample.json": "7dbdbc5b4011335bc58182a831116ec68c1d30064f5e78c572ff6b96e21ef04b"
