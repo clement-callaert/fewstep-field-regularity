@@ -1,0 +1,3 @@
+fonts ok (embedded, no Type 3): /tmp/fewstep-pass5-20260813/paper/arxiv/main.pdf
+fonts ok (embedded, no Type 3): /tmp/fewstep-pass5-20260813/paper/gddl2026/main.pdf
+EXIT:0

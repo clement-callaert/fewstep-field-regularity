@@ -1,0 +1,23 @@
+{
+  "base_commit": "f6bdd65d4eddb2bfb5abf519c2f62241ea4fba64",
+  "environment_lock_hash": "25195ab63834cda2c141fa7745e4949756797aca5f2cc75ab671e057d2a124b6",
+  "figure_artifact_id": "arxiv_figures_2026-08-13-v1:fig_scalar",
+  "figure_checksum_sha256": "2594db221455f659ea4fb41bf7cedab6e55ddf866196d0bd2f10d52ec49dac60",
+  "generation_command": "python scripts/make_arxiv_figures.py",
+  "generation_timestamp": "2026-08-14T16:23:03.677275+00:00",
+  "git_commit": "f6bdd65d4eddb2bfb5abf519c2f62241ea4fba64",
+  "note": "Exact closed-form drifts a_lin and a_VP on [0,1]; Heun nodes at NFE 8.",
+  "plotting_config": {
+    "kind": "scalar_drift_lin_vp_heun_nodes"
+  },
+  "plotting_script": "scripts/make_arxiv_figures.py",
+  "source_artifact_ids": [],
+  "source_commit": "f6bdd65d4eddb2bfb5abf519c2f62241ea4fba64",
+  "source_run_ids": [
+    "none_conceptual"
+  ],
+  "source_table_hashes": {},
+  "working_tree_diff_sha256": "cc227942b18d7dddf433dfc63fd9423aabb22b40b05b919d3471d6af2cce7c5c",
+  "working_tree_dirty": true,
+  "working_tree_status_sha256": "def9af46e4161f60aa8397f682d38d27f9254e60c53f6f6c9ef0c4d790e815c9"
+}

@@ -1,0 +1,4551 @@
+{
+  "family": {
+    "anisotropy": 6.0,
+    "geometry_seed_note": "recorded only; no randomness consumed",
+    "name": "shifted_anisotropic_gaussian",
+    "source_mean_rule": "0.75 * (-1)^i",
+    "target_mean_rule": "1.0 + 0.25 * i"
+  },
+  "quantity_status": {
+    "baseline_metric": "numerical time quadrature",
+    "gaussian_w2": "exact from analytical numerical-map moments"
+  },
+  "rows": [
+    {
+      "actual_nfe": 8,
+      "affine_matrix": [
+        [
+          0.538061090635943,
+          0.0
+        ],
+        [
+          0.0,
+          1.317975122503472
+        ]
+      ],
+      "affine_offset": [
+        0.5964541820230428,
+        2.2384813418776046
+      ],
+      "baseline_metric": 1.093850806380379,
+      "continuous_endpoint_w2": 0.0,
+      "covariance": [
+        [
+          0.28950973725634044,
+          0.0
+        ],
+        [
+          0.0,
+          1.7370584235380417
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 2,
+      "gaussian_w2": 0.26690871977236674,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.4494897427831774,
+      "maximum_covariance_eigenvalue": 1.7370584235380417,
+      "mean": [
+        1.0,
+        1.2500000000000007
+      ],
+      "mean_error": 6.661338147750939e-16,
+      "minimum_covariance_eigenvalue": 0.28950973725634044,
+      "n_steps": 8,
+      "nfe": 8,
+      "path": "linear",
+      "solver": "euler",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.0033855140063678846
+    },
+    {
+      "actual_nfe": 16,
+      "affine_matrix": [
+        [
+          0.5865907644410168,
+          0.0
+        ],
+        [
+          0.0,
+          1.4368480607096141
+        ]
+      ],
+      "affine_offset": [
+        0.5600569266692376,
+        2.3276360455322105
+      ],
+      "baseline_metric": 1.093850806380379,
+      "continuous_endpoint_w2": 0.0,
+      "covariance": [
+        [
+          0.3440887249274964,
+          0.0
+        ],
+        [
+          0.0,
+          2.064532349564979
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 2,
+      "gaussian_w2": 0.13851127167705127,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.4494897427831783,
+      "maximum_covariance_eigenvalue": 2.064532349564979,
+      "mean": [
+        1.0,
+        1.25
+      ],
+      "mean_error": 0.0,
+      "minimum_covariance_eigenvalue": 0.3440887249274964,
+      "n_steps": 16,
+      "nfe": 16,
+      "path": "linear",
+      "solver": "euler",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.003896187001373619
+    },
+    {
+      "actual_nfe": 32,
+      "affine_matrix": [
+        [
+          0.6122404397009907,
+          0.0
+        ],
+        [
+          0.0,
+          1.4996766771646395
+        ]
+      ],
+      "affine_offset": [
+        0.540819670224257,
+        2.37475750787348
+      ],
+      "baseline_metric": 1.093850806380379,
+      "continuous_endpoint_w2": 0.0,
+      "covariance": [
+        [
+          0.3748383560052625,
+          0.0
+        ],
+        [
+          0.0,
+          2.2490301360315743
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 2,
+      "gaussian_w2": 0.07064860972959275,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.449489742783178,
+      "maximum_covariance_eigenvalue": 2.2490301360315743,
+      "mean": [
+        1.0,
+        1.2500000000000004
+      ],
+      "mean_error": 4.440892098500626e-16,
+      "minimum_covariance_eigenvalue": 0.3748383560052625,
+      "n_steps": 32,
+      "nfe": 32,
+      "path": "linear",
+      "solver": "euler",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.005735234008170664
+    },
+    {
+      "actual_nfe": 8,
+      "affine_matrix": [
+        [
+          0.6404275303559854,
+          0.0
+        ],
+        [
+          0.0,
+          1.5210844101966159
+        ]
+      ],
+      "affine_offset": [
+        0.519679352233011,
+        2.3908133076474622
+      ],
+      "baseline_metric": 1.093850806380379,
+      "continuous_endpoint_w2": 0.0,
+      "covariance": [
+        [
+          0.41014742163786666,
+          0.0
+        ],
+        [
+          0.0,
+          2.3136977829431866
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 2,
+      "gaussian_w2": 0.04402520266904125,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.375107780502678,
+      "maximum_covariance_eigenvalue": 2.3136977829431866,
+      "mean": [
+        1.0,
+        1.2500000000000004
+      ],
+      "mean_error": 4.440892098500626e-16,
+      "minimum_covariance_eigenvalue": 0.41014742163786666,
+      "n_steps": 4,
+      "nfe": 8,
+      "path": "linear",
+      "solver": "heun",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.0015994090063031763
+    },
+    {
+      "actual_nfe": 16,
+      "affine_matrix": [
+        [
+          0.6403876694322802,
+          0.0
+        ],
+        [
+          0.0,
+          1.556275658561793
+        ]
+      ],
+      "affine_offset": [
+        0.5197092479257898,
+        2.417206743921345
+      ],
+      "baseline_metric": 1.093850806380379,
+      "continuous_endpoint_w2": 0.0,
+      "covariance": [
+        [
+          0.41009636716090736,
+          0.0
+        ],
+        [
+          0.0,
+          2.4219939254319423
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 2,
+      "gaussian_w2": 0.00892658203191368,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.4302086577361344,
+      "maximum_covariance_eigenvalue": 2.4219939254319423,
+      "mean": [
+        0.9999999999999999,
+        1.2500000000000004
+      ],
+      "mean_error": 4.577566798522237e-16,
+      "minimum_covariance_eigenvalue": 0.41009636716090736,
+      "n_steps": 8,
+      "nfe": 16,
+      "path": "linear",
+      "solver": "heun",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.0026973809872288257
+    },
+    {
+      "actual_nfe": 32,
+      "affine_matrix": [
+        [
+          0.6394423825095323,
+          0.0
+        ],
+        [
+          0.0,
+          1.5631953402545
+        ]
+      ],
+      "affine_offset": [
+        0.5204182131178505,
+        2.4223965051908753
+      ],
+      "baseline_metric": 1.093850806380379,
+      "continuous_endpoint_w2": 0.0,
+      "covariance": [
+        [
+          0.4088865605494671,
+          0.0
+        ],
+        [
+          0.0,
+          2.443579671793382
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 2,
+      "gaussian_w2": 0.0019540997614263065,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.444622663451929,
+      "maximum_covariance_eigenvalue": 2.443579671793382,
+      "mean": [
+        0.9999999999999998,
+        1.2500000000000004
+      ],
+      "mean_error": 4.965068306494546e-16,
+      "minimum_covariance_eigenvalue": 0.4088865605494671,
+      "n_steps": 16,
+      "nfe": 32,
+      "path": "linear",
+      "solver": "heun",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.006818927999120206
+    },
+    {
+      "actual_nfe": 8,
+      "affine_matrix": [
+        [
+          0.641428475395349,
+          0.0
+        ],
+        [
+          0.0,
+          1.55602000845884
+        ]
+      ],
+      "affine_offset": [
+        0.5189286434534883,
+        2.41701500634413
+      ],
+      "baseline_metric": 1.093850806380379,
+      "continuous_endpoint_w2": 0.0,
+      "covariance": [
+        [
+          0.4114304890480018,
+          0.0
+        ],
+        [
+          0.0,
+          2.4211982667242484
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 2,
+      "gaussian_w2": 0.009399123805021137,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.425866746093204,
+      "maximum_covariance_eigenvalue": 2.4211982667242484,
+      "mean": [
+        1.0,
+        1.2499999999999998
+      ],
+      "mean_error": 2.220446049250313e-16,
+      "minimum_covariance_eigenvalue": 0.4114304890480018,
+      "n_steps": 2,
+      "nfe": 8,
+      "path": "linear",
+      "solver": "rk4",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.0012017179979011416
+    },
+    {
+      "actual_nfe": 16,
+      "affine_matrix": [
+        [
+          0.638904984746583,
+          0.0
+        ],
+        [
+          0.0,
+          1.5647959614430014
+        ]
+      ],
+      "affine_offset": [
+        0.5208212614400628,
+        2.4235969710822514
+      ],
+      "baseline_metric": 1.093850806380379,
+      "continuous_endpoint_w2": 0.0,
+      "covariance": [
+        [
+          0.4081995795340314,
+          0.0
+        ],
+        [
+          0.0,
+          2.448586400948327
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 2,
+      "gaussian_w2": 0.0002911250748270215,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.4491841491323885,
+      "maximum_covariance_eigenvalue": 2.448586400948327,
+      "mean": [
+        1.0,
+        1.2500000000000004
+      ],
+      "mean_error": 4.440892098500626e-16,
+      "minimum_covariance_eigenvalue": 0.4081995795340314,
+      "n_steps": 4,
+      "nfe": 16,
+      "path": "linear",
+      "solver": "rk4",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.0035433770099189132
+    },
+    {
+      "actual_nfe": 32,
+      "affine_matrix": [
+        [
+          0.6389435939049085,
+          0.0
+        ],
+        [
+          0.0,
+          1.5650713424198894
+        ]
+      ],
+      "affine_offset": [
+        0.5207923045713186,
+        2.4238035068149166
+      ],
+      "baseline_metric": 1.093850806380379,
+      "continuous_endpoint_w2": 0.0,
+      "covariance": [
+        [
+          0.40824891619212067,
+          0.0
+        ],
+        [
+          0.0,
+          2.449448306863995
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 2,
+      "gaussian_w2": 1.3246721633042432e-05,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.4494671475692313,
+      "maximum_covariance_eigenvalue": 2.449448306863995,
+      "mean": [
+        1.0,
+        1.2499999999999996
+      ],
+      "mean_error": 4.440892098500626e-16,
+      "minimum_covariance_eigenvalue": 0.40824891619212067,
+      "n_steps": 8,
+      "nfe": 32,
+      "path": "linear",
+      "solver": "rk4",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.006147067993879318
+    },
+    {
+      "actual_nfe": 8,
+      "affine_matrix": [
+        [
+          0.6325934670351899,
+          0.0
+        ],
+        [
+          0.0,
+          1.5316831945628429
+        ]
+      ],
+      "affine_offset": [
+        0.6615216763360542,
+        2.4335594787096566
+      ],
+      "baseline_metric": 0.34253590281533186,
+      "continuous_endpoint_w2": 0.0,
+      "covariance": [
+        [
+          0.40017449453560194,
+          0.0
+        ],
+        [
+          0.0,
+          2.3460534085062354
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 2,
+      "gaussian_w2": 0.14440835072678646,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.4212757076696754,
+      "maximum_covariance_eigenvalue": 2.3460534085062354,
+      "mean": [
+        1.1359667766124466,
+        1.2847970827875246
+      ],
+      "mean_error": 0.14034885575914324,
+      "minimum_covariance_eigenvalue": 0.40017449453560194,
+      "n_steps": 8,
+      "nfe": 8,
+      "path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.0019505730015225708
+    },
+    {
+      "actual_nfe": 16,
+      "affine_matrix": [
+        [
+          0.634847520985504,
+          0.0
+        ],
+        [
+          0.0,
+          1.5505762056597492
+        ]
+      ],
+      "affine_offset": [
+        0.591959684064939,
+        2.432265746458581
+      ],
+      "baseline_metric": 0.34253590281533186,
+      "continuous_endpoint_w2": 0.0,
+      "covariance": [
+        [
+          0.40303137490144,
+          0.0
+        ],
+        [
+          0.0,
+          2.404286569558185
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 2,
+      "gaussian_w2": 0.07237422039946047,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.442438781603362,
+      "maximum_covariance_eigenvalue": 2.404286569558185,
+      "mean": [
+        1.068095324804067,
+        1.269333592213769
+      ],
+      "mean_error": 0.07078672932167221,
+      "minimum_covariance_eigenvalue": 0.40303137490144,
+      "n_steps": 16,
+      "nfe": 16,
+      "path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.004182415999821387
+    },
+    {
+      "actual_nfe": 32,
+      "affine_matrix": [
+        [
+          0.6366637346078956,
+          0.0
+        ],
+        [
+          0.0,
+          1.558379101749598
+        ]
+      ],
+      "affine_offset": [
+        0.5566074232921565,
+        2.4289339824437213
+      ],
+      "baseline_metric": 0.34253590281533186,
+      "continuous_endpoint_w2": 0.0,
+      "covariance": [
+        [
+          0.40534071096487295,
+          0.0
+        ],
+        [
+          0.0,
+          2.428545424769884
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 2,
+      "gaussian_w2": 0.03628141130245092,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.447727139208522,
+      "maximum_covariance_eigenvalue": 2.428545424769884,
+      "mean": [
+        1.0341052242480782,
+        1.2601496561315226
+      ],
+      "mean_error": 0.03558344896998959,
+      "minimum_covariance_eigenvalue": 0.40534071096487295,
+      "n_steps": 32,
+      "nfe": 32,
+      "path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.0065421000035712495
+    },
+    {
+      "actual_nfe": 8,
+      "affine_matrix": [
+        [
+          0.6536181945007801,
+          0.0
+        ],
+        [
+          0.0,
+          1.5145621726294967
+        ]
+      ],
+      "affine_offset": [
+        0.49329081188384494,
+        2.3523169076056623
+      ],
+      "baseline_metric": 0.34253590281533186,
+      "continuous_endpoint_w2": 0.0,
+      "covariance": [
+        [
+          0.4272167441824596,
+          0.0
+        ],
+        [
+          0.0,
+          2.293898574760181
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 2,
+      "gaussian_w2": 0.06456974658016619,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.3171970813729987,
+      "maximum_covariance_eigenvalue": 2.293898574760181,
+      "mean": [
+        0.98350445775943,
+        1.2163952781335396
+      ],
+      "mean_error": 0.0374350136307253,
+      "minimum_covariance_eigenvalue": 0.4272167441824596,
+      "n_steps": 4,
+      "nfe": 8,
+      "path": "variance_preserving",
+      "solver": "heun",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.001337936002528295
+    },
+    {
+      "actual_nfe": 16,
+      "affine_matrix": [
+        [
+          0.6429679581133272,
+          0.0
+        ],
+        [
+          0.0,
+          1.5532149963033208
+        ]
+      ],
+      "affine_offset": [
+        0.5134296693724847,
+        2.407008338132402
+      ],
+      "baseline_metric": 0.34253590281533186,
+      "continuous_endpoint_w2": 0.0,
+      "covariance": [
+        [
+          0.41340779516042125,
+          0.0
+        ],
+        [
+          0.0,
+          2.412476824741525
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 2,
+      "gaussian_w2": 0.01544072282137013,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.4156958005511635,
+      "maximum_covariance_eigenvalue": 2.412476824741525,
+      "mean": [
+        0.9956556379574801,
+        1.2420970909049114
+      ],
+      "mean_error": 0.009018284411223777,
+      "minimum_covariance_eigenvalue": 0.41340779516042125,
+      "n_steps": 8,
+      "nfe": 16,
+      "path": "variance_preserving",
+      "solver": "heun",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.003999594991910271
+    },
+    {
+      "actual_nfe": 32,
+      "affine_matrix": [
+        [
+          0.6400010224344596,
+          0.0
+        ],
+        [
+          0.0,
+          1.5622336548927844
+        ]
+      ],
+      "affine_offset": [
+        0.5189004775137583,
+        2.419779714502057
+      ],
+      "baseline_metric": 0.34253590281533186,
+      "continuous_endpoint_w2": 0.0,
+      "covariance": [
+        [
+          0.4096013087171536,
+          0.0
+        ],
+        [
+          0.0,
+          2.4405739924796674
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 2,
+      "gaussian_w2": 0.0037479661986879586,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.440986186163113,
+      "maximum_covariance_eigenvalue": 2.4405739924796674,
+      "mean": [
+        0.998901244339603,
+        1.2481044733324689
+      ],
+      "mean_error": 0.0021909553506577937,
+      "minimum_covariance_eigenvalue": 0.4096013087171536,
+      "n_steps": 16,
+      "nfe": 32,
+      "path": "variance_preserving",
+      "solver": "heun",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.0076406940061133355
+    },
+    {
+      "actual_nfe": 8,
+      "affine_matrix": [
+        [
+          0.6356820282184815,
+          0.0
+        ],
+        [
+          0.0,
+          1.5675379007341217
+        ]
+      ],
+      "affine_offset": [
+        0.5244564033327587,
+        2.4249843517118066
+      ],
+      "baseline_metric": 0.34253590281533186,
+      "continuous_endpoint_w2": 0.0,
+      "covariance": [
+        [
+          0.4040916409999623,
+          0.0
+        ],
+        [
+          0.0,
+          2.457175070237937
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 2,
+      "gaussian_w2": 0.004310962654073115,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.4659150819902758,
+      "maximum_covariance_eigenvalue": 2.457175070237937,
+      "mean": [
+        1.0012179244966197,
+        1.2493309261612153
+      ],
+      "mean_error": 0.001389604217470742,
+      "minimum_covariance_eigenvalue": 0.4040916409999623,
+      "n_steps": 2,
+      "nfe": 8,
+      "path": "variance_preserving",
+      "solver": "rk4",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.0019151360029354692
+    },
+    {
+      "actual_nfe": 16,
+      "affine_matrix": [
+        [
+          0.6387931167448191,
+          0.0
+        ],
+        [
+          0.0,
+          1.5653108483319205
+        ]
+      ],
+      "affine_offset": [
+        0.5209053433761879,
+        2.424006017820052
+      ],
+      "baseline_metric": 0.34253590281533186,
+      "continuous_endpoint_w2": 0.0,
+      "covariance": [
+        [
+          0.4080566460005601,
+          0.0
+        ],
+        [
+          0.0,
+          2.4501980519055966
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 2,
+      "gaussian_w2": 0.00027242829178525965,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.45041909078244,
+      "maximum_covariance_eigenvalue": 2.4501980519055966,
+      "mean": [
+        1.0000001809348023,
+        1.2500228815711116
+      ],
+      "mean_error": 2.2882286466596045e-05,
+      "minimum_covariance_eigenvalue": 0.4080566460005601,
+      "n_steps": 4,
+      "nfe": 16,
+      "path": "variance_preserving",
+      "solver": "rk4",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.003608404003898613
+    },
+    {
+      "actual_nfe": 32,
+      "affine_matrix": [
+        [
+          0.6389358390215576,
+          0.0
+        ],
+        [
+          0.0,
+          1.565097874800189
+        ]
+      ],
+      "affine_offset": [
+        0.5207971768382775,
+        2.4238259822998165
+      ],
+      "baseline_metric": 0.34253590281533186,
+      "continuous_endpoint_w2": 0.0,
+      "covariance": [
+        [
+          0.40823900638618177,
+          0.0
+        ],
+        [
+          0.0,
+          2.4495313577040676
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 2,
+      "gaussian_w2": 1.5396768158988844e-05,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.4495384030999436,
+      "maximum_covariance_eigenvalue": 2.4495313577040676,
+      "mean": [
+        0.9999990561044457,
+        1.250002576199675
+      ],
+      "mean_error": 2.7436733738606837e-06,
+      "minimum_covariance_eigenvalue": 0.40823900638618177,
+      "n_steps": 8,
+      "nfe": 32,
+      "path": "variance_preserving",
+      "solver": "rk4",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.006616794998990372
+    },
+    {
+      "actual_nfe": 8,
+      "affine_matrix": [
+        [
+          0.538061090635943,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.6146439490698068,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.7009011924954369,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.797917366655887,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.906859798293941,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.028971853880337,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.165560366571099,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.317975122503472
+        ]
+      ],
+      "affine_offset": [
+        0.5964541820230428,
+        1.710982961802355,
+        0.9743241056284224,
+        2.348438024991915,
+        1.3198551512795444,
+        3.021728890410252,
+        1.6258297250716756,
+        3.7384813418776046
+      ],
+      "baseline_metric": 1.0938508063803787,
+      "continuous_endpoint_w2": 1.4901161193847656e-08,
+      "covariance": [
+        [
+          0.28950973725634044,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.37778718412812723,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.49126248164152553,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.6366721240110652,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.8223946937617275,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0587830760779375,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.3585309681213547,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.7370584235380417
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 8,
+      "gaussian_w2": 0.47142837195963594,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.4494897427831774,
+      "maximum_covariance_eigenvalue": 1.7370584235380417,
+      "mean": [
+        1.0,
+        1.25,
+        1.5,
+        1.7499999999999998,
+        2.0,
+        2.2499999999999996,
+        2.5,
+        2.750000000000001
+      ],
+      "mean_error": 1.0175362097255202e-15,
+      "minimum_covariance_eigenvalue": 0.28950973725634044,
+      "n_steps": 8,
+      "nfe": 8,
+      "path": "linear",
+      "solver": "euler",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.001977736988919787
+    },
+    {
+      "actual_nfe": 16,
+      "affine_matrix": [
+        [
+          0.5865907644410168,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.6683426939156316,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.7608387277842458,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.8654210510388167,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.9835799953491358,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.116964337647648,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.2673902614584234,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.436848060709615
+        ]
+      ],
+      "affine_offset": [
+        0.5600569266692376,
+        1.7512570204367242,
+        0.9293709541618155,
+        2.3990657882791124,
+        1.262315003488148,
+        3.087723253235736,
+        1.549457303906182,
+        3.8276360455322096
+      ],
+      "baseline_metric": 1.0938508063803787,
+      "continuous_endpoint_w2": 1.4901161193847656e-08,
+      "covariance": [
+        [
+          0.3440887249274964,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.44668195651040365,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.5788755696963497,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.7489535955811302,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.9674296072510059,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.2476093315766488,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.6062780748396508,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.0645323495649817
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 8,
+      "gaussian_w2": 0.2444555372019896,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.44948974278318,
+      "maximum_covariance_eigenvalue": 2.0645323495649817,
+      "mean": [
+        1.0,
+        1.2500000000000004,
+        1.4999999999999998,
+        1.75,
+        2.0,
+        2.25,
+        2.4999999999999996,
+        2.7499999999999982
+      ],
+      "mean_error": 1.897149936107019e-15,
+      "minimum_covariance_eigenvalue": 0.3440887249274964,
+      "n_steps": 16,
+      "nfe": 16,
+      "path": "linear",
+      "solver": "euler",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.002240265006548725
+    },
+    {
+      "actual_nfe": 32,
+      "affine_matrix": [
+        [
+          0.6122404397009907,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.6966943554007414,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.7924618395740628,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.9010233757535557,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0240432292112043,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.1633892721637142,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.3211540266488147,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.49967667716464
+        ]
+      ],
+      "affine_offset": [
+        0.540819670224257,
+        1.7725207665505558,
+        0.9056536203194525,
+        2.4257675318151666,
+        1.231967578091597,
+        3.1225419541227852,
+        1.509134480013389,
+        3.87475750787348
+      ],
+      "baseline_metric": 1.0938508063803787,
+      "continuous_endpoint_w2": 1.4901161193847656e-08,
+      "covariance": [
+        [
+          0.3748383560052625,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.4853830248472546,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.6279957671811076,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.8118431236543333,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.048664535293311,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.3534745985856167,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.745447962130377,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.2490301360315756
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 8,
+      "gaussian_w2": 0.12462319581050875,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.4494897427831783,
+      "maximum_covariance_eigenvalue": 2.2490301360315756,
+      "mean": [
+        1.0,
+        1.2499999999999998,
+        1.4999999999999996,
+        1.7499999999999998,
+        2.0,
+        2.2499999999999996,
+        2.5,
+        2.75
+      ],
+      "mean_error": 7.021666937153402e-16,
+      "minimum_covariance_eigenvalue": 0.3748383560052625,
+      "n_steps": 32,
+      "nfe": 32,
+      "path": "linear",
+      "solver": "euler",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.007168708005337976
+    },
+    {
+      "actual_nfe": 8,
+      "affine_matrix": [
+        [
+          0.6404275303559854,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.7252933848355407,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.8214919198836844,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.9303732407325529,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.053318663596531,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.1917594283428992,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.3471884117385033,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.5210844101966168
+        ]
+      ],
+      "affine_offset": [
+        0.519679352233011,
+        1.7939700386266557,
+        0.8838810600872368,
+        2.4477799305494146,
+        1.2100110023026018,
+        3.143819571257173,
+        1.4896086911961226,
+        3.8908133076474622
+      ],
+      "baseline_metric": 1.0938508063803787,
+      "continuous_endpoint_w2": 1.4901161193847656e-08,
+      "covariance": [
+        [
+          0.41014742163786666,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.5260504940861958,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.6748489744341818,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.8655943670711929,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.109480207080782,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.420290535044194,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.8149166167225113,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.3136977829431897
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 8,
+      "gaussian_w2": 0.05884775499648022,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.3751077805026792,
+      "maximum_covariance_eigenvalue": 2.3136977829431897,
+      "mean": [
+        1.0,
+        1.2500000000000002,
+        1.5,
+        1.75,
+        2.0,
+        2.2499999999999982,
+        2.5,
+        2.7499999999999996
+      ],
+      "mean_error": 1.8444410139024814e-15,
+      "minimum_covariance_eigenvalue": 0.41014742163786666,
+      "n_steps": 4,
+      "nfe": 8,
+      "path": "linear",
+      "solver": "heun",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.0019584350084187463
+    },
+    {
+      "actual_nfe": 16,
+      "affine_matrix": [
+        [
+          0.6403876694322802,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.7270247397208374,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.825461782995316,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.9372584452942334,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0641664765760641,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.208145875850695,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.3713783847520706,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.5562756585617938
+        ]
+      ],
+      "affine_offset": [
+        0.5197092479257898,
+        1.7952685547906284,
+        0.8809036627535131,
+        2.452943833970675,
+        1.201875142567952,
+        3.1561094068880218,
+        1.471466211435947,
+        3.917206743921345
+      ],
+      "baseline_metric": 1.0938508063803787,
+      "continuous_endpoint_w2": 1.4901161193847656e-08,
+      "covariance": [
+        [
+          0.41009636716090736,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.5285649721661513,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.6813871551858062,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.8784533932753635,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.1324502898683149,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.4596164573350432,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.8806786741651982,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.421993925431945
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 8,
+      "gaussian_w2": 0.011368422402734524,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.4302086577361357,
+      "maximum_covariance_eigenvalue": 2.421993925431945,
+      "mean": [
+        0.9999999999999999,
+        1.2500000000000004,
+        1.5,
+        1.75,
+        2.0,
+        2.2500000000000004,
+        2.5,
+        2.75
+      ],
+      "mean_error": 6.377745716588144e-16,
+      "minimum_covariance_eigenvalue": 0.41009636716090736,
+      "n_steps": 8,
+      "nfe": 16,
+      "path": "linear",
+      "solver": "heun",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.0036325389955891296
+    },
+    {
+      "actual_nfe": 32,
+      "affine_matrix": [
+        [
+          0.6394423825095323,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.7265284688048013,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.8255029820451776,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.93797655959554,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0657751132868662,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.2109669001209515,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.3758921877318375,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.5631953402544996
+        ]
+      ],
+      "affine_offset": [
+        0.5204182131178505,
+        1.7948963516036005,
+        0.8808727634661166,
+        2.453482419696654,
+        1.2006686650348504,
+        3.158225175090713,
+        1.4680808592011214,
+        3.922396505190874
+      ],
+      "baseline_metric": 1.0938508063803787,
+      "continuous_endpoint_w2": 1.4901161193847656e-08,
+      "covariance": [
+        [
+          0.4088865605494671,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.5278436159838491,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.6814551733654808,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.8798000263506857,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.1358765921016325,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.4664408331885466,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.893079312261502,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.4435796717933806
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 8,
+      "gaussian_w2": 0.002429550322766682,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.4446226634519284,
+      "maximum_covariance_eigenvalue": 2.4435796717933806,
+      "mean": [
+        0.9999999999999998,
+        1.2499999999999996,
+        1.4999999999999998,
+        1.7499999999999991,
+        2.0,
+        2.249999999999999,
+        2.4999999999999996,
+        2.749999999999999
+      ],
+      "mean_error": 1.6910413304902302e-15,
+      "minimum_covariance_eigenvalue": 0.4088865605494671,
+      "n_steps": 16,
+      "nfe": 32,
+      "path": "linear",
+      "solver": "heun",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.005413388003944419
+    },
+    {
+      "actual_nfe": 8,
+      "affine_matrix": [
+        [
+          0.641428475395349,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.7289855547074637,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.8266067471105748,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.9362704399730291,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0605209468993193,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.2025508871639112,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.3662378950588698,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.5560200084588391
+        ]
+      ],
+      "affine_offset": [
+        0.5189286434534883,
+        1.7967391660305978,
+        0.8800449396670688,
+        2.452202829979772,
+        1.2046092898255103,
+        3.151913165372933,
+        1.4753215787058476,
+        3.91701500634413
+      ],
+      "baseline_metric": 1.0938508063803787,
+      "continuous_endpoint_w2": 1.4901161193847656e-08,
+      "covariance": [
+        [
+          0.4114304890480018,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.5314199389721486,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.6832787143687258,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.8766023367672894,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.1247046788122288,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.44612863621871,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.8666059858948914,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.4211982667242458
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 8,
+      "gaussian_w2": 0.01821339202408203,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.425866746093203,
+      "maximum_covariance_eigenvalue": 2.4211982667242458,
+      "mean": [
+        1.0,
+        1.25,
+        1.5,
+        1.75,
+        1.9999999999999998,
+        2.2499999999999996,
+        2.5,
+        2.7500000000000004
+      ],
+      "mean_error": 6.661338147750939e-16,
+      "minimum_covariance_eigenvalue": 0.4114304890480018,
+      "n_steps": 2,
+      "nfe": 8,
+      "path": "linear",
+      "solver": "rk4",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.0019301529973745346
+    },
+    {
+      "actual_nfe": 16,
+      "affine_matrix": [
+        [
+          0.638904984746583,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.7261459000606296,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.8252904702131058,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.9379495725451381,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0659766855529065,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.2114885771816026,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.3768715755746295,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.5647959614430023
+        ]
+      ],
+      "affine_offset": [
+        0.5208212614400628,
+        1.7946094250454718,
+        0.8810321473401704,
+        2.453462179408853,
+        1.20051748583532,
+        3.1586164328862023,
+        1.4673463183190278,
+        3.9235969710822514
+      ],
+      "baseline_metric": 1.0938508063803787,
+      "continuous_endpoint_w2": 1.4901161193847656e-08,
+      "covariance": [
+        [
+          0.4081995795340314,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.527287868174862,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.6811043602245692,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.8797494006376073,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.13630629414236,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.467704572641504,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.8957753356253626,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.44858640094833
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 8,
+      "gaussian_w2": 0.0004053081756807395,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.44918414913239,
+      "maximum_covariance_eigenvalue": 2.44858640094833,
+      "mean": [
+        1.0,
+        1.2499999999999996,
+        1.4999999999999998,
+        1.7499999999999996,
+        2.0,
+        2.2500000000000004,
+        2.5,
+        2.7499999999999996
+      ],
+      "mean_error": 9.155133597044475e-16,
+      "minimum_covariance_eigenvalue": 0.4081995795340314,
+      "n_steps": 4,
+      "nfe": 16,
+      "path": "linear",
+      "solver": "rk4",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.0052575500012608245
+    },
+    {
+      "actual_nfe": 32,
+      "affine_matrix": [
+        [
+          0.6389435939049086,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.726180306573744,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.8253274358050398,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.9380111733094196,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.066079686875981,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.211633435158178,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.377059618360716,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.5650713424198894
+        ]
+      ],
+      "affine_offset": [
+        0.5207923045713185,
+        1.7946352299303068,
+        0.88100442314622,
+        2.4535083799820643,
+        1.200440234843014,
+        3.158725076368632,
+        1.4672052862294636,
+        3.9238035068149166
+      ],
+      "baseline_metric": 1.0938508063803787,
+      "continuous_endpoint_w2": 1.4901161193847656e-08,
+      "covariance": [
+        [
+          0.4082489161921208,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.5273378376555368,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.681165376292522,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.879864961253314,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.1365258987695896,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.4680555811932066,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.8962931925197608,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.449448306863995
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 8,
+      "gaussian_w2": 1.7532626726851007e-05,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.449467147569231,
+      "maximum_covariance_eigenvalue": 2.449448306863995,
+      "mean": [
+        1.0,
+        1.2499999999999987,
+        1.4999999999999998,
+        1.7499999999999996,
+        1.9999999999999998,
+        2.2499999999999982,
+        2.5000000000000004,
+        2.7499999999999996
+      ],
+      "mean_error": 2.3707876222259364e-15,
+      "minimum_covariance_eigenvalue": 0.4082489161921208,
+      "n_steps": 8,
+      "nfe": 32,
+      "path": "linear",
+      "solver": "rk4",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.009897051000734791
+    },
+    {
+      "actual_nfe": 8,
+      "affine_matrix": [
+        [
+          0.6325934670351899,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.7233946547457364,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.8250171190215905,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.9384903160618099,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.064868165730945,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.2052020536621515,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.3605021345719661,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.5316831945628424
+        ]
+      ],
+      "affine_offset": [
+        0.6615216763360542,
+        1.8377119287229282,
+        1.081565711345309,
+        2.5437466143050758,
+        1.4742864330645131,
+        3.2942960496824223,
+        1.8318386639126254,
+        4.094275654234195
+      ],
+      "baseline_metric": 0.34253590281533186,
+      "continuous_endpoint_w2": 1.4901161193847656e-08,
+      "covariance": [
+        [
+          0.40017449453560194,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.5232998265147032,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.6806532466786852,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.8807640733417959,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.133944210387187,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.4525119901514676,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.8509660581748761,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.346053408506234
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 8,
+      "gaussian_w2": 0.5715808250677553,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.4212757076696745,
+      "maximum_covariance_eigenvalue": 2.346053408506234,
+      "mean": [
+        1.1359667766124466,
+        1.295165937663626,
+        1.7003285506115018,
+        1.8398788772587182,
+        2.272937557362722,
+        2.390394509435809,
+        2.8522152648416,
+        2.9455132583120633
+      ],
+      "mean_error": 0.57028345802495,
+      "minimum_covariance_eigenvalue": 0.40017449453560194,
+      "n_steps": 8,
+      "nfe": 8,
+      "path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.0015233110025292262
+    },
+    {
+      "actual_nfe": 16,
+      "affine_matrix": [
+        [
+          0.6348475209855041,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.7240389734958266,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.8246614271434872,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.938057893150182,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0656956272902582,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.2091668440945558,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.370185180398077,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.5505762056597518
+        ]
+      ],
+      "affine_offset": [
+        0.5919596840649389,
+        1.8168877026603127,
+        0.9821114182016369,
+        2.5004062268384866,
+        1.3383064979354033,
+        3.22981868707516,
+        1.6506997871797544,
+        4.014472193809655
+      ],
+      "baseline_metric": 0.34253590281533186,
+      "continuous_endpoint_w2": 1.4901161193847656e-08,
+      "covariance": [
+        [
+          0.4030313749014401,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.5242324351408902,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.680066469418333,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.8799526109013582,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.135707170025577,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.4620844568575877,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.8774074285825106,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.404286569558193
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 8,
+      "gaussian_w2": 0.2901270799433231,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.4424387816033657,
+      "maximum_covariance_eigenvalue": 2.404286569558193,
+      "mean": [
+        1.068095324804067,
+        1.2738584725384428,
+        1.6006074885592523,
+        1.79686280697585,
+        2.137578218403097,
+        2.3229435540042433,
+        2.6783386724783123,
+        2.851540039564841
+      ],
+      "mean_error": 0.28963387127508294,
+      "minimum_covariance_eigenvalue": 0.4030313749014401,
+      "n_steps": 16,
+      "nfe": 16,
+      "path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.003501238999888301
+    },
+    {
+      "actual_nfe": 32,
+      "affine_matrix": [
+        [
+          0.6366637346078956,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.7249225451638066,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.8248673979789154,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.9379872088266503,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.065944265886488,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.2105894343651196,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.3739770889798737,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.558379101749599
+        ]
+      ],
+      "affine_offset": [
+        0.5566074232921565,
+        1.8059468161883496,
+        0.9317784006476209,
+        2.477404047158323,
+        1.2696032679417368,
+        3.195094594577074,
+        1.5592244415660645,
+        3.970490705290166
+      ],
+      "baseline_metric": 0.34253590281533186,
+      "continuous_endpoint_w2": 1.4901161193847656e-08,
+      "covariance": [
+        [
+          0.40534071096487295,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.5255126964867712,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.6804062242485064,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.8798200039224101,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.1362371779762837,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.46552677859646,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.8878130410416079,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.428545424769887
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 8,
+      "gaussian_w2": 0.14615628847928616,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.4477271392085234,
+      "maximum_covariance_eigenvalue": 2.428545424769887,
+      "mean": [
+        1.0341052242480782,
+        1.2622549073154947,
+        1.5504289491318075,
+        1.7739136405383351,
+        2.069061467356603,
+        2.287152518803234,
+        2.5897072583009697,
+        2.801706378977967
+      ],
+      "mean_error": 0.14594186491346484,
+      "minimum_covariance_eigenvalue": 0.40534071096487295,
+      "n_steps": 32,
+      "nfe": 32,
+      "path": "variance_preserving",
+      "solver": "euler",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.006628414004808292
+    },
+    {
+      "actual_nfe": 8,
+      "affine_matrix": [
+        [
+          0.6536181945007801,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.7377273248175975,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.8331757665334358,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.9410605779166059,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0624338704940406,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.1981889693077932,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.3488959263891664,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.5145621726294962
+        ]
+      ],
+      "affine_offset": [
+        0.49329081188384494,
+        1.7798352206953216,
+        0.8580767294059426,
+        2.4238746361502392,
+        1.1901144841314182,
+        3.109523422436334,
+        1.4839598886591823,
+        3.8403607315229324
+      ],
+      "baseline_metric": 0.34253590281533186,
+      "continuous_endpoint_w2": 1.4901161193847656e-08,
+      "covariance": [
+        [
+          0.4272167441824596,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.544241605782529,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.6941818579385783,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.8855950113087363,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.1287657291729478,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.4356568061708717,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.8195202202292875,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.29389857476018
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 8,
+      "gaussian_w2": 0.09943605786540373,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.3171970813729983,
+      "maximum_covariance_eigenvalue": 2.29389857476018,
+      "mean": [
+        0.98350445775943,
+        1.2265397270821234,
+        1.4829585543060195,
+        1.7180792027127847,
+        1.9869398870019486,
+        2.2108816954554893,
+        2.495631833451057,
+        2.7044391020508103
+      ],
+      "mean_error": 0.07699038961376156,
+      "minimum_covariance_eigenvalue": 0.4272167441824596,
+      "n_steps": 4,
+      "nfe": 8,
+      "path": "variance_preserving",
+      "solver": "heun",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.001465281005948782
+    },
+    {
+      "actual_nfe": 16,
+      "affine_matrix": [
+        [
+          0.6429679581133272,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.7292530770560139,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.8273547084275699,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.9387785367292794,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0651882900716392,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.208403936646624,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.370388267727477,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.5532149963033195
+        ]
+      ],
+      "affine_offset": [
+        0.5134296693724847,
+        1.7907137620936866,
+        0.875044933581669,
+        2.4460180027513694,
+        1.1979505089782507,
+        3.1469354289961364,
+        1.4718641478906054,
+        3.9046726035566603
+      ],
+      "baseline_metric": 0.34253590281533186,
+      "continuous_endpoint_w2": 1.4901161193847656e-08,
+      "covariance": [
+        [
+          0.41340779516042125,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.5318100503956646,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.6845158135572691,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.8813051410235669,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.1346260933057426,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.460240074103058,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.8779640043251151,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.4124768247415207
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 8,
+      "gaussian_w2": 0.02392053542681692,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.4156958005511613,
+      "maximum_covariance_eigenvalue": 2.4124768247415207,
+      "mean": [
+        0.9956556379574801,
+        1.2437739543016761,
+        1.4955609649023465,
+        1.7419341002044098,
+        1.9968417265319802,
+        2.2406324765111685,
+        2.499655348686213,
+        2.7397613563291707
+      ],
+      "mean_error": 0.018576186235708406,
+      "minimum_covariance_eigenvalue": 0.41340779516042125,
+      "n_steps": 8,
+      "nfe": 16,
+      "path": "variance_preserving",
+      "solver": "heun",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.004465142992557958
+    },
+    {
+      "actual_nfe": 32,
+      "affine_matrix": [
+        [
+          0.6400010224344596,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.726975778192084,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.8258449240310142,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.9382054061499536,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0658614329363387,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.210847241374014,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.375450291484804,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.5622336548927844
+        ]
+      ],
+      "affine_offset": [
+        0.5189004775137583,
+        1.7936311516437224,
+        0.8794911231408382,
+        2.4516258888803257,
+        1.1998246436480944,
+        3.15584656356943,
+        1.468406139638197,
+        3.9192775881051816
+      ],
+      "baseline_metric": 0.34253590281533186,
+      "continuous_endpoint_w2": 1.4901161193847656e-08,
+      "covariance": [
+        [
+          0.4096013087171536,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.5284937820779861,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.6820198385477916,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.8802293841289994,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.1360605942211053,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.4661510419430595,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.891863504345632,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.4405739924796674
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 8,
+      "gaussian_w2": 0.005850073510443231,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.440986186163113,
+      "maximum_covariance_eigenvalue": 2.4405739924796674,
+      "mean": [
+        0.998901244339603,
+        1.2483993179996595,
+        1.4988748161640988,
+        1.7479718342678605,
+        1.9992207183503483,
+        2.2477111325389196,
+        2.4999938582518,
+        2.7476023469355932
+      ],
+      "mean_error": 0.004554548698968209,
+      "minimum_covariance_eigenvalue": 0.4096013087171536,
+      "n_steps": 16,
+      "nfe": 32,
+      "path": "variance_preserving",
+      "solver": "heun",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.007274450996192172
+    },
+    {
+      "actual_nfe": 8,
+      "affine_matrix": [
+        [
+          0.6356820282184815,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.7244749204660452,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.8246448233144369,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.9378556502178168,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0662354230169626,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.2122817545309,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.3786171366149838,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.5675379007341212
+        ]
+      ],
+      "affine_offset": [
+        0.5244564033327587,
+        1.7945091420634587,
+        0.8817917439337316,
+        2.453832086473014,
+        1.2004960869353285,
+        3.159373476436155,
+        1.4662709276602326,
+        3.92480718481502
+      ],
+      "baseline_metric": 0.34253590281533186,
+      "continuous_endpoint_w2": 1.4901161193847656e-08,
+      "covariance": [
+        [
+          0.4040916409999623,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.5248639103842826,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.6800390846192989,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.8795732206454839,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.1368579772961611,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.469627052368517,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.9005852093684967,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.457175070237936
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 8,
+      "gaussian_w2": 0.005176509796108936,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.4659150819902753,
+      "maximum_covariance_eigenvalue": 2.457175070237936,
+      "mean": [
+        1.0012179244966197,
+        1.2511529517139248,
+        1.5002753614195594,
+        1.7504403488096512,
+        2.0001726541980505,
+        2.25016216053798,
+        2.5002337801214702,
+        2.7491537592644293
+      ],
+      "mean_error": 0.0019771825306652427,
+      "minimum_covariance_eigenvalue": 0.4040916409999623,
+      "n_steps": 2,
+      "nfe": 8,
+      "path": "variance_preserving",
+      "solver": "rk4",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.0018189230031566694
+    },
+    {
+      "actual_nfe": 16,
+      "affine_matrix": [
+        [
+          0.6387931167448191,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.7261081215863223,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.8252967364351258,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.9380043297006897,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0660922756092446,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.2116748552234773,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.3771615833883204,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.56531084833192
+        ]
+      ],
+      "affine_offset": [
+        0.5209053433761879,
+        1.7946208732937632,
+        0.8810297988259699,
+        2.453525881668119,
+        1.200445056691965,
+        3.158785898335199,
+        1.4671871169370667,
+        3.92405233254368
+      ],
+      "baseline_metric": 0.34253590281533186,
+      "continuous_endpoint_w2": 1.4901161193847656e-08,
+      "covariance": [
+        [
+          0.4080566460005601,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.5272330042336174,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.6811147031704695,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.8798521225372402,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.1365527401136974,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.4681559547808347,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.8965740267606257,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.4501980519055953
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 8,
+      "gaussian_w2": 0.00031831032900725225,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.450419090782439,
+      "maximum_covariance_eigenvalue": 2.4501980519055953,
+      "mean": [
+        1.0000001809348023,
+        1.2500397821040214,
+        1.5000023511523142,
+        1.7500226343926015,
+        2.0000142633988984,
+        2.2500297569175913,
+        2.500058304478307,
+        2.75006919629474
+      ],
+      "mean_error": 0.00010666278766509586,
+      "minimum_covariance_eigenvalue": 0.4080566460005601,
+      "n_steps": 4,
+      "nfe": 16,
+      "path": "variance_preserving",
+      "solver": "rk4",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.0029706469940720126
+    },
+    {
+      "actual_nfe": 32,
+      "affine_matrix": [
+        [
+          0.6389358390215576,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.7261764248629996,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.8253263611999271,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.9380125328712206,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0660838085782363,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.2116415606251976,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.3770744082778947,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.565097874800189
+        ]
+      ],
+      "affine_offset": [
+        0.5207971768382775,
+        1.7946340993855583,
+        0.8810051002650985,
+        2.453510687187055,
+        1.2004381069354437,
+        3.158733497196748,
+        1.4671984957881958,
+        3.9238299092490574
+      ],
+      "baseline_metric": 0.34253590281533186,
+      "continuous_endpoint_w2": 1.4901161193847656e-08,
+      "covariance": [
+        [
+          0.40823900638618177,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.5273322000268077,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.6811636024915125,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.8798675118234827,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.1365346869126776,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.4680752714342644,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.8963339259339138,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.4495313577040676
+        ]
+      ],
+      "covariance_is_psd": true,
+      "covariance_symmetry_residual": 0.0,
+      "dim": 8,
+      "gaussian_w2": 1.89560084141817e-05,
+      "gaussian_w2_is_exact_from_moments": true,
+      "matrix_condition_number": 2.4495384030999436,
+      "maximum_covariance_eigenvalue": 2.4495313577040676,
+      "mean": [
+        0.9999990561044457,
+        1.2500017807383086,
+        1.4999998711650437,
+        1.7500012875336395,
+        2.000000963369121,
+        2.25000232672785,
+        2.5000043019966167,
+        2.750006503148916
+      ],
+      "mean_error": 8.536754202984302e-06,
+      "minimum_covariance_eigenvalue": 0.40823900638618177,
+      "n_steps": 8,
+      "nfe": 32,
+      "path": "variance_preserving",
+      "solver": "rk4",
+      "target_family": "shifted_anisotropic_gaussian",
+      "wall_clock_s": 0.00476998501108028
+    }
+  ]
+}

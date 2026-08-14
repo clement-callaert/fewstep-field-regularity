@@ -1,0 +1,12 @@
+--- /tmp/fewstep-corrected-20260813/paper/arxiv/main.tex	2026-08-13 21:36:37.922832590 +0200
++++ /tmp/fewstep-pass5-20260813/paper/arxiv/main.tex	2026-08-13 22:19:59.931959294 +0200
+@@ -1217,8 +1217,7 @@
+ one place $F$ is redrawn. The paired concordance score on the centered census is discussed
+ in Appendix~\ref{app:quadrature} and recorded in Table~\ref{tab:concordance}.
+ 
+-\enlargethispage{12\baselineskip}
+-\begin{table}[H]
++\begin{table}[ht]
+   \centering
+   \begin{minipage}[t]{0.49\linewidth}
+     \centering

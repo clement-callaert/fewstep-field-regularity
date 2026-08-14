@@ -1,0 +1,526 @@
+{
+  "n_seeds": 50,
+  "interval": "Clopper-Pearson 95 percent exact",
+  "generator": "torch.Generator manual_seed 10000..10049",
+  "redraws_F": true,
+  "summary": [
+    {
+      "dim": 2,
+      "n_seeds": 50,
+      "n_with_any_inversion": 50,
+      "fraction": 1.0,
+      "clopper_pearson_low": 0.9288782635357954,
+      "clopper_pearson_high": 1.0
+    },
+    {
+      "dim": 8,
+      "n_seeds": 50,
+      "n_with_any_inversion": 50,
+      "fraction": 1.0,
+      "clopper_pearson_low": 0.9288782635357954,
+      "clopper_pearson_high": 1.0
+    }
+  ],
+  "draws": [
+    {
+      "dim": 2,
+      "seed": 10000,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10001,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10002,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10003,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10004,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10005,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10006,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10007,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10008,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10009,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10010,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10011,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10012,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10013,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10014,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10015,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10016,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10017,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10018,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10019,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10020,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10021,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10022,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10023,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10024,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10025,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10026,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10027,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10028,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10029,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10030,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10031,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10032,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10033,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10034,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10035,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10036,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10037,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10038,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10039,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10040,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10041,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10042,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10043,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10044,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10045,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10046,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10047,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10048,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 2,
+      "seed": 10049,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10000,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10001,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10002,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10003,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10004,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10005,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10006,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10007,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10008,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10009,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10010,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10011,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10012,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10013,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10014,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10015,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10016,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10017,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10018,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10019,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10020,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10021,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10022,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10023,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10024,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10025,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10026,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10027,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10028,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10029,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10030,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10031,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10032,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10033,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10034,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10035,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10036,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10037,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10038,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10039,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10040,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10041,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10042,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10043,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10044,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10045,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10046,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10047,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10048,
+      "inversion_any_block": true
+    },
+    {
+      "dim": 8,
+      "seed": 10049,
+      "inversion_any_block": true
+    }
+  ]
+}

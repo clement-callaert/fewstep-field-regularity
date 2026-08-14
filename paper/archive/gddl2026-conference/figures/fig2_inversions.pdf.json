@@ -1,0 +1,23 @@
+{
+  "figure_artifact_id": "workshop_figures_2026-07-24-v1:fig2_inversions",
+  "figure_checksum_sha256": "c9e9c0c3e67302f28851bc38444f2326353400f81deb44523c01102711078071",
+  "generation_timestamp": "2026-07-24T21:57:41.126901+00:00",
+  "git_commit": "de8d1afc5813c0305c4a51106f1de0b47eb9a881",
+  "git_status": "dirty (regenerate after committing)",
+  "note": "Log margin axis; no visual exaggeration of differences.",
+  "plotting_config": {
+    "block_definition": "two-path comparison per (family, dim, solver, nfe)",
+    "kind": "strongest_inversion_and_all_blocks",
+    "x_scale": "log"
+  },
+  "plotting_script": "scripts/make_workshop_figures.py",
+  "source_artifact_ids": [
+    "phase4_gaussian_reproduction_2026-07-24-v1:results"
+  ],
+  "source_run_ids": [
+    "phase4_gaussian_reproduction_2026-07-24-v1"
+  ],
+  "source_table_hashes": {
+    "phase4_gaussian_reproduction_2026-07-24-v1:results": "b8930142cba5655ee553aae5ff400cd884c1137e77547d9a5fa94bd4e354973f"
+  }
+}

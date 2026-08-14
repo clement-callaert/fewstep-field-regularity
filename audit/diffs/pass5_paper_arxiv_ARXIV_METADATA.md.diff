@@ -1,0 +1,11 @@
+--- /tmp/fewstep-corrected-20260813/paper/arxiv/ARXIV_METADATA.md	2026-08-13 21:38:22.578667508 +0200
++++ /tmp/fewstep-pass5-20260813/paper/arxiv/ARXIV_METADATA.md	2026-08-13 22:11:29.848364114 +0200
+@@ -49,7 +49,7 @@
+ 
+ ## Comments field (suggested)
+ 
+-22 pages, 4 figures, 2 tables in the main text. Code and compact artifacts: https://github.com/clement-callaert/fewstep-field-regularity
++23 pages, 4 figures, 2 tables in the main text. Code and compact artifacts: https://github.com/clement-callaert/fewstep-field-regularity
+ 
+ Update the page/figure/table counts from the compiled PDF immediately before upload. Do not put venue, review, or acceptance language in the comments field.
+ 

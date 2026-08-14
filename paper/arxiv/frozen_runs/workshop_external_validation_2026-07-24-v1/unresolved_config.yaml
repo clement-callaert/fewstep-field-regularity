@@ -1,0 +1,94 @@
+distribution:
+  name: standard_gaussian
+  dim: 2
+  kind: gaussian
+  role: source
+path:
+  name: linear
+  coupling: independent
+  schedule: linear
+  notes: Independent coupling with linear mean and residual schedules.
+solver:
+  name: euler
+  family: fixed_step
+  order: 1
+  nfe_per_step: 1
+metric:
+  name: averaged_squared_lipschitz_proxy
+  kind: estimator
+  baseline: true
+  notes: Baseline averaged squared Lipschitz proxy after source verification.
+evaluator:
+  name: gaussian_w2
+  kind: exact_when_gaussian
+  notes: Exact Gaussian W2 when both laws are Gaussian and represented analytically.
+experiment:
+  name: workshop_external_validation
+  mode: workshop_external_validation
+  run_id: workshop_external_validation_2026-07-24-v1
+  phase: 4
+  plan: docs/WORKSHOP_EXTERNAL_VALIDATION_PLAN.md
+  hypotheses:
+  - P4-C1
+  seeds:
+  - 0
+  target_geometry_seed: 314159
+  dimensions:
+  - 2
+  - 8
+  nfe_budgets:
+  - 8
+  - 16
+  - 32
+  family:
+    name: shifted_anisotropic_gaussian
+    anisotropy: 6.0
+    source_mean_scale: 0.75
+    target_mean_base: 1.0
+    target_mean_slope: 0.25
+  paths:
+  - linear
+  - variance_preserving
+  solvers:
+  - euler
+  - heun
+  - rk4
+  metric:
+    name: averaged_squared_lipschitz_proxy
+    n_time: 24
+    estimator_budget: 128
+  precision:
+    dtype: float64
+  compute:
+    device: cpu
+  expected_counts:
+    endpoint_configurations: 36
+    comparison_blocks: 18
+    stochastic_endpoint_replicates: 0
+  runtime:
+    expected_minutes: 0.5
+    hard_stop_minutes: 10
+  release_ready_required: true
+  allow_dirty_code: false
+  overwrite: false
+  notes: Frozen pre-registered external validation. Exactly one non-centered commuting
+    Gaussian family. See docs/WORKSHOP_EXTERNAL_VALIDATION_PLAN.md.
+precision:
+  name: float64
+  dtype: float64
+  allow_silent_cast: false
+  notes: Default for exact analytical experiments.
+compute:
+  name: cpu
+  device: cpu
+  repo_root: null
+  seed_offset: 0
+artifact_policy:
+  name: phase4_release_ready
+  output_dir: outputs
+  release_ready: true
+  require_resolved_config: true
+  require_seed_records: true
+  require_hashes: true
+  reject_dirty_release_ready: true
+  require_figure_provenance: true

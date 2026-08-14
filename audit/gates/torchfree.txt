@@ -1,0 +1,23 @@
+===== TORCH-FREE CERT =====
+torch in sys.modules before: False
+python /tmp/fewstep-notorch/bin/python
+EXIT:0
+nverted": true,
+  "float64": {
+    "linear_factor": 1.9097232679665115,
+    "vp_factor": 1.8696263416613177,
+    "linear_w2": 0.09027673203348852,
+    "vp_w2": 0.1303736583386823,
+    "linear_step0": 0.9038461538461539,
+    "vp_drift_formula": 1.1575314384717514
+  },
+  "mpmath_80digit": {
+    "linear_factor": "1.9097232679665112097544529976962409394841827274259706692139124571557003989436422",
+    "vp_factor": "1.8696263416613175400087652067481241942254043361757242052039889541615699637099156",
+    "linear_w2": "0.09027673203348879024554700230375906051581727257402933078608754284429960105635781",
+    "vp_w2": "0.13037365833868245999123479325187580577459566382427579479601104583843003629008436"
+  },
+  "software": "Python fractions.Fraction; Machin pi bound; mpmath 1.4.1 interval cross-check"
+}
+
+torch modules after separate import probe in THIS interpreter: []

@@ -1,6 +1,9 @@
-main.aux
-main.log
-main.out
-main.bbl
-main.blg
-main.toc
+# LaTeX intermediates. Keep source, figures, and compiled PDFs.
+*.aux
+*.log
+*.out
+*.fls
+*.fdb_latexmk
+*.blg
+*.synctex.gz
+*.toc

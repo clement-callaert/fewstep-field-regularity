@@ -1,15 +1,16 @@
-"""Build the three workshop paper figures with provenance sidecars.
+"""Build workshop paper figures with provenance sidecars.
 
 Inputs are explicit artifact files with pinned SHA-256 checksums. The
 script refuses to run on a checksum mismatch and never scans directories.
-Figure 1 is conceptual and consumes no artifact.
+The live workshop PDF uses fig_scalar, fig1_regimes, and
+fig_inversion_region. Hydra-backed figures are skipped when outputs/
+is absent.
 """
 
 from __future__ import annotations
 
 import json
 import subprocess
-from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -19,6 +20,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 from fewstep_regularities.utils.hashing import sha256_file
+from fewstep_regularities.utils.provenance import figure_sidecar_payload, write_json
 
 ROOT = Path(__file__).resolve().parents[1]
 FIGURE_DIR = ROOT / "paper" / "gddl2026" / "figures"
@@ -49,6 +51,10 @@ GRAY = "#5f6368"
 
 plt.rcParams.update(
     {
+        "text.usetex": False,
+        "mathtext.fontset": "cm",
+        "font.family": "serif",
+        "font.serif": ["DejaVu Serif"],
         "font.size": 9,
         "axes.titlesize": 9,
         "axes.labelsize": 9,
@@ -61,29 +67,51 @@ plt.rcParams.update(
         "xtick.major.width": 0.6,
         "ytick.major.width": 0.6,
         "pdf.fonttype": 42,
+        "ps.fonttype": 42,
     }
 )
 
 
+def _revision_commit() -> str | None:
+    path = ROOT / "REVISION"
+    if not path.is_file():
+        return None
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if line.lower().startswith("commit:"):
+            return line.split(":", 1)[1].strip()
+    return None
+
+
 def git_commit() -> str:
-    return subprocess.run(
-        ["git", "rev-parse", "HEAD"],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
-        check=True,
-    ).stdout.strip()
+    pinned = _revision_commit()
+    if pinned:
+        return pinned
+    try:
+        return subprocess.run(
+            ["git", "-c", f"safe.directory={ROOT}", "rev-parse", "HEAD"],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.strip()
+    except (subprocess.CalledProcessError, FileNotFoundError, OSError):
+        return "snapshot-without-git"
 
 
 def git_status_flag() -> str:
-    out = subprocess.run(
-        ["git", "status", "--porcelain"],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
-        check=True,
-    ).stdout.strip()
-    return "clean" if not out else "dirty (regenerate after committing)"
+    if (ROOT / "REVISION").is_file() and not (ROOT / ".git").exists():
+        return "git-archive-snapshot"
+    try:
+        out = subprocess.run(
+            ["git", "-c", f"safe.directory={ROOT}", "status", "--porcelain"],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.strip()
+        return "clean" if not out else "dirty (regenerate after committing)"
+    except (subprocess.CalledProcessError, FileNotFoundError, OSError):
+        return "git-unavailable"
 
 
 def load_pinned(artifact_id: str) -> Any:
@@ -102,24 +130,17 @@ def write_sidecar(
     plotting_config: dict[str, Any],
     note: str,
 ) -> None:
-    sidecar = {
-        "figure_artifact_id": f"workshop_figures_2026-07-24-v1:{figure_path.stem}",
-        "source_run_ids": sorted({a.split(":")[0] for a in artifact_ids})
-        or ["none_conceptual"],
-        "source_artifact_ids": artifact_ids,
-        "source_table_hashes": {a: PINNED_INPUTS[a]["sha256"] for a in artifact_ids},
-        "plotting_script": "scripts/make_workshop_figures.py",
-        "plotting_config": plotting_config,
-        "git_commit": git_commit(),
-        "git_status": git_status_flag(),
-        "generation_timestamp": datetime.now(UTC).isoformat(),
-        "figure_checksum_sha256": sha256_file(figure_path),
-        "note": note,
-    }
-    sidecar_path = figure_path.with_suffix(figure_path.suffix + ".json")
-    sidecar_path.write_text(
-        json.dumps(sidecar, indent=2, sort_keys=True), encoding="utf-8"
+    sidecar = figure_sidecar_payload(
+        figure_path,
+        artifact_ids=artifact_ids,
+        source_table_hashes={a: PINNED_INPUTS[a]["sha256"] for a in artifact_ids},
+        plotting_script="scripts/make_workshop_figures.py",
+        plotting_config=plotting_config,
+        note=note,
+        generation_command="python scripts/make_workshop_figures.py",
+        figure_artifact_id=f"workshop_figures_2026-08-13-v1:{figure_path.stem}",
     )
+    write_json(figure_path.with_suffix(figure_path.suffix + ".json"), sidecar)
 
 
 def phase4_blocks(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -372,42 +393,30 @@ def figure3_interaction() -> tuple[Path, list[str]]:
 
 
 def main() -> None:
+    """Copy the three live workshop figures from the arXiv tree with sidecars.
+
+    Hydra-backed fig2/fig3 are not written into the live workshop directory
+    because the anonymous PDF does not include them.
+    """
+    import shutil
+
     FIGURE_DIR.mkdir(parents=True, exist_ok=True)
-    fig1 = figure1_conceptual()
-    write_sidecar(
-        fig1,
-        artifact_ids=[],
-        plotting_config={
-            "kind": "conceptual_schematic",
-            "consumes_artifacts": False,
-        },
-        note=(
-            "Conceptual schematic only; curves and bars are illustrative and "
-            "represent no measured quantity."
-        ),
-    )
-    fig2, ids2 = figure2_inversions()
-    write_sidecar(
-        fig2,
-        artifact_ids=ids2,
-        plotting_config={
-            "kind": "strongest_inversion_and_all_blocks",
-            "block_definition": "two-path comparison per (family, dim, solver, nfe)",
-            "x_scale": "log",
-        },
-        note="Log margin axis; no visual exaggeration of differences.",
-    )
-    fig3, ids3 = figure3_interaction()
-    write_sidecar(
-        fig3,
-        artifact_ids=ids3,
-        plotting_config={
-            "kind": "lowrank_solver_path_interaction",
-            "y_scale": "symlog linthresh 1e-4",
-        },
-        note="Signed margins; zero line marks path-preference boundary.",
-    )
-    for path in (fig1, fig2, fig3):
+    arxiv_fig = ROOT / "paper" / "arxiv" / "figures"
+    written: list[Path] = []
+    for name in ("fig_scalar.pdf", "fig1_regimes.pdf", "fig_inversion_region.pdf"):
+        src = arxiv_fig / name
+        dst = FIGURE_DIR / name
+        if not src.is_file():
+            raise FileNotFoundError(f"missing arXiv figure {src}")
+        shutil.copy2(src, dst)
+        write_sidecar(
+            dst,
+            artifact_ids=[],
+            plotting_config={"kind": "copied_from_arxiv", "source": name},
+            note=f"Copied from paper/arxiv/figures/{name} for the anonymous PDF.",
+        )
+        written.append(dst)
+    for path in written:
         print(path.relative_to(ROOT), sha256_file(path)[:16])
 
 

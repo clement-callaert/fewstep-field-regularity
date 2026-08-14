@@ -1,0 +1,1329 @@
+{
+  "analysis_status": "registered",
+  "creation_script": "src/fewstep_regularities/experiments/phase4_affine_audit.py",
+  "exact_row_selection": {
+    "dimensions": [
+      2,
+      8
+    ],
+    "nfe_budgets": [
+      8,
+      16,
+      32
+    ],
+    "paths": [
+      "linear",
+      "variance_preserving"
+    ],
+    "solvers": [
+      "euler",
+      "heun",
+      "rk4"
+    ],
+    "target_families": [
+      "anisotropic_gaussian",
+      "low_rank_gaussian"
+    ]
+  },
+  "rows": [
+    {
+      "absolute_reference_delta": 1.3877787807814457e-16,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.24407153157943517,
+      "high_precision_gaussian_w2": "0.24407153157943532146209028061471101350240234383903093706223555130480681001748833",
+      "nfe": 8,
+      "path": "linear",
+      "solver": "euler",
+      "target_eigenvalues": [
+        0.5,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 7.216449660063518e-16,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.1265814756531332,
+      "high_precision_gaussian_w2": "0.12658147565313249607745256316401709004770287938677716189377370543959151407699513",
+      "nfe": 16,
+      "path": "linear",
+      "solver": "euler",
+      "target_eigenvalues": [
+        0.5,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 6.522560269672795e-16,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.06453761485272992,
+      "high_precision_gaussian_w2": "0.06453761485273057441159369018993392006005547931569025918479457630359042970855741",
+      "nfe": 32,
+      "path": "linear",
+      "solver": "euler",
+      "target_eigenvalues": [
+        0.5,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 3.622102617839573e-15,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.032429533685102485,
+      "high_precision_gaussian_w2": "0.032429533685098861716873671090238252672944595113011979020116473995979435633064336",
+      "nfe": 8,
+      "path": "linear",
+      "solver": "heun",
+      "target_eigenvalues": [
+        0.5,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 3.2378613679107104e-15,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.006326501302280992,
+      "high_precision_gaussian_w2": "0.0063265013022842293676319734070747322736990959790092054573750024371591213600292394",
+      "nfe": 16,
+      "path": "linear",
+      "solver": "heun",
+      "target_eigenvalues": [
+        0.5,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 1.3073938633090254e-13,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.001359193004376291,
+      "high_precision_gaussian_w2": "0.0013591930045070305506990799068732372766485231804755189376167675244897871861074004",
+      "nfe": 32,
+      "path": "linear",
+      "solver": "heun",
+      "target_eigenvalues": [
+        0.5,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 4.2587461335230614e-15,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.011191134048681444,
+      "high_precision_gaussian_w2": "0.011191134048685703247422451956070953962282971196188342938045052585647034400760234",
+      "nfe": 8,
+      "path": "linear",
+      "solver": "rk4",
+      "target_eigenvalues": [
+        0.5,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 8.127635391964871e-13,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.00021304913864381012,
+      "high_precision_gaussian_w2": "0.00021304913783104658749689381630906435166120588782447345919403871729300426012460099",
+      "nfe": 16,
+      "path": "linear",
+      "solver": "rk4",
+      "target_eigenvalues": [
+        0.5,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 8.348867260306683e-12,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 9.780748082362688e-06,
+      "high_precision_gaussian_w2": "0.0000097807564312299479911984170161159128594365983433932070223976727563680296053391934",
+      "nfe": 32,
+      "path": "linear",
+      "solver": "rk4",
+      "target_eigenvalues": [
+        0.5,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 5.506012312750386e-15,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.019751027127865382,
+      "high_precision_gaussian_w2": "0.019751027127859874945628806961613900531964487524571393551124480142731486399381707",
+      "nfe": 8,
+      "path": "variance_preserving",
+      "solver": "euler",
+      "target_eigenvalues": [
+        0.5,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 2.121566811119635e-15,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.008549093208126008,
+      "high_precision_gaussian_w2": "0.0085490932081281298811303968280684754249052113156683155342059464547499610961525359",
+      "nfe": 16,
+      "path": "variance_preserving",
+      "solver": "euler",
+      "target_eigenvalues": [
+        0.5,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 3.918480123710211e-14,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.003972855992702084,
+      "high_precision_gaussian_w2": "0.0039728559927412685512833712958907120287295766133132117460329476219067215443093483",
+      "nfe": 32,
+      "path": "variance_preserving",
+      "solver": "euler",
+      "target_eigenvalues": [
+        0.5,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 1.5057399771478686e-15,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.03433484409531278,
+      "high_precision_gaussian_w2": "0.034334844095311272835095725073593021300958930700535264132330042047162151265887713",
+      "nfe": 8,
+      "path": "variance_preserving",
+      "solver": "heun",
+      "target_eigenvalues": [
+        0.5,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 9.900066877399638e-15,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.008266307406966772,
+      "high_precision_gaussian_w2": "0.0082663074069568718495599759384342307789616735696512197969242704000714718506219628",
+      "nfe": 16,
+      "path": "variance_preserving",
+      "solver": "heun",
+      "target_eigenvalues": [
+        0.5,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 4.895649857727946e-14,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.0020226369442279154,
+      "high_precision_gaussian_w2": "0.0020226369442768720254984950133399533189092630353404371289745932136904891957924691",
+      "nfe": 32,
+      "path": "variance_preserving",
+      "solver": "heun",
+      "target_eigenvalues": [
+        0.5,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 3.4840186291518194e-14,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.002662405283824904,
+      "high_precision_gaussian_w2": "0.0026624052838597441698465308256478435315827496684549898754266404959022662006368572",
+      "nfe": 8,
+      "path": "variance_preserving",
+      "solver": "rk4",
+      "target_eigenvalues": [
+        0.5,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 6.57928952204484e-13,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.00014047635378068782,
+      "high_precision_gaussian_w2": "0.00014047635443861678573241943185276147266069307350914308301720627505671694102252878",
+      "nfe": 16,
+      "path": "variance_preserving",
+      "solver": "rk4",
+      "target_eigenvalues": [
+        0.5,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 5.016896944771488e-11,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 8.19576734745251e-06,
+      "high_precision_gaussian_w2": "0.0000081958175164219584315680467093537050330546614335741825181881729532222839225014351",
+      "nfe": 32,
+      "path": "variance_preserving",
+      "solver": "rk4",
+      "target_eigenvalues": [
+        0.5,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 3.164135620181696e-15,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.2932627860390627,
+      "high_precision_gaussian_w2": "0.2932627860390595565859824516803968786286734234094981918457539752791779276234506",
+      "nfe": 8,
+      "path": "linear",
+      "solver": "euler",
+      "target_eigenvalues": [
+        0.2914701258115777,
+        2.9677106074567434
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 1.5265566588595902e-15,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.15230798199400283,
+      "high_precision_gaussian_w2": "0.15230798199400130152453426714228776537584962515876385355324976494523579282355617",
+      "nfe": 16,
+      "path": "linear",
+      "solver": "euler",
+      "target_eigenvalues": [
+        0.2914701258115777,
+        2.9677106074567434
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 6.9111383282915995e-15,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.07772627312964585,
+      "high_precision_gaussian_w2": "0.07772627312965276160687017487785127904621143056570643543628364222863719773734271",
+      "nfe": 32,
+      "path": "linear",
+      "solver": "euler",
+      "target_eigenvalues": [
+        0.2914701258115777,
+        2.9677106074567434
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 5.981326545168031e-15,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.05850470794759695,
+      "high_precision_gaussian_w2": "0.058504707947590968617305107641170568672913864395370645730300526241069317411145753",
+      "nfe": 8,
+      "path": "linear",
+      "solver": "heun",
+      "target_eigenvalues": [
+        0.2914701258115777,
+        2.9677106074567434
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 8.515237126527353e-14,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.012200831658050602,
+      "high_precision_gaussian_w2": "0.012200831657965449406701775837710227323048101476059398792957861354564499322403649",
+      "nfe": 16,
+      "path": "linear",
+      "solver": "heun",
+      "target_eigenvalues": [
+        0.2914701258115777,
+        2.9677106074567434
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 6.457252267610958e-13,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.002707270551898283,
+      "high_precision_gaussian_w2": "0.0027072705512525580150580547299687939062612357055682518888958534388401609521593907",
+      "nfe": 32,
+      "path": "linear",
+      "solver": "heun",
+      "target_eigenvalues": [
+        0.2914701258115777,
+        2.9677106074567434
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 5.617294823734298e-14,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.004577750430562853,
+      "high_precision_gaussian_w2": "0.0045777504305066798283309763182619159069866922400601989795227684871348540168811288",
+      "nfe": 8,
+      "path": "linear",
+      "solver": "rk4",
+      "target_eigenvalues": [
+        0.2914701258115777,
+        2.9677106074567434
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 2.1659097584024456e-12,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.0004319756461452846,
+      "high_precision_gaussian_w2": "0.00043197564831119438436922454808384772434578815215951203397178503854973234484449548",
+      "nfe": 16,
+      "path": "linear",
+      "solver": "rk4",
+      "target_eigenvalues": [
+        0.2914701258115777,
+        2.9677106074567434
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 5.756398267057236e-11,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 1.732126514101936e-05,
+      "high_precision_gaussian_w2": "0.000017321207577036690629442694178867802957338618000412360850801630087751464556235193",
+      "nfe": 32,
+      "path": "linear",
+      "solver": "rk4",
+      "target_eigenvalues": [
+        0.2914701258115777,
+        2.9677106074567434
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 1.8506030041720578e-14,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.05316874948565923,
+      "high_precision_gaussian_w2": "0.053168749485640720158298646091753945338103787102591649237947346027751705912021651",
+      "nfe": 8,
+      "path": "variance_preserving",
+      "solver": "euler",
+      "target_eigenvalues": [
+        0.2914701258115777,
+        2.9677106074567434
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 6.529499163576702e-15,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.024077822612430362,
+      "high_precision_gaussian_w2": "0.024077822612423831769928085734745264893352403507166917644680688808205065080686255",
+      "nfe": 16,
+      "path": "variance_preserving",
+      "solver": "euler",
+      "target_eigenvalues": [
+        0.2914701258115777,
+        2.9677106074567434
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 1.6207001019008516e-13,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.011440235535809173,
+      "high_precision_gaussian_w2": "0.011440235535647102648872681365122344952598231916192534393605413874332196768173448",
+      "nfe": 32,
+      "path": "variance_preserving",
+      "solver": "euler",
+      "target_eigenvalues": [
+        0.2914701258115777,
+        2.9677106074567434
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 9.173217740965356e-15,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.07686722045348426,
+      "high_precision_gaussian_w2": "0.07686722045347508525459081084568232791081582905495920193648061971684627157466482",
+      "nfe": 8,
+      "path": "variance_preserving",
+      "solver": "heun",
+      "target_eigenvalues": [
+        0.2914701258115777,
+        2.9677106074567434
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 4.94847218757144e-14,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.018240756792250547,
+      "high_precision_gaussian_w2": "0.018240756792201060892508567954584815548059165060930827470042097953008639632448931",
+      "nfe": 16,
+      "path": "variance_preserving",
+      "solver": "heun",
+      "target_eigenvalues": [
+        0.2914701258115777,
+        2.9677106074567434
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 6.428538257274852e-14,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.004405305125863257,
+      "high_precision_gaussian_w2": "0.004405305125798971900451373547694266139203631522756885605806377778538741592509574",
+      "nfe": 32,
+      "path": "variance_preserving",
+      "solver": "heun",
+      "target_eigenvalues": [
+        0.2914701258115777,
+        2.9677106074567434
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 6.920158890366679e-14,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.006094472257871766,
+      "high_precision_gaussian_w2": "0.0060944722578025638817514236652685740192168501696356453785720512123148545239974597",
+      "nfe": 8,
+      "path": "variance_preserving",
+      "solver": "rk4",
+      "target_eigenvalues": [
+        0.2914701258115777,
+        2.9677106074567434
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 1.5805081852657277e-12,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 0.000560973749770245,
+      "high_precision_gaussian_w2": "0.00056097374818973683537878199036959197843931261040182286977807177285224708893579163",
+      "nfe": 16,
+      "path": "variance_preserving",
+      "solver": "rk4",
+      "target_eigenvalues": [
+        0.2914701258115777,
+        2.9677106074567434
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 2.6585689656959555e-12,
+      "decimal_digits": 80,
+      "dim": 2,
+      "float64_gaussian_w2": 2.8510185752521586e-05,
+      "high_precision_gaussian_w2": "0.000028510183093952622099425984554757891715420805487711134297524794957694790415390251",
+      "nfe": 32,
+      "path": "variance_preserving",
+      "solver": "rk4",
+      "target_eigenvalues": [
+        0.2914701258115777,
+        2.9677106074567434
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 7.771561172376096e-16,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.4508875716354879,
+      "high_precision_gaussian_w2": "0.45088757163548867992451399989480013933956725428435005665406876855880605135336734",
+      "nfe": 8,
+      "path": "linear",
+      "solver": "euler",
+      "target_eigenvalues": [
+        0.5,
+        0.6095068271022377,
+        0.7429971445684742,
+        0.9057236642639066,
+        1.1040895136738125,
+        1.3459001926323562,
+        1.6406707120152757,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 5.828670879282072e-16,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.23372653709783062,
+      "high_precision_gaussian_w2": "0.23372653709783003843775974852494987049126353893099918931126540628730524012187244",
+      "nfe": 16,
+      "path": "linear",
+      "solver": "euler",
+      "target_eigenvalues": [
+        0.5,
+        0.6095068271022377,
+        0.7429971445684742,
+        0.9057236642639066,
+        1.1040895136738125,
+        1.3459001926323562,
+        1.6406707120152757,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 2.6367796834847468e-15,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.11912779452591571,
+      "high_precision_gaussian_w2": "0.11912779452591834882218880833985509744878021873942180668118757809251032020994178",
+      "nfe": 32,
+      "path": "linear",
+      "solver": "euler",
+      "target_eigenvalues": [
+        0.5,
+        0.6095068271022377,
+        0.7429971445684742,
+        0.9057236642639066,
+        1.1040895136738125,
+        1.3459001926323562,
+        1.6406707120152757,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 1.226796442210798e-14,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.04645269976250035,
+      "high_precision_gaussian_w2": "0.046452699762488078933249455694599253987629824373168660057474751412580586164903229",
+      "nfe": 8,
+      "path": "linear",
+      "solver": "heun",
+      "target_eigenvalues": [
+        0.5,
+        0.6095068271022377,
+        0.7429971445684742,
+        0.9057236642639066,
+        1.1040895136738125,
+        1.3459001926323562,
+        1.6406707120152757,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 8.690964614643804e-16,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.008457419059338727,
+      "high_precision_gaussian_w2": "0.0084574190593378589270656232631928661406435186367676071314349572133127548107898543",
+      "nfe": 16,
+      "path": "linear",
+      "solver": "heun",
+      "target_eigenvalues": [
+        0.5,
+        0.6095068271022377,
+        0.7429971445684742,
+        0.9057236642639066,
+        1.1040895136738125,
+        1.3459001926323562,
+        1.6406707120152757,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 2.8661101270088807e-14,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.0017457088001671215,
+      "high_precision_gaussian_w2": "0.0017457088001957825826295685219838027138127540094317688791064857799858209060131568",
+      "nfe": 32,
+      "path": "linear",
+      "solver": "heun",
+      "target_eigenvalues": [
+        0.5,
+        0.6095068271022377,
+        0.7429971445684742,
+        0.9057236642639066,
+        1.1040895136738125,
+        1.3459001926323562,
+        1.6406707120152757,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 5.963979310408263e-15,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.01811991649180993,
+      "high_precision_gaussian_w2": "0.018119916491803966595158455107777631293231393235724978741046426231756007709707211",
+      "nfe": 8,
+      "path": "linear",
+      "solver": "rk4",
+      "target_eigenvalues": [
+        0.5,
+        0.6095068271022377,
+        0.7429971445684742,
+        0.9057236642639066,
+        1.1040895136738125,
+        1.3459001926323562,
+        1.6406707120152757,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 9.561383802758616e-14,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.0003323990896879324,
+      "high_precision_gaussian_w2": "0.00033239908978354626452296427007085820388174004300371553435916686067920105875083948",
+      "nfe": 16,
+      "path": "linear",
+      "solver": "rk4",
+      "target_eigenvalues": [
+        0.5,
+        0.6095068271022377,
+        0.7429971445684742,
+        0.9057236642639066,
+        1.1040895136738125,
+        1.3459001926323562,
+        1.6406707120152757,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 1.146802310164857e-11,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 1.3695496664790843e-05,
+      "high_precision_gaussian_w2": "0.00001369550813281394481990910733933342710481231170078494464499728400110675726933452",
+      "nfe": 32,
+      "path": "linear",
+      "solver": "rk4",
+      "target_eigenvalues": [
+        0.5,
+        0.6095068271022377,
+        0.7429971445684742,
+        0.9057236642639066,
+        1.1040895136738125,
+        1.3459001926323562,
+        1.6406707120152757,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 8.11156697366755e-15,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.022647510005351815,
+      "high_precision_gaussian_w2": "0.022647510005359925311119233111332539940806056063175589302827801442431434963009094",
+      "nfe": 8,
+      "path": "variance_preserving",
+      "solver": "euler",
+      "target_eigenvalues": [
+        0.5,
+        0.6095068271022377,
+        0.7429971445684742,
+        0.9057236642639066,
+        1.1040895136738125,
+        1.3459001926323562,
+        1.6406707120152757,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 3.392945646663037e-14,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.009675150882885746,
+      "high_precision_gaussian_w2": "0.0096751508828518166082147083966808186977684997681966527147041585175353784461620768",
+      "nfe": 16,
+      "path": "variance_preserving",
+      "solver": "euler",
+      "target_eigenvalues": [
+        0.5,
+        0.6095068271022377,
+        0.7429971445684742,
+        0.9057236642639066,
+        1.1040895136738125,
+        1.3459001926323562,
+        1.6406707120152757,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 8.067331525030141e-15,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.0044727797096248975,
+      "high_precision_gaussian_w2": "0.0044727797096168298239209617452174902460266657489310245330031484567314784450996882",
+      "nfe": 32,
+      "path": "variance_preserving",
+      "solver": "euler",
+      "target_eigenvalues": [
+        0.5,
+        0.6095068271022377,
+        0.7429971445684742,
+        0.9057236642639066,
+        1.1040895136738125,
+        1.3459001926323562,
+        1.6406707120152757,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 6.286637876939949e-15,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.042223682188352235,
+      "high_precision_gaussian_w2": "0.042223682188345945532286920573646057901866372824466916331385832280565696603086019",
+      "nfe": 8,
+      "path": "variance_preserving",
+      "solver": "heun",
+      "target_eigenvalues": [
+        0.5,
+        0.6095068271022377,
+        0.7429971445684742,
+        0.9057236642639066,
+        1.1040895136738125,
+        1.3459001926323562,
+        1.6406707120152757,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 5.620504062164855e-16,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.010216360736134683,
+      "high_precision_gaussian_w2": "0.01021636073613412089879780858883906629986094786059253652378466189096963783300985",
+      "nfe": 16,
+      "path": "variance_preserving",
+      "solver": "heun",
+      "target_eigenvalues": [
+        0.5,
+        0.6095068271022377,
+        0.7429971445684742,
+        0.9057236642639066,
+        1.1040895136738125,
+        1.3459001926323562,
+        1.6406707120152757,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 7.287790163013064e-14,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.0025085261342393753,
+      "high_precision_gaussian_w2": "0.0025085261341664974791070910635342914063483513119733556320889866419116419760146972",
+      "nfe": 32,
+      "path": "variance_preserving",
+      "solver": "heun",
+      "target_eigenvalues": [
+        0.5,
+        0.6095068271022377,
+        0.7429971445684742,
+        0.9057236642639066,
+        1.1040895136738125,
+        1.3459001926323562,
+        1.6406707120152757,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 3.021888295151598e-15,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.0030996670405404074,
+      "high_precision_gaussian_w2": "0.0030996670405434291026231679326453147532248224939534482784324396671332046069523456",
+      "nfe": 8,
+      "path": "variance_preserving",
+      "solver": "rk4",
+      "target_eigenvalues": [
+        0.5,
+        0.6095068271022377,
+        0.7429971445684742,
+        0.9057236642639066,
+        1.1040895136738125,
+        1.3459001926323562,
+        1.6406707120152757,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 1.7278417195273899e-12,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.00016137854413368098,
+      "high_precision_gaussian_w2": "0.00016137854240583927188205365290840221369896221649372807029508556961800400289762844",
+      "nfe": 16,
+      "path": "variance_preserving",
+      "solver": "rk4",
+      "target_eigenvalues": [
+        0.5,
+        0.6095068271022377,
+        0.7429971445684742,
+        0.9057236642639066,
+        1.1040895136738125,
+        1.3459001926323562,
+        1.6406707120152757,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 5.597853452139561e-11,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 9.492840847252333e-06,
+      "high_precision_gaussian_w2": "0.0000094928968257868551305667262734673260804060562746731860354306132315147983279120634",
+      "nfe": 32,
+      "path": "variance_preserving",
+      "solver": "rk4",
+      "target_eigenvalues": [
+        0.5,
+        0.6095068271022377,
+        0.7429971445684742,
+        0.9057236642639066,
+        1.1040895136738125,
+        1.3459001926323562,
+        1.6406707120152757,
+        2.0
+      ],
+      "target_family": "anisotropic_gaussian"
+    },
+    {
+      "absolute_reference_delta": 6.783462680459706e-14,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.8108540110923013,
+      "high_precision_gaussian_w2": "0.81085401109223345995469768975154247384305322896187495752339845483462377891451449",
+      "nfe": 8,
+      "path": "linear",
+      "solver": "euler",
+      "target_eigenvalues": [
+        0.049999999999998934,
+        0.04999999999999987,
+        0.04999999999999995,
+        0.05000000000000009,
+        0.05000000000000015,
+        0.05000000000000153,
+        4.64827725629505,
+        10.675638226546441
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 1.7646994976416863e-13,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.4240351654601041,
+      "high_precision_gaussian_w2": "0.4240351654602805700341686298675020803299315951277177886095814156948652745830298",
+      "nfe": 16,
+      "path": "linear",
+      "solver": "euler",
+      "target_eigenvalues": [
+        0.049999999999998934,
+        0.04999999999999987,
+        0.04999999999999995,
+        0.05000000000000009,
+        0.05000000000000015,
+        0.05000000000000153,
+        4.64827725629505,
+        10.675638226546441
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 6.860623180671155e-13,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.2174861971208484,
+      "high_precision_gaussian_w2": "0.2174861971201623343616131551775004645760646787301625734697217962580910962726631",
+      "nfe": 32,
+      "path": "linear",
+      "solver": "euler",
+      "target_eigenvalues": [
+        0.049999999999998934,
+        0.04999999999999987,
+        0.04999999999999995,
+        0.05000000000000009,
+        0.05000000000000015,
+        0.05000000000000153,
+        4.64827725629505,
+        10.675638226546441
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 1.5543122344752192e-13,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.40943658235557057,
+      "high_precision_gaussian_w2": "0.40943658235572599104233558066741649820462114787550162462801470481764745906804452",
+      "nfe": 8,
+      "path": "linear",
+      "solver": "heun",
+      "target_eigenvalues": [
+        0.049999999999998934,
+        0.04999999999999987,
+        0.04999999999999995,
+        0.05000000000000009,
+        0.05000000000000015,
+        0.05000000000000153,
+        4.64827725629505,
+        10.675638226546441
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 1.1658451981588769e-12,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.0893635464487545,
+      "high_precision_gaussian_w2": "0.089363546449920339048796835344906782552147936117300270193962358761488526222049361",
+      "nfe": 16,
+      "path": "linear",
+      "solver": "heun",
+      "target_eigenvalues": [
+        0.049999999999998934,
+        0.04999999999999987,
+        0.04999999999999995,
+        0.05000000000000009,
+        0.05000000000000015,
+        0.05000000000000153,
+        4.64827725629505,
+        10.675638226546441
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 7.992006362256276e-12,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.02047407294025141,
+      "high_precision_gaussian_w2": "0.02047407293225940540885901013323448999689965944427914052498080435204762307299227",
+      "nfe": 32,
+      "path": "linear",
+      "solver": "heun",
+      "target_eigenvalues": [
+        0.049999999999998934,
+        0.04999999999999987,
+        0.04999999999999995,
+        0.05000000000000009,
+        0.05000000000000015,
+        0.05000000000000153,
+        4.64827725629505,
+        10.675638226546441
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 3.3229669016421326e-12,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.06961711594198904,
+      "high_precision_gaussian_w2": "0.069617115945312008148440328425174893168139073307184744979339209057377609901000325",
+      "nfe": 8,
+      "path": "linear",
+      "solver": "rk4",
+      "target_eigenvalues": [
+        0.049999999999998934,
+        0.04999999999999987,
+        0.04999999999999995,
+        0.05000000000000009,
+        0.05000000000000015,
+        0.05000000000000153,
+        4.64827725629505,
+        10.675638226546441
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 7.435731717853056e-12,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.007459872301587587,
+      "high_precision_gaussian_w2": "0.0074598722941518550456417143187918008244162670586916381453745841259952105418713523",
+      "nfe": 16,
+      "path": "linear",
+      "solver": "rk4",
+      "target_eigenvalues": [
+        0.049999999999998934,
+        0.04999999999999987,
+        0.04999999999999995,
+        0.05000000000000009,
+        0.05000000000000015,
+        0.05000000000000153,
+        4.64827725629505,
+        10.675638226546441
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 9.705043048770321e-10,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.00013223425916892033,
+      "high_precision_gaussian_w2": "0.00013223328866461546048267220410289660777738267863123023100129977893013649550904406",
+      "nfe": 32,
+      "path": "linear",
+      "solver": "rk4",
+      "target_eigenvalues": [
+        0.049999999999998934,
+        0.04999999999999987,
+        0.04999999999999995,
+        0.05000000000000009,
+        0.05000000000000015,
+        0.05000000000000153,
+        4.64827725629505,
+        10.675638226546441
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 5.260236690673992e-13,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.4564779075112565,
+      "high_precision_gaussian_w2": "0.45647790751073046614770934960429644836282725378234682311003779417563466390626567",
+      "nfe": 8,
+      "path": "variance_preserving",
+      "solver": "euler",
+      "target_eigenvalues": [
+        0.049999999999998934,
+        0.04999999999999987,
+        0.04999999999999995,
+        0.05000000000000009,
+        0.05000000000000015,
+        0.05000000000000153,
+        4.64827725629505,
+        10.675638226546441
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 3.69565489322099e-13,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.2193405557846937,
+      "high_precision_gaussian_w2": "0.21934055578506325845301179109252416299279148760872278547897802026586987246218209",
+      "nfe": 16,
+      "path": "variance_preserving",
+      "solver": "euler",
+      "target_eigenvalues": [
+        0.049999999999998934,
+        0.04999999999999987,
+        0.04999999999999995,
+        0.05000000000000009,
+        0.05000000000000015,
+        0.05000000000000153,
+        4.64827725629505,
+        10.675638226546441
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 9.25301502086029e-13,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.10782859031859415,
+      "high_precision_gaussian_w2": "0.10782859031951944842701074431814237372944021748345620595455796726055470727089625",
+      "nfe": 32,
+      "path": "variance_preserving",
+      "solver": "euler",
+      "target_eigenvalues": [
+        0.049999999999998934,
+        0.04999999999999987,
+        0.04999999999999995,
+        0.05000000000000009,
+        0.05000000000000015,
+        0.05000000000000153,
+        4.64827725629505,
+        10.675638226546441
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 9.325873406851315e-14,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.6617291240304057,
+      "high_precision_gaussian_w2": "0.66172912403031247026006201684704639868021403407979237645271161872163331774967077",
+      "nfe": 8,
+      "path": "variance_preserving",
+      "solver": "heun",
+      "target_eigenvalues": [
+        0.049999999999998934,
+        0.04999999999999987,
+        0.04999999999999995,
+        0.05000000000000009,
+        0.05000000000000015,
+        0.05000000000000153,
+        4.64827725629505,
+        10.675638226546441
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 5.056788321411432e-13,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.17272720308880327,
+      "high_precision_gaussian_w2": "0.17272720308829757991890831064654227435742566170900828199782141236714843793469396",
+      "nfe": 16,
+      "path": "variance_preserving",
+      "solver": "heun",
+      "target_eigenvalues": [
+        0.049999999999998934,
+        0.04999999999999987,
+        0.04999999999999995,
+        0.05000000000000009,
+        0.05000000000000015,
+        0.05000000000000153,
+        4.64827725629505,
+        10.675638226546441
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 9.95933197023291e-12,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.04129712919530764,
+      "high_precision_gaussian_w2": "0.041297129205266971730578965740025621200029690999781348766554737459453602365600763",
+      "nfe": 32,
+      "path": "variance_preserving",
+      "solver": "heun",
+      "target_eigenvalues": [
+        0.049999999999998934,
+        0.04999999999999987,
+        0.04999999999999995,
+        0.05000000000000009,
+        0.05000000000000015,
+        0.05000000000000153,
+        4.64827725629505,
+        10.675638226546441
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 4.4375614294267507e-13,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.23689178707707775,
+      "high_precision_gaussian_w2": "0.23689178707752150059631334189713884220244303805183446302234895529670537325086455",
+      "nfe": 8,
+      "path": "variance_preserving",
+      "solver": "rk4",
+      "target_eigenvalues": [
+        0.049999999999998934,
+        0.04999999999999987,
+        0.04999999999999995,
+        0.05000000000000009,
+        0.05000000000000015,
+        0.05000000000000153,
+        4.64827725629505,
+        10.675638226546441
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 1.0245774714756628e-11,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.012692950621794354,
+      "high_precision_gaussian_w2": "0.012692950611548579020757982704005559936138732929080604371693374541437336023514854",
+      "nfe": 16,
+      "path": "variance_preserving",
+      "solver": "rk4",
+      "target_eigenvalues": [
+        0.049999999999998934,
+        0.04999999999999987,
+        0.04999999999999995,
+        0.05000000000000009,
+        0.05000000000000015,
+        0.05000000000000153,
+        4.64827725629505,
+        10.675638226546441
+      ],
+      "target_family": "low_rank_gaussian"
+    },
+    {
+      "absolute_reference_delta": 1.0079658440374784e-10,
+      "decimal_digits": 80,
+      "dim": 8,
+      "float64_gaussian_w2": 0.0016411016767693097,
+      "high_precision_gaussian_w2": "0.001641101777565894117806988287468768639185948451409846791915277483112298300972363",
+      "nfe": 32,
+      "path": "variance_preserving",
+      "solver": "rk4",
+      "target_eigenvalues": [
+        0.049999999999998934,
+        0.04999999999999987,
+        0.04999999999999995,
+        0.05000000000000009,
+        0.05000000000000015,
+        0.05000000000000153,
+        4.64827725629505,
+        10.675638226546441
+      ],
+      "target_family": "low_rank_gaussian"
+    }
+  ],
+  "source_run_ids": [
+    "phase4_gaussian_reproduction_2026-07-24-v1"
+  ]
+}

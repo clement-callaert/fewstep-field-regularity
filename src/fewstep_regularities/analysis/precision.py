@@ -17,6 +17,8 @@ def _variance(
     if path_name == "variance_preserving":
         angle = mpmath.pi * time / 2
         return mpmath.cos(angle) ** 2 + eigenvalue * mpmath.sin(angle) ** 2
+    if path_name == "log_covariance":
+        return mpmath.exp(time * mpmath.log(eigenvalue))
     raise ValueError(f"Unsupported path {path_name!r}")
 
 
@@ -25,10 +27,16 @@ def _drift(
     eigenvalue: mpmath.mpf,
     time: mpmath.mpf,
 ) -> mpmath.mpf:
+    if path_name == "log_covariance":
+        return mpmath.mpf("0.5") * mpmath.log(eigenvalue)
     variance = _variance(path_name, eigenvalue, time)
     if path_name == "linear":
         return ((1 + eigenvalue) * time - 1) / variance
-    return mpmath.pi * (eigenvalue - 1) * mpmath.sin(mpmath.pi * time) / (4 * variance)
+    if path_name == "variance_preserving":
+        return (
+            mpmath.pi * (eigenvalue - 1) * mpmath.sin(mpmath.pi * time) / (4 * variance)
+        )
+    raise ValueError(f"Unsupported path {path_name!r}")
 
 
 def _step_factor(
@@ -199,8 +207,10 @@ def high_precision_noncentered_gaussian_w2(
 ) -> mpmath.mpf:
     """Return Gaussian W2 for the non-centered commuting family.
 
-    Source moments are ``(source_means, I)``; the target has diagonal
-    covariance ``eigenvalues`` and mean ``target_means``.
+    Inputs: path and solver names; modal eigenvalues and means; ``requested_nfe``; ``decimal_digits``.
+    Outputs: high-precision scalar W2.
+    Units: state-space W2.
+    Precision: mpmath with ``decimal_digits`` (plan default in docs/WORKSHOP_EXTERNAL_VALIDATION_PLAN.md); equal-NFE modal steps.
     """
     if not len(eigenvalues) == len(source_means) == len(target_means):
         raise ValueError("modal sequences must have equal length")

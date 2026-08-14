@@ -51,8 +51,8 @@ dev = [
 fewstep-regularities = "fewstep_regularities.cli.main:main"
 
 [project.urls]
-Homepage = "https://github.com/calla/fewstep-field-regularity"
-Documentation = "https://github.com/calla/fewstep-field-regularity/tree/main/docs"
+Homepage = "https://github.com/clement-callaert/fewstep-field-regularity"
+Documentation = "https://github.com/clement-callaert/fewstep-field-regularity/tree/main/docs"
 
 [tool.setuptools.packages.find]
 where = ["src"]
