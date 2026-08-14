@@ -219,7 +219,8 @@ def evaluate_cell(
         error0=err0,
         error1=err1,
         endpoints_match=endpoints_match,
-        euler_exact_on_oscillation=solver == "euler" and err1 <= match_tol * max(1.0, abs(exact1)),
+        euler_exact_on_oscillation=solver == "euler"
+        and err1 <= match_tol * max(1.0, abs(exact1)),
         ranking_inverted=err0 > err1 + match_tol and endpoints_match,
     )
 

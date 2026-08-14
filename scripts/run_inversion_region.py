@@ -20,7 +20,6 @@ from fewstep_regularities.analysis.ranking_grids import (
     path_regularity,
     path_w2,
 )
-from fewstep_regularities.utils.hashing import sha256_file
 from fewstep_regularities.utils.provenance import figure_sidecar_payload, write_json
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -140,9 +139,7 @@ def main() -> None:
         ax.set_xlabel(r"$\lambda$")
         ax.axvline(4.0, color="#222222", lw=0.7, ls="--")
     axes[0].set_ylabel("NFE")
-    colorbar = fig.colorbar(
-        mesh, ax=list(axes), fraction=0.03, pad=0.02, ticks=[0, 1]
-    )
+    colorbar = fig.colorbar(mesh, ax=list(axes), fraction=0.03, pad=0.02, ticks=[0, 1])
     colorbar.set_ticklabels(["agree", "invert"])
     OUT_PDF_ARXIV.parent.mkdir(parents=True, exist_ok=True)
     OUT_PDF_GDDL.parent.mkdir(parents=True, exist_ok=True)
@@ -181,14 +178,10 @@ def main() -> None:
         )
 
     missing_invert = [
-        value
-        for value in CONTROL_INVERT
-        if not linear_vp_inversion([value], "heun", 8)
+        value for value in CONTROL_INVERT if not linear_vp_inversion([value], "heun", 8)
     ]
     extra_invert = [
-        value
-        for value in CONTROL_NO_INVERT
-        if linear_vp_inversion([value], "heun", 8)
+        value for value in CONTROL_NO_INVERT if linear_vp_inversion([value], "heun", 8)
     ]
     euler_hits = [
         value

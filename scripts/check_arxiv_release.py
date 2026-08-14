@@ -130,14 +130,19 @@ def check_figure_sidecars() -> list[str]:
                     f"sidecar hash mismatch for {pdf.name}: recorded "
                     f"{recorded} actual {actual}"
                 )
-            if payload.get("working_tree_dirty") is None and "git_status" not in payload:
+            if (
+                payload.get("working_tree_dirty") is None
+                and "git_status" not in payload
+            ):
                 errors.append(f"{sidecar.name} missing source-state dirty flag")
-            if payload.get("git_status") == "dirty (regenerate after committing)":
-                if payload.get("working_tree_dirty") is not True:
-                    errors.append(
-                        f"{sidecar.name} uses a stale dirty-git slogan without "
-                        "working_tree_dirty=true"
-                    )
+            if (
+                payload.get("git_status") == "dirty (regenerate after committing)"
+                and payload.get("working_tree_dirty") is not True
+            ):
+                errors.append(
+                    f"{sidecar.name} uses a stale dirty-git slogan without "
+                    "working_tree_dirty=true"
+                )
     return errors
 
 
@@ -152,9 +157,7 @@ def check_canonical_title() -> list[str]:
             # TeX titles may break the line. Compare collapsed forms.
             collapsed = re.sub(r"\s+", " ", text.replace("\\", ""))
             if CANONICAL_TITLE not in collapsed:
-                errors.append(
-                    f"canonical title missing from {path.relative_to(ROOT)}"
-                )
+                errors.append(f"canonical title missing from {path.relative_to(ROOT)}")
         for retired in RETIRED_TITLES:
             if retired in text:
                 errors.append(
@@ -187,7 +190,9 @@ def check_placeholders() -> list[str]:
         text = path.read_text(encoding="utf-8", errors="replace")
         for token in PLACEHOLDER_TOKENS:
             if token in text:
-                errors.append(f"unresolved placeholder {token} in {path.relative_to(ROOT)}")
+                errors.append(
+                    f"unresolved placeholder {token} in {path.relative_to(ROOT)}"
+                )
         if re.search(r"date-released:\s*TODO", text):
             errors.append(f"placeholder date-released in {path.relative_to(ROOT)}")
     return errors
@@ -223,11 +228,12 @@ def check_pdf_pages() -> list[str]:
             )
         # The live workshop file must not claim an 8-page build if it is not.
         gddl_readme = (GDDL_DIR / "README.md").read_text(encoding="utf-8")
-        if "eight-page" in gddl_readme.lower() or "8-page" in gddl_readme.lower():
-            if pages != 8:
-                errors.append(
-                    f"workshop README mentions an 8-page build but PDF has {pages} pages"
-                )
+        if (
+            "eight-page" in gddl_readme.lower() or "8-page" in gddl_readme.lower()
+        ) and pages != 8:
+            errors.append(
+                f"workshop README mentions an 8-page build but PDF has {pages} pages"
+            )
     else:
         errors.append("missing paper/gddl2026/main.pdf")
     return errors
@@ -244,13 +250,22 @@ def check_workshop_anonymity() -> list[str]:
         "github.com/clement",
     )
     for path in GDDL_DIR.rglob("*"):
-        if not path.is_file() or path.suffix.lower() not in {".tex", ".bib", ".json", ".md"}:
+        if not path.is_file() or path.suffix.lower() not in {
+            ".tex",
+            ".bib",
+            ".json",
+            ".md",
+        }:
             continue
         text = path.read_text(encoding="utf-8", errors="replace")
         for token in forbidden:
             if token in text:
-                errors.append(f"deanonymizing token {token!r} in {path.relative_to(ROOT)}")
-    if (GDDL_DIR / "supplement.tex").is_file() or (GDDL_DIR / "supplement.pdf").is_file():
+                errors.append(
+                    f"deanonymizing token {token!r} in {path.relative_to(ROOT)}"
+                )
+    if (GDDL_DIR / "supplement.tex").is_file() or (
+        GDDL_DIR / "supplement.pdf"
+    ).is_file():
         errors.append(
             "live workshop directory contains supplement.tex/pdf; "
             "GDDL 2026 has no supplement field"
@@ -324,9 +339,7 @@ def main() -> None:
     errors = collect_errors()
     if args.skip_pdf:
         errors = [
-            err
-            for err in errors
-            if "main.pdf" not in err and "PDF has" not in err
+            err for err in errors if "main.pdf" not in err and "PDF has" not in err
         ]
     tag_present = tag_exists()
     if args.require_tag and not tag_present:

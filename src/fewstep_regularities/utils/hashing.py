@@ -72,9 +72,7 @@ def write_compact_manifest(path: Path, payload: dict) -> str:
     digest = sha256_manifest(data)
     files = data.setdefault("files", {})
     files[MANIFEST_SELF_KEY] = digest
-    path.write_text(
-        json.dumps(data, indent=2, sort_keys=True) + "\n", encoding="utf-8"
-    )
+    path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     on_disk = json.loads(path.read_text(encoding="utf-8"))
     if sha256_manifest(on_disk) != digest:
         raise RuntimeError(f"canonical manifest self-hash failed for {path}")

@@ -17,7 +17,7 @@ SEARCH_PHRASES = (
     "Jacobian",
     "Wasserstein-2",
     "Heun",
-    "Runge–Kutta",
+    "Runge–Kutta",  # noqa: RUF001
     "NFE",
     "flow-matching marginal",
     "score-based probability-flow",
@@ -66,9 +66,7 @@ def body_and_appendix(text: str) -> tuple[str, str]:
 
 
 def abstract_text(text: str) -> str:
-    match = re.search(
-        r"\\begin\{abstract\}(.*?)\\end\{abstract\}", text, flags=re.S
-    )
+    match = re.search(r"\\begin\{abstract\}(.*?)\\end\{abstract\}", text, flags=re.S)
     if match is None:
         raise ValueError("missing abstract")
     return match.group(1)
@@ -79,7 +77,7 @@ def strip_tex(source: str) -> str:
     source = source.replace("~", " ")
     source = source.replace("\\,", " ")
     source = source.replace("\\ ", " ")
-    source = source.replace("--", "–")
+    source = source.replace("--", "–")  # noqa: RUF001
     source = re.sub(r"\\[a-zA-Z]+\{", " ", source)
     source = re.sub(r"\\[a-zA-Z]+", " ", source)
     source = re.sub(r"[{}$]", "", source)
@@ -177,7 +175,7 @@ def not_shared_without_eigenvalue_hypothesis(text: str) -> list[str]:
 
 def main() -> None:
     text = TEX.read_text(encoding="utf-8")
-    body, appendix = body_and_appendix(text)
+    body, _appendix = body_and_appendix(text)
     errors: list[str] = []
     for token in BODY_FORBIDDEN:
         if token in body:

@@ -241,7 +241,9 @@ def figure1_regimes() -> Path:
     low8 = four_path_scores(payload["low_rank_d8"]["eigenvalues"], "euler", 8)
     aniso8 = four_path_scores(payload["anisotropic_d8"]["eigenvalues"], "euler", 8)
 
-    def _bars(ax: Any, names: list[str], colors: list[str], values: list[float]) -> None:
+    def _bars(
+        ax: Any, names: list[str], colors: list[str], values: list[float]
+    ) -> None:
         x = np.arange(len(names))
         bars = ax.bar(x, values, color=colors, width=0.62)
         tick_size = 6.5 if len(names) > 2 else 7
@@ -251,6 +253,7 @@ def figure1_regimes() -> Path:
 
     fig, axes = plt.subplots(3, 2, figsize=(FIGWIDTH, 4.2), layout="constrained")
     fig.set_constrained_layout_pads(w_pad=0.02, h_pad=0.04, hspace=0.08, wspace=0.06)
+
     def _panel_label(ax: Any, text: str) -> None:
         ax.set_title(text, loc="left", fontsize=7)
 
@@ -327,12 +330,17 @@ def figure1_regimes() -> Path:
         raise ValueError(f"fig1(c) Chen R is {r_sc}, expected low-rank d=8")
     if abs(r_pm - 2.243602963703273) > 1e-9:
         raise ValueError(f"fig1(c) per-mode R is {r_pm}, expected low-rank d=8")
-    if aniso8["linear"].regularity > 1.5 or abs(aniso8["linear"].regularity - r_lin) < 0.5:
+    if (
+        aniso8["linear"].regularity > 1.5
+        or abs(aniso8["linear"].regularity - r_lin) < 0.5
+    ):
         raise ValueError("panel (b) must use anisotropic d=8, not low-rank")
 
     out = FIGURE_DIR / ("fig1_regimes" + FIGURE_SUFFIX)
     fig.savefig(out, bbox_inches="tight")
-    workshop = ROOT / "paper" / "gddl2026" / "figures" / ("fig1_regimes" + FIGURE_SUFFIX)
+    workshop = (
+        ROOT / "paper" / "gddl2026" / "figures" / ("fig1_regimes" + FIGURE_SUFFIX)
+    )
     workshop.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(workshop, bbox_inches="tight")
     plt.close(fig)
@@ -386,8 +394,18 @@ def figure_four_paths() -> Path:
     width = 0.18
     offsets = (-1.5, -0.5, 0.5, 1.5)
     for ax, store, ylabel, title in (
-        (axes[0], r_vals, r"$R=\int_0^1\Vert A(t)\Vert_2^2\,dt$", "regularity (lower preferred)"),
-        (axes[1], w_vals, r"Euler $W_2$ at NFE $8$", "endpoint error (lower preferred)"),
+        (
+            axes[0],
+            r_vals,
+            r"$R=\int_0^1\Vert A(t)\Vert_2^2\,dt$",
+            "regularity (lower preferred)",
+        ),
+        (
+            axes[1],
+            w_vals,
+            r"Euler $W_2$ at NFE $8$",
+            "endpoint error (lower preferred)",
+        ),
     ):
         for offset, path in zip(offsets, FOUR_PATHS, strict=True):
             ax.bar(
@@ -974,7 +992,11 @@ def main() -> None:
             "pairwise_block": "low_rank_d8 euler NFE 8",
             "in_family_block": "anisotropic_d8 euler NFE 8",
             "unconstrained_block": "low_rank_d8 euler NFE 8",
-            "counts": {"pairwise_cells": "5/12", "in_family_blocks": "9/36", "minimizer": "36/36"},
+            "counts": {
+                "pairwise_cells": "5/12",
+                "in_family_blocks": "9/36",
+                "minimizer": "36/36",
+            },
         },
         note=(
             "Headline R and W2 bars for the three regimes. Counts are a finite "
@@ -1003,7 +1025,11 @@ def main() -> None:
     )
     written.append(fig4)
     frozen_root = (
-        ROOT / "paper" / "arxiv" / "frozen_runs" / "phase4_gaussian_reproduction_2026-07-24-v1"
+        ROOT
+        / "paper"
+        / "arxiv"
+        / "frozen_runs"
+        / "phase4_gaussian_reproduction_2026-07-24-v1"
     )
     if frozen_root.is_dir():
         fig_e, ids_e = figure_eigenmode()
