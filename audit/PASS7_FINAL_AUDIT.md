@@ -3,8 +3,10 @@
 **Historical.** This file describes the 2026-08-14 editorial polish that
 landed as commit `44bc8fe9faf78aebb328a18e0f6dd87252467e5e`. It recorded a
 dirty working tree and an uncommitted state that is no longer current.
-It is **not** the current release audit. See `STALE_AUDIT_NOTICE.md` and,
-after the artifact-carrier commit, `audit/PASS8_RELEASE.md`.
+It is **not** the current release audit. See `STALE_AUDIT_NOTICE.md`.
+`audit/PASS8_RELEASE.md` is the subsequent pre-merge artifact snapshot.
+The current record is `audit/PASS9_POST_MERGE_RELEASE.md`. Pull request #1
+has since been merged as `25186a5337ae8c85a9367051da24953b80b133a5`.
 
 The remainder of the file is kept as a snapshot of that earlier pass.
 

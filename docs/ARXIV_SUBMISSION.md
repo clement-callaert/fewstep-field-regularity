@@ -115,20 +115,22 @@ decision.
    `https://orcid.org/0009-0001-6863-8778`. Keep **one** spelling of the
    name everywhere: PDF, arXiv, GitHub, BibTeX. Graphy: `Clément Callaert`.
    At arXiv upload, paste the same ORCID into the author form.
-2. `git checkout main && git merge --ff-only arxiv-audit-and-release && git push origin main`
+2. After explicit owner authorization, merge the intended release tip to
+   `main` if it is not already the upload commit, then push.
 3. Deposit on arXiv with the fields above. **v1 is the only discovery
    event**: it enters the daily listing and email alerts; v2 does not.
    Upload one complete version.
-4. Once the identifier is assigned: replace `TODO-ARXIV-ID` in
-   `README.md` and `CITATION.cff`, set `date-released` to the announcement
-   date (`YYYY-MM-DD`), commit, and push.
+4. Once the identifier is assigned: add that identifier to `README.md`
+   and `CITATION.cff` (do not invent one beforehand), set `date-released`
+   to the announcement date (`YYYY-MM-DD`), commit, and push.
 5. `git tag -a arxiv-v1 -m "arXiv v1" && git push origin arxiv-v1`
 6. Confirm `FEWSTEP_RELEASE_GATE=1 pytest tests/analytical/test_release_gate.py` passes.
 7. Pin the repository on the GitHub profile again.
 
-Until that sequence, do not merge into `main`, do not create tags, and do
-not deposit. `main` currently carries the old workshop title; that
-mismatch is useful while the signed preprint is unannounced.
+Do not create the `arxiv-v1` tag and do not deposit without explicit
+owner authorization. Pull request #1 is already merged to `main` as
+`25186a5337ae8c85a9367051da24953b80b133a5`. `main` already carries the
+canonical title. See `audit/PASS9_POST_MERGE_RELEASE.md`.
 
 ## Owner actions outside git
 
