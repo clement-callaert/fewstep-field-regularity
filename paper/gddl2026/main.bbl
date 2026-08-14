@@ -1,4 +1,4 @@
-\begin{thebibliography}{16}
+\begin{thebibliography}{17}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -31,6 +31,11 @@ Matthias Gelbrich.
 \newblock On a formula for the {$L^2$} {W}asserstein metric between measures on
   {E}uclidean and {H}ilbert spaces.
 \newblock \emph{Mathematische Nachrichten}, 147:\penalty0 185--203, 1990.
+
+\bibitem[Gupta et~al.(2026)Gupta, Lim, Yu, and Erichson]{gupta2026sharpen}
+Aditi Gupta, Soon~Hoe Lim, Annan Yu, and N.~Benjamin Erichson.
+\newblock Sharpen your flow: Sharpness-aware sampling for flow matching.
+\newblock \emph{arXiv preprint arXiv:2605.11547}, 2026.
 
 \bibitem[Hairer et~al.(1993)Hairer, N{\o}rsett, and Wanner]{hairer1993solving}
 Ernst Hairer, Syvert~P. N{\o}rsett, and Gerhard Wanner.
