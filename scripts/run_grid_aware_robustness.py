@@ -82,9 +82,7 @@ def main() -> None:
             {
                 "n_records": len(records),
                 "n_inverted": sum(row.ranking_inverted for row in records),
-                "n_endpoint_mismatch": sum(
-                    not row.endpoints_match for row in records
-                ),
+                "n_endpoint_mismatch": sum(not row.endpoints_match for row in records),
                 "json": str(OUT_JSON.relative_to(ROOT)),
                 "sha256": sha256_file(OUT_JSON),
             }

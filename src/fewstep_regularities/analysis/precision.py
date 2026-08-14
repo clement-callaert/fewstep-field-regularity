@@ -33,8 +33,8 @@ def _drift(
     if path_name == "linear":
         return ((1 + eigenvalue) * time - 1) / variance
     if path_name == "variance_preserving":
-        return mpmath.pi * (eigenvalue - 1) * mpmath.sin(mpmath.pi * time) / (
-            4 * variance
+        return (
+            mpmath.pi * (eigenvalue - 1) * mpmath.sin(mpmath.pi * time) / (4 * variance)
         )
     raise ValueError(f"Unsupported path {path_name!r}")
 

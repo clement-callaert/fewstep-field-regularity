@@ -109,7 +109,9 @@ def collect_members() -> list[tuple[Path, str, bytes | None]]:
             raise RuntimeError(f"refusing to pack {name}")
         if name.startswith("/") or ".." in Path(name).parts:
             raise RuntimeError(f"unsafe archive name {name}")
-    missing = used_figures - {Path(name).name for name in names if name.startswith("figures/")}
+    missing = used_figures - {
+        Path(name).name for name in names if name.startswith("figures/")
+    }
     if missing:
         raise FileNotFoundError(f"figures referenced but not packed: {sorted(missing)}")
     return members
@@ -196,7 +198,9 @@ def check_folio_not_overprinted(pdf: Path) -> None:
         text=True,
         errors="replace",
     )
-    page_chunks = [chunk for chunk in re.split(r"(?=<page )", raw) if chunk.startswith("<page")]
+    page_chunks = [
+        chunk for chunk in re.split(r"(?=<page )", raw) if chunk.startswith("<page")
+    ]
     word_re = re.compile(
         r'<word xMin="([^"]+)" yMin="([^"]+)" xMax="([^"]+)" yMax="([^"]+)">([^<]*)</word>'
     )
@@ -208,10 +212,16 @@ def check_folio_not_overprinted(pdf: Path) -> None:
         height = float(height_match.group(1))
         page_no = str(index)
         words = [
-            (float(m.group(1)), float(m.group(2)), float(m.group(3)), float(m.group(4)), m.group(5))
+            (
+                float(m.group(1)),
+                float(m.group(2)),
+                float(m.group(3)),
+                float(m.group(4)),
+                m.group(5),
+            )
             for m in word_re.finditer(chunk)
         ]
-        for x0, y0, x1, y1, text in words:
+        for _x0, _y0, _x1, y1, text in words:
             if y1 > height + 0.5:
                 collisions.append(
                     f"page {page_no}: {text!r} extends past the page edge "
@@ -261,7 +271,9 @@ def verify_clean_compile(archive: Path) -> None:
                 raise RuntimeError("archive is missing main.bbl")
             for name in names:
                 lowered = name.lower()
-                if lowered.endswith(FORBIDDEN_SUFFIXES) or lowered.endswith(".synctex.gz"):
+                if lowered.endswith(FORBIDDEN_SUFFIXES) or lowered.endswith(
+                    ".synctex.gz"
+                ):
                     raise RuntimeError(f"archive contains forbidden file {name}")
             zf.extractall(tmp)
         _run(
@@ -283,7 +295,9 @@ def verify_clean_compile(archive: Path) -> None:
             if line.startswith("Pages:"):
                 pages = int(line.split(":", 1)[1])
         if pages != expected_pages:
-            raise RuntimeError(f"clean compile has {pages} pages, expected {expected_pages}")
+            raise RuntimeError(
+                f"clean compile has {pages} pages, expected {expected_pages}"
+            )
         text = subprocess.check_output(
             ["pdftotext", str(built), "-"],
             text=True,
@@ -309,7 +323,11 @@ def main() -> None:
     if args.skip_compile:
         return
     verify_clean_compile(archive)
-    print("clean compile passed:", archive_page_count(), "pages, embedded fonts, no Type 3")
+    print(
+        "clean compile passed:",
+        archive_page_count(),
+        "pages, embedded fonts, no Type 3",
+    )
 
 
 if __name__ == "__main__":

@@ -7,8 +7,8 @@ from collections.abc import Sequence
 from dataclasses import dataclass
 
 from fewstep_regularities.analysis.affine_flow import (
-    shared_logcov_path,
     scalar_drift,
+    shared_logcov_path,
 )
 from fewstep_regularities.analysis.continuous_regularity import continuous_regularity
 from fewstep_regularities.analysis.local_error import propagate_scalar_mode

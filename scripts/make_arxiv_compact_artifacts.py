@@ -423,15 +423,11 @@ def main() -> None:
         },
     )
 
-    robust_hydra = (
-        ROOT / "outputs/phase4_robustness_2026-07-24-v1/table.json"
-    )
+    robust_hydra = ROOT / "outputs/phase4_robustness_2026-07-24-v1/table.json"
     if robust_hydra.is_file():
         actual = sha256_file(robust_hydra)
         if actual != ROBUSTNESS_PIN[1]:
-            raise ValueError(
-                f"Checksum mismatch for {ROBUSTNESS_PIN[0]}: {actual}"
-            )
+            raise ValueError(f"Checksum mismatch for {ROBUSTNESS_PIN[0]}: {actual}")
         robust = json.loads(robust_hydra.read_text(encoding="utf-8"))
         lr_prefs = [
             row
@@ -439,7 +435,9 @@ def main() -> None:
             if row["target_family"] == "low_rank_gaussian"
         ]
     else:
-        existing = json.loads((OUT / "robustness_lowrank.json").read_text(encoding="utf-8"))
+        existing = json.loads(
+            (OUT / "robustness_lowrank.json").read_text(encoding="utf-8")
+        )
         lr_prefs = existing["blocks"]
         print(
             "using committed robustness_lowrank.json; raw Hydra table "

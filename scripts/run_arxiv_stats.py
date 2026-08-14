@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from collections import defaultdict
+from fractions import Fraction
 from pathlib import Path
 
 from fewstep_regularities.analysis.census_statistics import (
@@ -15,8 +16,6 @@ from fewstep_regularities.analysis.ranking_grids import (
     SOLVERS,
     log_lebesgue_inversion_measure,
 )
-from fractions import Fraction
-
 from fewstep_regularities.utils.hashing import sha256_file, write_compact_manifest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -76,17 +75,21 @@ def main() -> None:
         key = f"{block['family']}_d{block['dim']}"
         by_family[key].append(bool(block["inversion_R"]))
         by_solver[str(block["solver"])].append(bool(block["inversion_R"]))
-    tau_family = {key: paired_concordance_score(vals) for key, vals in by_family.items()}
-    tau_solver = {key: paired_concordance_score(vals) for key, vals in by_solver.items()}
+    tau_family = {
+        key: paired_concordance_score(vals) for key, vals in by_family.items()
+    }
+    tau_solver = {
+        key: paired_concordance_score(vals) for key, vals in by_solver.items()
+    }
 
     seeds = json.loads(SEEDS.read_text(encoding="utf-8"))
     draws = [
-        row
-        for row in seeds.get("draws", [])
-        if "seed" in row and "n_seeds" not in row
+        row for row in seeds.get("draws", []) if "seed" in row and "n_seeds" not in row
     ]
     for row in seeds["summary"]:
-        low, high = clopper_pearson(int(row["n_with_any_inversion"]), int(row["n_seeds"]))
+        low, high = clopper_pearson(
+            int(row["n_with_any_inversion"]), int(row["n_seeds"])
+        )
         row["clopper_pearson_low"] = low
         row["clopper_pearson_high"] = high
         row.pop("wald_low", None)
@@ -121,10 +124,7 @@ def main() -> None:
                 "doubled_measure": meas2,
                 "relative_change": rel,
             }
-    if REGION.is_file():
-        region = json.loads(REGION.read_text(encoding="utf-8"))
-    else:
-        region = {}
+    region = json.loads(REGION.read_text(encoding="utf-8")) if REGION.is_file() else {}
     region["log_lebesgue"] = {
         "lam_min": LAM_MIN,
         "lam_max": LAM_MAX,

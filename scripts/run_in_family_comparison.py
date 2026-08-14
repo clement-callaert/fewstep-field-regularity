@@ -76,7 +76,9 @@ def main() -> None:
     n_cells = sum(any(flags) for flags in cells.values())
     found = {(fam, dim, solver, nfe) for fam, dim, solver, nfe in inverted}
     if found != EXPECTED:
-        raise SystemExit(f"unexpected shared-schedule pairwise inversions: {sorted(found)}")
+        raise SystemExit(
+            f"unexpected shared-schedule pairwise inversions: {sorted(found)}"
+        )
     if len(rows) != 36 or len(inverted) != 9 or n_cells != 4:
         raise SystemExit("unexpected shared-schedule pairwise census counts")
     OUT_JSON.write_text(

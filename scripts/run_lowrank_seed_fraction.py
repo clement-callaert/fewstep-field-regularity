@@ -53,9 +53,7 @@ def main() -> None:
             eigenvalues = torch.linalg.eigvalsh(gaussian.covariance()).tolist()
             inverted = geometry_inverts(eigenvalues)
             hits += int(inverted)
-            records.append(
-                {"dim": dim, "seed": seed, "inversion_any_block": inverted}
-            )
+            records.append({"dim": dim, "seed": seed, "inversion_any_block": inverted})
         lo, hi = binomial_interval(hits, N_SEEDS)
         print(f"d={dim} {hits}/{N_SEEDS} interval=({lo:.3f},{hi:.3f})")
         records.append(

@@ -65,7 +65,10 @@ def test_arxiv_abstract_length_and_plain_macros() -> None:
     assert "disclaimer" not in plain.lower()
     assert "no venue" not in plain.lower()
     assert "Lipschitz constant of the marginal" not in abstract
-    assert "probability flow ODE" not in abstract.lower() or "score-based" in abstract.lower()
+    assert (
+        "probability flow ODE" not in abstract.lower()
+        or "score-based" in abstract.lower()
+    )
 
 
 @pytest.mark.analytical
@@ -151,7 +154,7 @@ def test_arxiv_body_float_budget() -> None:
 def test_arxiv_no_pvalue_or_significance_theatre() -> None:
     module = _load_structure()
     text = (ROOT / "paper" / "arxiv" / "main.tex").read_text(encoding="utf-8")
-    body, appendix = module.body_and_appendix(text)
+    body, _appendix = module.body_and_appendix(text)
     lowered = body.lower()
     assert "p-value" not in lowered
     assert "pvalue" not in lowered

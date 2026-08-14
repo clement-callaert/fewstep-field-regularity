@@ -132,7 +132,9 @@ def main() -> None:
             f"{PATH_LABEL[str(row['W2_prefers'])]} \\\\"
         )
     workshop_lines.extend([r"\bottomrule", r"\end{tabular}", ""])
-    workshop_tex = ROOT / "paper" / "arxiv" / "generated" / "log_covariance_workshop.tex"
+    workshop_tex = (
+        ROOT / "paper" / "arxiv" / "generated" / "log_covariance_workshop.tex"
+    )
     gddl_tex = ROOT / "paper" / "gddl2026" / "generated" / "log_covariance_workshop.tex"
     workshop_tex.write_text("\n".join(workshop_lines), encoding="utf-8")
     gddl_tex.parent.mkdir(parents=True, exist_ok=True)

@@ -12,6 +12,7 @@ from scipy.integrate import quad
 from fewstep_regularities.analysis.affine_flow import scalar_drift, scalar_variance
 from fewstep_regularities.analysis.local_error import evaluations_per_step
 from fewstep_regularities.analysis.scalar_gaussian_counterexample import (
+    DISPLAYED_VP_HEUN_PRODUCT,
     EXACT_ENDPOINT_FACTOR,
     LAMBDA,
     LINEAR_HEUN_FACTOR,
@@ -25,7 +26,6 @@ from fewstep_regularities.analysis.scalar_gaussian_counterexample import (
     all_vp_heun_poly_coefficients_nonnegative,
     arctan_taylor_partial,
     certify,
-    DISPLAYED_VP_HEUN_PRODUCT,
     completed_square_linear_variance,
     evaluate_poly,
     float64_crosscheck,
