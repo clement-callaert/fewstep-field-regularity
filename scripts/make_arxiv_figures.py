@@ -866,10 +866,15 @@ def figure_scalar_counterexample() -> Path:
             )
         # Side annotation: leader lands on the named bar and misses the value label.
         side = -1.0 if prefer_index == 0 else 1.0
+        text_x = prefer_index + side * 0.70
+        if prefer_index == 0:
+            # Inward of the y-axis and below the 0.15 tick; still above the lin label.
+            y_ann = ymax * 1.02
+            text_x = 0.28
         axis.annotate(
             prefer_text,
             xy=(prefer_index + side * 0.18, shorter * 0.48),
-            xytext=(prefer_index + side * 0.70, y_ann),
+            xytext=(text_x, y_ann),
             fontsize=7,
             color="black",
             ha="center",
