@@ -23,7 +23,7 @@ change, or an arXiv upload.
    as MIT pending an owner `LICENSE` file decision.
 6. Ledger statuses are not changed. P4-C1 and P4-C2 remain `under-test`.
 7. `talks/` and `.claude/` stay untracked.
-8. No `CITATION.cff` until an arXiv identifier exists. Do not invent one.
+8. No `CITATION.cff` until an arXiv identifier exists.
 
 ## What remains dirty on purpose
 

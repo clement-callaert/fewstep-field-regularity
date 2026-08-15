@@ -1,6 +1,6 @@
 # arXiv metadata (not submitted)
 
-Prepared 2026-08-13. No identifier is assigned. Do not invent an arXiv id.
+Prepared 2026-08-13.
 Do not upload without an explicit owner decision.
 
 ## Title

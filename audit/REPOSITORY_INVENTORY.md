@@ -24,7 +24,7 @@ Classification codes: S = source, G = generated output, E = evidence artifact, D
 | `CONTRIBUTING.md` | Owner-only commits | D | no | |
 | `pyproject.toml` | Package metadata | S | yes | Declares MIT with no LICENSE file. Homepage URL `github.com/calla/...` does not match the remote `clement-callaert/...`. Python `>=3.11`. |
 | `LICENSE` | Missing | | decision | Declared MIT in pyproject only. |
-| `CITATION.cff` | Missing | | later | Do not invent an arXiv identifier. |
+| `CITATION.cff` | Missing | | later | Add when an identifier exists. |
 | `.github/workflows/ci.yml` | ruff, mypy, pytest on 3.11/3.12 | S | no | Does not validate Phase 4 artifacts. |
 | `.gitignore` | Ignores `outputs/*`, `artifacts/*`, literature PDFs | S | yes | Scientific JSON evidence is local-only. |
 | `.venv/` | Local environment | G | no | Python 3.11.15. |

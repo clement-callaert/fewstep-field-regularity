@@ -1,7 +1,7 @@
 # arXiv submission kit
 
 Prepared 2026-08-14. This file is the form-field copy source for an owner
-upload. It is not an upload. Do not invent an arXiv identifier.
+upload. It is not an upload.
 
 The GDDL 2026 CFP states that the workshop is non-archival and that
 submissions may be concurrently or subsequently submitted to other
@@ -121,7 +121,7 @@ decision.
    event**: it enters the daily listing and email alerts; v2 does not.
    Upload one complete version.
 4. Once the identifier is assigned: add that identifier to `README.md`
-   and `CITATION.cff` (do not invent one beforehand), set `date-released`
+   and `CITATION.cff`, set `date-released`
    to the announcement date (`YYYY-MM-DD`), commit, and push.
 5. `git tag -a arxiv-v1 -m "arXiv v1" && git push origin arxiv-v1`
 6. Confirm `FEWSTEP_RELEASE_GATE=1 pytest tests/analytical/test_release_gate.py` passes.

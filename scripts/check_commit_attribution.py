@@ -20,6 +20,9 @@ PROHIBITED_IDENTITY_PATTERNS: tuple[str, ...] = (
     r"\bclaude\b",
     r"\banthropic\b",
     r"noreply@anthropic\.com",
+    r"\bcursor\b",
+    r"cursoragent@cursor\.com",
+    r"noreply@cursor\.com",
     r"\[bot\]",
 )
 

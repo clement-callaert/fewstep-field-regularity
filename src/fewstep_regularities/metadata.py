@@ -1,7 +1,7 @@
 """Canonical publication metadata.
 
 A single source for the title used in PDFs, README, CITATION.cff, and
-release checks. Do not invent an arXiv identifier, DOI, or release date.
+release checks. Publication identifiers stay unset until they exist.
 """
 
 from __future__ import annotations

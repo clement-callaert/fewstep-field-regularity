@@ -1,7 +1,5 @@
 # Averaged Jacobian Regularity Can Misrank Few-Step Flow-Matching Schedules: A Certified Gaussian Counterexample
 
-No arXiv identifier has been assigned. Do not invent one.
-
 **Abstract.** Few-step sampling in flow matching and stochastic interpolants requires choosing an interpolation schedule before endpoint error is observed. Averaged squared Lipschitzness of the drift, measured by the time-integrated squared 2-norm of its spatial Jacobian, is a plausible schedule-design criterion, but it is not a solver-specific discretization-error functional. Chen, Vanden-Eijnden, and Xu propose minimizing this quantity, denoted A_2; they do not claim or prove that A_2 universally ranks equal-NFE solver error. We study that narrower surrogate question. For independent N(0,1) and N(0,4), the exact regularity integrals are 5 pi/8 - 1 and pi^2/16, so regularity prefers trigonometric VP, whereas explicit Heun, a two-stage Runge-Kutta method, with a budget of eight function evaluations (NFE 8), prefers the linear path in Gaussian Wasserstein-2 distance. The inversion is certified by an exact rational Heun product and a nonnegative element of Q[pi, sqrt(2)]. A complementary construction shows that, for every step count N and every admissible endpoint log-scale, the unique integrated-regularity minimizer can have strictly larger N-step Euler endpoint error than a higher-regularity competitor aligned with that solver grid. A specified finite Gaussian enumeration of four candidate paths on 36 tested blocks contains both agreement and pairwise disagreement. These results limit a universal surrogate interpretation; they do not evaluate learned velocity fields or estimate a population failure frequency.
 
 ```bibtex
@@ -10,7 +8,7 @@ No arXiv identifier has been assigned. Do not invent one.
             Schedules: A Certified Gaussian Counterexample},
   author = {Callaert, Cl\'ement},
   year   = {2026},
-  note   = {Preprint; arXiv identifier not yet assigned}
+  note   = {Preprint}
 }
 ```
 

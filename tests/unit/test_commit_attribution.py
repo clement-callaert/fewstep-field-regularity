@@ -21,6 +21,11 @@ def test_blocks_claude_coauthor_trailer() -> None:
     assert checker.check_message(message, "x")
 
 
+def test_blocks_cursor_coauthor_trailer() -> None:
+    message = "Fix bug\n\nCo-authored-by: Cursor <cursoragent@cursor.com>\n"
+    assert checker.check_message(message, "x")
+
+
 def test_blocks_anthropic_signoff() -> None:
     message = "Fix bug\n\nSigned-off-by: Anthropic Bot <bot@anthropic.com>\n"
     assert checker.check_message(message, "x")

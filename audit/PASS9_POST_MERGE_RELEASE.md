@@ -34,7 +34,7 @@ upload, or merge to `main` was performed here.
 | Grammar-fix source snapshot used for PDF generation | `3932b48b3a0f61a464230329a9363917e77f8c47` (clean working tree) |
 | Artifact-carrier commit | `4a9d5ceea4ceb30e357271c49bf0d23f06ee081f` |
 | Tags | no `arxiv-v1`; no GitHub Release |
-| arXiv identifier | none; do not invent one |
+| arXiv identifier | none |
 
 `origin/main` was fetched at the start of this pass and again before the
 artifact commit. It remained `25186a5337ae8c85a9367051da24953b80b133a5`.
