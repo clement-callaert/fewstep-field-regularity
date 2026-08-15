@@ -1,7 +1,0 @@
-{
-  "all_checks_passed": true,
-  "decimal_digits": 80,
-  "maximum_absolute_reference_delta": 9.705043048770321e-10,
-  "reference_tolerance": 2e-09,
-  "row_count": 72
-}

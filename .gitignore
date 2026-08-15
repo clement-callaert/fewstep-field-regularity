@@ -79,3 +79,6 @@ mlruns/
 tmp/
 temp/
 .cache/
+
+# Local interview talk (keep on disk, do not publish)
+talks/
